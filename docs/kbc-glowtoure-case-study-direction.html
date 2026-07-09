@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krystal Brook Coterie — Glowtoure Case Study · Design Direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rich-black:#0A0A0A; --deep-petrol:#052029; --cream:#EFEEE8; --greige:#B2ABA0;
+    --mocha:#9E8062; --terracotta:#BF6940; --teal:#287B8B;
+    --display:'Cormorant Garamond', Georgia, serif;
+    --body:'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    --measure:62ch; --gutter:clamp(1.25rem,5vw,6rem);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--rich-black);color:var(--cream);font-family:var(--body);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  @media (pointer:fine){ body{cursor:none;} }
+  .display{font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:-0.01em;}
+  .display em{font-style:italic;font-weight:400;}
+  .eyebrow{font-family:var(--body);font-size:.72rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--greige);}
+  .rule-short{height:1px;background:var(--teal);border:0;width:64px;}
+  .rule{height:1px;background:var(--teal);border:0;width:100%;}
+  a{color:inherit;text-decoration:none;}
+
+  .spec-band{padding:clamp(3.5rem,9vw,8rem) var(--gutter);border-bottom:1px solid rgba(239,238,232,.08);}
+  .spec-label{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.75rem;}
+  .spec-label .n{font-family:var(--display);font-size:1.15rem;color:var(--terracotta);}
+  .spec-label h2{font-family:var(--body);font-size:.72rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--greige);}
+  .note{font-size:.82rem;color:var(--mocha);max-width:var(--measure);line-height:1.7;}
+  .stand-in{background:rgba(158,128,98,.08);border:1px solid rgba(158,128,98,.25);padding:1.25rem 1.5rem;border-radius:2px;font-size:.85rem;color:var(--greige);max-width:var(--measure);}
+  .stand-in strong{color:var(--cream);font-weight:500;}
+
+  /* cover */
+  .cover{min-height:70vh;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(2rem,5vw,4rem) var(--gutter) clamp(3rem,7vw,6rem);}
+  .cover-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;}
+  .cover-mark{font-family:var(--display);font-size:1.35rem;letter-spacing:.02em;}
+  .cover-meta{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--greige);text-align:right;line-height:2;}
+  .cover-hero .display{font-size:clamp(2.8rem,8vw,6.5rem);max-width:15ch;}
+  .cover-sub{margin-top:2rem;max-width:48ch;color:var(--greige);font-size:1.05rem;}
+
+  /* mockup chrome */
+  .mock-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;}
+  .mock-head .tag{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);border:1px solid var(--terracotta);padding:.35rem .7rem;border-radius:1px;}
+  .mock-head .desc{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--greige);}
+  .browser{border:1px solid rgba(239,238,232,.14);border-radius:6px;overflow:hidden;background:var(--rich-black);}
+  .browser-bar{display:flex;align-items:center;gap:.4rem;padding:.7rem 1rem;background:#141414;border-bottom:1px solid rgba(239,238,232,.08);}
+  .browser-bar .dot{width:9px;height:9px;border-radius:50%;background:#333;}
+  .browser-bar .url{margin-left:.8rem;font-size:.7rem;color:var(--greige);letter-spacing:.04em;}
+
+  .site{background:var(--rich-black);}
+  .site-nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem clamp(1.25rem,4vw,3rem);position:relative;z-index:2;}
+  .site-nav .brand{font-family:var(--display);font-size:1.25rem;letter-spacing:.03em;}
+  .site-nav ul{display:flex;gap:1.6rem;list-style:none;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--greige);align-items:center;}
+  .site-nav .nav-cta{color:var(--cream);border:1px solid var(--terracotta);padding:.5rem 1rem;border-radius:1px;}
+
+  /* image treatments — warm Glowtoure duotone stand-ins */
+  .imgframe{position:relative;border:1px solid rgba(239,238,232,.14);
+    background:
+      radial-gradient(120% 120% at 72% 18%, rgba(191,105,64,.40), transparent 55%),
+      radial-gradient(130% 130% at 12% 88%, rgba(158,128,98,.42), transparent 58%),
+      linear-gradient(160deg,#1a120c,#0b0908);
+    display:flex;align-items:flex-end;padding:1rem;}
+  .imgframe .imgcap{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--greige);}
+  .imgframe.bleed{border-left:0;border-right:0;}
+
+  /* case hero */
+  .cs-hero{padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem) 0;}
+  .cs-hero h1{font-family:var(--display);font-size:clamp(2.6rem,7vw,5.5rem);line-height:1;max-width:14ch;}
+  .cs-hero h1 em{font-style:italic;color:var(--terracotta);}
+  .cs-hero .lede{margin-top:1.5rem;max-width:44ch;color:var(--greige);font-size:1.1rem;}
+  .cs-meta{display:flex;gap:3rem;flex-wrap:wrap;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid rgba(239,238,232,.1);}
+  .cs-meta .m-item .m-lab{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--greige);}
+  .cs-meta .m-item .m-val{font-family:var(--body);font-size:.9rem;color:var(--cream);margin-top:.35rem;}
+  .cs-herowrap{margin-top:clamp(2rem,5vw,3.5rem);}
+  .cs-herowrap .imgframe{aspect-ratio:21/9;}
+
+  .cs-section{padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem);}
+  .cs-two{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(1.5rem,4vw,4rem);align-items:start;}
+  .cs-two .display{font-size:clamp(1.7rem,3.6vw,2.6rem);max-width:16ch;}
+  .cs-two p{color:var(--greige);max-width:48ch;}
+  .cs-two p + p{margin-top:1rem;}
+
+  .cs-gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.5vw,2rem);align-items:start;padding:0 clamp(1.25rem,4vw,3rem);}
+  .cs-gallery .tall{aspect-ratio:3/4;}
+  .cs-gallery .short{aspect-ratio:4/5;transform:translateY(2.5rem);}
+
+  .cs-approach{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(239,238,232,.08);border:1px solid rgba(239,238,232,.08);margin-top:2.5rem;}
+  .ap-cell{background:var(--rich-black);padding:1.75rem 1.4rem;}
+  .ap-cell .ap-n{font-family:var(--display);font-size:1.1rem;color:var(--teal);}
+  .ap-cell .ap-h{font-family:var(--display);font-size:1.35rem;margin-top:.4rem;}
+  .ap-cell .ap-d{color:var(--greige);font-size:.85rem;margin-top:.6rem;}
+
+  /* results */
+  .cs-results{padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem);}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(239,238,232,.08);border:1px solid rgba(239,238,232,.08);margin-top:2rem;}
+  .stat{background:var(--rich-black);padding:2rem 1.4rem;}
+  .stat .fig{font-family:var(--display);font-size:clamp(2.4rem,5vw,3.6rem);color:var(--terracotta);line-height:1;}
+  .stat .lab{font-size:.72rem;letter-spacing:.08em;color:var(--greige);margin-top:.7rem;line-height:1.4;}
+
+  .pullquote{padding:clamp(3rem,8vw,6rem) clamp(1.25rem,4vw,3rem);}
+  .pullquote .display{font-size:clamp(1.9rem,4.5vw,3.4rem);max-width:22ch;font-style:italic;}
+  .pullquote .display .hl{color:var(--terracotta);font-style:italic;}
+  .pullquote .attr{margin-top:1.5rem;font-size:.78rem;letter-spacing:.08em;color:var(--greige);text-transform:uppercase;}
+
+  .cs-closing{padding:clamp(3rem,8vw,7rem) clamp(1.25rem,4vw,3rem);}
+  .cs-closing .display{font-size:clamp(2.2rem,5.5vw,4.2rem);max-width:18ch;}
+  .cs-closing .display em{color:var(--terracotta);}
+  .btn{display:inline-block;font-family:var(--body);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 1.75rem;border-radius:1px;}
+  .btn-primary{background:var(--terracotta);color:var(--cream);border:1px solid var(--terracotta);}
+
+  /* petrol footer */
+  .site-footer{background:var(--deep-petrol);color:var(--cream);padding:clamp(2.5rem,6vw,4.5rem) clamp(1.25rem,4vw,3rem) 2rem;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem;}
+  .wm-stacked{font-family:var(--display);line-height:1.02;}
+  .wm-stacked .l1,.wm-stacked .l2{font-size:1.4rem;display:block;}
+  .wm-stacked .l2{font-style:italic;}
+  .wm-stacked .l3{font-size:.66rem;letter-spacing:.42em;text-transform:uppercase;font-family:var(--body);margin-top:.5rem;display:block;color:var(--greige);}
+  .footer-col .fx-eyebrow{color:var(--greige);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1rem;display:block;}
+  .footer-col ul{list-style:none;font-size:.85rem;line-height:2.1;}
+  .footer-rule{margin:2.5rem 0 1.25rem;}
+  .footer-legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;font-size:.7rem;letter-spacing:.06em;color:var(--greige);}
+
+  /* phone */
+  .devices{display:flex;gap:2.5rem;flex-wrap:wrap;align-items:flex-start;}
+  .phone{width:300px;border:8px solid #1a1a1a;border-radius:34px;overflow:hidden;background:var(--rich-black);box-shadow:0 30px 60px -20px rgba(0,0,0,.6);flex:0 0 auto;}
+  .phone .p-nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.1rem;}
+  .phone .p-nav .brand{font-family:var(--display);font-size:1rem;}
+  .phone .p-nav .burger{display:flex;flex-direction:column;gap:3px;}
+  .phone .p-nav .burger span{width:20px;height:1.5px;background:var(--greige);}
+  .phone .p-hero{padding:1.3rem 1.1rem 1.5rem;}
+  .phone .p-hero .eyebrow{font-size:.56rem;}
+  .phone .p-hero h1{font-family:var(--display);font-size:2rem;line-height:1.02;margin-top:.8rem;}
+  .phone .p-hero h1 em{font-style:italic;color:var(--terracotta);}
+  .phone .p-hero p{color:var(--greige);font-size:.8rem;margin-top:.7rem;}
+  .phone .p-img{aspect-ratio:16/11;margin:0 0 0 0;}
+  .phone .p-meta{display:flex;gap:1.2rem;padding:1rem 1.1rem;border-bottom:1px solid rgba(239,238,232,.07);}
+  .phone .p-meta .ml{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:var(--greige);}
+  .phone .p-meta .mv{font-size:.72rem;margin-top:.2rem;}
+  .phone .p-sec{padding:1.4rem 1.1rem;border-bottom:1px solid rgba(239,238,232,.07);}
+  .phone .p-sec h3{font-family:var(--display);font-size:1.4rem;}
+  .phone .p-sec p{color:var(--greige);font-size:.78rem;margin-top:.5rem;}
+  .phone .p-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(239,238,232,.08);}
+  .phone .p-stat{background:var(--rich-black);padding:1rem;}
+  .phone .p-stat .f{font-family:var(--display);font-size:1.9rem;color:var(--terracotta);line-height:1;}
+  .phone .p-stat .l{font-size:.58rem;color:var(--greige);margin-top:.4rem;}
+  .phone .p-foot{background:var(--deep-petrol);padding:1.4rem 1.1rem;}
+  .phone .p-foot .p-fx{margin-top:.8rem;font-size:.66rem;color:var(--greige);line-height:1.9;}
+
+  #cur-dot,#cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);will-change:transform;}
+  #cur-dot{width:7px;height:7px;background:var(--terracotta);}
+  #cur-ring{width:34px;height:34px;border:1px solid var(--teal);opacity:.6;transition:width .22s ease,height .22s ease,opacity .22s ease;}
+  #cur-ring.hovering{width:56px;height:56px;opacity:1;}
+  @media (pointer:coarse){#cur-dot,#cur-ring{display:none;}}
+
+  @media (max-width:820px){
+    .cs-two,.cs-approach,.stats,.footer-top,.cs-gallery{grid-template-columns:1fr;}
+    .cs-gallery .short{transform:none;}
+    .site-nav ul{display:none;}
+    .stats{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="cover-mark">Krystal Brook Coterie</div>
+    <div class="cover-meta">Design Direction<br>Flagship Case Study<br>Glowtoure</div>
+  </div>
+  <div class="cover-hero">
+    <div class="eyebrow" style="margin-bottom:1.5rem;">The richest page on the site</div>
+    <h1 class="display">The proof, <em>rendered</em> in full.</h1>
+    <p class="cover-sub">Glowtoure is the studio's flagship — the case study every proposal leads with. This is its direction: hero, narrative, approach, imagery, and a results block built to hold real performance numbers.</p>
+  </div>
+</section>
+
+<!-- CASE STUDY — DESKTOP -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">01</span><h2>Glowtoure case study — desktop</h2></div>
+  <div class="mock-head"><span class="tag">Work / Glowtoure</span><span class="desc">Full-bleed hero · offset galleries · results block</span></div>
+  <div class="browser">
+    <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">krystalbrookcoterie.com/work/glowtoure</span></div>
+    <div class="site">
+      <nav class="site-nav">
+        <div class="brand">Krystal Brook Coterie</div>
+        <ul><li>Work</li><li>Services</li><li>Process</li><li>About</li><li>Journal</li><li><a class="nav-cta">Begin</a></li></ul>
+      </nav>
+
+      <header class="cs-hero">
+        <div class="eyebrow" style="margin-bottom:1.75rem;">Luxury mobile spray tan · Sacramento</div>
+        <h1>A luminous tan, <em>brought to you</em>.</h1>
+        <p class="lede">Glowtoure needed a home as considered as the service itself — one that made a mobile luxury look inevitable, not improvised.</p>
+        <div class="cs-meta">
+          <div class="m-item"><div class="m-lab">Role</div><div class="m-val">Strategy, design &amp; custom build</div></div>
+          <div class="m-item"><div class="m-lab">Stack</div><div class="m-val">Next.js 14 · Tailwind · Vercel</div></div>
+          <div class="m-item"><div class="m-lab">Year</div><div class="m-val">2025</div></div>
+        </div>
+      </header>
+
+      <div class="cs-herowrap"><div class="imgframe bleed"><span class="imgcap">Hero — Glowtoure brand imagery</span></div></div>
+
+      <section class="cs-section">
+        <div class="cs-two">
+          <div><hr class="rule-short" style="margin-bottom:1.5rem;"><div class="display">The brief</div></div>
+          <div>
+            <p>Luxury spray tanning lives in a crowded, discount-led corner of Instagram. Glowtoure's service was elevated; its digital presence had to make that obvious in five seconds, before a single price was seen.</p>
+            <p>The site had to do two jobs at once: signal genuine luxury, and make booking a mobile appointment effortless from a phone, where nearly every client arrives.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="cs-gallery">
+        <div class="imgframe tall"><span class="imgcap">Editorial detail</span></div>
+        <div class="imgframe short"><span class="imgcap">Service moment</span></div>
+      </div>
+
+      <section class="cs-section">
+        <div class="eyebrow" style="margin-bottom:.5rem;">The approach</div>
+        <div class="display" style="font-size:clamp(1.7rem,3.6vw,2.6rem);max-width:20ch;">A dark editorial system, engineered for the thumb.</div>
+        <div class="cs-approach">
+          <div class="ap-cell"><div class="ap-n">01</div><div class="ap-h">Positioning first</div><div class="ap-d">A restrained, dark-led identity that reads as a boutique service, not a side hustle — luxury conveyed through space and typography, not gloss.</div></div>
+          <div class="ap-cell"><div class="ap-n">02</div><div class="ap-h">Custom-coded</div><div class="ap-d">Hand-built in Next.js on Vercel — no template, no page builder. Fast, owned, and extensible as the brand grows.</div></div>
+          <div class="ap-cell"><div class="ap-n">03</div><div class="ap-h">Booking, effortless</div><div class="ap-d">A mobile-first flow that turns a phone tap into a confirmed appointment, with the booking system woven into the design rather than bolted on.</div></div>
+        </div>
+      </section>
+
+      <div class="cs-herowrap" style="padding:0 clamp(1.25rem,4vw,3rem);"><div class="imgframe" style="aspect-ratio:21/9;"><span class="imgcap">Full-bleed brand moment</span></div></div>
+
+      <section class="cs-results">
+        <div class="eyebrow" style="margin-bottom:.5rem;">The result</div>
+        <div class="display" style="font-size:clamp(1.7rem,3.6vw,2.6rem);max-width:22ch;">A site that performs as beautifully as it reads.</div>
+        <div class="stats">
+          <div class="stat"><div class="fig">100</div><div class="lab">Lighthouse performance</div></div>
+          <div class="stat"><div class="fig">&lt;1s</div><div class="lab">Largest Contentful Paint</div></div>
+          <div class="stat"><div class="fig">AA</div><div class="lab">WCAG accessibility</div></div>
+          <div class="stat"><div class="fig">100%</div><div class="lab">Custom-coded, template-free</div></div>
+        </div>
+        <p class="note" style="margin-top:1.5rem;">Figures shown are placeholders — swap in your real measured Lighthouse / Core Web Vitals scores and any booking or revenue outcomes before this goes live. Real numbers are the whole point of the results block.</p>
+      </section>
+
+      <section class="pullquote">
+        <hr class="rule-short" style="margin-bottom:2rem;">
+        <div class="display">This is the standard <span class="hl">every KBC build</span> is measured against.</div>
+        <div class="attr">Glowtoure · Krystal Brook Coterie flagship</div>
+      </section>
+
+      <section class="cs-closing">
+        <div class="display">Want a site <em>this</em> considered?</div>
+        <div style="margin-top:2rem;"><a class="btn btn-primary">Begin your project</a></div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-top">
+          <div class="footer-brand"><div class="wm-stacked"><span class="l1">Krystal Brook</span><span class="l2">Coterie</span><span class="l3">Web Design Studio</span></div></div>
+          <div class="footer-col"><span class="fx-eyebrow">Studio</span><ul><li>Work</li><li>Services</li><li>Process</li><li>About</li><li>Journal</li></ul></div>
+          <div class="footer-col"><span class="fx-eyebrow">Connect</span><ul><li>hello@krystalbrookcoterie.com</li><li>Instagram</li><li>Begin a project</li></ul></div>
+        </div>
+        <hr class="rule footer-rule">
+        <div class="footer-legal"><span>© 2026 Krystal Brook Coterie</span><span>a DBA of Lion &amp; Gazelle Holdings LLC</span><span>Privacy · Terms</span></div>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY — MOBILE -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">02</span><h2>Glowtoure case study — mobile</h2></div>
+  <div class="devices">
+    <div class="phone">
+      <div class="p-nav"><div class="brand">KBC</div><div class="burger"><span></span><span></span><span></span></div></div>
+      <div class="p-hero">
+        <div class="eyebrow">Luxury mobile spray tan</div>
+        <h1>Brought <em>to you</em>.</h1>
+        <p>A home as considered as the service itself.</p>
+      </div>
+      <div class="p-img imgframe"><span class="imgcap">Hero</span></div>
+      <div class="p-meta">
+        <div><div class="ml">Stack</div><div class="mv">Next.js · Vercel</div></div>
+        <div><div class="ml">Year</div><div class="mv">2025</div></div>
+      </div>
+      <div class="p-sec"><h3>The brief</h3><p>Signal genuine luxury in five seconds, and make mobile booking effortless.</p></div>
+      <div class="p-sec"><h3>The result</h3>
+        <div class="p-stats" style="margin-top:.8rem;">
+          <div class="p-stat"><div class="f">100</div><div class="l">Lighthouse</div></div>
+          <div class="p-stat"><div class="f">&lt;1s</div><div class="l">LCP</div></div>
+          <div class="p-stat"><div class="f">AA</div><div class="l">Accessibility</div></div>
+          <div class="p-stat"><div class="f">100%</div><div class="l">Custom code</div></div>
+        </div>
+      </div>
+      <div class="p-foot">
+        <div class="wm-stacked"><span class="l1">Krystal Brook</span><span class="l2">Coterie</span></div>
+        <div class="p-fx">hello@krystalbrookcoterie.com<br>a DBA of Lion &amp; Gazelle Holdings LLC</div>
+      </div>
+    </div>
+    <div style="max-width:32ch;align-self:center;">
+      <p class="note">On mobile the case study becomes a vertical scroll: hero, a compact meta row, the brief, then the results as a 2×2 stat grid so the numbers still land. Full-bleed imagery goes edge-to-edge for impact on a small screen, and the petrol footer closes it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HANDOFF -->
+<section class="spec-band" style="border-bottom:0;">
+  <div class="spec-label"><span class="n">03</span><h2>Feeding this to code</h2></div>
+  <p style="font-family:var(--body);font-size:1.05rem;max-width:var(--measure);margin-bottom:1.5rem;">This is the target for Prompt 10 (Glowtoure case study) in your build sequence. Screenshot the desktop and mobile frames and paste them into Claude Code alongside that prompt so the build matches the picture.</p>
+  <div class="stand-in"><strong>Before launch, replace three things:</strong> the placeholder imagery with your real Glowtoure brand photography, the placeholder stat figures with your actual measured Lighthouse / Core Web Vitals scores and any booking outcomes, and confirm the narrative copy reads in Glowtoure's true voice. Everything else — layout, tokens, motion, the offset galleries — is build-ready.</p>
+  <p class="note" style="margin-top:2rem;">Fonts are web stand-ins (Cormorant Garamond / Inter) for your licensed PP Editorial New + PP Pangram Sans. Krystal Brook Coterie · a DBA of Lion &amp; Gazelle Holdings LLC · krystalbrookcoterie.com</p>
+</section>
+
+<div id="cur-ring"></div>
+<div id="cur-dot"></div>
+<script>
+(function(){
+  if(!window.matchMedia('(pointer:fine)').matches) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var dot=document.getElementById('cur-dot'), ring=document.getElementById('cur-ring');
+  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+  document.addEventListener('mousemove',function(e){
+    mx=e.clientX;my=e.clientY;
+    dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
+    if(reduce) ring.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
+  });
+  if(!reduce){(function loop(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();}
+  document.querySelectorAll('a,button,.btn,.nav-cta,li').forEach(function(el){
+    el.addEventListener('mouseenter',function(){ring.classList.add('hovering');});
+    el.addEventListener('mouseleave',function(){ring.classList.remove('hovering');});
+  });
+})();
+</script>
+</body>
+</html>

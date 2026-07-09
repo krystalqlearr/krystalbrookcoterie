@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krystal Brook Coterie — Design Direction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ——— THE 7 LOCKED TOKENS ——— */
+    --rich-black:#0A0A0A;
+    --deep-petrol:#052029;   /* FOOTER ONLY */
+    --cream:#EFEEE8;
+    --greige:#B2ABA0;
+    --mocha:#9E8062;
+    --terracotta:#BF6940;    /* primary warm accent + cursor dot */
+    --teal:#287B8B;          /* structural accent only + cursor ring */
+
+    /* stand-in faces for PP Editorial New / PP Pangram Sans */
+    --display:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --body:'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+
+    --measure: 62ch;
+    --gutter: clamp(1.25rem, 5vw, 6rem);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--rich-black);
+    color:var(--cream);
+    font-family:var(--body);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  @media (pointer:fine){ body{cursor:none;} }
+
+  /* ——— shared type ——— */
+  .display{font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:-0.01em;}
+  .display em{font-style:italic;font-weight:400;}
+  .eyebrow{
+    font-family:var(--body);font-size:.72rem;font-weight:500;
+    letter-spacing:.28em;text-transform:uppercase;color:var(--greige);
+  }
+  .rule{height:1px;background:var(--teal);border:0;width:100%;}
+  .rule-short{height:1px;background:var(--teal);border:0;width:64px;}
+
+  a{color:inherit;text-decoration:none;}
+
+  /* ——— document scaffold (the spec wrapper) ——— */
+  .spec-band{
+    padding:clamp(3.5rem,9vw,8rem) var(--gutter);
+    border-bottom:1px solid rgba(239,238,232,.08);
+  }
+  .spec-label{
+    display:flex;align-items:baseline;gap:1rem;margin-bottom:2.75rem;
+  }
+  .spec-label .n{font-family:var(--display);font-size:1.15rem;color:var(--terracotta);}
+  .spec-label h2{font-family:var(--body);font-size:.72rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--greige);}
+
+  /* ============ COVER ============ */
+  .cover{
+    min-height:82vh;display:flex;flex-direction:column;justify-content:space-between;
+    padding:clamp(2rem,5vw,4rem) var(--gutter) clamp(3rem,7vw,6rem);
+  }
+  .cover-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;}
+  .cover-mark{font-family:var(--display);font-size:1.35rem;letter-spacing:.02em;}
+  .cover-meta{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--greige);text-align:right;line-height:2;}
+  .cover-hero{max-width:16ch;}
+  .cover-hero .display{font-size:clamp(2.8rem,8.5vw,7rem);}
+  .cover-sub{margin-top:2rem;max-width:46ch;color:var(--greige);font-size:1.05rem;}
+
+  /* ============ COLOR ============ */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(239,238,232,.08);border:1px solid rgba(239,238,232,.08);}
+  .sw{background:var(--rich-black);padding:1.5rem 1.25rem;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;}
+  .sw-chip{width:100%;height:64px;border-radius:2px;margin-bottom:1.1rem;border:1px solid rgba(239,238,232,.1);}
+  .sw h3{font-family:var(--body);font-size:.9rem;font-weight:500;letter-spacing:.01em;color:var(--cream);}
+  .sw .hex{font-size:.78rem;color:var(--greige);letter-spacing:.05em;margin-top:.15rem;}
+  .sw .use{font-size:.72rem;color:var(--mocha);margin-top:.55rem;line-height:1.4;}
+
+  /* ============ TYPE ============ */
+  .type-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:1.5rem;padding:1.4rem 0;border-bottom:1px solid rgba(239,238,232,.06);}
+  .type-row .lab{flex:0 0 130px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--greige);}
+  .type-scale-1{font-family:var(--display);font-size:clamp(2.4rem,6vw,4.5rem);line-height:1;}
+  .type-scale-2{font-family:var(--display);font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.05;}
+  .type-scale-3{font-family:var(--display);font-size:1.35rem;}
+  .type-body{font-family:var(--body);font-size:1.05rem;max-width:var(--measure);color:var(--cream);}
+  .type-ui{font-family:var(--body);font-size:.82rem;letter-spacing:.02em;color:var(--greige);}
+
+  /* ============ WORDMARK ============ */
+  .marks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(239,238,232,.08);border:1px solid rgba(239,238,232,.08);}
+  .mark-cell{padding:3rem 2rem;display:flex;flex-direction:column;align-items:center;gap:1.75rem;text-align:center;min-height:220px;justify-content:center;}
+  .mark-cell.on-light{background:var(--cream);}
+  .mark-cell.on-dark{background:var(--rich-black);}
+  .mark-cell .cap{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;}
+  .on-light .cap{color:var(--mocha);}
+  .on-dark .cap{color:var(--greige);}
+  .wm-stacked{font-family:var(--display);line-height:1.02;text-align:center;}
+  .wm-stacked .l1{font-size:1.6rem;letter-spacing:.02em;display:block;}
+  .wm-stacked .l2{font-size:1.6rem;font-style:italic;display:block;}
+  .wm-stacked .l3{font-size:.7rem;letter-spacing:.42em;text-transform:uppercase;font-family:var(--body);margin-top:.6rem;display:block;}
+  .wm-horizontal{font-family:var(--display);font-size:1.5rem;letter-spacing:.03em;}
+  .wm-mono{font-family:var(--display);font-size:2.6rem;letter-spacing:.04em;border:1px solid currentColor;width:88px;height:88px;display:flex;align-items:center;justify-content:center;border-radius:1px;}
+  .on-light .wm-stacked,.on-light .wm-horizontal,.on-light .wm-mono{color:var(--rich-black);}
+  .on-dark .wm-stacked,.on-dark .wm-horizontal,.on-dark .wm-mono{color:var(--cream);}
+
+  /* ============ COMPONENTS ============ */
+  .comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2.5rem;}
+  .comp{border:1px solid rgba(239,238,232,.1);padding:1.75rem;background:rgba(239,238,232,.015);}
+  .comp .comp-cap{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--greige);margin-bottom:1.25rem;}
+  .btn{display:inline-block;font-family:var(--body);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 1.75rem;border-radius:1px;}
+  .btn-primary{background:var(--terracotta);color:var(--cream);border:1px solid var(--terracotta);}
+  .btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--greige);}
+  .service-card{border-top:1px solid var(--teal);padding-top:1.1rem;}
+  .service-card .sc-name{font-family:var(--display);font-size:1.5rem;}
+  .service-card .sc-price{color:var(--terracotta);font-size:.95rem;margin:.35rem 0 .7rem;}
+  .service-card .sc-desc{color:var(--greige);font-size:.9rem;}
+  .testimonial{max-width:40ch;}
+  .testimonial q{font-family:var(--display);font-size:1.5rem;line-height:1.35;font-style:italic;display:block;quotes:none;}
+  .testimonial .attr{margin-top:1.1rem;font-size:.78rem;letter-spacing:.06em;color:var(--greige);}
+  .imgframe{position:relative;aspect-ratio:4/5;border:1px solid rgba(239,238,232,.14);
+    background:
+      radial-gradient(120% 120% at 75% 15%, rgba(191,105,64,.32), transparent 55%),
+      radial-gradient(120% 120% at 15% 90%, rgba(158,128,98,.30), transparent 55%),
+      linear-gradient(160deg,#14100e,#0b0b0b);
+    display:flex;align-items:flex-end;padding:1rem;}
+  .imgframe .imgcap{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--greige);}
+
+  /* ============ MOCKUP CHROME ============ */
+  .mock-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;}
+  .mock-head .tag{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);border:1px solid var(--terracotta);padding:.35rem .7rem;border-radius:1px;}
+  .mock-head .desc{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--greige);}
+
+  .browser{border:1px solid rgba(239,238,232,.14);border-radius:6px;overflow:hidden;background:var(--rich-black);}
+  .browser-bar{display:flex;align-items:center;gap:.4rem;padding:.7rem 1rem;background:#141414;border-bottom:1px solid rgba(239,238,232,.08);}
+  .browser-bar .dot{width:9px;height:9px;border-radius:50%;background:#333;}
+  .browser-bar .url{margin-left:.8rem;font-size:.7rem;color:var(--greige);letter-spacing:.04em;}
+
+  /* ——— rendered homepage inside browser ——— */
+  .site{background:var(--rich-black);}
+  .site-nav{display:flex;justify-content:space-between;align-items:center;padding:1.4rem clamp(1.25rem,4vw,3rem);position:relative;z-index:2;}
+  .site-nav .brand{font-family:var(--display);font-size:1.25rem;letter-spacing:.03em;}
+  .site-nav ul{display:flex;gap:1.6rem;list-style:none;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--greige);align-items:center;}
+  .site-nav .nav-cta{color:var(--cream);border:1px solid var(--terracotta);padding:.5rem 1rem;border-radius:1px;}
+
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(1.5rem,4vw,4rem);align-items:center;padding:clamp(2.5rem,7vw,6rem) clamp(1.25rem,4vw,3rem) clamp(3rem,8vw,7rem);}
+  .hero-copy h1{font-size:clamp(2.6rem,6.2vw,5.4rem);}
+  .hero-copy .lede{margin-top:1.6rem;max-width:40ch;color:var(--greige);font-size:1.05rem;}
+  .hero-copy .cta-row{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;}
+  .hero-img{transform:translateY(1.5rem);}
+  .hero-img .imgframe{aspect-ratio:3/4;}
+
+  .band{padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem);}
+  .band-positioning .display{font-size:clamp(1.8rem,4vw,3rem);max-width:24ch;}
+  .band-positioning .display em{color:var(--terracotta);}
+  .band-positioning .sub{margin-top:1.4rem;max-width:52ch;color:var(--greige);}
+
+  .work{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:end;}
+  .work .feature .imgframe{aspect-ratio:16/11;}
+  .work .meta-line{display:flex;justify-content:space-between;margin-top:1rem;font-size:.78rem;color:var(--greige);letter-spacing:.04em;}
+  .work .feature h3{font-family:var(--display);font-size:2rem;margin-top:.4rem;}
+  .work .side{transform:translateY(-1.5rem);}
+  .work .side .imgframe{aspect-ratio:4/5;}
+  .work .side h3{font-family:var(--display);font-size:1.35rem;margin-top:.7rem;}
+
+  .services-teaser{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(239,238,232,.08);border:1px solid rgba(239,238,232,.08);margin-top:2rem;}
+  .tier{background:var(--rich-black);padding:1.75rem 1.4rem;display:flex;flex-direction:column;gap:.5rem;min-height:210px;}
+  .tier.featured{background:linear-gradient(180deg,rgba(191,105,64,.10),transparent);}
+  .tier .t-name{font-family:var(--display);font-size:1.4rem;}
+  .tier .t-price{color:var(--terracotta);font-size:.95rem;}
+  .tier .t-for{color:var(--greige);font-size:.82rem;margin-top:.3rem;}
+  .tier .t-flag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-top:auto;}
+
+  .difference{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,4rem);align-items:center;}
+  .difference .display{font-size:clamp(1.7rem,3.5vw,2.6rem);max-width:16ch;}
+  .difference p{color:var(--greige);max-width:46ch;}
+  .difference p + p{margin-top:1rem;}
+
+  .closing{text-align:left;padding:clamp(3rem,8vw,7rem) clamp(1.25rem,4vw,3rem);}
+  .closing .display{font-size:clamp(2.2rem,5.5vw,4.5rem);max-width:18ch;}
+  .closing .display em{color:var(--terracotta);}
+
+  /* ——— PETROL FOOTER (only place petrol appears) ——— */
+  .site-footer{background:var(--deep-petrol);color:var(--cream);padding:clamp(2.5rem,6vw,4.5rem) clamp(1.25rem,4vw,3rem) 2rem;}
+  .footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem;}
+  .footer-brand .wm-stacked .l1,.footer-brand .wm-stacked .l2{font-size:1.4rem;}
+  .footer-brand .l3{color:var(--greige);}
+  .footer-col .fx-eyebrow{color:var(--greige);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:1rem;display:block;}
+  .footer-col ul{list-style:none;font-size:.85rem;line-height:2.1;color:var(--cream);}
+  .footer-rule{margin:2.5rem 0 1.25rem;background:var(--teal);}
+  .footer-legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.75rem;font-size:.7rem;letter-spacing:.06em;color:var(--greige);}
+
+  /* ——— mobile device frame ——— */
+  .devices{display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:flex-start;}
+  .phone{width:300px;border:8px solid #1a1a1a;border-radius:34px;overflow:hidden;background:var(--rich-black);box-shadow:0 30px 60px -20px rgba(0,0,0,.6);flex:0 0 auto;}
+  .phone .p-nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.1rem;}
+  .phone .p-nav .brand{font-family:var(--display);font-size:1rem;}
+  .phone .p-nav .burger{display:flex;flex-direction:column;gap:3px;}
+  .phone .p-nav .burger span{width:20px;height:1.5px;background:var(--greige);}
+  .phone .p-hero{padding:1.5rem 1.1rem 2rem;}
+  .phone .p-hero h1{font-family:var(--display);font-size:2.1rem;line-height:1.02;}
+  .phone .p-hero h1 em{font-style:italic;color:var(--terracotta);}
+  .phone .p-hero .p-lede{color:var(--greige);font-size:.82rem;margin-top:.9rem;}
+  .phone .p-hero .btn{margin-top:1.3rem;font-size:.7rem;padding:.7rem 1.3rem;}
+  .phone .p-img{aspect-ratio:3/4;margin:0 1.1rem 1.5rem;}
+  .phone .p-sec{padding:1.5rem 1.1rem;border-top:1px solid rgba(239,238,232,.07);}
+  .phone .p-sec .eyebrow{font-size:.6rem;}
+  .phone .p-sec h3{font-family:var(--display);font-size:1.5rem;margin-top:.5rem;}
+  .phone .p-sec p{color:var(--greige);font-size:.8rem;margin-top:.5rem;}
+  .phone .p-foot{background:var(--deep-petrol);padding:1.5rem 1.1rem;}
+  .phone .p-foot .wm-stacked .l1,.phone .p-foot .wm-stacked .l2{font-size:1.1rem;}
+  .phone .p-foot .l3{color:var(--greige);}
+  .phone .p-foot .p-fx{margin-top:1rem;font-size:.7rem;color:var(--greige);line-height:2;}
+
+  /* ——— services interior (desktop) ——— */
+  .svc-hero{padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,3rem);}
+  .svc-hero h1{font-family:var(--display);font-size:clamp(2.4rem,6vw,4.5rem);max-width:14ch;}
+  .svc-hero h1 em{font-style:italic;color:var(--terracotta);}
+  .svc-hero .sub{margin-top:1.4rem;max-width:50ch;color:var(--greige);}
+  .svc-list{border-top:1px solid rgba(239,238,232,.1);}
+  .svc-tier{display:grid;grid-template-columns:.5fr 1.6fr 1fr;gap:2rem;padding:2.25rem clamp(1.25rem,4vw,3rem);border-bottom:1px solid rgba(239,238,232,.1);align-items:start;position:relative;}
+  .svc-tier.featured{background:linear-gradient(90deg,rgba(191,105,64,.08),transparent 70%);}
+  .svc-tier .st-index{font-family:var(--display);font-size:1.2rem;color:var(--teal);}
+  .svc-tier .st-name{font-family:var(--display);font-size:2rem;}
+  .svc-tier .st-name .flag{display:inline-block;margin-left:.75rem;font-family:var(--body);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);border:1px solid var(--terracotta);padding:.2rem .5rem;border-radius:1px;vertical-align:middle;}
+  .svc-tier .st-desc{color:var(--greige);margin-top:.6rem;font-size:.92rem;max-width:44ch;}
+  .svc-tier .st-price{font-family:var(--display);font-size:1.75rem;color:var(--terracotta);}
+  .svc-tier .st-time{font-size:.74rem;letter-spacing:.06em;color:var(--greige);text-transform:uppercase;margin-top:.35rem;}
+  .svc-care{padding:2.5rem clamp(1.25rem,4vw,3rem);display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(239,238,232,.08);}
+  .care-cell{background:var(--rich-black);padding:1.5rem 1.25rem;}
+  .care-cell .cc-name{font-family:var(--display);font-size:1.3rem;}
+  .care-cell .cc-price{color:var(--terracotta);font-size:.9rem;margin-top:.2rem;}
+  .care-cell .cc-desc{color:var(--greige);font-size:.8rem;margin-top:.5rem;}
+
+  .note{font-size:.82rem;color:var(--mocha);max-width:var(--measure);line-height:1.7;}
+  .stand-in{background:rgba(158,128,98,.08);border:1px solid rgba(158,128,98,.25);padding:1.25rem 1.5rem;border-radius:2px;font-size:.85rem;color:var(--greige);max-width:var(--measure);}
+  .stand-in strong{color:var(--cream);font-weight:500;}
+
+  /* ——— custom cursor ——— */
+  #cur-dot,#cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%);will-change:transform;}
+  #cur-dot{width:7px;height:7px;background:var(--terracotta);}
+  #cur-ring{width:34px;height:34px;border:1px solid var(--teal);opacity:.6;transition:width .22s ease,height .22s ease,opacity .22s ease,border-color .22s ease;}
+  #cur-ring.hovering{width:56px;height:56px;opacity:1;border-color:var(--teal);}
+  @media (pointer:coarse){#cur-dot,#cur-ring{display:none;}}
+
+  @media (max-width:820px){
+    .hero,.work,.difference,.footer-top,.services-teaser,.svc-tier,.svc-care{grid-template-columns:1fr;}
+    .hero-img{transform:none;order:-1;}
+    .work .side{transform:none;}
+    .site-nav ul{display:none;}
+    .svc-tier{gap:.6rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================ COVER ============================ -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="cover-mark">Krystal Brook Coterie</div>
+    <div class="cover-meta">Design Direction<br>Phase 05 · Studio Site<br>krystalbrookcoterie.com</div>
+  </div>
+  <div class="cover-hero">
+    <div class="eyebrow" style="margin-bottom:1.5rem;">The visual system, made to feed code</div>
+    <h1 class="display">Editorial luxury, <em>owned</em> in code.</h1>
+    <p class="cover-sub">One confident direction — the brand system, the homepage, and an interior page, desktop and mobile. Everything here maps to a token or a component, so it hands straight to Claude Code.</p>
+  </div>
+</section>
+
+<!-- ============================ COLOR ============================ -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">01</span><h2>Color — 7 tokens, dark-led</h2></div>
+  <div class="swatches">
+    <div class="sw"><div class="sw-chip" style="background:#0A0A0A;"></div><div><h3>Rich Black</h3><div class="hex">#0A0A0A</div></div><div class="use">Primary canvas · ink on light</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#052029;"></div><div><h3>Deep Petrol</h3><div class="hex">#052029</div></div><div class="use">Footer only — never a section bg</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#EFEEE8;"></div><div><h3>Cream</h3><div class="hex">#EFEEE8</div></div><div class="use">Light text on dark · light surfaces</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#B2ABA0;"></div><div><h3>Greige</h3><div class="hex">#B2ABA0</div></div><div class="use">Muted text · eyebrows on petrol (AA)</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#9E8062;"></div><div><h3>Mocha</h3><div class="hex">#9E8062</div></div><div class="use">Warm neutral accent</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#BF6940;"></div><div><h3>Terracotta</h3><div class="hex">#BF6940</div></div><div class="use">Primary accent · cursor dot</div></div>
+    <div class="sw"><div class="sw-chip" style="background:#287B8B;"></div><div><h3>Teal</h3><div class="hex">#287B8B</div></div><div class="use">Structural only · rules · cursor ring</div></div>
+  </div>
+  <p class="note" style="margin-top:1.75rem;">Petrol is confined to the footer. Teal never decorates — it rules, divides, and marks. Terracotta is the single warm accent (buttons, cursor, stat figures). On the petrol footer, eyebrow text uses greige for AA contrast, never terracotta.</p>
+</section>
+
+<!-- ============================ TYPE ============================ -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">02</span><h2>Typography</h2></div>
+  <div class="type-row"><div class="lab">Display · XL</div><div class="type-scale-1 display">Felt before <em>read</em></div></div>
+  <div class="type-row"><div class="lab">Display · L</div><div class="type-scale-2 display">A website your brand has earned</div></div>
+  <div class="type-row"><div class="lab">Display · M</div><div class="type-scale-3 display">Selected work</div></div>
+  <div class="type-row"><div class="lab">Body</div><div class="type-body">The display face carries the personality; the grotesk carries the information. Body copy stays quiet, left-aligned, and generous — set for reading, not for filling space.</div></div>
+  <div class="type-row"><div class="lab">UI · Eyebrow</div><div class="type-ui" style="text-transform:uppercase;letter-spacing:.28em;">Founder-led beauty · wellness · med-spa</div></div>
+  <div class="stand-in" style="margin-top:2rem;"><strong>Fonts shown are web stand-ins.</strong> Display previews as Cormorant Garamond in place of <strong>PP Editorial New</strong>; body previews as Inter in place of <strong>PP Pangram Sans</strong>. Your production build loads the real licensed <code>.woff2</code> files locally from <code>/public/fonts</code> — the hierarchy, weights, and italic-accent behavior are identical.</div>
+</section>
+
+<!-- ============================ WORDMARK ============================ -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">03</span><h2>Wordmark lockups</h2></div>
+  <div class="marks">
+    <div class="mark-cell on-dark"><div class="wm-stacked"><span class="l1">Krystal Brook</span><span class="l2">Coterie</span><span class="l3">Web Design Studio</span></div><div class="cap">Stacked · primary</div></div>
+    <div class="mark-cell on-dark"><div class="wm-horizontal">Krystal Brook Coterie</div><div class="cap">Horizontal · inline</div></div>
+    <div class="mark-cell on-dark"><div class="wm-mono">KBC</div><div class="cap">Monogram</div></div>
+    <div class="mark-cell on-light"><div class="wm-stacked"><span class="l1">Krystal Brook</span><span class="l2">Coterie</span><span class="l3">Web Design Studio</span></div><div class="cap">On light</div></div>
+    <div class="mark-cell on-light"><div class="wm-horizontal">Krystal Brook Coterie</div><div class="cap">On light</div></div>
+    <div class="mark-cell on-light"><div class="wm-mono">KBC</div><div class="cap">On light</div></div>
+  </div>
+</section>
+
+<!-- ============================ COMPONENTS ============================ -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">04</span><h2>Core components</h2></div>
+  <div class="comp-grid">
+    <div class="comp"><div class="comp-cap">Buttons</div><div style="display:flex;gap:1rem;flex-wrap:wrap;"><a class="btn btn-primary">Begin</a><a class="btn btn-ghost">View work</a></div></div>
+    <div class="comp"><div class="comp-cap">Eyebrow + rule</div><div class="eyebrow">The Coterie</div><hr class="rule-short" style="margin-top:1rem;"></div>
+    <div class="comp"><div class="comp-cap">Service card</div><div class="service-card"><div class="sc-name">Signature</div><div class="sc-price">$9,800</div><div class="sc-desc">The flagship, for the brand whose site has fallen behind the business.</div></div></div>
+    <div class="comp"><div class="comp-cap">Testimonial</div><div class="testimonial"><q>She built us something that finally feels as considered as the work we do.</q><div class="attr">— Founder, Glowtoure</div></div></div>
+    <div class="comp"><div class="comp-cap">Image frame · offset</div><div class="imgframe"><span class="imgcap">Brand imagery</span></div></div>
+    <div class="comp"><div class="comp-cap">Project card</div><div><div class="imgframe" style="aspect-ratio:16/11;"><span class="imgcap">Glowtoure</span></div><div style="display:flex;justify-content:space-between;margin-top:.8rem;font-size:.76rem;color:var(--greige);"><span>Glowtoure</span><span>Luxury spray tan</span></div></div></div>
+  </div>
+</section>
+
+<!-- ============================ HOMEPAGE — DESKTOP ============================ -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">05</span><h2>Homepage — desktop</h2></div>
+  <div class="mock-head"><span class="tag">Home</span><span class="desc">Left-aligned · asymmetric · single confident direction</span></div>
+  <div class="browser">
+    <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">krystalbrookcoterie.com</span></div>
+    <div class="site">
+      <nav class="site-nav">
+        <div class="brand">Krystal Brook Coterie</div>
+        <ul><li>Work</li><li>Services</li><li>Process</li><li>About</li><li>Journal</li><li><a class="nav-cta">Begin</a></li></ul>
+      </nav>
+
+      <header class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow" style="margin-bottom:1.5rem;">Custom-coded editorial web design</div>
+          <h1 class="display">Websites that are <em>felt</em> before they're read.</h1>
+          <p class="lede">For founder-led beauty, wellness, med-spa, and luxury brands that have outgrown a template — and know it.</p>
+          <div class="cta-row"><a class="btn btn-primary">Begin your project</a><a class="btn btn-ghost">See the work</a></div>
+        </div>
+        <div class="hero-img"><div class="imgframe"><span class="imgcap">Hero · brand imagery</span></div></div>
+      </header>
+
+      <section class="band band-positioning">
+        <hr class="rule-short" style="margin-bottom:1.75rem;">
+        <div class="display">Your competitors' sites are rented. Yours will be <em>owned</em>.</div>
+        <p class="sub">Every KBC site is hand-built in code — no page builders, no Showit, no Squarespace — through an AI-augmented studio that delivers agency-grade engineering at boutique scale.</p>
+      </section>
+
+      <section class="band">
+        <div class="eyebrow" style="margin-bottom:2rem;">Selected work</div>
+        <div class="work">
+          <div class="feature">
+            <div class="imgframe" style="aspect-ratio:16/11;"><span class="imgcap">Glowtoure — flagship case study</span></div>
+            <div class="meta-line"><span>Glowtoure</span><span>Next.js · Tailwind · Vercel</span></div>
+            <h3 class="display">A luxury tan, given a luxury home</h3>
+          </div>
+          <div class="side">
+            <div class="imgframe"><span class="imgcap">Case study</span></div>
+            <h3 class="display">More, soon</h3>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="eyebrow" style="margin-bottom:1rem;">The studio</div>
+        <div class="display" style="font-size:clamp(1.6rem,3.5vw,2.4rem);max-width:22ch;">Four ways to work together — every one fully custom-coded.</div>
+        <div class="services-teaser">
+          <div class="tier"><div class="t-name">Launch</div><div class="t-price">$4,500</div><div class="t-for">Go to market looking established.</div></div>
+          <div class="tier featured"><div class="t-name">Signature</div><div class="t-price">$9,800</div><div class="t-for">The flagship. Most brands start here.</div><div class="t-flag">Recommended</div></div>
+          <div class="tier"><div class="t-name">Atelier</div><div class="t-price">$22,000+</div><div class="t-for">When the site is the flagship location.</div></div>
+          <div class="tier"><div class="t-name">Atelier Custom</div><div class="t-price">$32,000+</div><div class="t-for">Bespoke digital flagship.</div></div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="difference">
+          <div class="display">Senior judgment on <em>everything</em>. Nothing handed to juniors.</div>
+          <div>
+            <p>I direct an AI-augmented build process — so every design decision, every line of the system, and every word of strategy is mine, delivered at a speed a solo studio otherwise couldn't reach.</p>
+            <p>You get pixel-perfect implementation of the approved design, revision cycles measured in hours, and genuinely custom code at a price no traditional agency can match.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing">
+        <hr class="rule-short" style="margin-bottom:2rem;">
+        <div class="display">Let's build something <em>worth</em> owning.</div>
+        <div style="margin-top:2rem;"><a class="btn btn-primary">Begin your project</a></div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-top">
+          <div class="footer-brand"><div class="wm-stacked"><span class="l1">Krystal Brook</span><span class="l2">Coterie</span><span class="l3">Web Design Studio</span></div></div>
+          <div class="footer-col"><span class="fx-eyebrow">Studio</span><ul><li>Work</li><li>Services</li><li>Process</li><li>About</li><li>Journal</li></ul></div>
+          <div class="footer-col"><span class="fx-eyebrow">Connect</span><ul><li>hello@krystalbrookcoterie.com</li><li>Instagram</li><li>Begin a project</li></ul></div>
+        </div>
+        <hr class="rule footer-rule">
+        <div class="footer-legal"><span>© 2026 Krystal Brook Coterie</span><span>a DBA of Lion &amp; Gazelle Holdings LLC</span><span>Privacy · Terms</span></div>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ HOMEPAGE — MOBILE ============================ -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">06</span><h2>Homepage &amp; footer — mobile</h2></div>
+  <div class="devices">
+    <div class="phone">
+      <div class="p-nav"><div class="brand">KBC</div><div class="burger"><span></span><span></span><span></span></div></div>
+      <div class="p-hero">
+        <div class="eyebrow" style="font-size:.58rem;">Custom-coded web design</div>
+        <h1 style="margin-top:1rem;">Felt before <em>read</em>.</h1>
+        <p class="p-lede">For founder-led beauty, wellness, and luxury brands that have outgrown a template.</p>
+        <a class="btn btn-primary">Begin</a>
+      </div>
+      <div class="p-img imgframe"><span class="imgcap">Hero imagery</span></div>
+      <div class="p-sec"><div class="eyebrow">Positioning</div><h3>Rented vs. <em style="color:var(--terracotta);font-style:italic;">owned</em>.</h3><p>Hand-built in code — no page builders. Agency engineering at boutique scale.</p></div>
+      <div class="p-foot">
+        <div class="wm-stacked"><span class="l1">Krystal Brook</span><span class="l2">Coterie</span><span class="l3">Web Design Studio</span></div>
+        <div class="p-fx">hello@krystalbrookcoterie.com<br>Instagram · Begin a project</div>
+        <hr class="rule" style="margin:1rem 0;">
+        <div style="font-size:.62rem;color:var(--greige);">a DBA of Lion &amp; Gazelle Holdings LLC</div>
+      </div>
+    </div>
+    <div style="max-width:32ch;align-self:center;">
+      <p class="note">The mobile view keeps the same left-aligned hierarchy: eyebrow, display statement with the italic accent word, quiet lede, single primary action. The nav collapses to a monogram + accessible menu. The petrol footer is the only place petrol appears, on mobile as on desktop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SERVICES — DESKTOP ============================ -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">07</span><h2>Interior page · Services — desktop</h2></div>
+  <div class="mock-head"><span class="tag">Services</span><span class="desc">Editorial tiers, not a pricing table · Signature emphasized</span></div>
+  <div class="browser">
+    <div class="browser-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">krystalbrookcoterie.com/services</span></div>
+    <div class="site">
+      <nav class="site-nav">
+        <div class="brand">Krystal Brook Coterie</div>
+        <ul><li>Work</li><li>Services</li><li>Process</li><li>About</li><li>Journal</li><li><a class="nav-cta">Begin</a></li></ul>
+      </nav>
+      <header class="svc-hero">
+        <div class="eyebrow" style="margin-bottom:1.5rem;">Services</div>
+        <h1>Four ways to work together — every one <em>custom-coded</em>.</h1>
+        <p class="sub">The tiers vary in scope and depth, never in the quality of the engineering. Choose by ambition, not by how much site you can afford.</p>
+      </header>
+      <div class="svc-list">
+        <div class="svc-tier">
+          <div class="st-index">01</div>
+          <div><div class="st-name">Launch</div><p class="st-desc">For the founder going to market who needs to look established from day one. Up to 3 pages, one confident design, custom-coded.</p></div>
+          <div><div class="st-price">$4,500</div><div class="st-time">3–4 weeks</div></div>
+        </div>
+        <div class="svc-tier featured">
+          <div class="st-index">02</div>
+          <div><div class="st-name">Signature <span class="flag">Recommended</span></div><p class="st-desc">The flagship. For the established brand whose website has fallen behind. Up to 6 pages, full strategy, CMS, editorial motion, complete SEO.</p></div>
+          <div><div class="st-price">$9,800</div><div class="st-time">6–8 weeks</div></div>
+        </div>
+        <div class="svc-tier">
+          <div class="st-index">03</div>
+          <div><div class="st-name">Atelier</div><p class="st-desc">For the brand where the website is the flagship location. Up to 12 pages, per-treatment pages, copywriting, art direction, local SEO.</p></div>
+          <div><div class="st-price">$22,000+</div><div class="st-time">10–14 weeks</div></div>
+        </div>
+        <div class="svc-tier">
+          <div class="st-index">04</div>
+          <div><div class="st-name">Atelier Custom</div><p class="st-desc">Bespoke engineering — headless commerce, member areas, multi-location. Scoped after a paid discovery engagement.</p></div>
+          <div><div class="st-price">$32,000+</div><div class="st-time">14–20 weeks</div></div>
+        </div>
+      </div>
+      <section class="band">
+        <div class="eyebrow" style="margin-bottom:.5rem;">After launch</div>
+        <div class="display" style="font-size:1.8rem;max-width:20ch;">Care Plans keep the site compounding in value.</div>
+      </section>
+      <div class="svc-care">
+        <div class="care-cell"><div class="cc-name">Essential</div><div class="cc-price">$175 / month</div><div class="cc-desc">Updates, monitoring, backups, 30 minutes of changes.</div></div>
+        <div class="care-cell"><div class="cc-name">Growth</div><div class="cc-price">$450 / month</div><div class="cc-desc">Plus 2 hours of changes, monthly analytics, quarterly CRO review.</div></div>
+        <div class="care-cell"><div class="cc-name">Partner</div><div class="cc-price">$950 / month</div><div class="cc-desc">Plus 5 hours, priority queue, quarterly strategy, A/B tests.</div></div>
+      </div>
+      <footer class="site-footer">
+        <div class="footer-top">
+          <div class="footer-brand"><div class="wm-stacked"><span class="l1">Krystal Brook</span><span class="l2">Coterie</span><span class="l3">Web Design Studio</span></div></div>
+          <div class="footer-col"><span class="fx-eyebrow">Studio</span><ul><li>Work</li><li>Services</li><li>Process</li><li>About</li><li>Journal</li></ul></div>
+          <div class="footer-col"><span class="fx-eyebrow">Connect</span><ul><li>hello@krystalbrookcoterie.com</li><li>Instagram</li><li>Begin a project</li></ul></div>
+        </div>
+        <hr class="rule footer-rule">
+        <div class="footer-legal"><span>© 2026 Krystal Brook Coterie</span><span>a DBA of Lion &amp; Gazelle Holdings LLC</span><span>Privacy · Terms</span></div>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SERVICES — MOBILE ============================ -->
+<section class="spec-band">
+  <div class="spec-label"><span class="n">08</span><h2>Services — mobile</h2></div>
+  <div class="devices">
+    <div class="phone">
+      <div class="p-nav"><div class="brand">KBC</div><div class="burger"><span></span><span></span><span></span></div></div>
+      <div class="p-hero" style="padding-bottom:1rem;">
+        <div class="eyebrow" style="font-size:.58rem;">Services</div>
+        <h1 style="margin-top:1rem;font-size:1.85rem;">Four ways to <em>work</em>.</h1>
+        <p class="p-lede">Scope and depth vary. The engineering never does.</p>
+      </div>
+      <div style="padding:0 1.1rem 1.5rem;">
+        <div style="border-top:1px solid var(--teal);padding:1rem 0;"><div style="font-family:var(--display);font-size:1.35rem;">Launch</div><div style="color:var(--terracotta);font-size:.85rem;">$4,500 · 3–4 wks</div></div>
+        <div style="border-top:1px solid var(--teal);padding:1rem 0;background:linear-gradient(90deg,rgba(191,105,64,.10),transparent);"><div style="font-family:var(--display);font-size:1.35rem;">Signature <span style="font-family:var(--body);font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);border:1px solid var(--terracotta);padding:.15rem .4rem;">Rec</span></div><div style="color:var(--terracotta);font-size:.85rem;">$9,800 · 6–8 wks</div></div>
+        <div style="border-top:1px solid var(--teal);padding:1rem 0;"><div style="font-family:var(--display);font-size:1.35rem;">Atelier</div><div style="color:var(--terracotta);font-size:.85rem;">$22,000+ · 10–14 wks</div></div>
+        <div style="border-top:1px solid var(--teal);padding:1rem 0;"><div style="font-family:var(--display);font-size:1.35rem;">Atelier Custom</div><div style="color:var(--terracotta);font-size:.85rem;">$32,000+ · 14–20 wks</div></div>
+      </div>
+      <div class="p-foot">
+        <div class="wm-stacked"><span class="l1">Krystal Brook</span><span class="l2">Coterie</span><span class="l3">Web Design Studio</span></div>
+        <div class="p-fx">hello@krystalbrookcoterie.com</div>
+      </div>
+    </div>
+    <div style="max-width:32ch;align-self:center;">
+      <p class="note">On mobile the tiers stack as a single editorial list — teal rule between each, terracotta price and timeline, Signature carrying the same quiet emphasis it holds on desktop. No feature-comparison table; the reading order does the persuading.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ HANDOFF NOTE ============================ -->
+<section class="spec-band" style="border-bottom:0;">
+  <div class="spec-label"><span class="n">09</span><h2>Feeding this to code</h2></div>
+  <p class="type-body" style="margin-bottom:1.5rem;">This document is your approved Phase 05 direction. When you run the build sequence, reference it directly so Claude Code builds against a fixed target rather than improvising layout:</p>
+  <ul style="list-style:none;max-width:var(--measure);display:flex;flex-direction:column;gap:1rem;">
+    <li style="border-left:1px solid var(--teal);padding-left:1.25rem;"><strong style="color:var(--cream);font-weight:500;">Sections 01–04</strong> <span style="color:var(--greige);">— confirm your <code>CLAUDE.md</code> and styleguide (Prompts 01–07) match these tokens, type, wordmarks, and components before building pages.</span></li>
+    <li style="border-left:1px solid var(--teal);padding-left:1.25rem;"><strong style="color:var(--cream);font-weight:500;">Sections 05–06</strong> <span style="color:var(--greige);">— this is the target for the Home page prompt (Prompt 08). Screenshot the desktop and mobile frames into Claude Code alongside the prompt.</span></li>
+    <li style="border-left:1px solid var(--teal);padding-left:1.25rem;"><strong style="color:var(--cream);font-weight:500;">Sections 07–08</strong> <span style="color:var(--greige);">— the target for the Services prompt (Prompt 11), same screenshot-with-prompt approach.</span></li>
+    <li style="border-left:1px solid var(--teal);padding-left:1.25rem;"><strong style="color:var(--cream);font-weight:500;">Everywhere</strong> <span style="color:var(--greige);">— left-aligned default, asymmetric imagery, petrol-footer-only, teal-structural-only, greige eyebrows on petrol. The build audits (Prompts 18–19) check exactly these.</span></li>
+  </ul>
+  <p class="note" style="margin-top:2rem;">Krystal Brook Coterie · a DBA of Lion &amp; Gazelle Holdings LLC · krystalbrookcoterie.com</p>
+</section>
+
+<div id="cur-ring"></div>
+<div id="cur-dot"></div>
+<script>
+(function(){
+  var fine = window.matchMedia('(pointer:fine)').matches;
+  if(!fine) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var dot = document.getElementById('cur-dot');
+  var ring = document.getElementById('cur-ring');
+  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+  document.addEventListener('mousemove',function(e){
+    mx=e.clientX;my=e.clientY;
+    dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
+    if(reduce){ring.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';}
+  });
+  if(!reduce){
+    (function loop(){
+      rx+=(mx-rx)*0.18; ry+=(my-ry)*0.18;
+      ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';
+      requestAnimationFrame(loop);
+    })();
+  }
+  function bind(){
+    document.querySelectorAll('a,button,.btn,.nav-cta,li').forEach(function(el){
+      el.addEventListener('mouseenter',function(){ring.classList.add('hovering');});
+      el.addEventListener('mouseleave',function(){ring.classList.remove('hovering');});
+    });
+  }
+  bind();
+})();
+</script>
+</body>
+</html>

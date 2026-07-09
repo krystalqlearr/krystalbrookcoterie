@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark-led canvas: rich-black background, cream ink by default. */
+@layer base {
+  html {
+    background-color: #0a0a0a; /* rich-black */
+  }
+  body {
+    @apply bg-rich-black text-cream font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide the native cursor everywhere while the custom cursor is active.
+     Added only on fine pointers; removed on touch so the native cursor returns. */
+  .kbc-cursor-none,
+  .kbc-cursor-none * {
+    cursor: none !important;
+  }
+}
