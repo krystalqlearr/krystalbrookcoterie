@@ -1,4 +1,14 @@
 import Logo from "@/components/Logo";
+import Button from "@/components/Button";
+import EditorialHeading from "@/components/EditorialHeading";
+import Eyebrow from "@/components/Eyebrow";
+import FAQAccordion from "@/components/FAQAccordion";
+import ImageFrame from "@/components/ImageFrame";
+import ProjectCard from "@/components/ProjectCard";
+import Rule from "@/components/Rule";
+import SectionShell from "@/components/SectionShell";
+import ServiceCard from "@/components/ServiceCard";
+import Testimonial from "@/components/Testimonial";
 
 type Token = {
   name: string;
@@ -261,6 +271,194 @@ export default function StyleguidePage() {
                   ))}
                 </nav>
               </div>
+            </div>
+          </section>
+        </div>
+
+        {/* ── Component library ────────────────────────────────── */}
+        <div className="mt-38 space-y-26">
+          {/* SectionShell */}
+          <section>
+            <GroupMarker>SectionShell</GroupMarker>
+            <div className="mt-8 rounded-sm ring-1 ring-greige/15">
+              <SectionShell
+                container={false}
+                marker
+                eyebrow="The studio"
+                heading="Senior judgment on everything"
+                accent="everything"
+                accentColor="terracotta"
+                intro="Vertical rhythm, a teal marker rule, a greige eyebrow, a display heading with an italic accent, and an intro — assembled left-aligned, every part optional."
+                className="!py-14 px-8"
+              >
+                <p className="max-w-measure font-sans text-sm text-greige">
+                  Children render below the header block with editorial spacing.
+                </p>
+              </SectionShell>
+            </div>
+          </section>
+
+          {/* EditorialHeading */}
+          <section>
+            <GroupMarker>EditorialHeading</GroupMarker>
+            <div className="mt-10 space-y-8">
+              <EditorialHeading size="xl" accent="felt">
+                Websites that are felt before they&rsquo;re read
+              </EditorialHeading>
+              <EditorialHeading size="lg" accent="owned" accentColor="terracotta">
+                Your competitors&rsquo; sites are rented. Yours will be owned
+              </EditorialHeading>
+              <EditorialHeading size="md">Selected work</EditorialHeading>
+            </div>
+          </section>
+
+          {/* Button */}
+          <section>
+            <GroupMarker>Button</GroupMarker>
+            <div className="mt-10 flex flex-wrap items-center gap-5">
+              <Button href="/styleguide" variant="primary">
+                Begin your project
+              </Button>
+              <Button href="/styleguide" variant="ghost">
+                See the work
+              </Button>
+              <Button variant="primary">Submit (button)</Button>
+            </div>
+          </section>
+
+          {/* Rule */}
+          <section>
+            <GroupMarker>Rule</GroupMarker>
+            <div className="mt-10 space-y-8">
+              <div>
+                <p className="mb-3 font-sans text-xs text-greige">short · section marker</p>
+                <Rule width="short" />
+              </div>
+              <div>
+                <p className="mb-3 font-sans text-xs text-greige">full · divider</p>
+                <Rule width="full" />
+              </div>
+            </div>
+          </section>
+
+          {/* Eyebrow */}
+          <section>
+            <GroupMarker>Eyebrow</GroupMarker>
+            <div className="mt-10 grid gap-8 sm:grid-cols-3">
+              <div>
+                <Eyebrow>Founder-led beauty</Eyebrow>
+                <p className="mt-3 font-sans text-xs text-greige">default · greige</p>
+              </div>
+              <div>
+                <Eyebrow tone="terracotta">On rich-black</Eyebrow>
+                <p className="mt-3 font-sans text-xs text-greige">tone=&quot;terracotta&quot; (5.01:1)</p>
+              </div>
+              <div className="rounded-sm bg-deep-petrol p-6">
+                <Eyebrow tone="terracotta" onPetrol>
+                  On petrol
+                </Eyebrow>
+                <p className="mt-3 font-sans text-xs text-greige">
+                  onPetrol forces greige (terracotta would be 4.26:1)
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ImageFrame */}
+          <section>
+            <GroupMarker>ImageFrame</GroupMarker>
+            <div className="mt-10 grid gap-x-gutter gap-y-8 sm:grid-cols-3">
+              <ImageFrame ratio="4/5" alt="Brand imagery placeholder" caption="4 / 5" />
+              <ImageFrame ratio="16/11" alt="Brand imagery placeholder" caption="16 / 11" />
+              <ImageFrame ratio="3/4" alt="Brand imagery placeholder" caption="3 / 4 · offset" offset="down" />
+            </div>
+          </section>
+
+          {/* Testimonial */}
+          <section>
+            <GroupMarker>Testimonial</GroupMarker>
+            <div className="mt-10">
+              <Testimonial
+                quote="She built us something that finally feels as considered as the work we do."
+                name="Founder"
+                role="GlowToure"
+              />
+            </div>
+          </section>
+
+          {/* ServiceCard */}
+          <section>
+            <GroupMarker>ServiceCard</GroupMarker>
+            <div className="mt-10 grid gap-x-gutter gap-y-10 md:grid-cols-3">
+              <ServiceCard
+                name="Launch"
+                price="$4,500"
+                duration="3–4 weeks"
+                description="For the founder going to market who needs to look established from day one. Up to 3 pages, one confident design, custom-coded."
+                href="/styleguide"
+              />
+              <ServiceCard
+                name="Signature"
+                price="$9,800"
+                duration="6–8 weeks"
+                featured
+                description="The flagship. For the established brand whose website has fallen behind. Up to 6 pages, full strategy, CMS, editorial motion."
+                href="/styleguide"
+              />
+              <ServiceCard
+                name="Atelier"
+                price="$22,000+"
+                duration="10–14 weeks"
+                description="For the brand where the website is the flagship location. Up to 12 pages, per-treatment pages, copywriting, art direction."
+                href="/styleguide"
+              />
+            </div>
+          </section>
+
+          {/* ProjectCard */}
+          <section>
+            <GroupMarker>ProjectCard</GroupMarker>
+            <div className="mt-10 grid items-end gap-x-gutter gap-y-10 md:grid-cols-[1.4fr_1fr]">
+              <ProjectCard
+                size="feature"
+                client="GlowToure"
+                tag="Luxury spray tan"
+                descriptor="A luxury tan, given a luxury home"
+                href="/styleguide"
+              />
+              <ProjectCard
+                size="side"
+                client="Coming soon"
+                tag="Case study"
+                descriptor="More, soon"
+                href="/styleguide"
+              />
+            </div>
+          </section>
+
+          {/* FAQAccordion */}
+          <section>
+            <GroupMarker>FAQAccordion</GroupMarker>
+            <div className="mt-10 max-w-editorial">
+              <FAQAccordion
+                items={[
+                  {
+                    question: "How long does a project take?",
+                    answer:
+                      "Launch runs 3–4 weeks, Signature 6–8, Atelier 10–14. Timelines are held from the day assets and content are in hand.",
+                  },
+                  {
+                    question: "Do you work with established brands only?",
+                    answer:
+                      "Both — established brands whose site has fallen behind, and founders going to market who need to look established from day one.",
+                  },
+                  {
+                    question: "What do you build on?",
+                    answer:
+                      "Hand-coded Next.js and Tailwind, deployed on Vercel — no page builders, no Squarespace, no Showit.",
+                  },
+                ]}
+              />
             </div>
           </section>
         </div>

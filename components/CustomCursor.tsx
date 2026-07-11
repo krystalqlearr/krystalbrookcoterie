@@ -65,6 +65,8 @@ export default function CustomCursor() {
         rx = mx;
         ry = my;
         renderRing();
+      } else {
+        startLoop();
       }
     };
 
@@ -93,7 +95,20 @@ export default function CustomCursor() {
       rx += (mx - rx) * LERP;
       ry += (my - ry) * LERP;
       renderRing();
+      // Sleep once the ring has caught up so the page can reach idle;
+      // onMove() wakes it again. requestAnimationFrame never returns 0.
+      if (Math.abs(mx - rx) < 0.5 && Math.abs(my - ry) < 0.5) {
+        rx = mx;
+        ry = my;
+        renderRing();
+        raf = 0;
+        return;
+      }
       raf = requestAnimationFrame(loop);
+    };
+
+    const startLoop = () => {
+      if (!raf && !reducedMotion.matches) raf = requestAnimationFrame(loop);
     };
 
     const enable = () => {
@@ -104,7 +119,7 @@ export default function CustomCursor() {
       document.addEventListener("mouseover", onOver, { passive: true });
       document.documentElement.addEventListener("mouseenter", onEnter);
       document.documentElement.addEventListener("mouseleave", onLeave);
-      if (!reducedMotion.matches) raf = requestAnimationFrame(loop);
+      startLoop();
       renderDot();
       renderRing();
     };

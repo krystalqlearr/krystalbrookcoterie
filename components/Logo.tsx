@@ -48,7 +48,7 @@ export default function Logo({
         role="img"
         aria-label={LABEL}
         style={{ fontSize }}
-        className={`inline-flex h-[2.12em] w-[2.12em] items-center justify-center rounded-[1px] border border-current font-display leading-none tracking-[0.04em] ${tone} ${className}`}
+        className={`inline-flex h-[2.12em] w-[2.12em] items-center justify-center rounded-[1px] border border-current font-editorial leading-none tracking-[0.04em] ${tone} ${className}`}
       >
         <span aria-hidden>KBC</span>
       </span>
@@ -61,7 +61,7 @@ export default function Logo({
         role="img"
         aria-label={LABEL}
         style={{ fontSize }}
-        className={`font-display leading-none tracking-[0.03em] ${tone} ${className}`}
+        className={`font-editorial leading-none tracking-[0.03em] ${tone} ${className}`}
       >
         <span aria-hidden>Krystal Brook Coterie</span>
       </span>
@@ -76,10 +76,10 @@ export default function Logo({
       style={{ fontSize }}
       className={`inline-block leading-none ${tone} ${className}`}
     >
-      <span aria-hidden className="block font-display text-[1em] leading-[1.02] tracking-[0.02em]">
+      <span aria-hidden className="block font-editorial text-[1em] leading-[1.02] tracking-[0.02em]">
         Krystal Brook
       </span>
-      <span aria-hidden className="block font-display text-[1em] italic leading-[1.02]">
+      <span aria-hidden className="block font-editorial text-[1em] italic leading-[1.02]">
         Coterie
       </span>
       <span

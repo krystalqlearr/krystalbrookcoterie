@@ -5,36 +5,32 @@ import CustomCursor from "@/components/CustomCursor";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
-// Display — PP Editorial New (standard width, all provided weights + italics).
-const editorialNew = localFont({
-  variable: "--font-display",
+// Display + body/UI — PP Neue Montreal (sans). Note: this family has no 700;
+// it goes Semibold 600 → Extrabold 800 → Black 900.
+const neueMontreal = localFont({
+  variable: "--font-sans",
   display: "swap",
   src: [
-    { path: "../public/fonts/PPEditorialNew-Thin.woff2", weight: "100", style: "normal" },
-    { path: "../public/fonts/PPEditorialNew-ThinItalic.woff2", weight: "100", style: "italic" },
-    { path: "../public/fonts/PPEditorialNew-Ultralight.woff2", weight: "200", style: "normal" },
+    { path: "../public/fonts/PPNeueMontreal-Hairline.woff2", weight: "100", style: "normal" },
+    { path: "../public/fonts/PPNeueMontreal-Light.woff2", weight: "300", style: "normal" },
+    { path: "../public/fonts/PPNeueMontreal-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/PPNeueMontreal-Italic.woff2", weight: "400", style: "italic" },
+    { path: "../public/fonts/PPNeueMontreal-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../public/fonts/PPNeueMontreal-Semibold.woff2", weight: "600", style: "normal" },
+    { path: "../public/fonts/PPNeueMontreal-Extrabold.woff2", weight: "800", style: "normal" },
+    { path: "../public/fonts/PPNeueMontreal-Black.woff2", weight: "900", style: "normal" },
+  ],
+});
+
+// Editorial accent (italic serif) + wordmark — PP Editorial New.
+const editorialNew = localFont({
+  variable: "--font-editorial",
+  display: "swap",
+  src: [
     { path: "../public/fonts/PPEditorialNew-Regular.woff2", weight: "400", style: "normal" },
     { path: "../public/fonts/PPEditorialNew-Italic.woff2", weight: "400", style: "italic" },
     { path: "../public/fonts/PPEditorialNew-Bold.woff2", weight: "700", style: "normal" },
     { path: "../public/fonts/PPEditorialNew-BoldItalic.woff2", weight: "700", style: "italic" },
-    { path: "../public/fonts/PPEditorialNew-Heavy.woff2", weight: "900", style: "normal" },
-    { path: "../public/fonts/PPEditorialNew-HeavyItalic.woff2", weight: "900", style: "italic" },
-  ],
-});
-
-// Body / UI — PP Pangram Sans (standard width, all provided weights + italics).
-const pangramSans = localFont({
-  variable: "--font-sans",
-  display: "swap",
-  src: [
-    { path: "../public/fonts/PPPangramSans-Light.woff2", weight: "300", style: "normal" },
-    { path: "../public/fonts/PPPangramSans-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../public/fonts/PPPangramSans-RegularItalic.woff2", weight: "400", style: "italic" },
-    { path: "../public/fonts/PPPangramSans-Medium.woff2", weight: "500", style: "normal" },
-    { path: "../public/fonts/PPPangramSans-Semibold.woff2", weight: "600", style: "normal" },
-    { path: "../public/fonts/PPPangramSans-Bold.woff2", weight: "700", style: "normal" },
-    { path: "../public/fonts/PPPangramSans-Extrabold.woff2", weight: "800", style: "normal" },
-    { path: "../public/fonts/PPPangramSans-ExtraboldItalic.woff2", weight: "800", style: "italic" },
   ],
 });
 
@@ -50,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${editorialNew.variable} ${pangramSans.variable}`}>
+    <html lang="en" className={`${neueMontreal.variable} ${editorialNew.variable}`}>
       <body>
         <SiteHeader />
         <main>{children}</main>

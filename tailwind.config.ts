@@ -61,9 +61,11 @@ const config: Config = {
         editorial: "90rem", //  1440px — editorial content cap
       },
       fontFamily: {
-        // Wired to next/font/local variables (fonts added later).
-        display: ["var(--font-display)"],
+        // Neue Montreal carries both body and display (bold sans headlines);
+        // Editorial New is the italic serif accent + wordmark.
         sans: ["var(--font-sans)"],
+        display: ["var(--font-sans)"],
+        editorial: ["var(--font-editorial)"],
       },
     },
   },

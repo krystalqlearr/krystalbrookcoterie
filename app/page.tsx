@@ -1,101 +1,159 @@
-import Image from "next/image";
+import Button from "@/components/Button";
+import EditorialHeading from "@/components/EditorialHeading";
+import Eyebrow from "@/components/Eyebrow";
+import ImageFrame from "@/components/ImageFrame";
+import ProjectCard from "@/components/ProjectCard";
+import SectionShell from "@/components/SectionShell";
+import ServiceCard from "@/components/ServiceCard";
+import Testimonial from "@/components/Testimonial";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      {/* 1 · Hero — reserves top space for the fixed overlay header */}
+      <section className="pb-section pt-32 md:pt-40">
+        <div className="container grid items-center gap-x-gutter gap-y-12 lg:grid-cols-[1.15fr_0.85fr]">
+          <div>
+            <Eyebrow tone="terracotta">Custom-coded editorial web design</Eyebrow>
+            <EditorialHeading
+              as="h1"
+              size="xl"
+              accent="felt"
+              accentColor="terracotta"
+              className="mt-6 max-w-[15ch]"
+            >
+              Websites that are felt before they&rsquo;re read.
+            </EditorialHeading>
+            <p className="mt-6 max-w-[42ch] font-sans text-lg leading-relaxed text-greige">
+              For founder-led beauty, wellness, med-spa, and luxury brands that have
+              outgrown a template — and know it.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button href="/begin" variant="primary">
+                Begin your project
+              </Button>
+              <Button href="/work" variant="ghost">
+                See the work
+              </Button>
+            </div>
+          </div>
+          <ImageFrame
+            ratio="3/4"
+            offset="down"
+            priority
+            alt="Krystal Brook Coterie — brand imagery"
+            caption="Hero · brand imagery"
+            sizes="(min-width: 1024px) 40vw, 100vw"
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+      </section>
+
+      {/* 2 · Positioning band — petrol alt-section */}
+      <SectionShell
+        tone="petrol"
+        marker
+        heading="Your competitors’ sites are rented. Yours will be owned."
+        accent="owned"
+        accentColor="terracotta"
+        intro="Every KBC site is hand-built in code — no page builders, no Squarespace — through an AI-augmented studio that delivers agency-grade engineering at boutique scale."
+      />
+
+      {/* 3 · Selected Work — asymmetric, Glowtoure featured largest */}
+      <SectionShell eyebrow="Selected work">
+        <div className="grid items-end gap-x-gutter gap-y-12 lg:grid-cols-[1.4fr_1fr]">
+          <ProjectCard
+            size="feature"
+            client="Glowtoure"
+            tag="Next.js · Tailwind · Vercel"
+            descriptor="A luxury tan, given a luxury home"
+            href="/work/glowtoure"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <ProjectCard
+            size="side"
+            client="In progress"
+            tag="Case study"
+            descriptor="More, soon"
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
+        </div>
+      </SectionShell>
+
+      {/* 4 · Services teaser — four tiers, Signature emphasized */}
+      <SectionShell
+        eyebrow="The studio"
+        heading="Four ways to work together, every one custom-coded."
+        headingSize="md"
+      >
+        <div className="grid gap-x-gutter gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <ServiceCard name="Launch" price="$4,500" description="Go to market looking established." />
+          <ServiceCard
+            name="Signature"
+            price="$9,800"
+            featured
+            description="The flagship. Most brands start here."
           />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <ServiceCard name="Atelier" price="$22,000+" description="When the site is the flagship location." />
+          <ServiceCard
+            name="Atelier Custom"
+            price="$32,000+"
+            description="A bespoke digital flagship."
+          />
+        </div>
+        <div className="mt-12">
+          <Button href="/services" variant="ghost">
+            View all services
+          </Button>
+        </div>
+      </SectionShell>
+
+      {/* 5 · The difference — petrol alt-section */}
+      <SectionShell tone="petrol" eyebrow="The difference">
+        <div className="grid gap-x-gutter gap-y-8 lg:grid-cols-2 lg:items-start">
+          <EditorialHeading
+            as="h2"
+            size="lg"
+            accent="everything"
+            accentColor="terracotta"
+            className="max-w-[16ch]"
+          >
+            Senior judgment on everything. Nothing handed to juniors.
+          </EditorialHeading>
+          <div className="max-w-measure space-y-4 font-sans leading-relaxed text-greige">
+            <p>
+              I direct an AI-augmented build process — so every design decision, every line
+              of the system, and every word of strategy is mine, delivered at a speed a solo
+              studio otherwise couldn&rsquo;t reach.
+            </p>
+            <p>
+              You get pixel-perfect implementation of the approved design, revision cycles
+              measured in hours, and genuinely custom code at a price no traditional agency
+              can match.
+            </p>
+          </div>
+        </div>
+      </SectionShell>
+
+      {/* 6 · Testimonial (placeholder until real ones arrive) */}
+      <SectionShell eyebrow="Proof">
+        <Testimonial
+          quote="She built us something that finally feels as considered as the work we do."
+          name="Founder"
+          role="Glowtoure"
+        />
+      </SectionShell>
+
+      {/* 7 · Closing CTA — cream showstopper */}
+      <SectionShell
+        tone="cream"
+        marker
+        heading="Let’s build something worth owning."
+        accent="worth"
+        accentColor="terracotta"
+        headingSize="xl"
+      >
+        <Button href="/begin" variant="onCream">
+          Begin your project
+        </Button>
+      </SectionShell>
+    </>
   );
 }
