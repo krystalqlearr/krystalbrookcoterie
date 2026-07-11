@@ -20,7 +20,7 @@ export default function HomePage() {
               size="xl"
               accent="felt"
               accentColor="terracotta"
-              className="mt-6 max-w-[15ch]"
+              className="mt-6 max-w-[19ch] text-balance"
             >
               Websites that are felt before they&rsquo;re read.
             </EditorialHeading>
@@ -38,11 +38,12 @@ export default function HomePage() {
             </div>
           </div>
           <ImageFrame
-            ratio="3/4"
+            ratio="4/5"
             offset="down"
             priority
+            index="01"
             alt="Krystal Brook Coterie — brand imagery"
-            caption="Hero · brand imagery"
+            caption="Brand imagery — forthcoming"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
         </div>
@@ -76,6 +77,18 @@ export default function HomePage() {
           />
         </div>
       </SectionShell>
+
+      {/* 3b · Full-bleed band — breaks the contained grid for editorial rhythm */}
+      <section aria-label="Studio imagery" className="relative">
+        <ImageFrame
+          fullBleed
+          ratio="16/7"
+          index="KBC"
+          alt="Krystal Brook Coterie — studio imagery"
+          caption="Full-bleed brand film — forthcoming"
+          sizes="100vw"
+        />
+      </section>
 
       {/* 4 · Services teaser — four tiers, Signature emphasized */}
       <SectionShell
