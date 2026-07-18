@@ -165,7 +165,7 @@ export default function EnquiryForm() {
         type="submit"
         className="mt-8 inline-flex items-center justify-center rounded-[1px] border border-ink bg-ink px-7 py-3.5 font-sans text-xs font-medium uppercase tracking-[0.14em] text-bone transition hover:bg-ink/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
       >
-        Send enquiry
+        Submit your inquiry
       </button>
     </form>
   );

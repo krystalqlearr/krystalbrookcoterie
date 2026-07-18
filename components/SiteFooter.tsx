@@ -19,8 +19,8 @@ export default function SiteFooter() {
           <div>
             <Logo variant="stacked" color="bone" />
             <p className="mt-8 max-w-[40ch] font-sans text-sm leading-relaxed text-bone/60">
-              Editorial luxury web design for founder-led beauty, wellness, med-spa,
-              and bridal brands — custom-coded, owned not rented.
+              Distinctive digital identities for founder-led beauty, wellness, med-spa,
+              and luxury lifestyle brands — built to lead their category.
             </p>
           </div>
 
@@ -68,7 +68,7 @@ export default function SiteFooter() {
                   href="/begin"
                   className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                 >
-                  Begin a project
+                  Commission a project
                 </Link>
               </li>
             </ul>

@@ -105,7 +105,7 @@ export default function SiteHeader() {
             href="/begin"
             className={`rounded-[1px] border border-ink px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
           >
-            Begin
+            Commission
           </Link>
         </nav>
 
@@ -166,7 +166,7 @@ export default function SiteHeader() {
             onClick={() => setOpen(false)}
             className={`mt-10 inline-block self-start rounded-[1px] border border-ink px-6 py-3 font-sans text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
           >
-            Begin your project
+            Commission a project
           </Link>
         </div>
       ) : null}

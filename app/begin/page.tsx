@@ -5,26 +5,34 @@ import Reveal from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
-  title: "Begin",
+  title: "Commission",
   description:
-    "Start your project with Krystal Brook Coterie. Share the brand and the ambition; every enquiry is reviewed for fit within 48 hours.",
+    "For founders ready to create a more distinctive, credible, and commercially powerful digital presence. Projects are accepted selectively.",
 };
 
 export default function BeginPage() {
   return (
     <>
       <PageHero
-        marker="Begin"
-        eyebrow="Begin"
-        title="Tell me what you’re building."
-        accent="building"
-        intro="A few questions to understand the brand and the ambition. Every enquiry comes straight to me and is reviewed for fit within 48 hours — a match leads to a consultation and a proposal within three business days."
+        marker="Commission"
+        eyebrow="Commission"
+        title="Let’s build what comes next."
+        accent="next"
+        intro="For founders ready to create a more distinctive, credible, and commercially powerful digital presence. Share where the brand stands today, what is changing, and what the next version must make possible."
       />
 
       <SectionShell as="section" className="pt-0">
         <div className="grid gap-x-gutter gap-y-14 lg:grid-cols-[1.4fr_0.6fr]">
           <Reveal>
+            <p className="mb-8 max-w-measure font-sans text-fluid-base leading-relaxed text-ink/70">
+              Every engagement begins with alignment. The details below help determine
+              the right scope, timing, and level of partnership for your project.
+            </p>
             <EnquiryForm />
+            <p className="mt-10 max-w-measure font-editorial text-fluid-base italic leading-snug text-ink/60">
+              Projects are accepted selectively to preserve the depth and attention each
+              engagement requires. You can expect a response within two business days.
+            </p>
           </Reveal>
 
           <Reveal delay={0.1}>

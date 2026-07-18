@@ -87,11 +87,20 @@ components by default (client only where interactivity requires), motion budgete
 layout shift. Future: View Transitions API, Speculation Rules prefetch, container
 queries, CSS scroll-driven animation (progressive enhancement); evaluate Next 15 + PPR.
 
-## Voice
-Editorial, confident, warm, restrained. Three brand words: Editorial, Owned, Precise.
-Display headings are UPPERCASE monumental sans; body and serif sublines are sentence
-case. Positioning: rented vs. owned. NEVER name competitors (Squarespace/Wix/page-
-builders) — confidence doesn't name the cheap option.
+## Voice — a luxury creative house (not a dev shop)
+Editorial, assured, fashion-conscious, commercially intelligent, selective, slightly
+provocative. Core message: "digital identities for brands that expect to be noticed,
+trusted, and chosen." SELL PERCEPTION FIRST — authority, trust, desirability, growth —
+then let capability support it. Craft/tech ("hand-built in code," "the stack big tech
+runs," "advanced architecture," "custom systems") is a PROOF POINT, never the headline;
+keep it to the FAQ and case-study depth. Frame projects as the SHIFT created (e.g.
+"a clinical brand, repositioned as a modern authority"), not the deliverable.
+Nomenclature: services are an ENGAGEMENT/COMMISSION (nav CTA = "Commission"); tiers are
+The Edit · Signature (flag: "Most commissioned") · Atelier · Private Commission.
+Display headings are UPPERCASE monumental sans; body and serif sublines sentence case.
+NEVER name competitors. AVOID empty luxury filler — "elevated," "bespoke," "intentional,"
+"curated," "timeless" — unless it says something specific. Positioning: rented vs. owned.
+Three brand words: Editorial · Owned · Precise. Full copy system: docs/kbc-voice.md.
 
 ## AI — never volunteer it (hard rule)
 NEVER mention AI in site copy except where a prospect literally asks: the single

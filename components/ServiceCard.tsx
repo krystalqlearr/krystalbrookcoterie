@@ -10,6 +10,7 @@ type Props = {
   price: string;
   description: string;
   duration?: string;
+  bestFor?: string;
   href?: string;
   cta?: string;
   featured?: boolean;
@@ -21,6 +22,7 @@ export default function ServiceCard({
   price,
   description,
   duration,
+  bestFor,
   href,
   cta = "Explore",
   featured = false,
@@ -34,7 +36,7 @@ export default function ServiceCard({
     >
       {featured ? (
         <span className="mb-3 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-ink">
-          Recommended
+          Most commissioned
         </span>
       ) : null}
       <h3 className="font-display text-fluid-lg font-extrabold uppercase tracking-[-0.01em] text-ink">
@@ -45,6 +47,11 @@ export default function ServiceCard({
         <p className="mt-1 font-sans text-xs uppercase tracking-[0.06em] text-ink/60">{duration}</p>
       ) : null}
       <p className="mt-4 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70">{description}</p>
+      {bestFor ? (
+        <p className="mt-3 max-w-[42ch] font-sans text-sm italic leading-relaxed text-ink/55 font-editorial">
+          {bestFor}
+        </p>
+      ) : null}
       {href ? (
         <div className="mt-6">
           <Button href={href} variant="ghost">

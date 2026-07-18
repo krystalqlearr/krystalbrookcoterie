@@ -80,7 +80,7 @@ export default function Hero() {
           animate={reduce ? undefined : "visible"}
           className="font-sans text-xs font-medium uppercase tracking-[0.28em] text-ink/60"
         >
-          Editorial web design, custom-coded
+          Digital identities for beauty, wellness &amp; luxury brands
         </motion.p>
 
         {/* Headline — monumental uppercase sans, per-line mask reveal */}
@@ -88,16 +88,16 @@ export default function Hero() {
           variants={reduce ? undefined : LINE_PARENT}
           initial={reduce ? undefined : "hidden"}
           animate={reduce ? undefined : "visible"}
-          className="mt-6 max-w-[16ch] font-display text-fluid-display font-extrabold uppercase leading-[0.92] tracking-[-0.01em] text-ink"
+          className="mt-6 max-w-[16ch] font-display text-fluid-hero font-extrabold uppercase leading-[0.9] tracking-[-0.01em] text-ink"
         >
           <span className="block overflow-hidden pb-[0.05em]">
             <motion.span variants={reduce ? undefined : LINE_CHILD} className="block">
-              Websites that are felt
+              Websites with
             </motion.span>
           </span>
           <span className="block overflow-hidden pb-[0.05em]">
             <motion.span variants={reduce ? undefined : LINE_CHILD} className="block">
-              before they&rsquo;re read.
+              presence.
             </motion.span>
           </span>
         </motion.h1>
@@ -108,10 +108,11 @@ export default function Hero() {
           variants={FADE_UP}
           initial={reduce ? undefined : "hidden"}
           animate={reduce ? undefined : "visible"}
-          className="mt-8 max-w-[42ch] font-editorial text-fluid-lg italic leading-snug text-ink/75"
+          className="mt-8 max-w-[46ch] font-editorial text-fluid-lg italic leading-snug text-ink/75"
         >
-          For founder-led beauty, wellness, med-spa, and luxury brands that have
-          outgrown a template — and know it.
+          For founder-led brands ready to look as established as they have become.
+          Strategy, art direction, and custom web design built to turn attention into
+          trust — and trust into demand.
         </motion.p>
 
         <motion.div
@@ -125,7 +126,7 @@ export default function Hero() {
             Begin your project
           </Button>
           <Button href="/work" variant="ghost">
-            See the work
+            View selected work
           </Button>
         </motion.div>
       </div>

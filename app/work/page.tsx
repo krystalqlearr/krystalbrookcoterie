@@ -5,7 +5,7 @@ import WorkShowcase from "@/components/WorkShowcase";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected custom-coded work. Open a project and it expands, in place, into a full case study. Glowtoure is the current flagship; more are in production.",
+    "The work speaks first. Selected identities and digital experiences created for brands with a clear point of view — and the ambition to build something people remember.",
 };
 
 export default function WorkPage() {
@@ -16,10 +16,11 @@ export default function WorkPage() {
         <div className="container relative z-10">
         <p className="font-sans text-xs uppercase tracking-[0.2em] text-ink/60">Selected work</p>
         <h1 className="mt-6 max-w-[15ch] font-display text-fluid-display font-extrabold uppercase tracking-[-0.01em] text-ink text-balance">
-          Proof, before promises.
+          The work speaks first.
         </h1>
         <p className="mt-6 max-w-measure font-editorial text-fluid-lg italic leading-snug text-ink/75">
-          Few projects, each fully owned. Open one — and watch the work expand into itself.
+          Selected identities and digital experiences created for brands with a clear
+          point of view — and the ambition to build something people remember.
         </p>
         </div>
       </div>

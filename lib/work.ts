@@ -9,10 +9,11 @@ export type WorkProject = {
   id: string;
   index: string;
   client: string;
-  descriptor: string;
-  accent: string; // the one word rendered as Editorial New italic
+  descriptor: string; // framed as the shift created, not the deliverable
+  accent: string; // a word within the descriptor, set in italic
   category: string;
-  stack: string;
+  capabilities: string; // what the engagement covered (leads over tech on cards)
+  stack: string; // tech — a supporting proof point, shown deeper in the case study
   url: string;
   year: string;
   role: string;
@@ -37,9 +38,10 @@ export const WORK: WorkProject[] = [
     id: "glowtoure",
     index: "01",
     client: "Glowtoure",
-    descriptor: "A luxury tan, given a luxury home",
-    accent: "luxury",
+    descriptor: "A luxury service, given the digital experience its pricing demanded.",
+    accent: "luxury service",
     category: "Beauty · Self-tan",
+    capabilities: "Brand Strategy · Art Direction · Web Design · Development",
     stack: "Next.js · Tailwind · Vercel",
     url: "glowtoure.com",
     year: "2025",
@@ -52,11 +54,11 @@ export const WORK: WorkProject[] = [
     field: "from-camel/30 via-mocha/40 to-ink",
     image: "/images/glowtoure/og-glowtoure.webp",
     intro:
-      "A founder-led tanning house with a product far more considered than its first website let on. The brief: a digital flagship that felt as premium as the ritual itself.",
+      "A founder-led tanning house whose service was far more considered than its first website let on. The brief: a digital presence that felt as premium as the ritual — and priced it accordingly.",
     body: [
-      "Glowtoure is a private, custom-colour spray-tan studio — mobile and in-studio across the greater Sacramento region, from a Plumas Lake home studio. The service is intimate and exacting: every solution mixed fresh to the client's undertone and desired depth. The old site didn't carry that; it read like a booking utility, not a luxury ritual.",
-      "We rebuilt the brand from the canvas up — a warm, editorial system where the photography leads and the interface recedes. Custom colour, private appointments, bridal and event work, prep-to-aftercare guidance: each given room to breathe, paced like a magazine rather than a landing page. Every section is hand-coded — no builder, no template, no compromise on the details that carry a luxury feeling.",
-      "The result loads instantly, moves with intention, and reads unmistakably high-end on the first scroll — before a single word is read.",
+      "Glowtoure is a private, custom-colour spray-tan studio, mobile and in-studio across the greater Sacramento region. The service is intimate and exacting; the old site read like a booking utility, quietly undercutting the price and the positioning.",
+      "We rebuilt the brand from its positioning up — a warm, editorial world where the photography leads and every screen signals authority. Custom colour, private appointments, bridal and event work, prep-to-aftercare: each given the room a luxury service deserves, paced like a magazine rather than a landing page.",
+      "The result reads unmistakably high-end on the first scroll, makes the offer feel worth its price, and turns a browse into a booking.",
     ],
     scope: [
       "Art direction",
@@ -84,9 +86,10 @@ export const WORK: WorkProject[] = [
     id: "maison-derme",
     index: "02",
     client: "Maison Dermé",
-    descriptor: "Clinical precision, softened",
-    accent: "softened",
+    descriptor: "A clinical brand, repositioned as a modern authority.",
+    accent: "modern authority",
     category: "Med-spa",
+    capabilities: "Brand Strategy · Web Design · Development · Copy Direction",
     stack: "Next.js · Sanity",
     url: "maisonderme.com",
     year: "2025",
@@ -96,10 +99,10 @@ export const WORK: WorkProject[] = [
     pt: "125%",
     field: "from-camel/25 via-ink to-ink",
     intro:
-      "A concept for a med-spa that wanted to look like a maison, not a clinic — where credentials and calm live on the same page without one undercutting the other.",
+      "A concept for a med-spa that wanted to read like a maison, not a clinic — where credentials and calm hold the same page, and the brand feels like the authority in its market.",
     body: [
-      "Cool, quiet, and exact. A restrained teal-and-petrol system with generous space, so the medical rigour reads as confidence rather than sterility.",
-      "Bookings, treatments, and practitioner bios flow from a headless CMS, so the studio can move as fast as the brand needs to.",
+      "Cool, quiet, and exact. A restrained warm-neutral system with generous space, so the medical rigour reads as confidence rather than sterility — and the pricing feels earned.",
+      "Treatments, practitioner bios, and bookings flow from a CMS the team can run themselves, so the brand can move as fast as the business does.",
     ],
     scope: ["Brand-to-web translation", "Design system", "Headless CMS", "Booking flow", "Accessibility"],
   },
@@ -107,9 +110,10 @@ export const WORK: WorkProject[] = [
     id: "etoile-atelier",
     index: "03",
     client: "Étoile Atelier",
-    descriptor: "The founder's vision, framed",
-    accent: "framed",
+    descriptor: "A founder-led business, transformed into a category-ready brand.",
+    accent: "category-ready brand",
     category: "Luxury lifestyle",
+    capabilities: "Brand Strategy · Art Direction · Web Design · Development",
     stack: "Next.js · Tailwind",
     url: "etoileatelier.com",
     year: "2026",
@@ -119,10 +123,10 @@ export const WORK: WorkProject[] = [
     pt: "66%",
     field: "from-mocha/30 via-ink to-ink",
     intro:
-      "A lifestyle house where the founder is the brand. The site had to hold a point of view — editorial, owned, and impossible to mistake for a template.",
+      "A lifestyle house where the founder is the brand — and the site had to make it legible to a market that had never heard the name, and impossible to mistake for anyone else.",
     body: [
-      "A warm-neutral system built around long-form storytelling and full-bleed imagery, paced like a magazine rather than a landing page.",
-      "Type does the heavy lifting: large display Neue Montreal against Editorial New italics, set with the air only a hand-built layout affords.",
+      "A warm-neutral world built around long-form storytelling and full-bleed imagery, paced like a magazine — positioning the brand a tier above the category it entered.",
+      "Type does the heavy lifting: monumental display against a serif italic voice, set with the air that signals a business worth taking seriously.",
     ],
     scope: ["Editorial direction", "Design system", "Custom front-end", "Motion & interaction"],
   },

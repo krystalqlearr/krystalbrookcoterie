@@ -9,23 +9,8 @@ import SectionShell from "@/components/SectionShell";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Krystal Brook Coterie is a custom-code-first web design studio for founder-led luxury brands — senior judgment at boutique scale.",
+    "Strategy-led, highly art-directed websites for beauty, wellness, med-spa, and luxury lifestyle brands that have outgrown the expected.",
 };
-
-const VALUES = [
-  {
-    word: "Editorial",
-    body: "Type does the heavy lifting. Generous space, left-aligned composition, imagery placed with intent rather than to fill a grid.",
-  },
-  {
-    word: "Owned",
-    body: "Real code on a real stack — yours outright. No platform lock-in, no rented ground, no monthly ransom to keep your brand online.",
-  },
-  {
-    word: "Precise",
-    body: "Pixel-perfect, fast, accessible. Restraint that signals confidence, and details resolved to the millimeter.",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -33,9 +18,9 @@ export default function AboutPage() {
       <PageHero
         marker="About"
         eyebrow="About"
-        title="Senior judgment, at boutique scale."
-        accent="judgment"
-        intro="Krystal Brook Coterie designs and hand-builds custom-coded websites for founder-led beauty, med-spa, wellness, bridal, and luxury lifestyle brands — the ones who care how things feel and are ready to own something built to last."
+        title="For founders who refuse to blend in."
+        accent="blend in"
+        intro="I create strategic, highly art-directed websites for beauty, wellness, med-spa, and luxury lifestyle brands that have outgrown the expected."
       />
 
       {/* Founder — portrait + narrative, asymmetric */}
@@ -53,28 +38,27 @@ export default function AboutPage() {
           </Reveal>
           <Reveal stagger={0.12}>
             <RevealItem>
-              <EditorialHeading as="h2" size="md" accent="one" className="max-w-[20ch]">
-                One studio, one standard, one decision-maker — me.
+              <EditorialHeading as="h2" size="md" accent="own" className="max-w-[20ch]">
+                A studio, and a point of view of its own.
               </EditorialHeading>
             </RevealItem>
             <RevealItem>
               <div className="mt-6 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
                 <p>
-                  I started KBC because founder-led luxury brands were being handed the same
-                  rented templates as everyone else — beautiful on the surface, fragile
-                  underneath, and impossible to truly own. They deserved the engineering the
-                  largest companies run, translated into something intimate and editorial.
+                  I’m Krystal — the designer and creative partner behind Krystal Brook
+                  Coterie, working at the intersection of brand strategy, editorial
+                  design, and digital experience.
                 </p>
                 <p>
-                  Every decision here is mine — the direction, the design system, the code, the
-                  words. Nothing is handed down to a junior, because there is no one to hand it
-                  to. That is the whole advantage of a studio built this way: agency-grade
-                  engineering with one senior mind on every detail, at a pace and price a
-                  traditional agency structurally can’t reach.
+                  My work is for founders who understand that a website is not simply
+                  where information lives. It is where value is perceived, trust is
+                  formed, and the brand becomes real in the mind of the customer.
                 </p>
                 <p>
-                  The result is a site a brand owns outright — built to compound in value, not
-                  age into a liability.
+                  Each project is approached as its own visual world — considered from
+                  the positioning beneath it to the smallest interaction on screen. The
+                  result is a website that does not merely represent the business. It
+                  strengthens it.
                 </p>
               </div>
             </RevealItem>
@@ -82,48 +66,40 @@ export default function AboutPage() {
         </div>
       </SectionShell>
 
-      {/* Values — petrol alt-section */}
-      <SectionShell tone="stone" eyebrow="What the work is" heading="Three words, held to." accent="three" headingSize="md">
-        <Reveal stagger={0.1}>
-          <div className="grid gap-x-gutter gap-y-10 md:grid-cols-3">
-            {VALUES.map((v) => (
-              <RevealItem key={v.word}>
-                <div className="border-t border-ink/20 pt-5">
-                  <h3 className="font-display text-fluid-lg font-extrabold uppercase tracking-[-0.01em] text-ink">{v.word}</h3>
-                  <p className="mt-3 max-w-[38ch] font-sans text-fluid-base leading-relaxed text-ink/70">
-                    {v.body}
-                  </p>
-                </div>
-              </RevealItem>
-            ))}
-          </div>
-        </Reveal>
-      </SectionShell>
-
-      {/* Taste */}
-      <SectionShell eyebrow="Taste" heading="Restraint, with editorial nerve." headingSize="md">
+      {/* Philosophy — alt-section */}
+      <SectionShell
+        tone="stone"
+        eyebrow="Philosophy"
+        heading="The standard is distinction."
+        accent="distinction"
+        headingSize="md"
+      >
         <Reveal>
           <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
             <p>
-              KBC lives deliberately between two references: The Row — luxury through what’s
-              withheld — and the bold editorial confidence of the great fashion houses.
-              Restraint everywhere, nerve where it counts.
+              Luxury is not created by adding more. It is created through restraint,
+              precision, consistency, and a clear point of view.
             </p>
             <p>
-              A dark-led canvas. A single warm accent. A fine structural line. Nothing extra —
-              the kind of room that tells you, before a word is spoken, that you’re in expert
-              hands.
+              That principle shapes every engagement. No interchangeable layouts. No
+              visual excess without purpose. No trend applied without understanding what
+              it communicates.
+            </p>
+            <p>
+              Only the elements that make the brand more recognizable, more credible, and
+              more difficult to replace.
             </p>
           </div>
         </Reveal>
       </SectionShell>
 
-      {/* CTA — cream showstopper */}
+      {/* CTA — charcoal showstopper */}
       <SectionShell
         tone="charcoal"
         marker
         heading="If that sounds like your brand, let’s talk."
-        accent="your"        headingSize="xl"
+        accent="your"
+        headingSize="xl"
       >
         <Button href="/begin" variant="onCharcoal">
           Begin your project

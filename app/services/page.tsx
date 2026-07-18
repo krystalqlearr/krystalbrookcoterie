@@ -14,11 +14,13 @@ export const metadata: Metadata = {
 
 const TIERS = [
   {
-    name: "Launch",
+    name: "The Edit",
     price: "$4,500",
     duration: "2–3 weeks",
     description:
-      "A custom-coded launch presence for the brand going to market. Focused, fast, and unmistakably established from day one.",
+      "A focused digital debut for brands ready to stop looking new. Strategic direction, custom design, and a polished online presence built to establish credibility from the first click.",
+    bestFor:
+      "Best for emerging brands, focused offers, and founders who need a refined foundation without an expansive build.",
   },
   {
     name: "Signature",
@@ -26,21 +28,26 @@ const TIERS = [
     duration: "6–8 weeks",
     featured: true,
     description:
-      "The flagship. A full bespoke site and design system, multi-page, with a CMS where it earns its place and motion that carries the brand. Most brands start here.",
+      "The complete brand website. Strategy, creative direction, custom design, and an intuitive CMS come together in a digital identity that feels unmistakably yours — and guides visitors toward action.",
+    bestFor:
+      "Designed for established founders ready for a website that carries the full weight of the brand.",
   },
   {
     name: "Atelier",
     price: "$22,000+",
     duration: "8–12 weeks",
     description:
-      "When the site is the flagship location. Advanced interaction, deeper architecture, and art direction built around a singular point of view.",
+      "For brands whose website must do more than look beautiful. A deeper strategic and creative engagement — immersive art direction, advanced interactions, custom user journeys, and a digital experience designed for authority and scale.",
+    bestFor: "Built for flagship brands, expanding businesses, and high-consideration offers.",
   },
   {
-    name: "Atelier Custom",
+    name: "Private Commission",
     price: "$32,000+",
-    duration: "Bespoke",
+    duration: "Custom timeline",
     description:
-      "A digital flagship with no ceiling — bespoke experiences, custom systems, and engineering scoped entirely to the ambition of the brand.",
+      "No standard scope. No predetermined ceiling. A fully commissioned digital experience shaped around the complexity, ambition, and operating model of the brand.",
+    bestFor:
+      "Custom platforms, original interactions, integrated systems, and creative direction developed entirely from the ground up.",
   },
 ];
 
@@ -99,9 +106,9 @@ export default function ServicesPage() {
       <PageHero
         marker="Services"
         eyebrow="Services"
-        title="Four ways to work together, every one custom-coded."
-        accent="custom-coded"
-        intro="Each tier is hand-built in code on the same stack the largest technology companies run — scoped to where a brand is now, and to where it intends to go."
+        title="A different level of presence."
+        accent="presence"
+        intro="Four ways to enter the studio. Every engagement is strategically led, visually distinct, and built around where your brand is now — and where it intends to go next."
       />
 
       {/* Tiers */}
@@ -115,6 +122,7 @@ export default function ServicesPage() {
                   price={t.price}
                   duration={t.duration}
                   description={t.description}
+                  bestFor={t.bestFor}
                   featured={t.featured}
                 />
               </RevealItem>
@@ -128,7 +136,8 @@ export default function ServicesPage() {
         tone="stone"
         eyebrow="Founding client program"
         heading="Signature scope at $2,800 — for the right first few."
-        accent="$2,800"        headingSize="md"
+        accent="$2,800"
+        headingSize="md"
         intro="A limited program for a small number of founding clients: full Signature-tier scope in exchange for case-study rights. Real work, deeply discounted, while the studio builds its published proof."
       >
         <Reveal delay={0.1}>
@@ -168,7 +177,8 @@ export default function ServicesPage() {
         tone="charcoal"
         marker
         heading="Let’s build something worth owning."
-        accent="worth"        headingSize="xl"
+        accent="worth"
+        headingSize="xl"
       >
         <Button href="/begin" variant="onCharcoal">
           Begin your project

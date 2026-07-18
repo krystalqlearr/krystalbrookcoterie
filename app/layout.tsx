@@ -37,24 +37,25 @@ const editorialNew = localFont({
 
 const SITE_URL = "https://krystalbrookcoterie.com";
 const SITE_NAME = "Krystal Brook Coterie";
+const SITE_TAGLINE = "Digital identities for luxury brands";
 const SITE_DESCRIPTION =
-  "Editorial luxury web design for founder-led beauty, med-spa, wellness, bridal, and luxury lifestyle brands. Custom-coded, owned not rented.";
+  "Distinctive digital identities for founder-led beauty, wellness, med-spa, and luxury lifestyle brands — strategy-led, custom-designed, and built to lead their category.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Editorial luxury web design`,
+    default: `${SITE_NAME} — ${SITE_TAGLINE}`,
     template: `%s — ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   keywords: [
     "luxury web design",
-    "custom-coded websites",
+    "brand strategy",
     "beauty brand web design",
     "med-spa web design",
     "editorial web design",
     "founder-led brands",
-    "Next.js web design studio",
+    "digital identity studio",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -62,14 +63,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Editorial luxury web design`,
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Editorial luxury web design`,
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
   },
   robots: {

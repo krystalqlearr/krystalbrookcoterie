@@ -33,24 +33,24 @@ export default function OpengraphImage() {
             color: "#6E675B",
           }}
         >
-          Editorial luxury web design
+          Digital identities for luxury brands
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div
             style={{
-              fontSize: 82,
+              fontSize: 128,
               fontWeight: 800,
-              lineHeight: 0.98,
-              letterSpacing: -2,
+              lineHeight: 0.9,
+              letterSpacing: -3,
               textTransform: "uppercase",
               maxWidth: 1000,
             }}
           >
-            Websites that are felt before they’re read.
+            Websites with presence.
           </div>
           <div style={{ fontSize: 30, fontStyle: "italic", fontFamily: "Georgia, serif", color: "#5C554A" }}>
-            For founder-led beauty & luxury brands.
+            For founder-led beauty, wellness & luxury brands.
           </div>
         </div>
 

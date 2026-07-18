@@ -7,13 +7,15 @@ import SectionShell from "@/components/SectionShell";
 export const metadata: Metadata = {
   title: "Journal",
   description:
-    "Notes from the studio on custom-coded web design, editorial craft, and building brands worth owning.",
+    "Observations on positioning, perception, design, and the decisions that separate a beautiful business from a powerful brand.",
 };
 
 const ENTRIES = [
-  { title: "Rented vs. owned: what a template actually costs", tag: "Positioning · Soon" },
-  { title: "The Glowtoure build, in detail", tag: "Case study · In production" },
-  { title: "What you actually own when the site is yours", tag: "Studio · Soon" },
+  { title: "Why your luxury website still feels inexpensive", tag: "Perception · Soon" },
+  { title: "The difference between looking polished and looking established", tag: "Positioning · Soon" },
+  { title: "Your brand doesn’t need more content. It needs a stronger point of view.", tag: "Strategy · Soon" },
+  { title: "What med-spas get wrong about premium positioning", tag: "Med-spa · Soon" },
+  { title: "Why better design can support higher pricing", tag: "Commerce · Soon" },
 ];
 
 export default function JournalPage() {
@@ -22,9 +24,9 @@ export default function JournalPage() {
       <PageHero
         marker="Journal"
         eyebrow="Journal"
-        title="Notes from the studio."
-        accent="studio"
-        intro="Writing on custom-coded craft, editorial design, and building brands worth owning. The first entries are in production."
+        title="On brand, beauty & digital presence."
+        accent="presence"
+        intro="Observations on positioning, perception, design, and the decisions that separate a beautiful business from a powerful brand."
       />
 
       <SectionShell as="section" className="pt-0">
@@ -50,7 +52,8 @@ export default function JournalPage() {
         tone="charcoal"
         marker
         heading="Rather see the work?"
-        accent="work"        headingSize="xl"
+        accent="work"
+        headingSize="xl"
       >
         <Button href="/work" variant="onCharcoal">
           View the work

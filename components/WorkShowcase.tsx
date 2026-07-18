@@ -201,9 +201,10 @@ function ProjectSlot({
         <span>
           {p.index} · {p.category}
         </span>
-        <span>{p.status ?? p.stack}</span>
+        {p.status ? <span>{p.status}</span> : null}
       </div>
-      <h3 className="mt-2 font-editorial text-2xl font-normal italic text-ink md:text-3xl">{p.descriptor}</h3>
+      <h3 className="mt-2 max-w-[24ch] font-editorial text-2xl font-normal italic text-ink md:text-3xl">{p.descriptor}</h3>
+      <p className="mt-3 font-sans text-xs uppercase tracking-[0.12em] text-ink/55">{p.capabilities}</p>
 
       {/* Close affordance — outside the morphing box, so it never distorts. */}
       {selected && (
