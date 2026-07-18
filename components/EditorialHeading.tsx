@@ -1,24 +1,27 @@
 import { type ReactNode } from "react";
 
 /**
- * Display heading in PP Editorial New. An `accent` word (must appear in the string
- * children) is rendered in italic — optionally terracotta — matching the reference's
- * italic-accent behavior.
+ * Display heading — monumental UPPERCASE Neue Montreal Extrabold (the HAUS/VOL.ONE
+ * register). Big, confident, tightly set. The serif voice is now a SEPARATE italic
+ * subline (see Hero / PageHero / Testimonial), never an inline word — so the old
+ * `accent` prop is retired (kept optional + ignored so existing callers don't break).
  */
 type Level = "h1" | "h2" | "h3" | "h4";
-type Size = "sm" | "md" | "lg" | "xl";
+type Size = "sm" | "md" | "lg" | "xl" | "hero";
 
+// Fluid sizes; the tokens carry their own tight leading (0.9–1.12) — ideal for caps.
 const sizeClass: Record<Size, string> = {
-  sm: "text-2xl",
-  md: "text-3xl md:text-4xl",
-  lg: "text-4xl md:text-5xl",
-  xl: "text-5xl md:text-7xl",
+  sm: "text-fluid-xl",
+  md: "text-fluid-2xl",
+  lg: "text-fluid-3xl",
+  xl: "text-fluid-display",
+  hero: "text-fluid-hero",
 };
 
 type Props = {
   children: ReactNode;
+  /** @deprecated inline accent retired — the serif italic is now a separate subline */
   accent?: string;
-  accentColor?: "inherit" | "terracotta";
   as?: Level;
   size?: Size;
   className?: string;
@@ -26,33 +29,15 @@ type Props = {
 
 export default function EditorialHeading({
   children,
-  accent,
-  accentColor = "inherit",
   as: Tag = "h2",
   size = "lg",
   className = "",
 }: Props) {
-  let content: ReactNode = children;
-
-  if (accent && typeof children === "string" && children.includes(accent)) {
-    const i = children.indexOf(accent);
-    // Accent word is Editorial New italic serif set against the Neue Montreal headline.
-    const emClass =
-      accentColor === "terracotta"
-        ? "font-editorial font-normal italic text-terracotta"
-        : "font-editorial font-normal italic";
-    content = (
-      <>
-        {children.slice(0, i)}
-        <em className={emClass}>{accent}</em>
-        {children.slice(i + accent.length)}
-      </>
-    );
-  }
-
   return (
-    <Tag className={`font-display font-extrabold leading-[1.03] tracking-tight ${sizeClass[size]} ${className}`}>
-      {content}
+    <Tag
+      className={`font-display font-extrabold uppercase tracking-[-0.01em] text-balance ${sizeClass[size]} ${className}`}
+    >
+      {children}
     </Tag>
   );
 }

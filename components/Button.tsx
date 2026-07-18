@@ -2,27 +2,26 @@ import Link from "next/link";
 import { type ReactNode } from "react";
 
 /**
- * Editorial button. Cream-filled CTAs (dark text) are the primary action — matching
- * the reference and keeping terracotta as an accent, not a button fill (cream-on-
- * terracotta is only 3.40:1, below AA).
- *  - primary : cream fill / rich-black text — for dark & petrol canvases
- *  - ghost   : greige outline / cream text  — for dark & petrol canvases
- *  - onCream : rich-black outline / ink text — for cream showstopper sections
+ * Editorial button. On the bone canvas the primary action is an INK fill with bone
+ * text (HAUS-like: confident, near-monochrome). Terracotta is retired.
+ *  - primary    : ink fill / bone text — the main action on bone/stone
+ *  - ghost      : ink outline / ink text — secondary on bone/stone
+ *  - onCharcoal : bone outline / bone text — for charcoal (dark) sections
  *
- * Renders an anchor when `href` is set, otherwise a <button>. Visible teal focus
- * ring; being a native button/anchor it triggers the custom cursor's hover-ring.
+ * Renders an anchor when `href` is set, otherwise a <button>. Focus ring color is
+ * per-variant so it stays visible on both canvases.
  */
-type Variant = "primary" | "ghost" | "onCream";
+type Variant = "primary" | "ghost" | "onCharcoal";
 
 const variantClass: Record<Variant, string> = {
-  primary: "border border-cream bg-cream text-rich-black hover:bg-cream/90",
-  ghost: "border border-greige text-cream hover:border-cream",
-  onCream:
-    "border border-rich-black text-rich-black hover:bg-rich-black hover:text-cream",
+  primary: "border border-ink bg-ink text-bone hover:bg-ink/90 focus-visible:outline-ink",
+  ghost: "border border-ink/40 text-ink hover:border-ink focus-visible:outline-ink",
+  onCharcoal:
+    "border border-bone text-bone hover:bg-bone hover:text-ink focus-visible:outline-bone",
 };
 
 const base =
-  "inline-flex items-center justify-center rounded-[1px] px-7 py-3.5 font-sans text-xs font-medium uppercase tracking-[0.14em] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal";
+  "inline-flex items-center justify-center rounded-[1px] px-7 py-3.5 font-sans text-xs font-medium uppercase tracking-[0.14em] transition duration-300 ease-editorial focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4";
 
 type Props = {
   children: ReactNode;

@@ -1,12 +1,9 @@
 import Button from "./Button";
 
 /**
- * Service tier card — teal top rule (structural), display name, terracotta price,
- * greige description. `featured` adds a subtle terracotta wash + "Recommended" flag.
- *
- * Note: the reference sets the flag in teal, but teal-on-rich-black is 4.05:1 (below
- * AA for small text), so the flag uses terracotta (5.01:1) instead — teal stays on
- * the structural rule only.
+ * Service tier card — ink top rule, uppercase sans name, ink price, muted-ink
+ * description. `featured` adds a subtle camel wash + "Recommended" flag. Ink-forward
+ * (no colored price) so it reads expensive, per the bone-led system.
  */
 type Props = {
   name: string;
@@ -31,21 +28,23 @@ export default function ServiceCard({
 }: Props) {
   return (
     <article
-      className={`flex flex-col border-t border-teal pt-5 ${
-        featured ? "bg-gradient-to-b from-terracotta/10 to-transparent" : ""
+      className={`flex flex-col border-t border-ink/20 pt-5 ${
+        featured ? "bg-gradient-to-b from-camel/15 to-transparent" : ""
       } ${className}`}
     >
       {featured ? (
-        <span className="mb-3 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-terracotta">
+        <span className="mb-3 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-ink">
           Recommended
         </span>
       ) : null}
-      <h3 className="font-display text-2xl text-cream">{name}</h3>
-      <p className="mt-2 font-sans text-terracotta">{price}</p>
+      <h3 className="font-display text-fluid-lg font-extrabold uppercase tracking-[-0.01em] text-ink">
+        {name}
+      </h3>
+      <p className="mt-2 font-sans font-medium text-ink">{price}</p>
       {duration ? (
-        <p className="mt-1 font-sans text-xs uppercase tracking-[0.06em] text-greige">{duration}</p>
+        <p className="mt-1 font-sans text-xs uppercase tracking-[0.06em] text-ink/60">{duration}</p>
       ) : null}
-      <p className="mt-4 max-w-[42ch] font-sans text-sm leading-relaxed text-greige">{description}</p>
+      <p className="mt-4 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70">{description}</p>
       {href ? (
         <div className="mt-6">
           <Button href={href} variant="ghost">

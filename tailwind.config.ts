@@ -2,9 +2,9 @@ import type { Config } from "tailwindcss";
 
 /**
  * Krystal Brook Coterie — token system.
- * 7 tokens, dark-led canvas. NEVER hardcode hex in components; use these token names.
- * Hex values are pinned here as comments so value integrity is auditable:
- * when refactoring, preserve VALUES, never remap by name.
+ * BONE-LED warm-neutral palette (redesigned 2026-07; supersedes the dark-led atelier).
+ * NEVER hardcode hex in components; use these token names. The inversion pair is
+ * `bone` (light) + `ink` (warm charcoal); muted/hairlines are opacities of the pair.
  */
 const config: Config = {
   content: [
@@ -33,16 +33,58 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // — Canvas —
-        "rich-black": "#0A0A0A", //  primary canvas / ink on light
-        "deep-petrol": "#052029", //  FOOTER ONLY — never a section background elsewhere
-        // — Text / surfaces —
-        cream: "#EFEEE8", //  light text on dark / light surfaces
-        greige: "#B2ABA0", //  muted text; eyebrow on petrol (AA contrast)
-        // — Accents —
-        mocha: "#9E8062", //  warm neutral accent
-        terracotta: "#BF6940", //  primary warm accent; the custom cursor dot
-        teal: "#287B8B", //  STRUCTURAL accent only — rules, dividers, markers, cursor hover ring
+        // — The inversion pair (canvas ↔ ink) —
+        bone: "#EBE5D8", //  primary canvas (warm ivory paper); ink-color on charcoal
+        ink: "#23201B", //  warm faded charcoal — primary ink; bg for charcoal sections
+        // — Paper elevation —
+        stone: "#E0D8C7", //  deeper paper — raised panels, subtle alt-section rhythm
+        // — Warm accents (used barely) —
+        camel: "#C6A98A", //  champagne accent — never small text/price on bone (fails AA)
+        mocha: "#9A8264", //  deep warm neutral — imagery / atmosphere only
+      },
+      // Fluid, clamp-based display scale — fashion-house large, no breakpoint jumps.
+      // Tight leading + negative tracking baked in for the display steps.
+      fontSize: {
+        "fluid-sm": ["clamp(0.85rem, 0.82rem + 0.15vw, 0.95rem)", { lineHeight: "1.5" }],
+        "fluid-base": ["clamp(1rem, 0.96rem + 0.2vw, 1.125rem)", { lineHeight: "1.6" }],
+        "fluid-lg": ["clamp(1.15rem, 1.05rem + 0.5vw, 1.5rem)", { lineHeight: "1.5" }],
+        "fluid-xl": [
+          "clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem)",
+          { lineHeight: "1.12", letterSpacing: "-0.01em" },
+        ],
+        "fluid-2xl": [
+          "clamp(2.2rem, 1.4rem + 3.2vw, 3.6rem)",
+          { lineHeight: "1.02", letterSpacing: "-0.015em" },
+        ],
+        "fluid-3xl": [
+          "clamp(2.8rem, 1.6rem + 5vw, 5.5rem)",
+          { lineHeight: "0.98", letterSpacing: "-0.02em" },
+        ],
+        "fluid-display": [
+          "clamp(3.4rem, 1.4rem + 8vw, 8.5rem)",
+          { lineHeight: "0.94", letterSpacing: "-0.025em" },
+        ],
+        "fluid-hero": [
+          "clamp(4rem, 1rem + 11vw, 12rem)",
+          { lineHeight: "0.9", letterSpacing: "-0.03em" },
+        ],
+      },
+      // Motion tokens — the ONLY sanctioned easing/durations (mirror lib/motion.ts).
+      transitionTimingFunction: {
+        editorial: "cubic-bezier(0.16, 1, 0.3, 1)", //  primary weighted ease-out
+        "editorial-inout": "cubic-bezier(0.83, 0, 0.17, 1)", //  symmetric morphs
+      },
+      transitionDuration: {
+        "400": "400ms",
+        "600": "600ms",
+        "700": "700ms",
+        "900": "900ms",
+      },
+      zIndex: {
+        header: "50",
+        overlay: "200",
+        "overlay-top": "220",
+        cursor: "9999",
       },
       // Editorial vertical rhythm — generous, spacious section spacing.
       spacing: {

@@ -1,6 +1,7 @@
 /**
- * Teal structural divider. `short` = 64px section marker; `full` spans the container.
- * Teal is structural only — this is its canonical use.
+ * Structural divider in camel — the single warm accent, used as the section marker
+ * tick. `short` = 64px marker; `full` spans the container. Reads on both bone and
+ * charcoal sections.
  */
 type RuleProps = {
   width?: "full" | "short";
@@ -9,6 +10,6 @@ type RuleProps = {
 
 export default function Rule({ width = "full", className = "" }: RuleProps) {
   return (
-    <hr className={`h-px border-0 bg-teal ${width === "short" ? "w-16" : "w-full"} ${className}`} />
+    <hr className={`h-px border-0 bg-camel ${width === "short" ? "w-16" : "w-full"} ${className}`} />
   );
 }

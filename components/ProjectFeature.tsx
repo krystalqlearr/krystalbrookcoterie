@@ -5,11 +5,8 @@ import EditorialHeading from "./EditorialHeading";
 
 /**
  * Editorial project feature — a large numbered thumbnail panel beside a detail
- * column set off by a teal structural rule. Matches the reference Work-page layout.
- * `reverse` alternates the panel side for a stacked, magazine-style list.
- *
- * Tag text is greige (not teal): teal-on-rich-black is 4.05:1, below AA — the teal
- * stays on the tag border and the column rule (structural only).
+ * column set off by a camel structural rule. `reverse` alternates the panel side
+ * for a stacked, magazine-style list. Ink text on bone; the thumb panel is charcoal.
  */
 type Props = {
   index: string; // "01"
@@ -42,10 +39,10 @@ export default function ProjectFeature({
     >
       {/* Thumbnail panel with numeral watermark */}
       <div className={reverse ? "lg:order-2" : ""}>
-        <div className="relative aspect-[3/2] overflow-hidden border border-cream/15 bg-gradient-to-br from-terracotta/15 via-mocha/5 to-rich-black">
+        <div className="relative aspect-[3/2] overflow-hidden border border-ink/15 bg-gradient-to-br from-mocha/25 via-ink to-ink">
           <span
             aria-hidden
-            className="absolute left-6 top-3 font-display text-[6rem] leading-none text-cream/10 md:text-[8rem]"
+            className="absolute left-6 top-3 font-display text-[6rem] leading-none text-bone/10 md:text-[8rem]"
           >
             {index}
           </span>
@@ -58,15 +55,15 @@ export default function ProjectFeature({
               className="object-cover"
             />
           ) : null}
-          <span className="absolute bottom-4 left-6 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-greige">
+          <span className="absolute bottom-4 left-6 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-bone/55">
             {client}
             {year ? ` · ${year}` : ""}
           </span>
         </div>
       </div>
 
-      {/* Detail column — teal structural rule on the left */}
-      <div className={`border-l-2 border-teal pl-8 ${reverse ? "lg:order-1" : ""}`}>
+      {/* Detail column — camel structural rule on the left */}
+      <div className={`border-l-2 border-camel pl-8 ${reverse ? "lg:order-1" : ""}`}>
         <Eyebrow>
           {eyebrow}
           {year ? ` · ${year}` : ""}
@@ -74,14 +71,14 @@ export default function ProjectFeature({
         <EditorialHeading as="h2" size="lg" className="mt-4">
           {client}
         </EditorialHeading>
-        <span className="mt-5 inline-block rounded-[1px] border border-teal px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-greige">
+        <span className="mt-5 inline-block rounded-[1px] border border-ink/30 px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-ink/60">
           {tag}
         </span>
-        <p className="mt-6 max-w-[40ch] font-sans leading-relaxed text-greige">{description}</p>
+        <p className="mt-6 max-w-[40ch] font-sans leading-relaxed text-ink/70">{description}</p>
         {href ? (
           <Link
             href={href}
-            className="mt-8 inline-flex items-center gap-2 border-b border-terracotta/50 pb-1 font-sans text-xs uppercase tracking-[0.16em] text-terracotta transition-colors hover:border-terracotta focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal"
+            className="mt-8 inline-flex items-center gap-2 border-b border-ink/40 pb-1 font-sans text-xs uppercase tracking-[0.16em] text-ink transition-colors hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
           >
             View the case study <span aria-hidden>→</span>
           </Link>

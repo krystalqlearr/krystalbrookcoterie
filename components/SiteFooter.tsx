@@ -3,24 +3,22 @@ import Logo from "./Logo";
 import { NAV_LINKS } from "./nav";
 
 /**
- * Global footer — the ONLY place deep-petrol (#052029) appears.
- * Text is cream; eyebrows/muted labels are greige (never terracotta on petrol —
- * terracotta/petrol is only 4.26:1, below AA). Teal appears once, as the
- * structural rule (non-text).
+ * Global footer on charcoal (ink) — the site's closing dark moment. Text is bone;
+ * muted labels are bone/60. Camel appears once, as the structural rule.
  */
 
 const linkFocus =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal";
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone";
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-deep-petrol text-cream">
+    <footer className="bg-ink text-bone">
       <div className="container py-20">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
           {/* Brand + studio line */}
           <div>
-            <Logo variant="stacked" color="cream" />
-            <p className="mt-8 max-w-[40ch] font-sans text-sm leading-relaxed text-greige">
+            <Logo variant="stacked" color="bone" />
+            <p className="mt-8 max-w-[40ch] font-sans text-sm leading-relaxed text-bone/60">
               Editorial luxury web design for founder-led beauty, wellness, med-spa,
               and bridal brands — custom-coded, owned not rented.
             </p>
@@ -28,13 +26,13 @@ export default function SiteFooter() {
 
           {/* Nav repeat */}
           <nav aria-label="Footer">
-            <p className="font-sans text-xs uppercase tracking-[0.28em] text-greige">Studio</p>
+            <p className="font-sans text-xs uppercase tracking-[0.28em] text-bone/60">Studio</p>
             <ul className="mt-5 space-y-2.5 font-sans text-sm">
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`text-cream transition-colors hover:text-greige ${linkFocus}`}
+                    className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                   >
                     {item.label}
                   </Link>
@@ -45,12 +43,12 @@ export default function SiteFooter() {
 
           {/* Connect */}
           <div>
-            <p className="font-sans text-xs uppercase tracking-[0.28em] text-greige">Connect</p>
+            <p className="font-sans text-xs uppercase tracking-[0.28em] text-bone/60">Connect</p>
             <ul className="mt-5 space-y-2.5 font-sans text-sm">
               <li>
                 <a
                   href="mailto:hello@krystalbrookcoterie.com"
-                  className={`text-cream transition-colors hover:text-greige ${linkFocus}`}
+                  className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                 >
                   hello@krystalbrookcoterie.com
                 </a>
@@ -60,15 +58,15 @@ export default function SiteFooter() {
                   href="https://www.instagram.com/krystalbrookcoterie/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-cream transition-colors hover:text-greige ${linkFocus}`}
+                  className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                 >
                   Instagram
                 </a>
               </li>
               <li>
                 <Link
-                  href="/contact"
-                  className={`text-cream transition-colors hover:text-greige ${linkFocus}`}
+                  href="/begin"
+                  className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                 >
                   Begin a project
                 </Link>
@@ -77,17 +75,17 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        {/* Single teal structural rule */}
-        <hr className="my-12 h-px border-0 bg-teal" />
+        {/* Single camel structural rule */}
+        <hr className="my-12 h-px border-0 bg-camel" />
 
-        <div className="flex flex-col gap-3 font-sans text-xs tracking-[0.04em] text-greige sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 font-sans text-xs tracking-[0.04em] text-bone/55 sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 Krystal Brook Coterie</span>
           <span>a DBA of Lion &amp; Gazelle Holdings LLC</span>
           <span className="flex gap-5">
-            <Link href="/privacy" className={`transition-colors hover:text-cream ${linkFocus}`}>
+            <Link href="/privacy" className={`transition-colors hover:text-bone ${linkFocus}`}>
               Privacy
             </Link>
-            <Link href="/terms" className={`transition-colors hover:text-cream ${linkFocus}`}>
+            <Link href="/terms" className={`transition-colors hover:text-bone ${linkFocus}`}>
               Terms
             </Link>
           </span>

@@ -44,7 +44,7 @@ export default function FAQAccordion({ items, allowMultiple = false, className =
   };
 
   return (
-    <div className={`divide-y divide-cream/10 border-y border-cream/10 ${className}`}>
+    <div className={`divide-y divide-ink/12 border-y border-ink/12 ${className}`}>
       {items.map((item, i) => {
         const triggerId = `${baseId}-t-${i}`;
         const panelId = `${baseId}-p-${i}`;
@@ -62,12 +62,12 @@ export default function FAQAccordion({ items, allowMultiple = false, className =
                 aria-controls={panelId}
                 onClick={() => toggle(i)}
                 onKeyDown={(e) => onKeyDown(e, i)}
-                className="flex w-full items-center justify-between gap-6 py-6 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+                className="flex w-full items-center justify-between gap-6 py-6 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
-                <span className="font-display text-xl text-cream">{item.question}</span>
+                <span className="font-editorial text-fluid-lg font-normal text-ink">{item.question}</span>
                 <span
                   aria-hidden
-                  className={`relative block h-3 w-3 flex-shrink-0 text-terracotta transition-transform duration-300 motion-reduce:transition-none ${
+                  className={`relative block h-3 w-3 flex-shrink-0 text-ink transition-transform duration-300 motion-reduce:transition-none ${
                     open ? "rotate-45" : ""
                   }`}
                 >
@@ -85,7 +85,7 @@ export default function FAQAccordion({ items, allowMultiple = false, className =
               }`}
             >
               <div className={`min-h-0 overflow-hidden ${open ? "" : "invisible"}`}>
-                <div className="max-w-measure pb-6 font-sans text-sm leading-relaxed text-greige">
+                <div className="max-w-measure pb-6 font-sans text-sm leading-relaxed text-ink/70">
                   {item.answer}
                 </div>
               </div>

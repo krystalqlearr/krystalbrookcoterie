@@ -42,8 +42,8 @@ export default function ImageFrame({
   className = "",
 }: Props) {
   const frame = fullBleed
-    ? "border-y border-cream/10"
-    : `border border-cream/15 ${offsetClass[offset]}`;
+    ? "border-y border-ink/12"
+    : `border border-ink/15 ${offsetClass[offset]}`;
 
   return (
     <figure
@@ -53,21 +53,20 @@ export default function ImageFrame({
       {src ? (
         <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
       ) : (
-        /* Art-directed placeholder: petrol shadow → warm terracotta/mocha highlight,
-           filmic grain, and a bottom fade that seats the caption. */
-        <div role="img" aria-label={alt} className="editorial-grain absolute inset-0 bg-rich-black">
-          <div className="absolute inset-0 bg-gradient-to-br from-deep-petrol via-rich-black to-rich-black" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-mocha/20 to-terracotta/40 mix-blend-screen" />
-          <div className="absolute inset-0 bg-gradient-to-t from-rich-black/70 via-transparent to-transparent" />
+        /* Art-directed placeholder: a warm charcoal field (a dark image slot that
+           punctuates the bone canvas) with a mocha→camel highlight and paper grain. */
+        <div role="img" aria-label={alt} className="editorial-grain absolute inset-0 bg-ink">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-mocha/25 to-camel/30 mix-blend-screen" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
         </div>
       )}
       {index ? (
-        <span className="absolute right-4 top-4 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-cream/60">
+        <span className="absolute right-4 top-4 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-bone/60">
           {index}
         </span>
       ) : null}
       {caption ? (
-        <figcaption className="absolute bottom-0 left-0 p-4 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-greige">
+        <figcaption className="absolute bottom-0 left-0 p-4 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-bone/55">
           {caption}
         </figcaption>
       ) : null}

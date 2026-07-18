@@ -1,42 +1,32 @@
 import type { Metadata } from "next";
-import ProjectCard from "@/components/ProjectCard";
-import SectionShell from "@/components/SectionShell";
+import SectionMarker from "@/components/SectionMarker";
+import WorkShowcase from "@/components/WorkShowcase";
 
 export const metadata: Metadata = {
-  title: "Work — Krystal Brook Coterie",
+  title: "Work",
   description:
-    "Selected custom-coded work. Glowtoure is the current flagship; more case studies are in production.",
+    "Selected custom-coded work. Open a project and it expands, in place, into a full case study. Glowtoure is the current flagship; more are in production.",
 };
 
 export default function WorkPage() {
   return (
-    <SectionShell
-      className="pt-32 md:pt-40"
-      eyebrow="Selected work"
-      heading="Few projects. Each one fully owned."
-      accent="owned"
-      accentColor="terracotta"
-      headingAs="h1"
-      intro="KBC is early and deliberate. Every site is hand-built in code and made to compound in value — so the list stays short on purpose. Glowtoure is the current flagship; further case studies are in production."
-    >
-      {/* Asymmetric editorial layout, per the design direction's Selected Work
-          grid (1.4fr / 1fr, align-items:end): Glowtoure anchors large on the left,
-          the next case study sits smaller and lifted, bottom-aligned to the feature. */}
-      <div className="grid gap-x-gutter gap-y-16 lg:grid-cols-[1.4fr_1fr] lg:items-end">
-        <ProjectCard
-          size="feature"
-          client="Glowtoure"
-          tag="Next.js · Tailwind · Vercel"
-          descriptor="A luxury tan, given a luxury home"
-          href="/work/glowtoure"
-        />
-        <ProjectCard
-          size="side"
-          client="Next case study"
-          tag="In production"
-          descriptor="More, soon"
-        />
+    <section className="pb-section pt-32 md:pt-40">
+      <div className="relative overflow-hidden">
+        <SectionMarker label="Work" side="right" />
+        <div className="container relative z-10">
+        <p className="font-sans text-xs uppercase tracking-[0.2em] text-ink/60">Selected work</p>
+        <h1 className="mt-6 max-w-[15ch] font-display text-fluid-display font-extrabold uppercase tracking-[-0.01em] text-ink text-balance">
+          Proof, before promises.
+        </h1>
+        <p className="mt-6 max-w-measure font-editorial text-fluid-lg italic leading-snug text-ink/75">
+          Few projects, each fully owned. Open one — and watch the work expand into itself.
+        </p>
+        </div>
       </div>
-    </SectionShell>
+
+      <div className="container mt-20 md:mt-28">
+        <WorkShowcase />
+      </div>
+    </section>
   );
 }

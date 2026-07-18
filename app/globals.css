@@ -2,19 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark-led canvas: rich-black background, cream ink by default. */
+/* ── Design-system custom properties ─────────────────────────────────────────
+   Motion tokens mirror lib/motion.ts and tailwind.config. Never inline magic
+   numbers — reference these (or the Tailwind ease-editorial / duration-* utils). */
+:root {
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-editorial-inout: cubic-bezier(0.83, 0, 0.17, 1);
+  --dur-fast: 0.4s;
+  --dur-base: 0.6s;
+  --dur-slow: 0.72s;
+  --dur-xslow: 0.9s;
+}
+
+/* Bone-led canvas: warm ivory paper, charcoal ink by default. */
 @layer base {
   html {
-    background-color: #0a0a0a; /* rich-black */
+    background-color: #ebe5d8; /* bone */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   body {
-    @apply bg-rich-black text-cream font-sans antialiased;
+    @apply bg-bone text-ink font-sans antialiased;
   }
+
+  /* Ink selection on bone — a quiet, confident tell. */
+  ::selection {
+    background-color: #23201b; /* ink */
+    color: #ebe5d8; /* bone */
+  }
+
+  /* Restrained warm scrollbar so the chrome never fights the paper. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #c9bfa9 #ebe5d8; /* warm stone thumb on bone track */
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #ebe5d8;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #c9bfa9;
+    border-radius: 9999px;
+  }
+}
+
+/* ── Lenis smooth scroll ─────────────────────────────────────────────────────
+   Required base styles; the instance is created in components/motion/SmoothScroll. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
   }
 
   /* Hide the native cursor everywhere while the custom cursor is active.
@@ -24,16 +80,48 @@
     cursor: none !important;
   }
 
-  /* Filmic grain overlay for art-directed image placeholders. Neutral noise
-     (not a brand token) laid over token-based duotone gradients so a frame
-     without photography still reads as intentional art direction. */
+  /* Paper tooth for art-directed fields. Neutral noise multiplied into the surface
+     so a field without photography reads as warm paper, not haze. Tuned for light. */
   .editorial-grain::after {
     content: "";
     position: absolute;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.14;
-    mix-blend-mode: overlay;
+    opacity: 0.1;
+    mix-blend-mode: multiply;
     pointer-events: none;
+  }
+
+  /* Whole-page paper grain — a fine, fixed tooth over the bone canvas for material
+     depth. Very low opacity so it reads as texture, never noise. */
+  .page-grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+}
+
+/* Cross-document view transitions — a subtle cross-fade between full page loads
+   (direct visits / hard navigations). Supported browsers only; ignored elsewhere.
+   Soft-nav (in-app <Link>) route transitions are a Next 15 upgrade item. */
+@view-transition {
+  navigation: auto;
+}
+
+/* ── Reduced motion: hard damp everything ────────────────────────────────────
+   Lenis is skipped in JS; this covers CSS transitions/animations and parallax. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

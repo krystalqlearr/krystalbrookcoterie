@@ -1,36 +1,32 @@
 /**
- * Krystal Brook Coterie wordmark — three lockups, typeset in PP Editorial New.
- * Matches docs/kbc-design-direction.html (.wm-stacked / .wm-horizontal / .wm-mono).
- *
- * If brand SVGs are added to /public/logo, swap the typeset markup for
- * <Image src="/logo/…svg" …/> per variant — the API (variant/color/size) stays the same.
- * None exist yet, so we typeset. Colors are token-mapped; the monogram border
- * uses currentColor so it always tracks the chosen token.
+ * Krystal Brook Coterie wordmark — three lockups in Neue Montreal Extrabold,
+ * UPPERCASE (matches the HAUS-register display headlines). Text is uppercased via
+ * CSS so the accessible label stays natural case. Colors are token-mapped; the
+ * monogram border uses currentColor so it tracks the chosen token.
  *
  * Internals are sized in `em`, so `size` (the root font-size) scales the whole
- * lockup proportionally — no Tailwind arbitrary-value override races.
+ * lockup proportionally.
  */
 
 type LogoVariant = "stacked" | "horizontal" | "monogram";
-type LogoColor = "cream" | "rich-black";
+type LogoColor = "bone" | "ink";
 
 const toneClass: Record<LogoColor, string> = {
-  cream: "text-cream",
-  "rich-black": "text-rich-black",
+  bone: "text-bone",
+  ink: "text-ink",
 };
 
-// Default root font-size per variant (reproduces the reference px sizes).
 const defaultSize: Record<LogoVariant, string> = {
-  stacked: "1.6rem",
-  horizontal: "1.5rem",
-  monogram: "2.6rem",
+  stacked: "1.5rem",
+  horizontal: "1.1rem",
+  monogram: "2.4rem",
 };
 
 const LABEL = "Krystal Brook Coterie";
 
 export default function Logo({
   variant = "stacked",
-  color = "cream",
+  color = "ink",
   size,
   className = "",
 }: {
@@ -48,7 +44,7 @@ export default function Logo({
         role="img"
         aria-label={LABEL}
         style={{ fontSize }}
-        className={`inline-flex h-[2.12em] w-[2.12em] items-center justify-center rounded-[1px] border border-current font-editorial leading-none tracking-[0.04em] ${tone} ${className}`}
+        className={`inline-flex h-[2em] w-[2em] items-center justify-center rounded-[1px] border border-current font-display font-extrabold uppercase leading-none tracking-[0.02em] ${tone} ${className}`}
       >
         <span aria-hidden>KBC</span>
       </span>
@@ -61,7 +57,7 @@ export default function Logo({
         role="img"
         aria-label={LABEL}
         style={{ fontSize }}
-        className={`font-editorial leading-none tracking-[0.03em] ${tone} ${className}`}
+        className={`font-display font-extrabold uppercase leading-none tracking-[-0.01em] ${tone} ${className}`}
       >
         <span aria-hidden>Krystal Brook Coterie</span>
       </span>
@@ -76,15 +72,15 @@ export default function Logo({
       style={{ fontSize }}
       className={`inline-block leading-none ${tone} ${className}`}
     >
-      <span aria-hidden className="block font-editorial text-[1em] leading-[1.02] tracking-[0.02em]">
+      <span aria-hidden className="block font-display text-[1em] font-extrabold uppercase leading-[0.95] tracking-[-0.01em]">
         Krystal Brook
       </span>
-      <span aria-hidden className="block font-editorial text-[1em] italic leading-[1.02]">
+      <span aria-hidden className="block font-display text-[1em] font-extrabold uppercase leading-[0.95] tracking-[-0.01em]">
         Coterie
       </span>
       <span
         aria-hidden
-        className="mt-[0.375em] block font-sans text-[0.4375em] uppercase tracking-[0.42em]"
+        className="mt-[0.55em] block font-sans text-[0.34em] font-medium uppercase tracking-[0.42em]"
       >
         Web Design Studio
       </span>

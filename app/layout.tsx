@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
+import SmoothScroll from "@/components/motion/SmoothScroll";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -34,10 +35,74 @@ const editorialNew = localFont({
   ],
 });
 
+const SITE_URL = "https://krystalbrookcoterie.com";
+const SITE_NAME = "Krystal Brook Coterie";
+const SITE_DESCRIPTION =
+  "Editorial luxury web design for founder-led beauty, med-spa, wellness, bridal, and luxury lifestyle brands. Custom-coded, owned not rented.";
+
 export const metadata: Metadata = {
-  title: "Krystal Brook Coterie",
-  description:
-    "Editorial luxury web design for founder-led beauty, med-spa, wellness, bridal, and luxury lifestyle brands.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — Editorial luxury web design`,
+    template: `%s — ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "luxury web design",
+    "custom-coded websites",
+    "beauty brand web design",
+    "med-spa web design",
+    "editorial web design",
+    "founder-led brands",
+    "Next.js web design studio",
+  ],
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — Editorial luxury web design`,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — Editorial luxury web design`,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
+};
+
+// Structured data — Organization + WebSite. Helps search + AI answer surfaces
+// understand who KBC is. Per-case-study CreativeWork JSON-LD lands with Phase 4.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      legalName: "Lion & Gazelle Holdings LLC",
+      url: SITE_URL,
+      description: SITE_DESCRIPTION,
+      email: "hello@krystalbrookcoterie.com",
+      slogan: "Owned, not rented.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -47,9 +112,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${neueMontreal.variable} ${editorialNew.variable}`}>
-      <body>
+      <body className="page-grain">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <SmoothScroll />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[300] focus:rounded-[1px] focus:bg-ink focus:px-4 focus:py-2 focus:font-sans focus:text-xs focus:uppercase focus:tracking-[0.14em] focus:text-bone"
+        >
+          Skip to content
+        </a>
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <SiteFooter />
         <CustomCursor />
       </body>

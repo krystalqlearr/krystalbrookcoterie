@@ -32,6 +32,8 @@ export default function SiteHeader() {
     if (!open) return;
     const panel = panelRef.current;
     if (!panel) return;
+    // Capture the trigger now so cleanup returns focus to the right node.
+    const toggleButton = toggleRef.current;
 
     const focusable = () =>
       Array.from(
@@ -66,26 +68,26 @@ export default function SiteHeader() {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
-      toggleRef.current?.focus();
+      toggleButton?.focus();
     };
   }, [open]);
 
   const linkFocus =
-    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal";
+    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
         scrolled || open
-          ? "border-cream/10 bg-rich-black"
+          ? "border-ink/10 bg-bone/90 backdrop-blur"
           : "border-transparent bg-transparent"
       }`}
     >
       <div className="container flex h-20 items-center justify-between">
         {/* Wordmark — horizontal on desktop, monogram on mobile */}
-        <Link href="/" aria-label="Krystal Brook Coterie — home" className={`text-cream ${linkFocus}`}>
-          <Logo variant="horizontal" color="cream" size="1.25rem" className="hidden md:block" />
-          <Logo variant="monogram" color="cream" size="1.05rem" className="md:hidden" />
+        <Link href="/" aria-label="Krystal Brook Coterie — home" className={`text-ink ${linkFocus}`}>
+          <Logo variant="horizontal" color="ink" size="1rem" className="hidden md:block" />
+          <Logo variant="monogram" color="ink" size="0.9rem" className="md:hidden" />
         </Link>
 
         {/* Desktop nav */}
@@ -94,14 +96,14 @@ export default function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className={`font-sans text-xs uppercase tracking-[0.16em] text-greige transition-colors hover:text-cream ${linkFocus}`}
+              className={`font-sans text-xs uppercase tracking-[0.16em] text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
             >
               {item.label}
             </Link>
           ))}
           <Link
-            href="/contact"
-            className={`rounded-[1px] border border-terracotta px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-cream transition-colors hover:bg-terracotta ${linkFocus}`}
+            href="/begin"
+            className={`rounded-[1px] border border-ink px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
           >
             Begin
           </Link>
@@ -115,7 +117,7 @@ export default function SiteHeader() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className={`flex h-11 w-11 items-center justify-center text-cream md:hidden ${linkFocus}`}
+          className={`flex h-11 w-11 items-center justify-center text-ink md:hidden ${linkFocus}`}
         >
           <span className="relative block h-3.5 w-6" aria-hidden>
             <span
@@ -145,7 +147,7 @@ export default function SiteHeader() {
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="fixed inset-0 top-20 z-40 flex flex-col justify-between bg-rich-black px-6 pb-12 pt-10 md:hidden"
+          className="fixed inset-0 top-20 z-40 flex flex-col justify-between bg-bone px-6 pb-12 pt-10 md:hidden"
         >
           <nav aria-label="Primary" className="flex flex-col gap-6">
             {NAV_LINKS.map((item) => (
@@ -153,16 +155,16 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`font-display text-3xl text-cream ${linkFocus}`}
+                className={`font-display text-3xl font-extrabold uppercase text-ink ${linkFocus}`}
               >
                 {item.label}
               </Link>
             ))}
           </nav>
           <Link
-            href="/contact"
+            href="/begin"
             onClick={() => setOpen(false)}
-            className={`mt-10 inline-block self-start rounded-[1px] border border-terracotta px-6 py-3 font-sans text-xs uppercase tracking-[0.14em] text-cream transition-colors hover:bg-terracotta ${linkFocus}`}
+            className={`mt-10 inline-block self-start rounded-[1px] border border-ink px-6 py-3 font-sans text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
           >
             Begin your project
           </Link>

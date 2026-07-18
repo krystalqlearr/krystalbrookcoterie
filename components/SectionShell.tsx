@@ -5,28 +5,28 @@ import Rule from "./Rule";
 
 /**
  * Section wrapper providing editorial vertical rhythm and a consistent left-aligned
- * header block. `tone` sets the canvas so pages can alternate rich-black / petrol /
- * cream instead of one flat dark scroll:
- *  - dark  : default rich-black canvas, cream text, terracotta eyebrow
- *  - petrol: deep-petrol alt-section, cream text, greige eyebrow (AA)
- *  - cream : cream showstopper (1–2 per page), rich-black text, ink eyebrow (AA)
+ * header block. `tone` sets the canvas so pages alternate bone / stone / charcoal
+ * instead of one flat scroll:
+ *  - light   : default bone canvas, ink text, muted eyebrow
+ *  - stone   : deeper-paper alt-section for quiet rhythm, ink text
+ *  - charcoal: dark inversion moment (closing CTAs), bone text — "charcoal punctuation"
+ * Intros use the serif-italic voice (the HAUS supporting line).
  */
-type Tone = "dark" | "petrol" | "cream";
+type Tone = "light" | "stone" | "charcoal";
 
 const toneStyles: Record<
   Tone,
-  { section: string; eyebrow: "terracotta" | "greige" | "ink"; intro: string }
+  { section: string; eyebrow: "muted" | "onDark"; intro: string }
 > = {
-  dark: { section: "text-cream", eyebrow: "terracotta", intro: "text-greige" },
-  petrol: { section: "bg-deep-petrol text-cream", eyebrow: "greige", intro: "text-greige" },
-  cream: { section: "bg-cream text-rich-black", eyebrow: "ink", intro: "text-rich-black/75" },
+  light: { section: "text-ink", eyebrow: "muted", intro: "text-ink/75" },
+  stone: { section: "bg-stone text-ink", eyebrow: "muted", intro: "text-ink/75" },
+  charcoal: { section: "bg-ink text-bone", eyebrow: "onDark", intro: "text-bone/75" },
 };
 
 type Props = {
   eyebrow?: string;
   heading?: string;
   accent?: string;
-  accentColor?: "inherit" | "terracotta";
   intro?: ReactNode;
   marker?: boolean;
   container?: boolean;
@@ -43,11 +43,10 @@ export default function SectionShell({
   eyebrow,
   heading,
   accent,
-  accentColor = "inherit",
   intro,
   marker = false,
   container = true,
-  tone = "dark",
+  tone = "light",
   as: As = "section",
   id,
   headingAs = "h2",
@@ -69,14 +68,13 @@ export default function SectionShell({
               as={headingAs}
               size={headingSize}
               accent={accent}
-              accentColor={accentColor}
               className="max-w-[22ch]"
             >
               {heading}
             </EditorialHeading>
           ) : null}
           {intro ? (
-            <div className={`max-w-measure font-sans leading-relaxed ${t.intro}`}>{intro}</div>
+            <div className={`max-w-measure font-editorial text-fluid-lg italic leading-snug ${t.intro}`}>{intro}</div>
           ) : null}
         </div>
       ) : null}

@@ -1,38 +1,28 @@
 import { type ReactNode } from "react";
 
 /**
- * Small tracked-caps label. Tone maps to an AA-safe color per canvas:
- *  - terracotta → dark canvases (5.01:1)
- *  - greige     → petrol canvases (7.41:1); terracotta would be 4.26:1 (fails)
- *  - ink        → cream showstoppers (rich-black, 17:1); terracotta is 3.40:1 (fails)
- * `onPetrol` still forces greige for backward compatibility.
+ * Small tracked-caps label. Tone maps to a canvas-aware muted ink:
+ *  - muted  → ink/65 on bone/stone (default)
+ *  - onDark → bone/60 on charcoal sections
+ * (The colored-eyebrow options are retired — labels are quiet neutral only.)
  */
-type EyebrowTone = "greige" | "terracotta" | "ink";
+type EyebrowTone = "muted" | "onDark";
 
 type EyebrowProps = {
   children: ReactNode;
   tone?: EyebrowTone;
-  onPetrol?: boolean;
   as?: "p" | "span" | "div";
   className?: string;
 };
 
 const toneClass: Record<EyebrowTone, string> = {
-  greige: "text-greige",
-  terracotta: "text-terracotta",
-  ink: "text-rich-black",
+  muted: "text-ink/65",
+  onDark: "text-bone/60",
 };
 
-export default function Eyebrow({
-  children,
-  tone = "greige",
-  onPetrol = false,
-  as: As = "p",
-  className = "",
-}: EyebrowProps) {
-  const color = onPetrol ? "text-greige" : toneClass[tone];
+export default function Eyebrow({ children, tone = "muted", as: As = "p", className = "" }: EyebrowProps) {
   return (
-    <As className={`font-sans text-xs font-medium uppercase tracking-[0.28em] ${color} ${className}`}>
+    <As className={`font-sans text-xs font-medium uppercase tracking-[0.28em] ${toneClass[tone]} ${className}`}>
       {children}
     </As>
   );
