@@ -21,10 +21,11 @@ export const DUR = {
   xslow: 0.9,
 } as const;
 
-/** Shared-layout transition for the signature work morph. */
+/** Shared-layout transition for the signature work morph — symmetric ease-in-out so
+ *  the cover opens AND closes with equal weight (slow start, slow settle). */
 export const morphTransition: Transition = {
   type: "tween",
-  ease: EASE,
+  ease: EASE_INOUT,
   duration: DUR.slow,
 };
 

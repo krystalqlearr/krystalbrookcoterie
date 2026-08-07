@@ -64,7 +64,7 @@ export default function WorkShowcase() {
         {active && (
           <motion.div
             key="backdrop"
-            className="fixed inset-0 z-[200] bg-ink"
+            className="fixed inset-0 z-[200] bg-charcoal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -102,8 +102,8 @@ function ProjectSlot({
           data-lenis-prevent
           className={
             selected
-              ? "group fixed inset-0 z-[210] flex flex-col overflow-y-auto bg-ink"
-              : "group absolute inset-0 flex flex-col overflow-hidden border border-ink/15 bg-ink"
+              ? "group fixed inset-0 z-[210] flex flex-col overflow-y-auto bg-charcoal"
+              : "group absolute inset-0 flex flex-col overflow-hidden border border-ink/15 bg-charcoal"
           }
         >
           {/* Real, focusable trigger over the collapsed frame — keyboard + a11y. */}
@@ -120,7 +120,7 @@ function ProjectSlot({
           {/* Browser chrome — the "this is a real website" signal. */}
           <div className="flex shrink-0 items-center gap-3 border-b border-bone/10 px-4 py-2.5">
             <span className="flex gap-1.5" aria-hidden>
-              <span className="h-2 w-2 rounded-full bg-bone/25" />
+              <span className="h-2 w-2 rounded-full bg-blush" />
               <span className="h-2 w-2 rounded-full bg-bone/25" />
               <span className="h-2 w-2 rounded-full bg-bone/25" />
             </span>
@@ -146,7 +146,7 @@ function ProjectSlot({
                 {!selected && (
                   <div
                     aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent"
+                    className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
                   />
                 )}
               </>
@@ -178,12 +178,13 @@ function ProjectSlot({
             )}
 
             {selected && (
-              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/80 to-transparent p-6 md:p-16">
+              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-charcoal/85 to-transparent p-6 md:p-16">
                 <div>
-                  <p className="font-sans text-xs uppercase tracking-[0.2em] text-bone/60">
+                  <p className="font-sans text-xs uppercase tracking-[0.2em] text-blush">
                     {p.category}
                   </p>
-                  <h2 className="mt-4 max-w-[18ch] font-editorial text-4xl font-normal italic leading-[1.1] tracking-[-0.01em] text-bone md:text-6xl">
+                  <span aria-hidden className="mt-5 block h-[3px] w-12 bg-blush" />
+                  <h2 className="mt-5 max-w-[18ch] font-editorial text-4xl font-normal italic leading-[1.1] tracking-[-0.01em] text-bone md:text-6xl">
                     {renderAccent(p.descriptor, p.accent)}
                   </h2>
                 </div>
@@ -203,7 +204,9 @@ function ProjectSlot({
         </span>
         {p.status ? <span>{p.status}</span> : null}
       </div>
-      <h3 className="mt-2 max-w-[24ch] font-editorial text-2xl font-normal italic text-ink md:text-3xl">{p.descriptor}</h3>
+      <h3 className="mt-2 max-w-[24ch] font-editorial text-2xl font-normal italic text-ink md:text-3xl">
+        {renderAccent(p.descriptor, p.accent, false)}
+      </h3>
       <p className="mt-3 font-sans text-xs uppercase tracking-[0.12em] text-ink/55">{p.capabilities}</p>
 
       {/* Close affordance — outside the morphing box, so it never distorts. */}
@@ -214,7 +217,7 @@ function ProjectSlot({
           data-cursor="hover"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { delay: reduce ? 0 : 0.35 } }}
-          className="fixed right-5 top-5 z-[220] flex items-center gap-2 rounded-full border border-bone/25 bg-ink/60 px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-bone backdrop-blur transition-colors hover:border-bone md:right-8 md:top-8"
+          className="fixed right-5 top-5 z-[220] flex items-center gap-2 rounded-full border border-bone/25 bg-charcoal/60 px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-bone backdrop-blur transition-colors hover:border-bone md:right-8 md:top-8"
         >
           Close <span aria-hidden>✕</span>
         </motion.button>
@@ -250,7 +253,7 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
       </dl>
 
       <div className="mt-14 grid gap-x-gutter gap-y-8 md:grid-cols-[1fr_1.4fr]">
-        <p className="font-sans text-sm uppercase tracking-[0.16em] text-camel">The work</p>
+        <p className="font-sans text-sm uppercase tracking-[0.16em] text-blush">The work</p>
         <div className="max-w-measure space-y-5 font-sans text-lg leading-relaxed text-bone/70">
           {p.body.map((para, i) => (
             <p key={i}>{para}</p>
@@ -265,7 +268,7 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
       </div>
 
       <div className="mt-16 grid gap-x-gutter gap-y-8 md:grid-cols-[1fr_1.4fr]">
-        <p className="font-sans text-sm uppercase tracking-[0.16em] text-camel">Scope</p>
+        <p className="font-sans text-sm uppercase tracking-[0.16em] text-blush">Scope</p>
         <ul className="max-w-measure divide-y divide-bone/15 font-sans text-lg text-bone">
           {p.scope.map((item) => (
             <li key={item} className="py-3">
@@ -291,10 +294,10 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
 }
 
 /**
- * Renders a heading with a SINGLE accent word in italic (first occurrence only) —
- * same color as the heading, never a loud accent. Quiet-luxury rule.
+ * Renders the descriptor with its SINGLE accent word lifted into the wine flare
+ * (blush on this charcoal overlay) — the wine thread, carried into the transition.
  */
-function renderAccent(text: string, accent: string) {
+function renderAccent(text: string, accent: string, onDark = true) {
   const at = text.toLowerCase().indexOf(accent.toLowerCase());
   if (at === -1) return text;
   const before = text.slice(0, at);
@@ -303,7 +306,7 @@ function renderAccent(text: string, accent: string) {
   return (
     <>
       {before}
-      <em className="italic">{match}</em>
+      <em className={`italic ${onDark ? "text-blush" : "text-cherry"}`}>{match}</em>
       {after}
     </>
   );

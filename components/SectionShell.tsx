@@ -16,11 +16,11 @@ type Tone = "light" | "stone" | "charcoal";
 
 const toneStyles: Record<
   Tone,
-  { section: string; eyebrow: "muted" | "onDark"; intro: string }
+  { section: string; eyebrow: "flare" | "flareDark"; intro: string }
 > = {
-  light: { section: "text-ink", eyebrow: "muted", intro: "text-ink/75" },
-  stone: { section: "bg-stone text-ink", eyebrow: "muted", intro: "text-ink/75" },
-  charcoal: { section: "bg-ink text-bone", eyebrow: "onDark", intro: "text-bone/75" },
+  light: { section: "text-ink", eyebrow: "flare", intro: "text-ink/75" },
+  stone: { section: "bg-stone text-ink", eyebrow: "flare", intro: "text-ink/75" },
+  charcoal: { section: "bg-charcoal text-bone", eyebrow: "flareDark", intro: "text-bone/75" },
 };
 
 type Props = {
@@ -68,6 +68,7 @@ export default function SectionShell({
               as={headingAs}
               size={headingSize}
               accent={accent}
+              accentOnDark={tone === "charcoal"}
               className="max-w-[22ch]"
             >
               {heading}

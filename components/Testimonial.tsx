@@ -20,9 +20,14 @@ export default function Testimonial({ quote, name, role, image, className = "" }
           <Image src={image.src} alt={image.alt} fill sizes="56px" className="object-cover" />
         </div>
       ) : null}
-      <blockquote className="font-editorial text-fluid-xl italic leading-[1.3] text-ink">
-        {quote}
-      </blockquote>
+      <div>
+        <span aria-hidden className="block font-editorial text-[3.5rem] italic leading-[0.4] text-cherry">
+          &ldquo;
+        </span>
+        <blockquote className="mt-4 font-editorial text-fluid-xl italic leading-[1.3] text-ink">
+          {quote}
+        </blockquote>
+      </div>
       <figcaption className="font-sans text-sm tracking-[0.04em] text-ink/60">
         <span className="text-ink">{name}</span>
         {role ? <>, {role}</> : null}

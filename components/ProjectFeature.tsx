@@ -5,7 +5,7 @@ import EditorialHeading from "./EditorialHeading";
 
 /**
  * Editorial project feature — a large numbered thumbnail panel beside a detail
- * column set off by a camel structural rule. `reverse` alternates the panel side
+ * column set off by a wine structural rule. `reverse` alternates the panel side
  * for a stacked, magazine-style list. Ink text on bone; the thumb panel is charcoal.
  */
 type Props = {
@@ -62,8 +62,8 @@ export default function ProjectFeature({
         </div>
       </div>
 
-      {/* Detail column — camel structural rule on the left */}
-      <div className={`border-l-2 border-camel pl-8 ${reverse ? "lg:order-1" : ""}`}>
+      {/* Detail column — wine structural rule on the left */}
+      <div className={`border-l-2 border-cherry pl-8 ${reverse ? "lg:order-1" : ""}`}>
         <Eyebrow>
           {eyebrow}
           {year ? ` · ${year}` : ""}

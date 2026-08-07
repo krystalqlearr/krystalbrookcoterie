@@ -2,8 +2,8 @@ import Button from "./Button";
 
 /**
  * Service tier card — ink top rule, uppercase sans name, ink price, muted-ink
- * description. `featured` adds a subtle camel wash + "Recommended" flag. Ink-forward
- * (no colored price) so it reads expensive, per the bone-led system.
+ * description. `featured` adds a wine top rule + wash + "Most commissioned" flag.
+ * Ink-forward price (never colored) so it reads expensive, per the bone-led system.
  */
 type Props = {
   name: string;
@@ -30,12 +30,14 @@ export default function ServiceCard({
 }: Props) {
   return (
     <article
-      className={`flex flex-col border-t border-ink/20 pt-5 ${
-        featured ? "bg-gradient-to-b from-camel/15 to-transparent" : ""
+      className={`flex flex-col border-t pt-5 ${
+        featured
+          ? "border-cherry bg-gradient-to-b from-cherry/12 to-transparent"
+          : "border-ink/20"
       } ${className}`}
     >
       {featured ? (
-        <span className="mb-3 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-ink">
+        <span className="mb-3 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-cherry">
           Most commissioned
         </span>
       ) : null}

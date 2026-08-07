@@ -3,8 +3,8 @@ import Logo from "./Logo";
 import { NAV_LINKS } from "./nav";
 
 /**
- * Global footer on charcoal (ink) — the site's closing dark moment. Text is bone;
- * muted labels are bone/60. Camel appears once, as the structural rule.
+ * Global footer on charcoal — the site's closing dark moment. Text is bone; muted
+ * labels are bone/60. The wine flare appears once, as the structural rule.
  */
 
 const linkFocus =
@@ -12,7 +12,7 @@ const linkFocus =
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-ink text-bone">
+    <footer className="bg-charcoal text-bone">
       <div className="container py-20">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
           {/* Brand + studio line */}
@@ -32,7 +32,7 @@ export default function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
+                    className={`link-underline text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                   >
                     {item.label}
                   </Link>
@@ -48,7 +48,7 @@ export default function SiteFooter() {
               <li>
                 <a
                   href="mailto:hello@krystalbrookcoterie.com"
-                  className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
+                  className={`link-underline text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                 >
                   hello@krystalbrookcoterie.com
                 </a>
@@ -58,7 +58,7 @@ export default function SiteFooter() {
                   href="https://www.instagram.com/krystalbrookcoterie/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
+                  className={`link-underline text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                 >
                   Instagram
                 </a>
@@ -66,7 +66,7 @@ export default function SiteFooter() {
               <li>
                 <Link
                   href="/begin"
-                  className={`text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
+                  className={`link-underline text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
                 >
                   Commission a project
                 </Link>
@@ -75,8 +75,8 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        {/* Single camel structural rule */}
-        <hr className="my-12 h-px border-0 bg-camel" />
+        {/* Single wine structural rule */}
+        <hr className="my-12 h-px border-0 bg-cherry" />
 
         <div className="flex flex-col gap-3 font-sans text-xs tracking-[0.04em] text-bone/55 sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 Krystal Brook Coterie</span>

@@ -1,12 +1,13 @@
 import { type ReactNode } from "react";
 
 /**
- * Small tracked-caps label. Tone maps to a canvas-aware muted ink:
- *  - muted  → ink/65 on bone/stone (default)
- *  - onDark → bone/60 on charcoal sections
- * (The colored-eyebrow options are retired — labels are quiet neutral only.)
+ * Small tracked-caps label — the editorial cover-line. Tone is canvas-aware:
+ *  - muted     → ink/65 on bone/stone (quiet, for non-section labels)
+ *  - onDark    → bone/60 on charcoal (quiet)
+ *  - flare     → cherry (the wine cover-line on bone/stone) — section labels
+ *  - flareDark → blush (the wine cover-line on charcoal)
  */
-type EyebrowTone = "muted" | "onDark";
+type EyebrowTone = "muted" | "onDark" | "flare" | "flareDark";
 
 type EyebrowProps = {
   children: ReactNode;
@@ -18,6 +19,8 @@ type EyebrowProps = {
 const toneClass: Record<EyebrowTone, string> = {
   muted: "text-ink/65",
   onDark: "text-bone/60",
+  flare: "text-cherry",
+  flareDark: "text-blush",
 };
 
 export default function Eyebrow({ children, tone = "muted", as: As = "p", className = "" }: EyebrowProps) {

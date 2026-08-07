@@ -1,6 +1,6 @@
 /**
- * Structural divider in camel — the single warm accent, used as the section marker
- * tick. `short` = 64px marker; `full` spans the container. Reads on both bone and
+ * Structural divider in the wine flare (cherry) — the section marker tick.
+ * `short` = 64px marker; `full` spans the container. Reads on both bone and
  * charcoal sections.
  */
 type RuleProps = {
@@ -10,6 +10,6 @@ type RuleProps = {
 
 export default function Rule({ width = "full", className = "" }: RuleProps) {
   return (
-    <hr className={`h-px border-0 bg-camel ${width === "short" ? "w-16" : "w-full"} ${className}`} />
+    <hr className={`h-px border-0 bg-cherry ${width === "short" ? "w-16" : "w-full"} ${className}`} />
   );
 }

@@ -96,7 +96,7 @@ export default function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className={`font-sans text-xs uppercase tracking-[0.16em] text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
+              className={`link-underline font-sans text-xs uppercase tracking-[0.16em] text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
             >
               {item.label}
             </Link>

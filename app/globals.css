@@ -27,7 +27,7 @@
 
   /* Ink selection on bone — a quiet, confident tell. */
   ::selection {
-    background-color: #23201b; /* ink */
+    background-color: #8a1f52; /* cherry — the wine flare */
     color: #ebe5d8; /* bone */
   }
 
@@ -71,6 +71,32 @@ html.lenis body {
   }
   .text-pretty {
     text-wrap: pretty;
+  }
+
+  /* Animated wine underline — the flare as the interactive signal on links. */
+  .link-underline {
+    background-image: linear-gradient(#8a1f52, #8a1f52);
+    background-repeat: no-repeat;
+    background-position: left 100%;
+    background-size: 0% 1px;
+    transition: background-size 0.32s var(--ease-editorial);
+    padding-bottom: 2px;
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  /* Editorial drop-cap — an oversized Editorial New italic initial in wine, for
+     long-form openings (journal, case-study intros). */
+  .dropcap::first-letter {
+    font-family: var(--font-editorial), Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 3.4em;
+    line-height: 0.72;
+    float: left;
+    margin: 0.06em 0.1em 0 0;
+    color: #8a1f52;
   }
 
   /* Hide the native cursor everywhere while the custom cursor is active.

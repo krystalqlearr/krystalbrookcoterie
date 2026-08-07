@@ -98,7 +98,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       <section className="pb-section">
         <div className="container">
           <Reveal>
-            <figure className="overflow-hidden border border-ink/15 bg-ink">
+            <figure className="overflow-hidden border border-ink/15 bg-charcoal">
               <div className="flex items-center gap-3 border-b border-bone/10 px-4 py-2.5">
                 <span className="flex gap-1.5" aria-hidden>
                   <span className="h-2 w-2 rounded-full bg-bone/25" />
@@ -137,7 +137,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </p>
             <div className="mt-10 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
               {p.body.map((para, i) => (
-                <p key={i}>{para}</p>
+                <p key={i} className={i === 0 ? "dropcap" : undefined}>
+                  {para}
+                </p>
               ))}
             </div>
           </Reveal>
@@ -182,7 +184,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <ul className="grid max-w-editorial gap-x-gutter gap-y-4 font-sans text-fluid-lg text-ink sm:grid-cols-2">
             {p.scope.map((item) => (
               <li key={item} className="flex items-baseline gap-4 border-t border-ink/12 py-4">
-                <span aria-hidden className="h-px w-6 flex-shrink-0 translate-y-2 bg-camel" />
+                <span aria-hidden className="h-px w-6 flex-shrink-0 translate-y-2 bg-cherry" />
                 {item}
               </li>
             ))}

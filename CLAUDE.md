@@ -12,29 +12,36 @@ CLAUDE.md is the short form; keep the two in sync, never let them drift.**
 ## Stack
 Next.js 14 App Router, TypeScript, Tailwind CSS, Framer Motion, Lenis. Deployed on Vercel.
 
-## Color — BONE-LED warm-neutral palette (redesigned 2026-07). NEVER hardcode hex.
+## Color — BONE-LED warm-neutral + a WINE FLARE (flare added 2026-08). NEVER hardcode hex.
 The inversion pair is `bone` (light) + `ink` (warm charcoal). Muted text and hairlines
 are OPACITIES of the pair (ink/x on bone, bone/x on charcoal), not separate tokens.
-bone   #EBE5D8   primary canvas (warm ivory paper); ink-color on charcoal
-ink    #23201B   warm faded charcoal — primary ink; bg for charcoal sections
-stone  #E0D8C7   deeper paper — raised panels (form fields), subtle alt-section rhythm
-camel  #C6A98A   champagne accent, used BARELY — the section rule (Rule), a thin tick,
-                 one detail per view. FAILS AA as small text/price on bone → never there.
-mocha  #9A8264   deep warm neutral — imagery / atmosphere haze only
+bone     #EBE5D8   primary canvas (warm ivory paper); ink-color on charcoal
+ink      #23201B   warm faded charcoal — primary INK (text) + button fill
+charcoal #1E1418   warmed near-black (aubergine-tinted) — dark SECTION backgrounds
+stone    #E0D8C7   deeper paper — raised panels (form fields), subtle alt-section rhythm
+cherry   #8A1F52   THE WINE FLARE — the editorial accent, Vogue-style punctuation:
+                   ONE per view (heading accent word · section eyebrow/cover-line ·
+                   Rule tick · one detail). Passes AA (~7:1) as text on bone, so it CAN
+                   be a colored word — the key upgrade over the retired camel.
+maroon   #4A1130   deep wine — gradient depth, primary-button hover
+blush    #E9A0C6   the flare ON charcoal (light wine tint; ~8.8:1 on charcoal)
+mocha    #9A8264   deep warm neutral — imagery / atmosphere haze only
 Muted = ink/65 (bone) · bone/60 (charcoal). Hairlines = ink/12–15 · bone/15–20.
-Prices/tags/asterisks are INK (ink-forward reads expensive; color is nearly absent).
-Grain is `mix-blend: multiply` (paper tooth) — retuned for light. RETIRED: rich-black,
-cream, deep-petrol, teal, greige, surface-1/2.
+Prices/tags/asterisks stay INK (ink-forward reads expensive; the flare stays rare).
+Grain is `mix-blend: multiply` (paper tooth). RETIRED: camel, rich-black, cream,
+deep-petrol, teal, greige, surface-1/2.
 
 ## Charcoal is punctuation
-Charcoal (ink bg, bone text) is NOT the default — it's the dark inversion moment used
-for: the footer, the closing-CTA showstoppers, the scrolled header, browser frames,
+Charcoal (`charcoal` bg, bone text) is NOT the default — it's the dark inversion moment
+used for: the footer, the closing-CTA showstoppers, the scrolled header, browser frames,
 and the work-transition overlay. One or two dark moments per page for rhythm.
 
 ## Typography — big sans + serif italic (HAUS/VOL.ONE register)
 Neue Montreal Extrabold (800), UPPERCASE, tight tracking: ALL display headlines,
-tier names, section titles (`EditorialHeading` → font-display uppercase; the inline
-accent word is RETIRED — the serif is a separate line). Editorial New ITALIC (400):
+tier names, section titles (`EditorialHeading` → font-display uppercase). THE WINE
+THREAD: exactly ONE word per heading is lifted into Editorial New italic + cherry
+(pass it as `accent`; blush on charcoal); read down a page the flare words form a
+spine (owned → follows → worth → presence) — the site's signature device. Editorial New ITALIC (400):
 the supporting voice — hero sublines, SectionShell/PageHero intros, pull-quotes,
 Testimonial, case-study + project descriptors (serif italic, lowercase). Neue Montreal
 also carries body/UI/eyebrows/buttons/meta. Load via next/font/local from /public/fonts
@@ -63,7 +70,7 @@ designed inversion event.
 
 ## Layout principles
 Left-alignment is DEFAULT — no centered template stacking. Asymmetric editorial
-composition, generous whitespace. Camel is the one warm structural accent, used barely.
+composition, generous whitespace. The wine flare (cherry) is the one accent, used barely.
 Imagery placed with intentional offset/asymmetry. Sharp corners (rounded-[1px]) are
 brand; only the cursor is round.
 
@@ -74,8 +81,9 @@ in components/nav.ts. Existing: / · /work · /styleguide · /prototype(temp). T
 
 ## Accessibility — WCAG 2.1 AA minimum
 Every text/bg pair ≥ 4.5:1 (3:1 large); flag failing pairs, never ship them. ink-on-bone
-is ~13:1 (AAA); muted ink/65 holds AA for body. Camel FAILS on bone (~1.6:1) → never
-small text/price/focus-ring there; it's graphic-only. Primary CTAs are INK-filled with
+is ~13:1 (AAA); muted ink/65 holds AA for body. The wine flare PASSES AA (cherry ~7:1
+on bone, blush ~8.8:1 on charcoal) → it CAN carry text/a colored word. Focus rings stay
+ink/bone, NEVER the flare. Primary CTAs are INK-filled with
 bone text (`primary`); `onCharcoal` (bone outline) on charcoal sections. Focus rings are
 per-canvas: `outline-ink` on bone/stone, `outline-bone` on charcoal. Every interactive
 element is a real, labeled, focusable control (work cards are <button>s); skip-link +

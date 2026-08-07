@@ -65,7 +65,7 @@ export default function Hero() {
         />
         <motion.div
           style={reduce ? undefined : { x: by, y: bx }}
-          className="absolute left-[20%] top-[60%] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-camel/10 blur-[140px]"
+          className="absolute left-[20%] top-[60%] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-cherry/10 blur-[140px]"
         />
         <div className="editorial-grain absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-bone via-bone/30 to-transparent" />
@@ -78,7 +78,7 @@ export default function Hero() {
           variants={FADE_UP}
           initial={reduce ? undefined : "hidden"}
           animate={reduce ? undefined : "visible"}
-          className="font-sans text-xs font-medium uppercase tracking-[0.28em] text-ink/60"
+          className="font-sans text-xs font-medium uppercase tracking-[0.28em] text-cherry"
         >
           Digital identities for beauty, wellness &amp; luxury brands
         </motion.p>
@@ -95,8 +95,11 @@ export default function Hero() {
               Websites with
             </motion.span>
           </span>
-          <span className="block overflow-hidden pb-[0.05em]">
-            <motion.span variants={reduce ? undefined : LINE_CHILD} className="block">
+          <span className="block overflow-hidden pb-[0.08em]">
+            <motion.span
+              variants={reduce ? undefined : LINE_CHILD}
+              className="block font-editorial font-normal italic normal-case tracking-normal leading-[0.95] text-cherry"
+            >
               presence.
             </motion.span>
           </span>

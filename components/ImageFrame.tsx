@@ -54,9 +54,9 @@ export default function ImageFrame({
         <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
       ) : (
         /* Art-directed placeholder: a warm charcoal field (a dark image slot that
-           punctuates the bone canvas) with a mocha→camel highlight and paper grain. */
-        <div role="img" aria-label={alt} className="editorial-grain absolute inset-0 bg-ink">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-mocha/25 to-camel/30 mix-blend-screen" />
+           punctuates the bone canvas) with a mocha→wine highlight and paper grain. */
+        <div role="img" aria-label={alt} className="editorial-grain absolute inset-0 bg-charcoal">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-mocha/25 to-cherry/30 mix-blend-screen" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
         </div>
       )}

@@ -14,7 +14,7 @@ import { type ReactNode } from "react";
 type Variant = "primary" | "ghost" | "onCharcoal";
 
 const variantClass: Record<Variant, string> = {
-  primary: "border border-ink bg-ink text-bone hover:bg-ink/90 focus-visible:outline-ink",
+  primary: "border border-ink bg-ink text-bone hover:border-cherry hover:bg-cherry focus-visible:outline-ink",
   ghost: "border border-ink/40 text-ink hover:border-ink focus-visible:outline-ink",
   onCharcoal:
     "border border-bone text-bone hover:bg-bone hover:text-ink focus-visible:outline-bone",

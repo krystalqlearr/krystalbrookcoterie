@@ -27,9 +27,12 @@ const groups: { label: string; tokens: Token[] }[] = [
     ],
   },
   {
-    label: "Warm accents (used barely)",
+    label: "The wine flare + warmed dark",
     tokens: [
-      { name: "camel", hex: "#C6A98A", swatch: "bg-camel", note: "champagne accent — the section rule; never small text/price on bone" },
+      { name: "cherry", hex: "#8A1F52", swatch: "bg-cherry", note: "the wine-fuchsia flare — one word/label per view; passes AA (~7:1) as text on bone" },
+      { name: "maroon", hex: "#4A1130", swatch: "bg-maroon", note: "deep wine — gradient depth, button hover" },
+      { name: "blush", hex: "#E9A0C6", swatch: "bg-blush", note: "the flare on charcoal — light wine tint for dark sections" },
+      { name: "charcoal", hex: "#1E1418", swatch: "bg-charcoal", note: "warmed near-black — dark section backgrounds" },
       { name: "mocha", hex: "#9A8264", swatch: "bg-mocha", note: "deep warm neutral — imagery / atmosphere only" },
     ],
   },
@@ -54,7 +57,7 @@ const serifScale: TypeSpec[] = [
 function GroupMarker({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-baseline gap-4">
-      <span aria-hidden className="h-px w-10 bg-camel" />
+      <span aria-hidden className="h-px w-10 bg-cherry" />
       <h2 className="font-sans text-xs font-medium uppercase tracking-[0.25em] text-ink/60">{children}</h2>
     </div>
   );
@@ -73,7 +76,7 @@ export default function StyleguidePage() {
           </h1>
           <p className="mt-6 max-w-measure font-editorial text-fluid-base italic text-ink/75">
             Bone-led warm-neutral palette, monumental uppercase sans over serif italic, a
-            single champagne-camel accent, and a mix-blend inversion-dot cursor — pinned in{" "}
+            a single wine-fuchsia flare, and a mix-blend inversion-dot cursor — pinned in{" "}
             <code className="not-italic text-ink">tailwind.config.ts</code>.
           </p>
         </header>

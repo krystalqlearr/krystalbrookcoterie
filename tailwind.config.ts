@@ -38,8 +38,11 @@ const config: Config = {
         ink: "#23201B", //  warm faded charcoal — primary ink; bg for charcoal sections
         // — Paper elevation —
         stone: "#E0D8C7", //  deeper paper — raised panels, subtle alt-section rhythm
-        // — Warm accents (used barely) —
-        camel: "#C6A98A", //  champagne accent — never small text/price on bone (fails AA)
+        // — Warmed dark + the wine flare (the editorial accent) —
+        charcoal: "#1E1418", //  warmed near-black — dark SECTION backgrounds (aubergine-tinted)
+        cherry: "#8A1F52", //  the wine-fuchsia flare — one word/label per view; passes AA (~7:1) as text on bone
+        maroon: "#4A1130", //  deep wine — gradient depth, button hover
+        blush: "#E9A0C6", //  the flare on charcoal — light wine tint for dark sections
         mocha: "#9A8264", //  deep warm neutral — imagery / atmosphere only
       },
       // Fluid, clamp-based display scale — fashion-house large, no breakpoint jumps.
