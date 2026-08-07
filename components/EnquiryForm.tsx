@@ -33,25 +33,50 @@ const labelBase = "font-sans text-xs font-medium uppercase tracking-[0.16em] tex
 export default function EnquiryForm() {
   const [submitted, setSubmitted] = useState(false);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const get = (k: string) => String(data.get(k) ?? "").trim();
+    const payload = {
+      name: get("name"),
+      brand: get("brand"),
+      email: get("email"),
+      link: get("link"),
+      industry: get("industry"),
+      investment: get("investment"),
+      timing: get("timing"),
+      vision: get("vision"),
+    };
 
-    const subject = `New enquiry — ${get("brand") || get("name")}`;
+    // Preferred: deliver via the API (Resend). Falls back to a mailto compose if the
+    // endpoint isn't configured yet or the request fails — so the form always works.
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        return;
+      }
+    } catch {
+      /* network error — fall through to mailto */
+    }
+
+    const subject = `New enquiry — ${payload.brand || payload.name}`;
     const body = [
-      `Name: ${get("name")}`,
-      `Brand: ${get("brand")}`,
-      `Email: ${get("email")}`,
-      `Website / Instagram: ${get("link")}`,
-      `Industry: ${get("industry")}`,
-      `Investment: ${get("investment")}`,
-      `Timing: ${get("timing")}`,
+      `Name: ${payload.name}`,
+      `Brand: ${payload.brand}`,
+      `Email: ${payload.email}`,
+      `Website / Instagram: ${payload.link}`,
+      `Industry: ${payload.industry}`,
+      `Investment: ${payload.investment}`,
+      `Timing: ${payload.timing}`,
       "",
       "Vision:",
-      get("vision"),
+      payload.vision,
     ].join("\n");
-
     window.location.href = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
@@ -60,7 +85,7 @@ export default function EnquiryForm() {
 
   if (submitted) {
     return (
-      <div className="max-w-measure border-t border-camel pt-8">
+      <div className="max-w-measure border-t border-cherry pt-8">
         <p className="font-editorial text-fluid-xl italic text-ink">Thank you.</p>
         <p className="mt-4 font-sans text-fluid-base leading-relaxed text-ink/70">
           Your email client should have opened with your enquiry ready to send. If it didn’t,
