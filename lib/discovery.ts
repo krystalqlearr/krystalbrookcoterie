@@ -43,13 +43,13 @@ export const DISCOVERY_STEPS: DiscoveryStep[] = [
       {
         id: "favorite_client",
         question: "Describe your favourite client as an actual person — not a type.",
-        hint: "Her age, her work, what she's getting lashes for.",
+        hint: "Their age, their life, what they're really coming to you for.",
       },
-      { id: "she_loves", question: "What does she say when she loves her set?" },
-      { id: "not_this_client", question: "Who don't you want walking in?" },
+      { id: "she_loves", question: "What do they say when they're thrilled with your work?" },
+      { id: "not_this_client", question: "Who don't you want as a client?" },
       {
         id: "why_regulars",
-        question: "Why do regulars pick you over the studio ten minutes away?",
+        question: "Why do your regulars choose you over the cheaper option nearby?",
         hint: "The real reason, not the polite one.",
       },
       { id: "clients_from", question: "Where do clients come from now?" },
@@ -64,11 +64,11 @@ export const DISCOVERY_STEPS: DiscoveryStep[] = [
       {
         id: "three_years",
         question: "What is this business in three years?",
-        hint: "Biggest artist in the city · small studio with a waitlist · training academy · product line.",
+        hint: "The category leader · a small studio with a waitlist · a training arm · a product line — or something else.",
       },
       { id: "raise_prices", question: "Are you raising prices — and by how much?" },
       { id: "keep_services", question: "Which two services would you keep?" },
-      { id: "solo_or_second", question: "Solo, or a second chair?" },
+      { id: "solo_or_second", question: "Staying solo, or building a team?" },
     ],
   },
   {
@@ -78,7 +78,7 @@ export const DISCOVERY_STEPS: DiscoveryStep[] = [
     accent: "Feeling",
     questions: [
       { id: "three_words", question: "Three words you want someone to feel — and three you'd hate." },
-      { id: "first_timer", question: "What should a first-timer be thinking on the table?" },
+      { id: "first_timer", question: "What should a first-time client be thinking during their first experience with you?" },
       { id: "brand_love", question: "A brand you love outside your industry — and why." },
       {
         id: "hate_branding",
@@ -100,7 +100,8 @@ export const DISCOVERY_STEPS: DiscoveryStep[] = [
     questions: [
       {
         id: "the_room",
-        question: "Describe the actual room — wall colour, lighting, what's on the counter.",
+        question: "Describe where your work actually happens — the space and the details a client notices.",
+        hint: "In person or online — wherever the experience lives.",
       },
       { id: "maintain", question: "What are you willing to maintain yourself?" },
       { id: "keep_name", question: "Are you keeping the current name?" },
@@ -117,7 +118,7 @@ export const DISCOVERY_STEPS: DiscoveryStep[] = [
       {
         id: "still_want",
         question:
-          "If nothing about the design changed but you booked 30% more next month, would you still want the rebrand?",
+          "If nothing about the design changed but you brought in 30% more next month, would you still want the rebrand?",
       },
     ],
   },
