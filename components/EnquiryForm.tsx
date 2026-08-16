@@ -5,9 +5,10 @@ import { useState, type FormEvent } from "react";
 /**
  * Enquiry form — the studio's single most important conversion surface.
  *
- * Submission: composes a mailto to the studio so it works with ZERO backend today.
- * For production, swap `onSubmit` to POST to a Route Handler wired to Resend (and a
- * Notion "Inquiries" record) per the ops plan — the field shape is already correct.
+ * Submission POSTs to /api/enquiry (validates with the shared zod schema, persists
+ * the lead, then emails via Resend). Validation errors render inline; any other
+ * failure (Resend unconfigured, network) falls back to a mailto compose so the form
+ * always works. A hidden honeypot field ("company") deters bots.
  *
  * No financial fields are ever collected here. "Investment" is a qualifying range,
  * not a payment. Accessible: real labels, required validation, visible ink focus.
@@ -29,9 +30,11 @@ const TIMING = ["As soon as possible", "Within 1–3 months", "In 3–6 months",
 const fieldBase =
   "mt-2 w-full rounded-[1px] border border-ink/20 bg-stone px-4 py-3 font-sans text-fluid-base text-ink placeholder:text-ink/40 transition-colors focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink";
 const labelBase = "font-sans text-xs font-medium uppercase tracking-[0.16em] text-ink/65";
+const errorText = "mt-2 font-sans text-xs text-cherry"; // in-palette; no new colors
 
 export default function EnquiryForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,10 +49,14 @@ export default function EnquiryForm() {
       investment: get("investment"),
       timing: get("timing"),
       vision: get("vision"),
+      company: get("company"), // honeypot — always empty for real users
     };
 
-    // Preferred: deliver via the API (Resend). Falls back to a mailto compose if the
-    // endpoint isn't configured yet or the request fails — so the form always works.
+    setErrors({});
+
+    // Preferred: deliver via the API (validates + persists the lead + emails via
+    // Resend). Validation errors show inline; any other failure falls through to a
+    // mailto compose so the form always works.
     try {
       const res = await fetch("/api/enquiry", {
         method: "POST",
@@ -59,6 +66,17 @@ export default function EnquiryForm() {
       if (res.ok) {
         setSubmitted(true);
         return;
+      }
+      if (res.status === 422) {
+        const errBody = (await res.json().catch(() => null)) as
+          | { errors?: Record<string, string> }
+          | null;
+        if (errBody?.errors) {
+          setErrors(errBody.errors);
+          const first = Object.keys(errBody.errors)[0];
+          if (first) document.getElementById(first)?.focus();
+          return; // stay on the form so they can fix it — no mailto
+        }
       }
     } catch {
       /* network error — fall through to mailto */
@@ -101,12 +119,31 @@ export default function EnquiryForm() {
 
   return (
     <form onSubmit={onSubmit} className="max-w-2xl">
+      {/* Honeypot — hidden from people, catches bots. Not a real field. */}
+      <div aria-hidden className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="company">Company</label>
+        <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelBase}>
             Your name <span className="text-ink/50">*</span>
           </label>
-          <input id="name" name="name" type="text" required autoComplete="name" className={fieldBase} />
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            className={fieldBase}
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "name-error" : undefined}
+          />
+          {errors.name && (
+            <p id="name-error" className={errorText}>
+              {errors.name}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="brand" className={labelBase}>
@@ -118,7 +155,21 @@ export default function EnquiryForm() {
           <label htmlFor="email" className={labelBase}>
             Email <span className="text-ink/50">*</span>
           </label>
-          <input id="email" name="email" type="email" required autoComplete="email" className={fieldBase} />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            className={fieldBase}
+            aria-invalid={!!errors.email}
+            aria-describedby={errors.email ? "email-error" : undefined}
+          />
+          {errors.email && (
+            <p id="email-error" className={errorText}>
+              {errors.email}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="link" className={labelBase}>
@@ -182,7 +233,14 @@ export default function EnquiryForm() {
             rows={5}
             placeholder="Tell me about the brand, what you’ve outgrown, and what you want the site to do."
             className={`${fieldBase} resize-y`}
+            aria-invalid={!!errors.vision}
+            aria-describedby={errors.vision ? "vision-error" : undefined}
           />
+          {errors.vision && (
+            <p id="vision-error" className={errorText}>
+              {errors.vision}
+            </p>
+          )}
         </div>
       </div>
 

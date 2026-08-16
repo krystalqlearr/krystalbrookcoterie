@@ -1,17 +1,15 @@
 import { NextResponse } from "next/server";
+import { enquirySchema, fieldErrors } from "@/lib/schemas";
+import { createSupabaseServiceClient } from "@/lib/supabase/server";
 
 /**
- * Enquiry delivery endpoint. Sends the /begin form to the studio via Resend.
- *
- * Env vars (set in Vercel → Settings → Environment Variables):
- *   RESEND_API_KEY      — required to actually send (until set, the client falls
- *                         back to a mailto compose, so the form still works).
- *   ENQUIRY_TO_EMAIL    — where enquiries land (default hello@krystalbrookcoterie.com).
- *   ENQUIRY_FROM_EMAIL  — verified Resend sender; default uses the send.* subdomain
- *                         we verify in DNS.
- *
- * The reply-to is set to the enquirer's address, so you can reply straight from
- * your inbox. To also log to Notion later, add a second fetch here.
+ * Enquiry endpoint. Order of operations:
+ *   1. honeypot  → silently accept bots
+ *   2. rate limit → 429 (5 / rolling hour / IP, in-memory best-effort)
+ *   3. validate  → 422 with field-level errors for inline display
+ *   4. persist   → insert the lead (fail-open: a down DB must never lose an enquiry)
+ *   5. email     → Resend raw fetch (reply_to = enquirer). 501 + mailto fallback
+ *                  when RESEND_API_KEY is absent; the lead is already saved.
  */
 
 const TO = process.env.ENQUIRY_TO_EMAIL || "hello@krystalbrookcoterie.com";
@@ -19,50 +17,115 @@ const FROM =
   process.env.ENQUIRY_FROM_EMAIL ||
   "Krystal Brook Coterie <enquiries@send.krystalbrookcoterie.com>";
 
-const clean = (v: unknown) => String(v ?? "").trim();
+// In-memory IP rate limit — best-effort (per serverless instance), no captcha.
+const WINDOW_MS = 60 * 60 * 1000;
+const MAX_PER_WINDOW = 5;
+const hits = new Map<string, number[]>();
+
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  return recent.length > MAX_PER_WINDOW;
+}
+
+function clientIp(req: Request): string {
+  const fwd = req.headers.get("x-forwarded-for");
+  return (fwd ? fwd.split(",")[0] : req.headers.get("x-real-ip"))?.trim() || "unknown";
+}
 
 export async function POST(req: Request) {
-  const key = process.env.RESEND_API_KEY;
-  // Not wired yet → tell the client to use its mailto fallback.
-  if (!key) return NextResponse.json({ ok: false, reason: "not_configured" }, { status: 501 });
-
-  let data: Record<string, unknown>;
+  let raw: Record<string, unknown>;
   try {
-    data = await req.json();
+    raw = await req.json();
   } catch {
     return NextResponse.json({ ok: false, reason: "bad_request" }, { status: 400 });
   }
 
-  const name = clean(data.name);
-  const email = clean(data.email);
-  const vision = clean(data.vision);
-  if (!name || !email || !vision) {
-    return NextResponse.json({ ok: false, reason: "missing_fields" }, { status: 422 });
+  // 1. Honeypot — a hidden field real users never fill. If it has content, this
+  // is a bot: pretend success so it gets no signal, and do nothing else.
+  if (typeof raw.company === "string" && raw.company.trim() !== "") {
+    return NextResponse.json({ ok: true });
   }
 
-  const subject = `New enquiry — ${clean(data.brand) || name}`;
+  // 2. Rate limit.
+  if (rateLimited(clientIp(req))) {
+    return NextResponse.json({ ok: false, reason: "rate_limited" }, { status: 429 });
+  }
+
+  // 3. Validate (same schema the form uses).
+  const parsed = enquirySchema.safeParse(raw);
+  if (!parsed.success) {
+    return NextResponse.json(
+      { ok: false, reason: "invalid", errors: fieldErrors(parsed.error) },
+      { status: 422 },
+    );
+  }
+  const data = parsed.data;
+
+  // 4. Persist first — fail-open. If Supabase is down we log and still try email,
+  // so an enquiry is never lost.
+  let leadSaved = false;
+  try {
+    const db = createSupabaseServiceClient();
+    const { error } = await db.from("leads").insert({
+      name: data.name,
+      brand_name: data.brand || null,
+      email: data.email,
+      link: data.link || null,
+      industry: data.industry || null,
+      investment: data.investment || null,
+      timing: data.timing || null,
+      vision: data.vision,
+      source: "begin_form",
+    });
+    if (error) throw error;
+    leadSaved = true;
+  } catch (e) {
+    console.error("[enquiry] lead insert failed:", e);
+  }
+
+  // 5. Email. Keep the 501 + mailto fallback when Resend isn't configured.
+  const key = process.env.RESEND_API_KEY;
+  if (!key) {
+    return NextResponse.json({ ok: false, reason: "not_configured", leadSaved }, { status: 501 });
+  }
+
+  const subject = `New enquiry — ${data.brand || data.name}`;
   const text = [
-    `Name: ${name}`,
-    `Brand: ${clean(data.brand)}`,
-    `Email: ${email}`,
-    `Website / Instagram: ${clean(data.link)}`,
-    `Industry: ${clean(data.industry)}`,
-    `Investment: ${clean(data.investment)}`,
-    `Timing: ${clean(data.timing)}`,
+    `Name: ${data.name}`,
+    `Brand: ${data.brand}`,
+    `Email: ${data.email}`,
+    `Website / Instagram: ${data.link}`,
+    `Industry: ${data.industry}`,
+    `Investment: ${data.investment}`,
+    `Timing: ${data.timing}`,
     "",
     "Vision:",
-    vision,
+    data.vision,
   ].join("\n");
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: FROM, to: [TO], reply_to: email, subject, text }),
-  });
-
-  if (!res.ok) {
-    const detail = await res.text().catch(() => "");
-    return NextResponse.json({ ok: false, reason: "send_failed", detail }, { status: 502 });
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ from: FROM, to: [TO], reply_to: data.email, subject, text }),
+    });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      console.error("[enquiry] resend failed:", res.status, detail);
+      // Lead is already saved → report success. If it wasn't, let the client
+      // fall back to a mailto compose so the enquiry still reaches the studio.
+      return leadSaved
+        ? NextResponse.json({ ok: true, emailFailed: true })
+        : NextResponse.json({ ok: false, reason: "send_failed" }, { status: 502 });
+    }
+  } catch (e) {
+    console.error("[enquiry] resend threw:", e);
+    return leadSaved
+      ? NextResponse.json({ ok: true, emailFailed: true })
+      : NextResponse.json({ ok: false, reason: "send_failed" }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });
