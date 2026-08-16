@@ -20,12 +20,20 @@ const variantClass: Record<Variant, string> = {
     "border border-bone text-bone hover:bg-bone hover:text-ink focus-visible:outline-bone",
 };
 
+type Size = "sm" | "lg";
+
+const sizeClass: Record<Size, string> = {
+  sm: "px-7 py-3.5 text-xs tracking-[0.14em]", // current default
+  lg: "px-9 py-4 text-sm tracking-[0.16em]", // primary client actions
+};
+
 const base =
-  "inline-flex items-center justify-center rounded-[1px] px-7 py-3.5 font-sans text-xs font-medium uppercase tracking-[0.14em] transition duration-300 ease-editorial focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4";
+  "inline-flex items-center justify-center rounded-[1px] font-sans font-medium uppercase transition duration-300 ease-editorial focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4";
 
 type Props = {
   children: ReactNode;
   variant?: Variant;
+  size?: Size;
   href?: string;
   type?: "button" | "submit" | "reset";
   target?: string;
@@ -37,6 +45,7 @@ type Props = {
 export default function Button({
   children,
   variant = "primary",
+  size = "sm",
   href,
   type = "button",
   target,
@@ -44,7 +53,7 @@ export default function Button({
   "aria-label": ariaLabel,
   className = "",
 }: Props) {
-  const cls = `${base} ${variantClass[variant]} ${className}`;
+  const cls = `${base} ${sizeClass[size]} ${variantClass[variant]} ${className}`;
 
   if (href) {
     return (

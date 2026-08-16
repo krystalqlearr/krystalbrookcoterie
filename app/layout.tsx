@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import RouteChrome from "@/components/RouteChrome";
 
 // Display + body/UI — PP Neue Montreal (sans). Note: this family has no 700;
 // it goes Semibold 600 → Extrabold 800 → Black 900.
@@ -125,10 +126,14 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <SiteHeader />
+        <RouteChrome>
+          <SiteHeader />
+        </RouteChrome>
         <main id="main">{children}</main>
-        <SiteFooter />
-        <CustomCursor />
+        <RouteChrome>
+          <SiteFooter />
+          <CustomCursor />
+        </RouteChrome>
       </body>
     </html>
   );

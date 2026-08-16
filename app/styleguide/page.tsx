@@ -1,5 +1,6 @@
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
+import Field from "@/components/Field";
 import EditorialHeading from "@/components/EditorialHeading";
 import Eyebrow from "@/components/Eyebrow";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -104,8 +105,9 @@ export default function StyleguidePage() {
           ))}
           <p className="max-w-measure font-sans text-sm text-ink/65">
             Muted text is ink/65 on bone, bone/60 on charcoal. Hairlines are ink/12–15 (light)
-            / bone/15–20 (charcoal). Camel never sets small text or prices on bone (fails AA) —
-            prices are ink. Charcoal (ink bg) is punctuation: footer, closing CTAs, work overlay.
+            / bone/15–20 (charcoal). The wine flare (cherry) passes AA on bone (~7:1) and can
+            carry a colored word; prices stay ink. Charcoal is punctuation: footer, closing
+            CTAs, work overlay.
           </p>
         </div>
 
@@ -195,12 +197,60 @@ export default function StyleguidePage() {
 
           <section>
             <GroupMarker>EditorialHeading + Button</GroupMarker>
-            <div className="mt-10 space-y-8">
+            <div className="mt-10 space-y-10">
               <EditorialHeading size="lg">Your competitors&rsquo; sites are rented</EditorialHeading>
-              <div className="flex flex-wrap items-center gap-5">
-                <Button href="/styleguide" variant="primary">Begin your project</Button>
-                <Button href="/styleguide" variant="ghost">See the work</Button>
+              <div className="space-y-6">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink/50">size sm — default</p>
+                <div className="flex flex-wrap items-center gap-5">
+                  <Button href="/styleguide" variant="primary">Begin your project</Button>
+                  <Button href="/styleguide" variant="ghost">See the work</Button>
+                </div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink/50">size lg — client actions</p>
+                <div className="flex flex-wrap items-center gap-5">
+                  <Button href="/styleguide" variant="primary" size="lg">Accept proposal</Button>
+                  <Button href="/styleguide" variant="ghost" size="lg">Read the brief</Button>
+                </div>
+                <div className="flex flex-wrap items-center gap-5 bg-charcoal p-8">
+                  <Button href="/styleguide" variant="onCharcoal">On charcoal · sm</Button>
+                  <Button href="/styleguide" variant="onCharcoal" size="lg">On charcoal · lg</Button>
+                </div>
               </div>
+            </div>
+          </section>
+
+          <section>
+            <GroupMarker>Field — form primitive</GroupMarker>
+            <div className="mt-10 grid max-w-2xl gap-6 sm:grid-cols-2">
+              <Field label="Your name" name="sg-name" required autoComplete="off" />
+              <Field
+                label="Email"
+                name="sg-email"
+                type="email"
+                required
+                autoComplete="off"
+                error="Enter a valid email address."
+              />
+              <Field label="Website" name="sg-link" hint="Or your Instagram handle." />
+              <Field as="select" label="Industry" name="sg-industry" options={["Beauty", "Med-spa", "Wellness"]} />
+              <Field
+                as="radio"
+                label="What are you after?"
+                name="sg-after"
+                className="sm:col-span-2"
+                options={[
+                  { label: "Brand identity", value: "brand" },
+                  { label: "Website", value: "website" },
+                  { label: "Both", value: "both" },
+                ]}
+              />
+              <Field
+                as="textarea"
+                label="The vision"
+                name="sg-vision"
+                rows={4}
+                placeholder="A sentence or two…"
+                className="sm:col-span-2"
+              />
             </div>
           </section>
 
