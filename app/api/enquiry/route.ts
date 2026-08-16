@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { enquirySchema, fieldErrors } from "@/lib/schemas";
 import { createSupabaseServiceClient } from "@/lib/supabase/server";
+import { sendEmail } from "@/lib/email";
 
 /**
  * Enquiry endpoint. Order of operations:
@@ -13,9 +14,6 @@ import { createSupabaseServiceClient } from "@/lib/supabase/server";
  */
 
 const TO = process.env.ENQUIRY_TO_EMAIL || "hello@krystalbrookcoterie.com";
-const FROM =
-  process.env.ENQUIRY_FROM_EMAIL ||
-  "Krystal Brook Coterie <enquiries@send.krystalbrookcoterie.com>";
 
 // In-memory IP rate limit — best-effort (per serverless instance), no captcha.
 const WINDOW_MS = 60 * 60 * 1000;
@@ -86,12 +84,8 @@ export async function POST(req: Request) {
     console.error("[enquiry] lead insert failed:", e);
   }
 
-  // 5. Email. Keep the 501 + mailto fallback when Resend isn't configured.
-  const key = process.env.RESEND_API_KEY;
-  if (!key) {
-    return NextResponse.json({ ok: false, reason: "not_configured", leadSaved }, { status: 501 });
-  }
-
+  // 5. Email via the shared helper. Keep the 501 + mailto fallback when Resend
+  //    isn't configured; the lead is already saved either way.
   const subject = `New enquiry — ${data.brand || data.name}`;
   const text = [
     `Name: ${data.name}`,
@@ -106,23 +100,12 @@ export async function POST(req: Request) {
     data.vision,
   ].join("\n");
 
-  try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: FROM, to: [TO], reply_to: data.email, subject, text }),
-    });
-    if (!res.ok) {
-      const detail = await res.text().catch(() => "");
-      console.error("[enquiry] resend failed:", res.status, detail);
-      // Lead is already saved → report success. If it wasn't, let the client
-      // fall back to a mailto compose so the enquiry still reaches the studio.
-      return leadSaved
-        ? NextResponse.json({ ok: true, emailFailed: true })
-        : NextResponse.json({ ok: false, reason: "send_failed" }, { status: 502 });
+  const email = await sendEmail({ to: TO, replyTo: data.email, subject, text });
+  if (!email.ok) {
+    if (email.reason === "not_configured") {
+      return NextResponse.json({ ok: false, reason: "not_configured", leadSaved }, { status: 501 });
     }
-  } catch (e) {
-    console.error("[enquiry] resend threw:", e);
+    // Send failed. Lead is saved → success; if not, let the client mailto-fallback.
     return leadSaved
       ? NextResponse.json({ ok: true, emailFailed: true })
       : NextResponse.json({ ok: false, reason: "send_failed" }, { status: 502 });

@@ -36,6 +36,8 @@ type Props = {
   size?: Size;
   href?: string;
   type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+  disabled?: boolean;
   target?: string;
   rel?: string;
   "aria-label"?: string;
@@ -48,12 +50,16 @@ export default function Button({
   size = "sm",
   href,
   type = "button",
+  onClick,
+  disabled,
   target,
   rel,
   "aria-label": ariaLabel,
   className = "",
 }: Props) {
-  const cls = `${base} ${sizeClass[size]} ${variantClass[variant]} ${className}`;
+  const cls = `${base} ${sizeClass[size]} ${variantClass[variant]} ${
+    disabled ? "cursor-not-allowed opacity-60" : ""
+  } ${className}`;
 
   if (href) {
     return (
@@ -64,7 +70,7 @@ export default function Button({
   }
 
   return (
-    <button type={type} aria-label={ariaLabel} className={cls}>
+    <button type={type} onClick={onClick} disabled={disabled} aria-label={ariaLabel} className={cls}>
       {children}
     </button>
   );
