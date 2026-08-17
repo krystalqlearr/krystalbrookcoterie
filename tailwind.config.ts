@@ -16,6 +16,12 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    // `lib/` HOLDS CLASS STRINGS — lib/work.ts carries each project's grid span
+    // (`lg:col-span-7`, `lg:col-start-9`…) and gradient field. Without this glob
+    // Tailwind never scans them, so those classes are never generated and the
+    // asymmetric work grid silently collapses to single columns. Any file that
+    // stores a class name as data must be listed here.
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     // Editorial container: wide gutters, capped measure, centered track.

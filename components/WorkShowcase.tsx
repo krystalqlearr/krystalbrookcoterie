@@ -45,7 +45,12 @@ export default function WorkShowcase() {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-x-gutter gap-y-16 lg:grid-cols-12">
+      {/* Column gap is 24px, NOT `gap-x-gutter`. The 64px gutter is the space between
+          two content blocks; across a 12-column grid it becomes eleven 64px gaps —
+          704px of a 896px track — which collapsed every column to 16px and wrapped
+          the descriptors one word per line. Asymmetric spans need a narrow column
+          gap; the visual gutter comes from the spans themselves. */}
+      <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-12 lg:gap-x-6">
         {PROJECTS.map((p) => (
           <ProjectSlot
             key={p.id}
