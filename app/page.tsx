@@ -1,60 +1,125 @@
 import Button from "@/components/Button";
+import ArrowLink from "@/components/ArrowLink";
 import EditorialHeading from "@/components/EditorialHeading";
 import Hero from "@/components/Hero";
+import IndexMeta from "@/components/IndexMeta";
+import Marquee from "@/components/Marquee";
 import ProjectCard from "@/components/ProjectCard";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
+import StatStrip from "@/components/StatStrip";
 import Testimonial from "@/components/Testimonial";
+import { WORK } from "@/lib/work";
+
+/**
+ * Home — the section rhythm the whole system was built for:
+ *
+ *   hero → proof band (DARK) → positioning → indexed work → point of view
+ *        → the studio → marquee → proof → closing CTA (DARK)
+ *
+ * Two rules govern the composition and both are deliberate:
+ *
+ *  CHARCOAL IS PUNCTUATION — exactly two dark moments, the proof band under the
+ *  hero and the closing CTA. Everything between them alternates milk (canvas) and
+ *  bone (first recess) so the page reads with cadence, never one flat scroll.
+ *
+ *  ONE FLARE PER VIEW — the accent words form a spine read top to bottom:
+ *  presence → owned → follows → worth. The indexed work section spends its flare
+ *  on the IndexMeta numbers instead of a heading accent, which is why that
+ *  heading has none.
+ */
+
+// Every figure here is a claim the site already makes in the /services FAQ —
+// nothing is estimated. If a claim changes there, change it here too.
+const PROOF = [
+  { figure: "6–8 wks", label: "Signature build", note: "Brief to launch, once content is in hand." },
+  { figure: "100%", label: "Yours to own", note: "Code, design system, deployment. No lock-in." },
+  { figure: "One", label: "Senior hand", note: "Every decision mine. Nothing handed to a junior." },
+  { figure: "Hours", label: "Revision turnaround", note: "Not the weeks an agency queue takes." },
+];
+
+const SECTORS = [
+  "Beauty",
+  "Med-spa",
+  "Wellness",
+  "Bridal",
+  "Luxury lifestyle",
+  "Aesthetics",
+  "Founder-led",
+];
 
 export default function HomePage() {
+  const [feature, ...rest] = WORK;
+
   return (
     <>
       {/* 1 · Hero — atmosphere + choreographed headline */}
       <Hero />
 
-      {/* 2 · Positioning band — petrol alt-section */}
+      {/* 2 · Proof band — the first dark inversion, directly under the hero. It
+             converts the headline's claim into something checkable before the
+             visitor has scrolled past one screen. */}
+      <StatStrip stats={PROOF} />
+
+      {/* 3 · Positioning — the argument, stated once, in the display register */}
       <SectionShell
-        tone="stone"
-        marker
         heading="Your competitors’ sites are rented. Yours will be owned."
         accent="owned"
         headingSize="lg"
         intro="The difference is presence. Strategy, art direction, and custom design that make a founder-led brand look as established as it has become — and turn attention into trust, and trust into demand."
       />
 
-      {/* 3 · Selected work — the transition lives at /work; here it's the invitation */}
-      <SectionShell eyebrow="Selected work">
+      {/* 4 · Selected work — an EDITED SEQUENCE, not a grid. IndexMeta carries the
+             count so the reader always knows where they are and how much is left. */}
+      <SectionShell tone="bone" eyebrow="Selected work" heading="The work speaks first.">
         <Reveal>
+          <IndexMeta index={1} total={WORK.length} tag={feature.category} />
           <ProjectCard
+            className="mt-5"
             size="feature"
-            client="Glowtoure"
-            tag="Brand Strategy · Art Direction · Web Design · Development"
-            descriptor="A luxury service, given the digital experience its pricing demanded."
-            browserUrl="glowtoure.com"
-            href="/work"
+            client={feature.client}
+            tag={feature.capabilities}
+            descriptor={feature.descriptor}
+            browserUrl={feature.url}
+            href={`/work/${feature.id}`}
           />
         </Reveal>
+
+        <div className="mt-26 grid gap-x-gutter gap-y-18 md:grid-cols-2">
+          {rest.map((project, i) => (
+            <Reveal key={project.id} delay={0.08 * (i + 1)}>
+              <IndexMeta index={i + 2} total={WORK.length} tag={project.category} />
+              <ProjectCard
+                className="mt-5"
+                size="side"
+                client={project.client}
+                tag={project.status ?? project.capabilities}
+                descriptor={project.descriptor}
+                href="/work"
+              />
+            </Reveal>
+          ))}
+        </div>
+
         <Reveal delay={0.1}>
-          <div className="mt-12">
-            <Button href="/work" variant="ghost">
-              View selected work
-            </Button>
+          <div className="mt-22">
+            <ArrowLink href="/work">View all work</ArrowLink>
           </div>
         </Reveal>
       </SectionShell>
 
-      {/* 4 · The difference — strategy-led, alt-section */}
-      <SectionShell tone="stone" eyebrow="The difference">
+      {/* 5 · Point of view — the studio's argument for why strategy comes first */}
+      <SectionShell eyebrow="The difference">
         <Reveal stagger={0.12}>
-          <div className="grid gap-x-gutter gap-y-8 lg:grid-cols-2 lg:items-start">
+          <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-2 lg:items-start">
             <RevealItem>
               <EditorialHeading as="h2" size="lg" accent="follows" className="max-w-[16ch]">
                 Strategy leads. Everything else follows.
               </EditorialHeading>
             </RevealItem>
             <RevealItem>
-              <div className="max-w-measure space-y-4 font-sans text-fluid-base leading-relaxed text-ink/70">
+              <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
                 <p>
                   Every brand I take on is shaped from its positioning up — who it must
                   move, what it must be trusted for, and where it intends to go. The
@@ -71,27 +136,39 @@ export default function HomePage() {
         </Reveal>
       </SectionShell>
 
-      {/* 5 · Services teaser — four tiers, Signature emphasized */}
+      {/* 6 · The studio — four ways in, Signature flagged */}
       <SectionShell
+        tone="bone"
         eyebrow="The studio"
         heading="Four ways to enter the studio."
         headingSize="md"
       >
         <Reveal stagger={0.08}>
-          <div className="grid gap-x-gutter gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-x-gutter gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             <RevealItem>
-              <ServiceCard name="The Edit" price="$4,500" description="A refined debut that stops a brand looking new." />
+              <ServiceCard
+                name="The Edit"
+                price="$4,500"
+                duration="2–3 weeks"
+                description="A refined debut that stops a brand looking new."
+              />
             </RevealItem>
             <RevealItem>
               <ServiceCard
                 name="Signature"
                 price="$9,800"
+                duration="6–8 weeks"
                 featured
-                description="The complete brand website. Most commissioned."
+                description="The complete brand website."
               />
             </RevealItem>
             <RevealItem>
-              <ServiceCard name="Atelier" price="$22,000+" description="For brands whose site must carry real authority." />
+              <ServiceCard
+                name="Atelier"
+                price="$22,000+"
+                duration="8–12 weeks"
+                description="For brands whose site must carry real authority."
+              />
             </RevealItem>
             <RevealItem>
               <ServiceCard
@@ -103,15 +180,19 @@ export default function HomePage() {
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="mt-12">
-            <Button href="/services" variant="ghost">
-              View all services
-            </Button>
+          <div className="mt-18">
+            <ArrowLink href="/services">View all services</ArrowLink>
           </div>
         </Reveal>
       </SectionShell>
 
-      {/* 6 · Proof */}
+      {/* 7 · Sectors — the page's heartbeat between two still sections. Presentational
+             only: every sector here is named as real content on /services and /work. */}
+      <section aria-hidden className="border-y border-ink/12 py-10">
+        <Marquee items={SECTORS} duration={48} />
+      </section>
+
+      {/* 8 · Proof */}
       <SectionShell eyebrow="Proof">
         <Reveal>
           <Testimonial
@@ -122,15 +203,20 @@ export default function HomePage() {
         </Reveal>
       </SectionShell>
 
-      {/* 7 · Closing CTA — cream showstopper */}
+      {/* 9 · Closing CTA — the second and final dark moment. It runs INTO the forest
+             footer, so the two read as one closing movement; the section's normal
+             120px bottom rhythm would leave 200px of dead dark before the footer's
+             first line, so it is deliberately trimmed here. */}
       <SectionShell
-        tone="charcoal"
-        marker
+        tone="dark"
         heading="Let’s build something worth owning."
         accent="worth"
         headingSize="xl"
+        className="!pb-14"
       >
-        <Button href="/begin" variant="onCharcoal">
+        {/* The one filled control on the page besides the hero: ArrowLink is for
+            navigation, Button for conversion, and this is the conversion moment. */}
+        <Button href="/begin" variant="onDark">
           Begin your project
         </Button>
       </SectionShell>

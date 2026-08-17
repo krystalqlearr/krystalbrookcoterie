@@ -64,7 +64,7 @@ export default function FAQAccordion({ items, allowMultiple = false, className =
                 onKeyDown={(e) => onKeyDown(e, i)}
                 className="flex w-full items-center justify-between gap-6 py-6 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
               >
-                <span className="font-editorial text-fluid-lg font-normal text-ink">{item.question}</span>
+                <span className="type-display text-fluid-xl text-ink">{item.question}</span>
                 <span
                   aria-hidden
                   className={`relative block h-3 w-3 flex-shrink-0 text-ink transition-transform duration-300 motion-reduce:transition-none ${

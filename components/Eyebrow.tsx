@@ -1,13 +1,22 @@
 import { type ReactNode } from "react";
 
 /**
- * Small tracked-caps label — the editorial cover-line. Tone is canvas-aware:
- *  - muted     → ink/65 on bone/stone (quiet, for non-section labels)
- *  - onDark    → bone/60 on charcoal (quiet)
- *  - flare     → cherry (the wine cover-line on bone/stone) — section labels
- *  - flareDark → blush (the wine cover-line on charcoal)
+ * The META register — 13px uppercase Semibold at +0.13em. This is the only
+ * uppercase left on the site, and it carries everything that isn't a headline or
+ * body copy: section labels, cover-lines, tags, categories, captions, credits.
+ *
+ * Tone is canvas-aware:
+ *  - muted     → ink/60 on bone/stone (the default; quiet structural label)
+ *  - onDark    → bone/60 on the forest dark
+ *  - ink       → full ink, for labels that need to sit forward
+ *  - flare     → flare-deep (the cover-line on bone/stone — the AA-safe stop, since
+ *                this is 13px text and the neon default fails at that size)
+ *  - flareDark → flare-lift (the cover-line on the forest dark)
+ *
+ * The flare is rationed: one flare element per view, total, across eyebrow + rule
+ * tick + heading accent. If the heading already carries it, keep the eyebrow muted.
  */
-type EyebrowTone = "muted" | "onDark" | "flare" | "flareDark";
+type EyebrowTone = "muted" | "onDark" | "ink" | "flare" | "flareDark";
 
 type EyebrowProps = {
   children: ReactNode;
@@ -17,16 +26,18 @@ type EyebrowProps = {
 };
 
 const toneClass: Record<EyebrowTone, string> = {
-  muted: "text-ink/65",
+  muted: "text-ink/70",
   onDark: "text-bone/60",
-  flare: "text-cherry",
-  flareDark: "text-blush",
+  ink: "text-ink",
+  flare: "text-flare-deep",
+  flareDark: "text-flare-lift",
 };
 
-export default function Eyebrow({ children, tone = "muted", as: As = "p", className = "" }: EyebrowProps) {
-  return (
-    <As className={`font-sans text-xs font-medium uppercase tracking-[0.28em] ${toneClass[tone]} ${className}`}>
-      {children}
-    </As>
-  );
+export default function Eyebrow({
+  children,
+  tone = "muted",
+  as: As = "p",
+  className = "",
+}: EyebrowProps) {
+  return <As className={`type-meta ${toneClass[tone]} ${className}`}>{children}</As>;
 }

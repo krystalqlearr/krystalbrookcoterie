@@ -6,8 +6,13 @@ import SmoothScroll from "@/components/motion/SmoothScroll";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
-// Display + body/UI — PP Neue Montreal (sans). Note: this family has no 700;
-// it goes Semibold 600 → Extrabold 800 → Black 900.
+// The site's ONE typeface — PP Neue Montreal. It carries all three jobs:
+//   DISPLAY  400  sentence-case headlines, enormous, −0.045→−0.06em
+//   META     600  13px uppercase at +0.13em — eyebrows, tags, indices, CTAs
+//   BODY     400  copy, with 500 for the wordmark
+// Note: this family has no 700; it goes Semibold 600 → Extrabold 800 → Black 900,
+// which is why META sits at 600. The 800/900 cuts are kept loaded but unused —
+// nothing in the system may set them.
 const neueMontreal = localFont({
   variable: "--font-sans",
   display: "swap",
@@ -23,17 +28,11 @@ const neueMontreal = localFont({
   ],
 });
 
-// Editorial accent (italic serif) + wordmark — PP Editorial New.
-const editorialNew = localFont({
-  variable: "--font-editorial",
-  display: "swap",
-  src: [
-    { path: "../public/fonts/PPEditorialNew-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../public/fonts/PPEditorialNew-Italic.woff2", weight: "400", style: "italic" },
-    { path: "../public/fonts/PPEditorialNew-Bold.woff2", weight: "700", style: "normal" },
-    { path: "../public/fonts/PPEditorialNew-BoldItalic.woff2", weight: "700", style: "italic" },
-  ],
-});
+// PP Editorial New is RETIRED (2026-08). The serif-italic supporting voice and the
+// serif accent word are gone: the system is one grotesk set two ways. The .woff2
+// files remain in /public/fonts, so restoring it is a localFont block plus a
+// `editorial` entry in tailwind's fontFamily — but nothing currently references
+// it, and preloading ~150KB of unused webfont on every route is not free.
 
 const SITE_URL = "https://krystalbrookcoterie.com";
 const SITE_NAME = "Krystal Brook Coterie";
@@ -112,7 +111,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${neueMontreal.variable} ${editorialNew.variable}`}>
+    <html lang="en" className={neueMontreal.variable}>
       <body className="page-grain">
         <script
           type="application/ld+json"
@@ -121,7 +120,7 @@ export default function RootLayout({
         <SmoothScroll />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[300] focus:rounded-[1px] focus:bg-ink focus:px-4 focus:py-2 focus:font-sans focus:text-xs focus:uppercase focus:tracking-[0.14em] focus:text-bone"
+          className="type-meta sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[300] focus:rounded-[1px] focus:bg-ink focus:px-5 focus:py-3 focus:text-bone"
         >
           Skip to content
         </a>

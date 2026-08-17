@@ -14,34 +14,35 @@
   --dur-xslow: 0.9s;
 }
 
-/* Bone-led canvas: warm ivory paper, charcoal ink by default. */
+/* Milk-led canvas: the brightest sheet of warm paper, warm ink by default. */
 @layer base {
   html {
-    background-color: #ebe5d8; /* bone */
+    background-color: #faf7f0; /* milk — THE canvas */
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   body {
-    @apply bg-bone text-ink font-sans antialiased;
+    @apply bg-milk text-ink font-sans antialiased;
   }
 
-  /* Ink selection on bone — a quiet, confident tell. */
+  /* Electric selection — a quiet, confident tell. Ink on flare, not bone on flare:
+     ink clears 4.30 against #FF0080 where bone manages only 3.01. */
   ::selection {
-    background-color: #8a1f52; /* cherry — the wine flare */
-    color: #ebe5d8; /* bone */
+    background-color: #ff0080; /* flare */
+    color: #23201b; /* ink */
   }
 
   /* Restrained warm scrollbar so the chrome never fights the paper. */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #c9bfa9 #ebe5d8; /* warm stone thumb on bone track */
+    scrollbar-color: #c9bfa9 #faf7f0; /* warm stone thumb on the milk track */
   }
   *::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   *::-webkit-scrollbar-track {
-    background: #ebe5d8;
+    background: #faf7f0;
   }
   *::-webkit-scrollbar-thumb {
     background: #c9bfa9;
@@ -65,6 +66,24 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* ── The two registers ───────────────────────────────────────────────────────
+   The whole site is one typeface set two ways. Everything is DISPLAY or META;
+   there is no third voice. Prefer the components (EditorialHeading, Eyebrow,
+   ArrowLink) — these classes exist for one-offs and for prose blocks. */
+@layer components {
+  /* DISPLAY — sentence case, weight 400. Size tokens (text-fluid-*) already carry
+     the negative tracking and sub-1 leading; this sets face, weight, and casing. */
+  .type-display {
+    @apply font-display font-normal normal-case text-balance;
+  }
+
+  /* META — 13px uppercase Semibold at +0.13em. The only uppercase on the site:
+     eyebrows, tags, indices, CTAs, captions, form labels, nav. */
+  .type-meta {
+    @apply font-sans text-meta font-semibold uppercase;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -73,9 +92,10 @@ html.lenis body {
     text-wrap: pretty;
   }
 
-  /* Animated wine underline — the flare as the interactive signal on links. */
+  /* Animated flare underline — the accent as the interactive signal on inline links.
+     A 1px rule is a graphic, so the neon stop is correct here. */
   .link-underline {
-    background-image: linear-gradient(#8a1f52, #8a1f52);
+    background-image: linear-gradient(#ff0080, #ff0080);
     background-repeat: no-repeat;
     background-position: left 100%;
     background-size: 0% 1px;
@@ -86,17 +106,47 @@ html.lenis body {
     background-size: 100% 1px;
   }
 
-  /* Editorial drop-cap — an oversized Editorial New italic initial in wine, for
-     long-form openings (journal, case-study intros). */
+  /* Arrow CTA — the signature action. A meta-caps label over a hairline that wipes
+     in from the left while the wine arrow travels up-and-right. No fill, no border,
+     no radius: the action is typography, not a box. See components/ArrowLink.tsx. */
+  .arrow-link .arrow-link__rule {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.44s var(--ease-editorial);
+  }
+  .arrow-link:hover .arrow-link__rule,
+  .arrow-link:focus-visible .arrow-link__rule {
+    transform: scaleX(1);
+  }
+  .arrow-link .arrow-link__glyph {
+    transition: transform 0.44s var(--ease-editorial);
+  }
+  .arrow-link:hover .arrow-link__glyph,
+  .arrow-link:focus-visible .arrow-link__glyph {
+    transform: translate3d(0.22em, -0.22em, 0);
+  }
+  /* Down-arrow variant travels straight down instead. */
+  .arrow-link[data-direction="down"]:hover .arrow-link__glyph,
+  .arrow-link[data-direction="down"]:focus-visible .arrow-link__glyph {
+    transform: translate3d(0, 0.28em, 0);
+  }
+
+  /* Marquee: pause on hover so a visitor can actually read a logo. */
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* Editorial drop-cap — an oversized initial in the flare, for long-form openings
+     (journal, case-study intros). Grotesk, matching the display register. At 3.2em
+     it is unambiguously large text, so the neon stop applies. */
   .dropcap::first-letter {
-    font-family: var(--font-editorial), Georgia, serif;
-    font-style: italic;
     font-weight: 400;
-    font-size: 3.4em;
-    line-height: 0.72;
+    font-size: 3.2em;
+    line-height: 0.74;
+    letter-spacing: -0.055em;
     float: left;
-    margin: 0.06em 0.1em 0 0;
-    color: #8a1f52;
+    margin: 0.08em 0.12em 0 0;
+    color: #ff0080;
   }
 
   /* Hide the native cursor everywhere while the custom cursor is active.
@@ -149,5 +199,11 @@ html.lenis body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+  /* The marquee is a continuous loop, not an entrance — stop it outright rather
+     than letting it snap to its end state. */
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
   }
 }

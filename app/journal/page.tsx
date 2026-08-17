@@ -35,10 +35,10 @@ export default function JournalPage() {
             {ENTRIES.map((e) => (
               <RevealItem as="li" key={e.title}>
                 <div className="flex flex-col gap-2 border-t border-ink/12 py-8 md:flex-row md:items-baseline md:justify-between">
-                  <h2 className="max-w-[32ch] font-editorial text-fluid-lg font-normal italic text-ink/50">
+                  <h2 className="type-display max-w-[32ch] text-fluid-xl text-ink/70">
                     {e.title}
                   </h2>
-                  <span className="font-sans text-xs uppercase tracking-[0.16em] text-ink/55">
+                  <span className="font-sans text-xs uppercase tracking-[0.16em] text-ink/70">
                     {e.tag}
                   </span>
                 </div>
@@ -49,13 +49,13 @@ export default function JournalPage() {
       </SectionShell>
 
       <SectionShell
-        tone="charcoal"
+        tone="dark"
         marker
         heading="Rather see the work?"
         accent="work"
         headingSize="xl"
       >
-        <Button href="/work" variant="onCharcoal">
+        <Button href="/work" variant="onDark">
           View the work
         </Button>
       </SectionShell>
