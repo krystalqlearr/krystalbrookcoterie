@@ -35,49 +35,93 @@
 
 ## 2. Design system
 
-### 2.1 Color — BONE-LED warm-neutral palette (redesigned 2026-07)
+### 2.1 Color — MILK-LED warm-neutral + an ELECTRIC FLARE (redesigned 2026-08)
 
-Full pivot from the dark atelier to a warm bone-paper studio (refs: HAUS, VOL.ONE
-STUDIOS, STAY). The inversion pair is `bone` (light) + `ink` (warm charcoal); muted
-text and hairlines are OPACITIES of the pair, not separate tokens.
+Second pivot: from the bone-paper studio to a milk-led canvas carrying an electric
+magenta flare against a forest dark. Reference for the SYSTEM (not the palette):
+bionicegg.com. Muted text and hairlines are OPACITIES of the pair, not separate tokens.
+
+PAPER — one stock, three sheets, lightest on top. Nothing sits ABOVE the canvas:
+elevation only goes DOWN from it, so an inset field is `stone`, not something lighter.
 
 | token | hex | role |
 |---|---|---|
-| `bone` | `#EBE5D8` | primary canvas (warm ivory paper); ink-color on charcoal |
-| `ink` | `#23201B` | warm faded charcoal — primary ink; bg for charcoal sections |
-| `stone` | `#E0D8C7` | deeper paper — raised panels (form fields), subtle alt-section |
-| `camel` | `#C6A98A` | champagne accent, used barely — the section Rule, a thin tick |
+| `milk` | `#FAF7F0` | THE CANVAS — the default page. Ink 16.2 (AAA) |
+| `bone` | `#EBE5D8` | FIRST RECESS — the warm alt-section, AND the light ink on forest |
+| `stone` | `#E0D8C7` | DEEPEST RECESS — inset form fields, the quietest band |
+| `ink` | `#23201B` | warm faded charcoal-brown — primary ink + button fill |
+| `forest` | `#0F2018` | THE dark inversion surface |
 | `mocha` | `#9A8264` | deep warm neutral — imagery / atmosphere haze only |
 
-Muted = `ink/65` (bone, 4.62:1 AA) · `bone/60` (charcoal). Hairlines = `ink/12–15` ·
-`bone/15–20`. Prices/tags/asterisks are INK — ink-forward reads expensive; color is
-nearly absent (camel FAILS as small text/price on bone, ~1.6:1). Grain is
-`mix-blend: multiply` (paper tooth). **RETIRED:** rich-black, cream, deep-petrol, teal,
-greige, surface-1/2. (The old "preserve values, never remap" rule applied to the dark
-system; this pivot is the sanctioned, documented exception.)
+THE FLARE — electric magenta, THREE STOPS. Neon and AA cannot be one swatch, so the
+stop is chosen by SIZE and CANVAS, never by taste:
 
-### 2.2 Charcoal is punctuation
+| token | hex | rule |
+|---|---|---|
+| `flare` | `#FF0080` | NEON. Graphics + text ≥24px ONLY, on milk/bone/forest. NEVER on stone (2.66) |
+| `flare-deep` | `#A8004F` | TEXT. Anything under 24px, plus the one full band. 6.02 on bone, 5.33 on stone |
+| `flare-lift` | `#FF7ABF` | The flare ON forest — 7.09, safe at any size |
 
-Charcoal (ink bg, bone text) is NOT the default — it's the dark inversion moment:
+Green is electric magenta's TRUE COMPLEMENT, which is why the flare reads hotter on
+forest than on any neutral. It works because the green is nearly black and the flare is
+rationed — lighten either and it tips into Christmas.
+
+ONE flare element PER VIEW, not per section. This is ENFORCED IN CODE: `SectionShell`
+derives the stop from `tone` and passes it to `EditorialHeading`, so a heading cannot
+silently ship a failing pair. Every display size floors at 24px precisely so the neon
+stop stays legal on headings.
+
+MUTED TEXT FLOOR = `ink/70` on milk, bone AND stone (5.72 / 5.37 / 5.05) · `bone/60` on
+forest (5.82). These are FLOORS: `ink/65` clears bone at 4.62 but FAILS stone at 4.38,
+and `ink/60` fails both. Opacity is therefore NOT available as a hierarchy step below
+the floor; use color instead. Prices/tags/asterisks stay INK. Focus rings are NEVER the
+flare. Grain is `mix-blend: multiply` (paper tooth).
+
+**RETIRED:** cherry/maroon/blush (the wine flare), charcoal `#1E1418` (its blue channel
+sat above green, which made every dark band read aubergine), camel, rich-black, cream,
+deep-petrol, teal, greige, surface-1/2.
+
+### 2.2 The dark is punctuation
+
+Forest (`forest` bg, bone text) is NOT the default — it's the dark inversion moment:
 footer, closing-CTA showstoppers, scrolled header, browser frames, work-transition
-overlay. One or two dark moments per page for rhythm.
+overlay. One or two dark moments per page for rhythm — home and /services each run
+exactly two.
 
-### 2.3 Typography — big sans + serif italic (HAUS register)
+### 2.3 Typography — ONE typeface, TWO registers (grotesk pivot 2026-08)
 
-**Approved 2026-07: monumental UPPERCASE sans + a quiet serif italic voice — "so
-expensive you can see and feel it."**
+**PP Neue Montreal carries everything. There is no second typeface and no third voice.**
 
-Families (locally loaded, no Google Fonts):
-- **Neue Montreal Extrabold (800), UPPERCASE** (`--font-sans` / `font-display`) — ALL
-  display headlines, tier names, section titles (`EditorialHeading`, uppercase, tight
-  tracking). The inline accent word is RETIRED.
-- **Editorial New Italic (400)** (`--font-editorial`) — the supporting voice: hero
-  sublines, SectionShell/PageHero intros, pull-quotes, Testimonial, project + case-study
-  descriptors (serif italic, lowercase).
+- **DISPLAY — weight 400 (REGULAR), sentence case**, enormous, hard negative tracking
+  (−0.045 → −0.06em), sub-1 leading (0.92), capped ~108px. Tracking and leading live in
+  the `fluid-xl … fluid-hero` tokens — NEVER hand-tune a heading. Write headlines as
+  short declarative sentences ending in a period, stacked two or three deep. The
+  restraint IS the luxury signal: 400-weight at 108px outranks any bold cut.
+- **META — 13px UPPERCASE Semibold (600) at +0.13em.** The ONLY uppercase on the site:
+  eyebrows, tags, indices, captions, credits, nav, form labels, CTAs. (The family has
+  no 700, hence 600.)
 
-Scale: fluid clamp tokens (`fluid-sm … fluid-hero`) size everything; the tokens' tight
-leading suits caps. The hero atmosphere is a faint warm paper haze (mocha/camel), not
-colored glows.
+THE FLARE THREAD survives as COLOR, not as a second face: one word per heading passed
+as `accent`, in the SAME face and weight.
+
+Scale: fluid clamp tokens (`fluid-sm … fluid-hero`). `fluid-xl` floors at 24px so every
+display size stays inside WCAG "large text". The hero atmosphere is a faint warm paper
+haze (mocha), not colored glows.
+
+**RETIRED:** Neue Montreal Extrabold/Black (800/900 — loaded, never set), uppercase
+display, and PP Editorial New entirely (serif italic sublines, pull-quotes, the serif
+accent word). The .woff2 files remain in /public/fonts; the font is no longer loaded.
+Only the wordmark sits outside the two registers, at Medium 500 uppercase.
+
+### 2.3b Signature devices (2026-08)
+
+| device | role |
+|---|---|
+| `ArrowLink` | THE CTA. Actions are TYPOGRAPHY, not boxes — meta label + flare arrow over a hairline that wipes in on hover/focus. `Button` (ink fill) is for real form controls, at most one per view |
+| `IndexMeta` | `01 / 07 — Med-spa · Brand + Web`. Live number takes flare-deep (13px text); turns a grid into an edited sequence |
+| `Rule` | 1px hairline. `flare`+`short` opens a section header; `hair` splits rows |
+| `Marquee` | Pure-CSS band. Pauses on hover, STOPS under reduced motion. Presentational only |
+| `StatStrip` | The proof band on forest under the hero. 3–4 DEFENSIBLE figures — every one must already be a claim the site makes elsewhere |
 
 ### 2.4 Motion tokens (NEW — single source, never inline magic numbers)
 
@@ -226,15 +270,37 @@ compliant token.
 
 ---
 
+- [x] **Phase 5 — Grotesk pivot (2026-08).** Identity rebuilt around bionicegg.com's
+      typographic SYSTEM in KBC's own palette. Milk-led canvas; electric magenta flare
+      in three stops; forest dark. One typeface, two registers (§2.1–2.3). New devices:
+      `ArrowLink`, `IndexMeta`, `Marquee`, `StatStrip`. Home, `/services`, `/process`,
+      `/journal` recomposed into the section rhythm; `/work`, `/about`, `/begin` brought
+      onto the register. PP Editorial New retired and unloaded.
+      **Bugs fixed:** `lib/` was missing from Tailwind's `content` globs, so the
+      class-strings in `lib/work.ts` were never generated and `/work`'s asymmetric grid
+      had NEVER rendered; `gap-x-gutter` on a 12-col grid consumed 704px of an 896px
+      track; 139 pre-existing contrast failures (muted floor `ink/65` fails on stone);
+      19 ad-hoc meta declarations across 5 files; `/services` metadata + FAQ advertised
+      retired tier names; the OG share card still rendered the entire old brand.
+      **Verified:** 1,498 text nodes across 11 routes at 1440/390 — zero contrast
+      failures, zero horizontal overflow, every route has an `h1`.
+
 ## 9. Anti-drift protocol
 
 1. This file + `CLAUDE.md` are canonical. Any change to tokens, motion, routes, or IA
-   updates BOTH in the same change.
+   updates BOTH in the same change. (Broken three times during the 2026-08 pivot:
+   `CLAUDE.md` was rewritten while this file kept describing the retired wine/bone/
+   uppercase system. If you are editing one, grep the other for the token names you
+   are retiring BEFORE committing.)
 2. Token values are never remapped by name; the material/motion layer is additive and
    documented here — additions to it are recorded in §2.
 3. No inline easing/duration magic numbers — import from `lib/motion.ts` (JS) or use
    `ease-editorial` / `duration-*` (CSS/Tailwind).
-4. No hardcoded hex in components — token names only.
+4. No hardcoded hex in components — token names only. ONE sanctioned exception:
+   `app/opengraph-image.tsx`, because Satori resolves no Tailwind classes. Those
+   literals are milk / ink / ink@70% / flare and MUST be updated by hand whenever the
+   corresponding tokens change — the share card is the most public surface on the site
+   and nothing in the app will surface its drift.
 5. Every new interactive element is a real, labeled, focusable control with a
    reduced-motion path.
 6. Update the Phase boxes in §8 as work lands so status never lies.
