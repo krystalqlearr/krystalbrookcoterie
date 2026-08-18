@@ -68,11 +68,19 @@ export const WORK: WorkProject[] = [
       "Booking flow",
       "Performance & SEO",
     ],
+    // Measured 2026-08-18, Lighthouse 12.8.2 against the live https://glowtoure.com,
+    // MOBILE emulation — the harder of the two runs and the one Google ranks on.
+    //
+    // Performance is deliberately ABSENT. Desktop scores 98 (LCP 1.1s) but mobile
+    // scores 77 (LCP 4.8s), and publishing the desktop figure alone would be a
+    // selective truth. Two fixable causes on the Glowtoure side: an apex→www redirect
+    // chain costing ~864ms, and a 2,424ms load delay on the hero LCP image (missing
+    // priority/fetchpriority). Fix those, re-measure, and add the row back honestly.
     results: [
-      { label: "Lighthouse performance", value: "To publish" },
-      { label: "Core Web Vitals", value: "To publish" },
+      { label: "Accessibility", value: "97 / 100" },
+      { label: "Best practices · SEO", value: "100 · 100" },
+      { label: "Layout shift (CLS)", value: "0.001" },
       { label: "Stack", value: "Next.js · Tailwind · Vercel" },
-      { label: "Engagement", value: "Fully custom-coded" },
     ],
     // NO TESTIMONIAL until a real, approved, attributed quote exists.
     //
