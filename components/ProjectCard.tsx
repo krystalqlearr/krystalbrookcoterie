@@ -35,6 +35,8 @@ export default function ProjectCard({
   size = "feature",
   className = "",
 }: Props) {
+  const interactive = Boolean(href);
+
   const thumb = (
     <ImageFrame
       ratio={ratioBySize[size]}
@@ -43,17 +45,32 @@ export default function ProjectCard({
       caption={image ? undefined : client}
       offset={size === "side" ? "up" : "none"}
       fullBleed={Boolean(browserUrl)}
+      zoomOnGroupHover={interactive}
     />
   );
 
   const body = (
     <>
-      {browserUrl ? <BrowserFrame url={browserUrl}>{thumb}</BrowserFrame> : thumb}
-      <div className="mt-4 flex items-baseline justify-between font-sans text-xs tracking-[0.04em] text-ink/60">
-        <span>{client}</span>
+      <div className="overflow-hidden">
+        {browserUrl ? <BrowserFrame url={browserUrl}>{thumb}</BrowserFrame> : thumb}
+      </div>
+      <div className="type-meta mt-5 flex items-baseline justify-between gap-4 text-ink/70">
+        <span className="text-ink">{client}</span>
         <span>{tag}</span>
       </div>
-      <h3 className={`mt-2 font-editorial font-normal italic text-ink ${headingBySize[size]}`}>{descriptor}</h3>
+      <h3 className={`type-display mt-3 text-ink ${headingBySize[size]}`}>
+        {descriptor}
+        {/* The arrow is part of the heading line, so it arrives on the same
+            baseline as the last word rather than floating in its own row. */}
+        {interactive ? (
+          <span
+            aria-hidden
+            className="ml-3 inline-block text-flare opacity-0 transition-all duration-500 ease-editorial group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:translate-x-1 group-focus-visible:opacity-100 motion-reduce:transition-none"
+          >
+            ↗︎
+          </span>
+        ) : null}
+      </h3>
     </>
   );
 

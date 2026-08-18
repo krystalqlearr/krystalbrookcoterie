@@ -1,10 +1,12 @@
 /**
- * Giant vertical section marker (the VOL.ONE / HAUS device) — a monumental
- * uppercase word running up a section edge as an architectural label. Purely
- * decorative (aria-hidden), sits behind the content, clipped by the section's
+ * Giant vertical section marker — a monumental word running up a section edge as
+ * an architectural label. Set in the DISPLAY register (regular weight, sentence
+ * case, hard negative tracking) so it reads as the same voice as the headlines,
+ * scaled up rather than as a different, louder typeface. Purely decorative
+ * (aria-hidden), sits behind the content, clipped by the section's
  * overflow-hidden. Desktop only — there's no room on mobile.
  *
- * Tone: `ink` on bone/stone sections, `bone` on charcoal. Opacity is deliberately
+ * Tone: `ink` on bone/stone sections, `bone` on the forest dark. Opacity is deliberately
  * low so it reads as structure, never as a second headline — raise the color
  * opacity below to make it louder.
  */
@@ -22,8 +24,8 @@ export default function SectionMarker({ label, side = "right", tone = "ink", cla
   return (
     <span
       aria-hidden
-      className={`pointer-events-none absolute top-1/2 hidden -translate-y-1/2 select-none font-display font-extrabold uppercase leading-none tracking-[-0.03em] lg:block ${pos} ${color} ${className}`}
-      style={{ writingMode: "vertical-rl", fontSize: "clamp(5rem, 15vw, 13rem)" }}
+      className={`pointer-events-none absolute top-1/2 hidden -translate-y-1/2 select-none font-display font-normal normal-case leading-none tracking-display lg:block ${pos} ${color} ${className}`}
+      style={{ writingMode: "vertical-rl", fontSize: "clamp(5rem, 13vw, 11rem)" }}
     >
       {label}
     </span>

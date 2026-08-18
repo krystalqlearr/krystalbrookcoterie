@@ -80,14 +80,14 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <Reveal stagger={0.1}>
             <Link
               href="/work"
-              className="font-sans text-xs uppercase tracking-[0.16em] text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+              className="type-meta text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
             >
               ← All work
             </Link>
-            <p className="mt-8 font-sans text-xs uppercase tracking-[0.2em] text-ink/60">
+            <p className="mt-8 type-meta text-ink/70">
               {p.category}
             </p>
-            <h1 className="mt-5 max-w-[20ch] font-editorial text-fluid-display font-normal italic leading-[1.06] tracking-[-0.01em] text-ink text-balance">
+            <h1 className="type-display mt-7 max-w-[20ch] text-fluid-display text-ink">
               {accented(p.descriptor, p.accent)}
             </h1>
           </Reveal>
@@ -98,14 +98,14 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       <section className="pb-section">
         <div className="container">
           <Reveal>
-            <figure className="overflow-hidden border border-ink/15 bg-charcoal">
+            <figure className="overflow-hidden border border-ink/15 bg-forest">
               <div className="flex items-center gap-3 border-b border-bone/10 px-4 py-2.5">
                 <span className="flex gap-1.5" aria-hidden>
                   <span className="h-2 w-2 rounded-full bg-bone/25" />
                   <span className="h-2 w-2 rounded-full bg-bone/25" />
                   <span className="h-2 w-2 rounded-full bg-bone/25" />
                 </span>
-                <span className="truncate rounded-sm bg-bone/5 px-3 py-1 font-sans text-[0.65rem] tracking-[0.06em] text-bone/50">
+                <span className="truncate rounded-sm bg-bone/5 px-3 py-1 font-sans text-[0.65rem] tracking-[0.06em] text-bone/60">
                   {p.url}
                 </span>
               </div>
@@ -132,7 +132,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       <SectionShell as="section" className="pt-0">
         <div className="grid gap-x-gutter gap-y-12 lg:grid-cols-[1.4fr_0.6fr]">
           <Reveal>
-            <p className="max-w-measure font-editorial text-fluid-xl italic leading-snug text-ink">
+            <p className="type-display max-w-measure text-fluid-xl text-ink">
               {p.intro}
             </p>
             <div className="mt-10 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
@@ -153,7 +153,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 ["Stack", p.stack],
               ].map(([label, value]) => (
                 <div key={label} className="border-t border-ink/12 pt-3 first:border-t-0 first:pt-0">
-                  <dt className="font-sans text-xs uppercase tracking-[0.16em] text-ink/60">{label}</dt>
+                  <dt className="type-meta text-ink/70">{label}</dt>
                   <dd className="mt-1 font-sans text-fluid-base text-ink">{value}</dd>
                 </div>
               ))}
@@ -162,15 +162,15 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </div>
       </SectionShell>
 
-      {/* Results — petrol alt-section */}
+      {/* Results — first-recess alt-section */}
       {p.results && p.results.length > 0 ? (
-        <SectionShell tone="stone" eyebrow="Results" heading="Engineered to perform." headingSize="md">
+        <SectionShell tone="bone" eyebrow="Results" heading="Engineered to perform." headingSize="md">
           <Reveal stagger={0.08}>
             <dl className="grid gap-x-gutter gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {p.results.map((r) => (
                 <div key={r.label} className="border-t border-ink/20 pt-5">
-                  <dt className="font-sans text-xs uppercase tracking-[0.14em] text-ink/60">{r.label}</dt>
-                  <dd className="mt-3 font-display text-fluid-xl font-extrabold uppercase tracking-[-0.01em] text-ink">{r.value}</dd>
+                  <dt className="type-meta text-ink/70">{r.label}</dt>
+                  <dd className="type-display mt-3 text-fluid-xl text-ink">{r.value}</dd>
                 </div>
               ))}
             </dl>
@@ -184,7 +184,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <ul className="grid max-w-editorial gap-x-gutter gap-y-4 font-sans text-fluid-lg text-ink sm:grid-cols-2">
             {p.scope.map((item) => (
               <li key={item} className="flex items-baseline gap-4 border-t border-ink/12 py-4">
-                <span aria-hidden className="h-px w-6 flex-shrink-0 translate-y-2 bg-cherry" />
+                <span aria-hidden className="h-px w-6 flex-shrink-0 translate-y-2 bg-flare" />
                 {item}
               </li>
             ))}
@@ -205,21 +205,21 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </SectionShell>
       ) : null}
 
-      {/* Next + CTA — cream showstopper */}
+      {/* CTA — the case study's one dark moment. `marker` off: the heading has the flare. */}
       <SectionShell
-        tone="charcoal"
-        marker
+        tone="dark"
         heading="Let’s build something worth owning."
         accent="worth"
         headingSize="xl"
+        className="!pb-14"
       >
         <div className="flex flex-wrap items-center gap-4">
-          <Button href="/begin" variant="onCharcoal">
+          <Button href="/begin" variant="onDark">
             Begin your project
           </Button>
           <Link
             href={nextCase ? `/work/${nextCase.id}` : "/work"}
-            className="font-sans text-xs uppercase tracking-[0.16em] text-bone underline decoration-bone/30 underline-offset-4 transition-colors hover:decoration-bone"
+            className="type-meta text-bone underline decoration-bone/30 underline-offset-4 transition-colors hover:decoration-bone"
           >
             {nextCase ? `Next — ${nextCase.client}` : "See all work"}
           </Link>

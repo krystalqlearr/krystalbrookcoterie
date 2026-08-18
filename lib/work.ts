@@ -51,7 +51,7 @@ export const WORK: WorkProject[] = [
       "How Krystal Brook Coterie designed and hand-built Glowtoure — a custom-coded, editorial digital flagship for a founder-led luxury spray-tan house across the Sacramento region.",
     span: "lg:col-span-7",
     pt: "62.5%",
-    field: "from-cherry/30 via-mocha/40 to-charcoal",
+    field: "from-mocha/35 via-mocha/20 to-forest",
     image: "/images/glowtoure/og-glowtoure.webp",
     intro:
       "A founder-led tanning house whose service was far more considered than its first website let on. The brief: a digital presence that felt as premium as the ritual — and priced it accordingly.",
@@ -74,13 +74,18 @@ export const WORK: WorkProject[] = [
       { label: "Stack", value: "Next.js · Tailwind · Vercel" },
       { label: "Engagement", value: "Fully custom-coded" },
     ],
-    // Placeholder until a real client quote is gathered — kept consistent with the
-    // homepage proof section; swap for an attributed testimonial when available.
-    testimonial: {
-      quote: "She built us something that finally feels as considered as the work we do.",
-      name: "Founder",
-      role: "Glowtoure",
-    },
+    // NO TESTIMONIAL until a real, approved, attributed quote exists.
+    //
+    // This field previously held an invented quote credited to "Founder, Glowtoure" —
+    // a real, named, identifiable client — rendered under a heading reading "Proof".
+    // Inventing evidence and attributing it to a real business is not a placeholder;
+    // it is a false statement about a third party, on the one site whose entire pitch
+    // is that this studio can be trusted. It also exposes Krystal if the client ever
+    // sees words they never said.
+    //
+    // To restore: add { quote, name, role } with words the client actually wrote and
+    // approved in writing. The case study renders this block conditionally, so leaving
+    // it absent is safe and simply hides the section.
   },
   {
     id: "maison-derme",
@@ -97,7 +102,7 @@ export const WORK: WorkProject[] = [
     status: "In production",
     span: "lg:col-span-4 lg:col-start-9 lg:mt-32",
     pt: "125%",
-    field: "from-maroon/35 via-charcoal to-charcoal",
+    field: "from-mocha/25 via-forest to-forest",
     intro:
       "A concept for a med-spa that wanted to read like a maison, not a clinic — where credentials and calm hold the same page, and the brand feels like the authority in its market.",
     body: [
@@ -121,7 +126,7 @@ export const WORK: WorkProject[] = [
     status: "Concept",
     span: "lg:col-span-6 lg:col-start-3 lg:mt-10",
     pt: "66%",
-    field: "from-mocha/30 via-charcoal to-charcoal",
+    field: "from-mocha/30 via-forest to-forest",
     intro:
       "A lifestyle house where the founder is the brand — and the site had to make it legible to a market that had never heard the name, and impossible to mistake for anyone else.",
     body: [

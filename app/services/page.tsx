@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
+import Eyebrow from "@/components/Eyebrow";
 import FAQAccordion from "@/components/FAQAccordion";
+import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
@@ -9,7 +12,7 @@ import ServiceCard from "@/components/ServiceCard";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Four custom-coded tiers — Launch, Signature, Atelier, Atelier Custom — plus ongoing Care Plans. Agency-grade engineering at boutique scale.",
+    "Four custom-coded tiers — The Edit, Signature, Atelier, Private Commission — plus ongoing Care Plans. Agency-grade engineering at boutique scale.",
 };
 
 const TIERS = [
@@ -91,7 +94,7 @@ const FAQ = [
   {
     question: "How long does a project take?",
     answer:
-      "Launch runs two to three weeks, Signature six to eight, and Atelier eight to twelve — with revision cycles measured in hours, not weeks. Atelier Custom is scoped to the work. Timelines are confirmed in your proposal and hold from the day content and assets are in hand.",
+      "The Edit runs two to three weeks, Signature six to eight, and Atelier eight to twelve — with revision cycles measured in hours, not weeks. A Private Commission is scoped to the work. Timelines are confirmed in your proposal and hold from the day content and assets are in hand.",
   },
   {
     question: "Do you offer ongoing support after launch?",
@@ -111,32 +114,56 @@ export default function ServicesPage() {
         intro="Four ways to enter the studio. Every engagement is strategically led, visually distinct, and built around where your brand is now — and where it intends to go next."
       />
 
-      {/* Tiers */}
+      {/* Tiers — a counted SEQUENCE of full-width rows, not a four-up card grid.
+          At this price point each tier has to be able to argue for itself, which a
+          quarter-width card cannot do; the row gives it a headline, the reasoning,
+          and its own way in. Price and duration stay INK — ink-forward reads
+          expensive, and the flare is spent on the index. */}
       <SectionShell as="section" className="pt-0">
-        <Reveal stagger={0.08}>
-          <div className="grid gap-x-gutter gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {TIERS.map((t) => (
-              <RevealItem key={t.name}>
-                <ServiceCard
-                  name={t.name}
-                  price={t.price}
-                  duration={t.duration}
-                  description={t.description}
-                  bestFor={t.bestFor}
-                  featured={t.featured}
-                />
-              </RevealItem>
-            ))}
-          </div>
-        </Reveal>
+        <ul className="border-b border-ink/15">
+          {TIERS.map((tier, i) => (
+            <li key={tier.name} className="border-t border-ink/15">
+              <Reveal>
+                <div className="grid gap-x-gutter gap-y-6 py-14 lg:grid-cols-[13rem_1fr]">
+                  {/* Left rail — position, price, timeline */}
+                  <div className="flex flex-col gap-4">
+                    <IndexMeta index={i + 1} total={TIERS.length} />
+                    <p className="font-sans text-fluid-lg text-ink">{tier.price}</p>
+                    <p className="type-meta text-ink/70">{tier.duration}</p>
+                  </div>
+
+                  {/* The argument */}
+                  <div className="max-w-measure">
+                    {tier.featured ? (
+                      <Eyebrow tone="flare" className="mb-4">
+                        Most commissioned
+                      </Eyebrow>
+                    ) : null}
+                    <h3 className="type-display text-fluid-2xl text-ink">{tier.name}</h3>
+                    <p className="mt-6 font-sans text-fluid-base leading-relaxed text-ink/70">
+                      {tier.description}
+                    </p>
+                    <p className="mt-4 font-sans text-fluid-sm leading-relaxed text-ink/70">
+                      {tier.bestFor}
+                    </p>
+                    <ArrowLink href="/begin" className="mt-8">
+                      Commission {tier.name}
+                    </ArrowLink>
+                  </div>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
       </SectionShell>
 
-      {/* Founding Client — petrol alt-section */}
+      {/* Founding client — first-recess alt-section. The price is deliberately NOT
+          the accent word: prices stay ink, so the flare here is the marker tick. */}
       <SectionShell
-        tone="stone"
+        tone="bone"
+        marker
         eyebrow="Founding client program"
         heading="Signature scope at $2,800 — for the right first few."
-        accent="$2,800"
         headingSize="md"
         intro="A limited program for a small number of founding clients: full Signature-tier scope in exchange for case-study rights. Real work, deeply discounted, while the studio builds its published proof."
       >
@@ -165,22 +192,23 @@ export default function ServicesPage() {
         </Reveal>
       </SectionShell>
 
-      {/* FAQ */}
-      <SectionShell eyebrow="Questions" heading="The honest answers." headingSize="md">
+      {/* FAQ — first-recess, so the page keeps alternating rather than running flat */}
+      <SectionShell tone="bone" eyebrow="Questions" heading="The honest answers." headingSize="md">
         <Reveal>
           <FAQAccordion items={FAQ} />
         </Reveal>
       </SectionShell>
 
-      {/* CTA — cream showstopper */}
+      {/* CTA — the page's ONE dark moment. `marker` is off: the heading already
+          carries the flare, and a section gets one flare element, not two. */}
       <SectionShell
-        tone="charcoal"
-        marker
+        tone="dark"
         heading="Let’s build something worth owning."
         accent="worth"
         headingSize="xl"
+        className="!pb-14"
       >
-        <Button href="/begin" variant="onCharcoal">
+        <Button href="/begin" variant="onDark">
           Begin your project
         </Button>
       </SectionShell>

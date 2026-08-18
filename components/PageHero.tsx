@@ -5,10 +5,13 @@ import SectionMarker from "./SectionMarker";
 import Reveal, { RevealItem } from "./motion/Reveal";
 
 /**
- * Consistent page opener — eyebrow + fluid display headline + serif italic intro,
+ * Consistent page opener — META eyebrow + fluid DISPLAY headline + grotesk intro,
  * left-aligned, choreographed in. Reserves space for the fixed header. An optional
- * `marker` renders the giant vertical section label (VOL.ONE device) up the right
- * edge. Used by every top-level page so openings read as one system.
+ * `marker` renders the giant vertical section label up the right edge. Used by
+ * every top-level page so openings read as one system.
+ *
+ * Write the title as short declarative sentences ending in a period — that
+ * cadence is what the display register is built for.
  */
 type Props = {
   eyebrow: string;
@@ -35,7 +38,7 @@ export default function PageHero({ eyebrow, title, accent, intro, size = "xl", m
           </RevealItem>
           {intro ? (
             <RevealItem>
-              <div className="mt-7 max-w-measure font-editorial text-fluid-lg italic leading-snug text-ink/75">
+              <div className="mt-8 max-w-measure font-sans text-fluid-lg text-ink/70">
                 {intro}
               </div>
             </RevealItem>

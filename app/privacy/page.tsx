@@ -46,11 +46,11 @@ export default function PrivacyPage() {
           </p>
           {SECTIONS.map((s) => (
             <div key={s.h} className="border-t border-ink/12 pt-6">
-              <h2 className="font-display text-fluid-lg font-extrabold uppercase tracking-[-0.01em] text-ink">{s.h}</h2>
+              <h2 className="type-display text-fluid-xl text-ink">{s.h}</h2>
               <p className="mt-3 font-sans text-fluid-base leading-relaxed text-ink/70">{s.p}</p>
             </div>
           ))}
-          <p className="border-t border-ink/12 pt-6 font-sans text-xs uppercase tracking-[0.12em] text-ink/50">
+          <p className="border-t border-ink/12 pt-6 type-meta text-ink/70">
             This is a working summary pending final review by counsel before launch.
           </p>
         </div>

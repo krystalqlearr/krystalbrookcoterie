@@ -79,31 +79,31 @@ export default function SiteHeader() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
         scrolled || open
-          ? "border-ink/10 bg-bone/90 backdrop-blur"
+          ? "border-ink/10 bg-milk/90 backdrop-blur"
           : "border-transparent bg-transparent"
       }`}
     >
       <div className="container flex h-20 items-center justify-between">
         {/* Wordmark — horizontal on desktop, monogram on mobile */}
-        <Link href="/" aria-label="Krystal Brook Coterie — home" className={`text-ink ${linkFocus}`}>
-          <Logo variant="horizontal" color="ink" size="1rem" className="hidden md:block" />
-          <Logo variant="monogram" color="ink" size="0.9rem" className="md:hidden" />
+        <Link href="/" aria-label="Krystal Brook Coterie — home" className={`shrink-0 text-ink ${linkFocus}`}>
+          <Logo variant="horizontal" color="ink" size="1rem" className="hidden lg:block" />
+          <Logo variant="monogram" color="ink" size="0.9rem" className="lg:hidden" />
         </Link>
 
         {/* Desktop nav */}
-        <nav aria-label="Primary" className="hidden items-center gap-9 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex xl:gap-9">
           {NAV_LINKS.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`link-underline font-sans text-xs uppercase tracking-[0.16em] text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
+              className={`link-underline type-meta text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
             >
               {item.label}
             </Link>
           ))}
           <Link
             href="/begin"
-            className={`rounded-[1px] border border-ink px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
+            className={`rounded-[1px] border border-ink px-5 py-2.5 type-meta text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
           >
             Commission
           </Link>
@@ -117,7 +117,7 @@ export default function SiteHeader() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className={`flex h-11 w-11 items-center justify-center text-ink md:hidden ${linkFocus}`}
+          className={`flex h-11 w-11 items-center justify-center text-ink lg:hidden ${linkFocus}`}
         >
           <span className="relative block h-3.5 w-6" aria-hidden>
             <span
@@ -147,7 +147,7 @@ export default function SiteHeader() {
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="fixed inset-0 top-20 z-40 flex flex-col justify-between bg-bone px-6 pb-12 pt-10 md:hidden"
+          className="fixed inset-0 top-20 z-40 flex flex-col justify-between bg-milk px-6 pb-12 pt-10 lg:hidden"
         >
           <nav aria-label="Primary" className="flex flex-col gap-6">
             {NAV_LINKS.map((item) => (
@@ -155,7 +155,7 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`font-display text-3xl font-extrabold uppercase text-ink ${linkFocus}`}
+                className={`type-display text-fluid-2xl text-ink ${linkFocus}`}
               >
                 {item.label}
               </Link>
@@ -164,7 +164,7 @@ export default function SiteHeader() {
           <Link
             href="/begin"
             onClick={() => setOpen(false)}
-            className={`mt-10 inline-block self-start rounded-[1px] border border-ink px-6 py-3 font-sans text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
+            className={`mt-10 inline-block self-start rounded-[1px] border border-ink px-7 py-3.5 type-meta text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
           >
             Commission a project
           </Link>
