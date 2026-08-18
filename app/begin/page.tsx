@@ -38,7 +38,7 @@ export default function BeginPage() {
           <Reveal delay={0.1}>
             <aside className="space-y-10 lg:border-l lg:border-ink/12 lg:pl-12">
               <div>
-                <p className="font-sans text-xs uppercase tracking-[0.16em] text-ink/70">Prefer email?</p>
+                <p className="type-meta text-ink/70">Prefer email?</p>
                 <a
                   href="mailto:hello@krystalbrookcoterie.com"
                   className="mt-3 block font-sans text-fluid-base text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink"
@@ -56,9 +56,7 @@ export default function BeginPage() {
               </div>
 
               <div>
-                <p className="font-sans text-xs uppercase tracking-[0.16em] text-ink/70">
-                  A good fit is
-                </p>
+                <p className="type-meta text-ink/70">A good fit is</p>
                 <ul className="mt-4 space-y-3 font-sans text-fluid-base leading-relaxed text-ink/70">
                   <li>Founder-led beauty, med-spa, wellness, bridal, or luxury lifestyle.</li>
                   <li>A brand that has outgrown a template — and knows it.</li>

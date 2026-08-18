@@ -55,7 +55,7 @@ export default function ProjectFeature({
               className="object-cover"
             />
           ) : null}
-          <span className="absolute bottom-4 left-6 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-bone/60">
+          <span className="absolute bottom-4 left-6 type-meta text-bone/60">
             {client}
             {year ? ` · ${year}` : ""}
           </span>
@@ -71,14 +71,14 @@ export default function ProjectFeature({
         <EditorialHeading as="h2" size="lg" className="mt-4">
           {client}
         </EditorialHeading>
-        <span className="mt-5 inline-block rounded-[1px] border border-ink/30 px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-ink/70">
+        <span className="mt-5 inline-block rounded-[1px] border border-ink/30 px-3 py-1 type-meta text-ink/70">
           {tag}
         </span>
         <p className="mt-6 max-w-[40ch] font-sans leading-relaxed text-ink/70">{description}</p>
         {href ? (
           <Link
             href={href}
-            className="mt-8 inline-flex items-center gap-2 border-b border-ink/40 pb-1 font-sans text-xs uppercase tracking-[0.16em] text-ink transition-colors hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+            className="mt-8 inline-flex items-center gap-2 border-b border-ink/40 pb-1 type-meta text-ink transition-colors hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
           >
             View the case study <span aria-hidden>→</span>
           </Link>

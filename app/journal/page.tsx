@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
+import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
@@ -11,11 +13,11 @@ export const metadata: Metadata = {
 };
 
 const ENTRIES = [
-  { title: "Why your luxury website still feels inexpensive", tag: "Perception · Soon" },
-  { title: "The difference between looking polished and looking established", tag: "Positioning · Soon" },
-  { title: "Your brand doesn’t need more content. It needs a stronger point of view.", tag: "Strategy · Soon" },
-  { title: "What med-spas get wrong about premium positioning", tag: "Med-spa · Soon" },
-  { title: "Why better design can support higher pricing", tag: "Commerce · Soon" },
+  { title: "Why your luxury website still feels inexpensive", tag: "Perception" },
+  { title: "The difference between looking polished and looking established", tag: "Positioning" },
+  { title: "Your brand doesn’t need more content. It needs a stronger point of view.", tag: "Strategy" },
+  { title: "What med-spas get wrong about premium positioning", tag: "Med-spa" },
+  { title: "Why better design can support higher pricing", tag: "Commerce" },
 ];
 
 export default function JournalPage() {
@@ -29,31 +31,47 @@ export default function JournalPage() {
         intro="Observations on positioning, perception, design, and the decisions that separate a beautiful business from a powerful brand."
       />
 
-      <SectionShell as="section" className="pt-0">
+      {/* The index — the same counted-row pattern as /services and /process, on the
+          bone recess so the page alternates rather than running milk into the dark.
+          Titles sit in INK: these are unpublished, but a muted title read as broken
+          rather than forthcoming. "Forthcoming" is stated once, as a status, instead
+          of being implied by greying out every headline. */}
+      <SectionShell
+        tone="bone"
+        eyebrow="The index"
+        heading="Five pieces, forthcoming."
+        headingSize="md"
+        intro="Written as the studio publishes them — no filler, no cadence for its own sake."
+      >
         <Reveal stagger={0.1}>
-          <ul className="flex flex-col">
-            {ENTRIES.map((e) => (
-              <RevealItem as="li" key={e.title}>
-                <div className="flex flex-col gap-2 border-t border-ink/12 py-8 md:flex-row md:items-baseline md:justify-between">
-                  <h2 className="type-display max-w-[32ch] text-fluid-xl text-ink/70">
-                    {e.title}
+          <ol className="border-b border-ink/15">
+            {ENTRIES.map((entry, i) => (
+              <RevealItem as="li" key={entry.title} className="border-t border-ink/15">
+                <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-[13rem_1fr]">
+                  <IndexMeta index={i + 1} total={ENTRIES.length} tag={entry.tag} />
+                  <h2 className="type-display max-w-[34ch] text-fluid-xl text-ink">
+                    {entry.title}
                   </h2>
-                  <span className="font-sans text-xs uppercase tracking-[0.16em] text-ink/70">
-                    {e.tag}
-                  </span>
                 </div>
               </RevealItem>
             ))}
-          </ul>
+          </ol>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="mt-18">
+            <ArrowLink href="/begin">Ask about a piece</ArrowLink>
+          </div>
         </Reveal>
       </SectionShell>
 
+      {/* CTA — the page's one dark moment. `marker` off: the heading has the flare. */}
       <SectionShell
         tone="dark"
-        marker
         heading="Rather see the work?"
         accent="work"
         headingSize="xl"
+        className="!pb-14"
       >
         <Button href="/work" variant="onDark">
           View the work

@@ -50,7 +50,7 @@ export default function TermsPage() {
               <p className="mt-3 font-sans text-fluid-base leading-relaxed text-ink/70">{s.p}</p>
             </div>
           ))}
-          <p className="border-t border-ink/12 pt-6 font-sans text-xs uppercase tracking-[0.12em] text-ink/70">
+          <p className="border-t border-ink/12 pt-6 type-meta text-ink/70">
             This is a working summary pending final review by counsel before launch.
           </p>
         </div>

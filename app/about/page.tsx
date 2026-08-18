@@ -94,12 +94,13 @@ export default function AboutPage() {
       </SectionShell>
 
       {/* CTA — dark showstopper */}
+      {/* CTA — the page's one dark moment. `marker` off: the heading has the flare. */}
       <SectionShell
         tone="dark"
-        marker
         heading="If that sounds like your brand, let’s talk."
         accent="your"
         headingSize="xl"
+        className="!pb-14"
       >
         <Button href="/begin" variant="onDark">
           Begin your project

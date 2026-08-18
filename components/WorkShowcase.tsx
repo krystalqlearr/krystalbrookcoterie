@@ -173,10 +173,10 @@ function ProjectSlot({
 
             {!selected && (
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 md:p-6">
-                <span className="font-sans text-xs uppercase tracking-[0.16em] text-bone/85">
+                <span className="type-meta text-bone/85">
                   {p.client}
                 </span>
-                <span className="flex translate-x-[-6px] items-center gap-2 font-sans text-xs uppercase tracking-[0.12em] text-bone opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
+                <span className="flex translate-x-[-6px] items-center gap-2 type-meta text-bone opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
                   View <span aria-hidden>→</span>
                 </span>
               </div>
@@ -185,7 +185,7 @@ function ProjectSlot({
             {selected && (
               <div className="absolute inset-0 flex items-end bg-gradient-to-t from-forest/85 to-transparent p-6 md:p-16">
                 <div>
-                  <p className="font-sans text-xs uppercase tracking-[0.2em] text-flare-lift">
+                  <p className="type-meta text-flare-lift">
                     {p.category}
                   </p>
                   <span aria-hidden className="mt-5 block h-[3px] w-12 bg-flare-lift" />
@@ -212,7 +212,7 @@ function ProjectSlot({
       <h3 className="type-display mt-3 max-w-[24ch] text-fluid-xl text-ink">
         {renderAccent(p.descriptor, p.accent, false)}
       </h3>
-      <p className="mt-3 font-sans text-xs uppercase tracking-[0.12em] text-ink/70">{p.capabilities}</p>
+      <p className="mt-3 type-meta text-ink/70">{p.capabilities}</p>
 
       {/* Close affordance — outside the morphing box, so it never distorts. */}
       {selected && (
@@ -222,7 +222,7 @@ function ProjectSlot({
           data-cursor="hover"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { delay: reduce ? 0 : 0.35 } }}
-          className="fixed right-5 top-5 z-[220] flex items-center gap-2 rounded-full border border-bone/25 bg-forest/60 px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-bone backdrop-blur transition-colors hover:border-bone md:right-8 md:top-8"
+          className="fixed right-5 top-5 z-[220] flex items-center gap-2 rounded-full border border-bone/25 bg-forest/60 px-4 py-2 type-meta text-bone backdrop-blur transition-colors hover:border-bone md:right-8 md:top-8"
         >
           Close <span aria-hidden>✕</span>
         </motion.button>
@@ -251,14 +251,14 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
           ["Stack", p.stack],
         ].map(([label, value]) => (
           <div key={label}>
-            <dt className="text-xs uppercase tracking-[0.16em] text-bone/60">{label}</dt>
+            <dt className="type-meta text-bone/60">{label}</dt>
             <dd className="mt-2 text-bone">{value}</dd>
           </div>
         ))}
       </dl>
 
       <div className="mt-14 grid gap-x-gutter gap-y-8 md:grid-cols-[1fr_1.4fr]">
-        <p className="font-sans text-sm uppercase tracking-[0.16em] text-flare-lift">The work</p>
+        <p className="type-meta text-flare-lift">The work</p>
         <div className="max-w-measure space-y-5 font-sans text-lg leading-relaxed text-bone/70">
           {p.body.map((para, i) => (
             <p key={i}>{para}</p>
@@ -273,7 +273,7 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
       </div>
 
       <div className="mt-16 grid gap-x-gutter gap-y-8 md:grid-cols-[1fr_1.4fr]">
-        <p className="font-sans text-sm uppercase tracking-[0.16em] text-flare-lift">Scope</p>
+        <p className="type-meta text-flare-lift">Scope</p>
         <ul className="max-w-measure divide-y divide-bone/15 font-sans text-lg text-bone">
           {p.scope.map((item) => (
             <li key={item} className="py-3">
@@ -291,7 +291,7 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
         </div>
       )}
 
-      <div className="mt-20 border-t border-bone/10 pt-8 font-sans text-xs uppercase tracking-[0.16em] text-bone/60">
+      <div className="mt-20 border-t border-bone/10 pt-8 type-meta text-bone/60">
         Krystal Brook Coterie — {p.index}
       </div>
     </motion.div>

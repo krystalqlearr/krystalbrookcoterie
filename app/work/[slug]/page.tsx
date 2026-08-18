@@ -80,11 +80,11 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <Reveal stagger={0.1}>
             <Link
               href="/work"
-              className="font-sans text-xs uppercase tracking-[0.16em] text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+              className="type-meta text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
             >
               ← All work
             </Link>
-            <p className="mt-8 font-sans text-xs uppercase tracking-[0.2em] text-ink/70">
+            <p className="mt-8 type-meta text-ink/70">
               {p.category}
             </p>
             <h1 className="type-display mt-7 max-w-[20ch] text-fluid-display text-ink">
@@ -153,7 +153,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                 ["Stack", p.stack],
               ].map(([label, value]) => (
                 <div key={label} className="border-t border-ink/12 pt-3 first:border-t-0 first:pt-0">
-                  <dt className="font-sans text-xs uppercase tracking-[0.16em] text-ink/70">{label}</dt>
+                  <dt className="type-meta text-ink/70">{label}</dt>
                   <dd className="mt-1 font-sans text-fluid-base text-ink">{value}</dd>
                 </div>
               ))}
@@ -169,7 +169,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             <dl className="grid gap-x-gutter gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {p.results.map((r) => (
                 <div key={r.label} className="border-t border-ink/20 pt-5">
-                  <dt className="font-sans text-xs uppercase tracking-[0.14em] text-ink/70">{r.label}</dt>
+                  <dt className="type-meta text-ink/70">{r.label}</dt>
                   <dd className="type-display mt-3 text-fluid-xl text-ink">{r.value}</dd>
                 </div>
               ))}
@@ -205,13 +205,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </SectionShell>
       ) : null}
 
-      {/* Next + CTA — cream showstopper */}
+      {/* CTA — the case study's one dark moment. `marker` off: the heading has the flare. */}
       <SectionShell
         tone="dark"
-        marker
         heading="Let’s build something worth owning."
         accent="worth"
         headingSize="xl"
+        className="!pb-14"
       >
         <div className="flex flex-wrap items-center gap-4">
           <Button href="/begin" variant="onDark">
@@ -219,7 +219,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </Button>
           <Link
             href={nextCase ? `/work/${nextCase.id}` : "/work"}
-            className="font-sans text-xs uppercase tracking-[0.16em] text-bone underline decoration-bone/30 underline-offset-4 transition-colors hover:decoration-bone"
+            className="type-meta text-bone underline decoration-bone/30 underline-offset-4 transition-colors hover:decoration-bone"
           >
             {nextCase ? `Next — ${nextCase.client}` : "See all work"}
           </Link>
