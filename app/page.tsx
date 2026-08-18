@@ -9,7 +9,6 @@ import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
 import StatStrip from "@/components/StatStrip";
-import Testimonial from "@/components/Testimonial";
 import { WORK } from "@/lib/work";
 
 /**
@@ -192,14 +191,20 @@ export default function HomePage() {
         <Marquee items={SECTORS} duration={48} />
       </section>
 
-      {/* 8 · Proof */}
-      <SectionShell eyebrow="Proof">
+      {/* 8 · Proof — a live, verifiable site rather than a quote. This section used to
+             carry an invented testimonial credited to a real client; a link the visitor
+             can actually click and check is stronger evidence than words nobody said.
+             When a real approved quote exists, a Testimonial belongs here too. */}
+      <SectionShell
+        eyebrow="Proof"
+        heading="The work is live."
+        headingSize="md"
+        intro="Glowtoure — a founder-led luxury tanning house serving the greater Sacramento region. Designed, built, and running in production."
+      >
         <Reveal>
-          <Testimonial
-            quote="She built us something that finally feels as considered as the work we do."
-            name="Founder"
-            role="Glowtoure"
-          />
+          <ArrowLink href="https://glowtoure.com" target="_blank" rel="noopener noreferrer">
+            Visit glowtoure.com
+          </ArrowLink>
         </Reveal>
       </SectionShell>
 

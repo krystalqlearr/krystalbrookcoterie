@@ -74,13 +74,18 @@ export const WORK: WorkProject[] = [
       { label: "Stack", value: "Next.js · Tailwind · Vercel" },
       { label: "Engagement", value: "Fully custom-coded" },
     ],
-    // Placeholder until a real client quote is gathered — kept consistent with the
-    // homepage proof section; swap for an attributed testimonial when available.
-    testimonial: {
-      quote: "She built us something that finally feels as considered as the work we do.",
-      name: "Founder",
-      role: "Glowtoure",
-    },
+    // NO TESTIMONIAL until a real, approved, attributed quote exists.
+    //
+    // This field previously held an invented quote credited to "Founder, Glowtoure" —
+    // a real, named, identifiable client — rendered under a heading reading "Proof".
+    // Inventing evidence and attributing it to a real business is not a placeholder;
+    // it is a false statement about a third party, on the one site whose entire pitch
+    // is that this studio can be trusted. It also exposes Krystal if the client ever
+    // sees words they never said.
+    //
+    // To restore: add { quote, name, role } with words the client actually wrote and
+    // approved in writing. The case study renders this block conditionally, so leaving
+    // it absent is safe and simply hides the section.
   },
   {
     id: "maison-derme",

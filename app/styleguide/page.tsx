@@ -548,17 +548,17 @@ export default function StyleguidePage() {
             <div className="mt-12 space-y-px overflow-hidden rounded-[1px] ring-1 ring-ink/15">
               <div className="bg-milk p-10 sm:p-14">
                 <Testimonial
-                  quote="She built us something that finally feels as considered as the work we do."
-                  name="Founder"
-                  role="Glowtoure"
+                  quote="Sample quote — the display register at fluid-xl, held to a 42-character measure."
+                  name="Attributed name"
+                  role="Role, Company"
                 />
               </div>
               <div className="bg-forest p-10 sm:p-14">
                 <Testimonial
                   tone="onDark"
-                  quote="She built us something that finally feels as considered as the work we do."
-                  name="Founder"
-                  role="Glowtoure"
+                  quote="Sample quote — the display register at fluid-xl, held to a 42-character measure."
+                  name="Attributed name"
+                  role="Role, Company"
                 />
               </div>
               {/* The flare holding a whole band — at most once per page. Uses the
@@ -566,9 +566,9 @@ export default function StyleguidePage() {
               <div className="bg-flare-deep p-10 sm:p-14">
                 <Testimonial
                   tone="onFlare"
-                  quote="She built us something that finally feels as considered as the work we do."
-                  name="Founder"
-                  role="Glowtoure"
+                  quote="Sample quote — the display register at fluid-xl, held to a 42-character measure."
+                  name="Attributed name"
+                  role="Role, Company"
                 />
               </div>
             </div>
