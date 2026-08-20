@@ -323,6 +323,89 @@ export default function StyleguidePage() {
                 </Note>
               </div>
             </div>
+
+            {/* Usage — the rule only holds if it is written where people look. */}
+            <div className="mt-12 border-t border-ink/15 pt-10">
+              <p className="type-meta text-ink/70">Which lockup, where</p>
+              <p className="type-display mt-6 max-w-[24ch] text-fluid-2xl">
+                One test: can the wordmark fit and stay legible here?
+              </p>
+              <div className="mt-6">
+                <Note>
+                  Yes → use the wordmark, always. No → use the mark. The mark is a
+                  SUBSTITUTE for the wordmark, never a companion to it: if both would
+                  fit, you need the wordmark, not both.
+                </Note>
+              </div>
+
+              <div className="mt-10 overflow-x-auto">
+                <table className="w-full min-w-[44rem] border-collapse text-left">
+                  <thead>
+                    <tr>
+                      {["Lockup", "Use it", "Never", "Min size"].map((h) => (
+                        <th
+                          key={h}
+                          className="type-meta border-b border-ink/15 pb-3 pr-6 align-bottom text-ink/70"
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="font-sans text-fluid-sm text-ink/70">
+                    {[
+                      {
+                        l: "Stacked",
+                        use: "Footer, proposal covers, invoice header — anywhere with vertical room",
+                        never: "In a horizontal row; it needs air",
+                        min: "18px",
+                      },
+                      {
+                        l: "Horizontal",
+                        use: "Desktop header (1024+), letterhead, email signature, document headers",
+                        never: "Below ~200px of available width — it wraps into whatever sits beside it",
+                        min: "14px",
+                      },
+                      {
+                        l: "Mark",
+                        use: "Favicon, mobile header, avatar, a stamp in a case-study corner",
+                        never: "Beside the wordmark",
+                        min: "16px simplified · 20px full",
+                      },
+                    ].map((r) => (
+                      <tr key={r.l} className="border-b border-ink/15 align-top">
+                        <td className="py-4 pr-6 text-ink">{r.l}</td>
+                        <td className="py-4 pr-6">{r.use}</td>
+                        <td className="py-4 pr-6">{r.never}</td>
+                        <td className="type-meta py-4 pr-6 text-ink/70">{r.min}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-8 space-y-5">
+                <Note>
+                  <strong className="font-normal text-ink">Clear space</strong> — one
+                  corner-bracket length on every side of the mark, roughly 22% of its
+                  width. Nothing intrudes, including the nav.
+                </Note>
+                <Note>
+                  <strong className="font-normal text-ink">Colour</strong> — ink on
+                  paper, bone on the forest dark. The crosshair takes the flare on milk
+                  and bone, flare-lift on forest. For a single-ink stamp — an invoice, a
+                  letterpress card — pass{" "}
+                  <code className="text-ink">flare={"{false}"}</code> and the crosshair
+                  matches the corners.
+                </Note>
+                <Note>
+                  <strong className="font-normal text-ink">The one thing not to do</strong>{" "}
+                  — don&rsquo;t add the mark to the desktop header to &ldquo;balance
+                  it.&rdquo; That is the exact impulse this rule exists to stop, and the
+                  one place where breaking it is most visible.
+                </Note>
+              </div>
+            </div>
           </section>
         </div>
 
