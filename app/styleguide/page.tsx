@@ -6,7 +6,7 @@ import Eyebrow from "@/components/Eyebrow";
 import FAQAccordion from "@/components/FAQAccordion";
 import ImageFrame from "@/components/ImageFrame";
 import IndexMeta from "@/components/IndexMeta";
-import Logo from "@/components/Logo";
+import Logo, { RegistrationMark } from "@/components/Logo";
 import Marquee from "@/components/Marquee";
 import ProjectCard from "@/components/ProjectCard";
 import Rule from "@/components/Rule";
@@ -251,14 +251,14 @@ export default function StyleguidePage() {
         {/* ── Logo ── */}
         <div className="mt-38">
           <section>
-            <GroupMarker>Wordmark — Medium 500, uppercase</GroupMarker>
+            <GroupMarker>Identity — wordmark + registration mark</GroupMarker>
             <div className="mt-10 grid gap-px overflow-hidden rounded-[1px] ring-1 ring-ink/15 sm:grid-cols-2">
               <div className="bg-forest p-10 sm:p-14">
                 <p className="type-meta mb-12 text-bone/60">On the dark · bone</p>
                 <div className="flex flex-col gap-14">
                   <Logo variant="stacked" color="bone" />
                   <Logo variant="horizontal" color="bone" />
-                  <Logo variant="monogram" color="bone" />
+                  <Logo variant="mark" color="bone" />
                 </div>
               </div>
               <div className="bg-stone p-10 sm:p-14">
@@ -266,17 +266,145 @@ export default function StyleguidePage() {
                 <div className="flex flex-col gap-14">
                   <Logo variant="stacked" color="ink" />
                   <Logo variant="horizontal" color="ink" />
-                  <Logo variant="monogram" color="ink" />
+                  <Logo variant="mark" color="ink" />
                 </div>
               </div>
             </div>
-            <div className="mt-8">
+            <div className="mt-8 space-y-5">
               <Note>
-                The mark sits at Medium (500) — heavier than body, lighter than a slab.
-                It is the one uppercase thing that is neither display nor meta, so it
-                reads as a house mark instead of competing with the 400-weight
+                The wordmark sits at Medium (500) — heavier than body, lighter than a
+                slab. It is the one uppercase thing that is neither display nor meta, so
+                it reads as a house mark instead of competing with the 400-weight
                 headlines beside it.
               </Note>
+              <Note>
+                <strong className="font-normal text-ink">
+                  The mark is what the wordmark becomes when there isn&rsquo;t room.
+                </strong>{" "}
+                It is never set beside the wordmark. At header size a mark renders around
+                16&ndash;19px, and a mark that small next to legible words reads as
+                clutter, not authority. So it serves only the surfaces the wordmark
+                cannot: the favicon, the mobile header, an avatar, a stamp on a case
+                study or an invoice. The desktop header stays wordmark-only.
+              </Note>
+              <Note>
+                Registration and crop marks are what a page carries when it has been
+                prepared properly for print — editorial by inheritance, precise by
+                definition, and a frame, which is what the studio does to a brand. Drawn
+                on the same 1px logic as <code className="text-ink">Rule</code>.
+              </Note>
+            </div>
+
+            {/* The small drawing is a different drawing, not a scaled one. */}
+            <div className="mt-12 border-t border-ink/15 pt-10">
+              <p className="type-meta text-ink/70">At size — the small drawing</p>
+              <div className="mt-8 flex flex-wrap items-end gap-12">
+                {[48, 32, 24].map((px) => (
+                  <div key={px} className="flex flex-col items-center gap-3">
+                    <span className="text-ink" style={{ width: px, height: px }}>
+                      <RegistrationMark className="h-full w-full" />
+                    </span>
+                    <span className="type-meta text-ink/70">{px}</span>
+                  </div>
+                ))}
+                <div className="flex flex-col items-center gap-3">
+                  <span className="text-ink" style={{ width: 16, height: 16 }}>
+                    <RegistrationMark simplified className="h-full w-full" />
+                  </span>
+                  <span className="type-meta text-flare-deep">16</span>
+                </div>
+              </div>
+              <div className="mt-8">
+                <Note>
+                  At 16 the crosshair is dropped and the corners thicken — that is the
+                  drawing <code className="text-ink">app/icon.svg</code> ships, not a
+                  scaled copy of the large one. Below roughly 20px the crosshair silts
+                  up, and four corners alone still read as a frame.
+                </Note>
+              </div>
+            </div>
+
+            {/* Usage — the rule only holds if it is written where people look. */}
+            <div className="mt-12 border-t border-ink/15 pt-10">
+              <p className="type-meta text-ink/70">Which lockup, where</p>
+              <p className="type-display mt-6 max-w-[24ch] text-fluid-2xl">
+                One test: can the wordmark fit and stay legible here?
+              </p>
+              <div className="mt-6">
+                <Note>
+                  Yes → use the wordmark, always. No → use the mark. The mark is a
+                  SUBSTITUTE for the wordmark, never a companion to it: if both would
+                  fit, you need the wordmark, not both.
+                </Note>
+              </div>
+
+              <div className="mt-10 overflow-x-auto">
+                <table className="w-full min-w-[44rem] border-collapse text-left">
+                  <thead>
+                    <tr>
+                      {["Lockup", "Use it", "Never", "Min size"].map((h) => (
+                        <th
+                          key={h}
+                          className="type-meta border-b border-ink/15 pb-3 pr-6 align-bottom text-ink/70"
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="font-sans text-fluid-sm text-ink/70">
+                    {[
+                      {
+                        l: "Stacked",
+                        use: "Footer, proposal covers, invoice header — anywhere with vertical room",
+                        never: "In a horizontal row; it needs air",
+                        min: "18px",
+                      },
+                      {
+                        l: "Horizontal",
+                        use: "Desktop header (1024+), letterhead, email signature, document headers",
+                        never: "Below ~200px of available width — it wraps into whatever sits beside it",
+                        min: "14px",
+                      },
+                      {
+                        l: "Mark",
+                        use: "Favicon, mobile header, avatar, a stamp in a case-study corner",
+                        never: "Beside the wordmark",
+                        min: "16px simplified · 20px full",
+                      },
+                    ].map((r) => (
+                      <tr key={r.l} className="border-b border-ink/15 align-top">
+                        <td className="py-4 pr-6 text-ink">{r.l}</td>
+                        <td className="py-4 pr-6">{r.use}</td>
+                        <td className="py-4 pr-6">{r.never}</td>
+                        <td className="type-meta py-4 pr-6 text-ink/70">{r.min}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-8 space-y-5">
+                <Note>
+                  <strong className="font-normal text-ink">Clear space</strong> — one
+                  corner-bracket length on every side of the mark, roughly 22% of its
+                  width. Nothing intrudes, including the nav.
+                </Note>
+                <Note>
+                  <strong className="font-normal text-ink">Colour</strong> — ink on
+                  paper, bone on the forest dark. The crosshair takes the flare on milk
+                  and bone, flare-lift on forest. For a single-ink stamp — an invoice, a
+                  letterpress card — pass{" "}
+                  <code className="text-ink">flare={"{false}"}</code> and the crosshair
+                  matches the corners.
+                </Note>
+                <Note>
+                  <strong className="font-normal text-ink">The one thing not to do</strong>{" "}
+                  — don&rsquo;t add the mark to the desktop header to &ldquo;balance
+                  it.&rdquo; That is the exact impulse this rule exists to stop, and the
+                  one place where breaking it is most visible.
+                </Note>
+              </div>
             </div>
           </section>
         </div>

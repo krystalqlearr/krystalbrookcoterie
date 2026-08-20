@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- KBC registration mark, SMALL DRAWING. The crosshair is deliberately absent:
+       below ~20px it silts up, and four corners alone still read as a frame.
+       Ink #23201B on milk #FAF7F0 — the mark is stamped, never neon, at this size. -->
+  <rect width="64" height="64" fill="#FAF7F0"/>
+  <g fill="none" stroke="#23201B" stroke-width="8" stroke-linecap="butt">
+    <path d="M8 22 V8 H22"/>
+    <path d="M42 8 H56 V22"/>
+    <path d="M56 42 V56 H42"/>
+    <path d="M22 56 H8 V42"/>
+  </g>
+</svg>
