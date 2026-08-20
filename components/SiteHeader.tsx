@@ -87,7 +87,7 @@ export default function SiteHeader() {
         {/* Wordmark — horizontal on desktop, monogram on mobile */}
         <Link href="/" aria-label="Krystal Brook Coterie — home" className={`shrink-0 text-ink ${linkFocus}`}>
           <Logo variant="horizontal" color="ink" size="1rem" className="hidden lg:block" />
-          <Logo variant="monogram" color="ink" size="0.9rem" className="lg:hidden" />
+          <Logo variant="mark" color="ink" size="1.4rem" className="lg:hidden" />
         </Link>
 
         {/* Desktop nav */}
