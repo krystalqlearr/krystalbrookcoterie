@@ -51,7 +51,7 @@ export const WORK: WorkProject[] = [
       "How Krystal Brook Coterie designed and hand-built Glowtoure — a custom-coded, editorial digital flagship for a founder-led luxury spray-tan house across the Sacramento region.",
     span: "lg:col-span-7",
     pt: "62.5%",
-    field: "from-cherry/30 via-mocha/40 to-charcoal",
+    field: "from-flare-lift/25 via-river to-river",
     image: "/images/glowtoure/og-glowtoure.webp",
     intro:
       "A founder-led tanning house whose service was far more considered than its first website let on. The brief: a digital presence that felt as premium as the ritual — and priced it accordingly.",
@@ -97,7 +97,7 @@ export const WORK: WorkProject[] = [
     status: "In production",
     span: "lg:col-span-4 lg:col-start-9 lg:mt-32",
     pt: "125%",
-    field: "from-maroon/35 via-charcoal to-charcoal",
+    field: "from-flare-deep/35 via-river to-river",
     intro:
       "A concept for a med-spa that wanted to read like a maison, not a clinic — where credentials and calm hold the same page, and the brand feels like the authority in its market.",
     body: [
@@ -121,7 +121,7 @@ export const WORK: WorkProject[] = [
     status: "Concept",
     span: "lg:col-span-6 lg:col-start-3 lg:mt-10",
     pt: "66%",
-    field: "from-mocha/30 via-charcoal to-charcoal",
+    field: "from-bone/20 via-river to-river",
     intro:
       "A lifestyle house where the founder is the brand — and the site had to make it legible to a market that had never heard the name, and impossible to mistake for anyone else.",
     body: [

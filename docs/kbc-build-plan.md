@@ -35,49 +35,64 @@
 
 ## 2. Design system
 
-### 2.1 Color — BONE-LED warm-neutral palette (redesigned 2026-07)
+### 2.1 Color — THE COTERIE SYSTEM (2026-08; supersedes wine/cherry)
 
-Full pivot from the dark atelier to a warm bone-paper studio (refs: HAUS, VOL.ONE
-STUDIOS, STAY). The inversion pair is `bone` (light) + `ink` (warm charcoal); muted
-text and hairlines are OPACITIES of the pair, not separate tokens.
+**"Clear water, deliberate K"** — the direction derives from the founder's name:
+*krystal* = clear water that flows (clarity → Editorial), the hard **K** = the one
+deliberate owned edge (→ Owned), *brook* = the current that carves by persistence
+(→ Precise). Milk-led luminous paper, a deep-river inversion, and an electric-magenta
+flare rationed to ONE element per view. Elevation only goes DOWN from milk.
 
 | token | hex | role |
 |---|---|---|
-| `bone` | `#EBE5D8` | primary canvas (warm ivory paper); ink-color on charcoal |
-| `ink` | `#23201B` | warm faded charcoal — primary ink; bg for charcoal sections |
-| `stone` | `#E0D8C7` | deeper paper — raised panels (form fields), subtle alt-section |
-| `camel` | `#C6A98A` | champagne accent, used barely — the section Rule, a thin tick |
-| `mocha` | `#9A8264` | deep warm neutral — imagery / atmosphere haze only |
+| `milk` | `#FDFBF6` | the canvas — luminous near-white warm paper (default page) |
+| `bone` | `#EBE5D8` | first recess — warm alt-sections; also the light ink on river |
+| `stone` | `#E0D8C7` | deepest recess — the quietest band; never carries the neon flare |
+| `field` | `#F1ECE2` | inset form fields on MILK only (a soft step down from the canvas) |
+| `ink` | `#23201B` | warm faded charcoal-brown — primary text + filled-button surface |
+| `river` | `#0F2A2D` | deep river — the dark inversion (water at depth); 1–2 per page |
+| `neon` | `#FF0080` | flare for GRAPHICS + text ≥24px on milk/bone/river; never small text, never on stone |
+| `flare-deep` | `#A8004F` | flare TEXT <24px on paper (eyebrows, index) + primary-button hover |
+| `flare-lift` | `#FF7ABF` | the flare on river — the only stop safe for small text on the dark |
 
-Muted = `ink/65` (bone, 4.62:1 AA) · `bone/60` (charcoal). Hairlines = `ink/12–15` ·
-`bone/15–20`. Prices/tags/asterisks are INK — ink-forward reads expensive; color is
-nearly absent (camel FAILS as small text/price on bone, ~1.6:1). Grain is
-`mix-blend: multiply` (paper tooth). **RETIRED:** rich-black, cream, deep-petrol, teal,
-greige, surface-1/2. (The old "preserve values, never remap" rule applied to the dark
-system; this pivot is the sanctioned, documented exception.)
+The flare stop is chosen by SIZE and CANVAS — never by taste — and enforced in code.
+**Muted floor = `ink/70`** on paper (ink/65 quietly fails stone; opacity is NOT a
+hierarchy step below the floor — use colour) · `bone/60` on river. Hairlines/decorative
+are exempt: `ink/12–15` · `bone/15–20`. Prices/tags/asterisks stay INK — ink-forward
+reads expensive. One flare element per view (arrow · index number · heading accent word ·
+section tick · at most once per page a full band); if the heading carries it, the eyebrow
+stays muted. Grain is `mix-blend: multiply`. **RETIRED:** cherry, maroon, blush, mocha,
+charcoal `#1E1418` (its blue channel read aubergine), camel, and the whole wine system.
 
-### 2.2 Charcoal is punctuation
+### 2.2 The dark is punctuation
 
-Charcoal (ink bg, bone text) is NOT the default — it's the dark inversion moment:
-footer, closing-CTA showstoppers, scrolled header, browser frames, work-transition
-overlay. One or two dark moments per page for rhythm.
+River (`river` bg, bone text) is NOT the default — it's the inversion moment: the
+footer, closing-CTA showstoppers, proof bands, browser frames, the work-transition
+overlay. One or two per page. Water at depth, not woods — lighten it and the magenta
+tips into Christmas.
 
-### 2.3 Typography — big sans + serif italic (HAUS register)
+### 2.3 Typography — one typeface, two registers, one flare
 
-**Approved 2026-07: monumental UPPERCASE sans + a quiet serif italic voice — "so
-expensive you can see and feel it."**
+**Approved 2026-08: PP Neue Montreal carries EVERYTHING. PP Editorial New is RETIRED
+entirely — no serif italic sublines, pull-quotes, or serif accent word. The restraint
+is the luxury signal: 400-weight at 108px outranks any bold cut.**
 
-Families (locally loaded, no Google Fonts):
-- **Neue Montreal Extrabold (800), UPPERCASE** (`--font-sans` / `font-display`) — ALL
-  display headlines, tier names, section titles (`EditorialHeading`, uppercase, tight
-  tracking). The inline accent word is RETIRED.
-- **Editorial New Italic (400)** (`--font-editorial`) — the supporting voice: hero
-  sublines, SectionShell/PageHero intros, pull-quotes, Testimonial, project + case-study
-  descriptors (serif italic, lowercase).
+- **Display — Regular 400, sentence case, ends in a period.** Short declarative
+  sentences stacked two or three deep. Tracking + leading live in the fluid size
+  tokens (`fluid-xl … fluid-hero`, maxing 36→108px) — never hand-tune a heading. Every
+  display size floors at 24px on purpose: that keeps them inside WCAG "large text,"
+  which is the only reason neon can colour a heading word at any viewport. THE FLARE
+  THREAD: exactly ONE word per heading may be lifted into the flare (same face — neon
+  on paper, flare-lift on river), passed as `accent`.
+- **Meta — Semibold 600, 13px, +0.13em, UPPERCASE** (`text-meta`) — the ONLY uppercase:
+  eyebrows, tags, indices, captions, nav, form labels, CTAs. (The family has no 700,
+  hence 600.) Index numbers take flare-deep; the total/tag stay muted.
+- **Wordmark — Medium 500, uppercase, lightly tracked** — the one thing outside both
+  registers; at 500 it holds beside 400-weight headlines without competing.
 
-Scale: fluid clamp tokens (`fluid-sm … fluid-hero`) size everything; the tokens' tight
-leading suits caps. The hero atmosphere is a faint warm paper haze (mocha/camel), not
-colored glows.
+Loaded via next/font/local from /public/fonts (.woff2, weights 400/400i/500/600) —
+NEVER Google Fonts. Hero atmosphere is clear water: a cool stone haze + one faint
+neon bloom (the K), not warm glows.
 
 ### 2.4 Motion tokens (NEW — single source, never inline magic numbers)
 
@@ -90,9 +105,14 @@ colored glows.
 ### 2.5 Layout & rhythm
 
 Left-aligned by default, asymmetric editorial composition, generous whitespace.
-Canvas rhythm alternates rich-black → petrol (alt) → cream (showstopper) per page.
-Container: centered, wide gutters, `max-w-editorial` (90rem). Sharp corners
-(`rounded-[1px]`) are brand; only pills/cursor are round.
+Canvas rhythm reads as one stock in recesses: milk (default) → bone (first recess,
+the workhorse alt) → stone (quietest band) → river (the inversion event), set via
+SectionShell `tone`. Actions are typography, not boxes: `ArrowLink` (meta label +
+flare arrow + hairline wipe; ↗ leaves · → continues · ↓ scrolls) is the CTA — a
+FILLED button is reserved for real form controls, at most one per view. Container:
+centered, wide gutters, `max-w-editorial` (90rem). Sharp corners (`rounded-[1px]`)
+are brand; only the cursor is round. Focus rings are never the flare: ink on paper,
+bone on river.
 
 ---
 

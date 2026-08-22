@@ -11,7 +11,7 @@ export default function SiteHeader() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Transparent over the hero → solidify to rich-black on scroll.
+  // Transparent over the hero → solidify to frosted milk on scroll.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -79,7 +79,7 @@ export default function SiteHeader() {
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
         scrolled || open
-          ? "border-ink/10 bg-bone/90 backdrop-blur"
+          ? "border-ink/10 bg-milk/90 backdrop-blur"
           : "border-transparent bg-transparent"
       }`}
     >
@@ -96,14 +96,14 @@ export default function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className={`link-underline font-sans text-xs uppercase tracking-[0.16em] text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
+              className={`link-underline font-sans text-xs font-semibold uppercase tracking-[0.13em] text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
             >
               {item.label}
             </Link>
           ))}
           <Link
             href="/begin"
-            className={`rounded-[1px] border border-ink px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
+            className={`rounded-[1px] border border-ink px-4 py-2 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-ink transition-colors hover:bg-ink hover:text-milk ${linkFocus}`}
           >
             Commission
           </Link>
@@ -147,7 +147,7 @@ export default function SiteHeader() {
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="fixed inset-0 top-20 z-40 flex flex-col justify-between bg-bone px-6 pb-12 pt-10 md:hidden"
+          className="fixed inset-0 top-20 z-40 flex flex-col justify-between bg-milk px-6 pb-12 pt-10 md:hidden"
         >
           <nav aria-label="Primary" className="flex flex-col gap-6">
             {NAV_LINKS.map((item) => (
@@ -155,7 +155,7 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`font-display text-3xl font-extrabold uppercase text-ink ${linkFocus}`}
+                className={`font-display text-3xl font-normal tracking-[-0.03em] text-ink ${linkFocus}`}
               >
                 {item.label}
               </Link>
@@ -164,7 +164,7 @@ export default function SiteHeader() {
           <Link
             href="/begin"
             onClick={() => setOpen(false)}
-            className={`mt-10 inline-block self-start rounded-[1px] border border-ink px-6 py-3 font-sans text-xs uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
+            className={`mt-10 inline-block self-start rounded-[1px] border border-ink px-6 py-3 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-ink transition-colors hover:bg-ink hover:text-milk ${linkFocus}`}
           >
             Commission a project
           </Link>

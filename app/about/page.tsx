@@ -66,9 +66,9 @@ export default function AboutPage() {
         </div>
       </SectionShell>
 
-      {/* Philosophy — alt-section */}
+      {/* Philosophy — bone alt-section */}
       <SectionShell
-        tone="stone"
+        tone="bone"
         eyebrow="Philosophy"
         heading="The standard is distinction."
         accent="distinction"
@@ -93,15 +93,15 @@ export default function AboutPage() {
         </Reveal>
       </SectionShell>
 
-      {/* CTA — charcoal showstopper */}
+      {/* CTA — the river inversion */}
       <SectionShell
-        tone="charcoal"
+        tone="river"
         marker
         heading="If that sounds like your brand, let’s talk."
         accent="your"
         headingSize="xl"
       >
-        <Button href="/begin" variant="onCharcoal">
+        <Button href="/begin" variant="onRiver" size="lg">
           Begin your project
         </Button>
       </SectionShell>

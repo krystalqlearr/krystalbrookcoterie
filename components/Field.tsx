@@ -11,10 +11,10 @@ import { type ReactNode } from "react";
  */
 
 export const fieldBase =
-  "mt-2 w-full rounded-[1px] border border-ink/20 bg-stone px-4 py-3 font-sans text-fluid-base text-ink placeholder:text-ink/40 transition-colors focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink";
-export const labelBase = "font-sans text-xs font-medium uppercase tracking-[0.16em] text-ink/65";
-export const errorText = "mt-2 font-sans text-xs text-cherry";
-const hintText = "mt-1.5 font-editorial text-xs italic leading-snug text-ink/60";
+  "mt-2 w-full rounded-[1px] border border-ink/15 bg-field px-4 py-3 font-sans text-fluid-base text-ink placeholder:text-ink/40 transition-colors focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink";
+export const labelBase = "font-sans text-xs font-semibold uppercase tracking-[0.13em] text-ink/70";
+export const errorText = "mt-2 font-sans text-xs text-flare-deep";
+const hintText = "mt-1.5 font-sans text-xs leading-snug text-ink/70";
 
 type Common = {
   label: string;
@@ -39,7 +39,7 @@ export default function Field(props: Props) {
     [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(" ") || undefined;
   const invalid = error ? true : undefined;
 
-  const Marker = required ? <span className="text-ink/50"> *</span> : null;
+  const Marker = required ? <span className="text-ink/70"> *</span> : null;
   const Hint = hint ? (
     <p id={`${id}-hint`} className={hintText}>
       {hint}

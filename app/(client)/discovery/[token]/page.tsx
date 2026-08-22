@@ -24,16 +24,13 @@ export default async function DiscoveryPage({ params }: { params: { token: strin
   if (data.submitted_at) {
     return (
       <section className="container flex min-h-[70svh] max-w-measure flex-col justify-center py-section">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.28em] text-cherry">
+        <p className="font-sans text-meta font-semibold uppercase text-flare-deep">
           Phase 01 · Complete
         </p>
-        <h1 className="mt-6 font-display text-fluid-2xl font-extrabold uppercase leading-[0.95] tracking-[-0.01em] text-ink">
-          Received.{" "}
-          <span className="font-editorial font-normal italic normal-case tracking-normal text-cherry">
-            Thank you.
-          </span>
+        <h1 className="mt-6 font-display text-fluid-2xl font-normal text-ink">
+          Received. <span className="text-neon">Thank you.</span>
         </h1>
-        <p className="mt-6 font-editorial text-fluid-lg italic leading-snug text-ink/70">
+        <p className="mt-6 font-sans text-fluid-lg leading-normal text-ink/70">
           Your answers are already in. I read every one before a single design decision gets made —
           that is the point of asking. You will hear from me next.
         </p>

@@ -49,11 +49,11 @@ export default function ProjectCard({
   const body = (
     <>
       {browserUrl ? <BrowserFrame url={browserUrl}>{thumb}</BrowserFrame> : thumb}
-      <div className="mt-4 flex items-baseline justify-between font-sans text-xs tracking-[0.04em] text-ink/60">
+      <div className="mt-4 flex items-baseline justify-between font-sans text-xs tracking-[0.04em] text-ink/70">
         <span>{client}</span>
         <span>{tag}</span>
       </div>
-      <h3 className={`mt-2 font-editorial font-normal italic text-ink ${headingBySize[size]}`}>{descriptor}</h3>
+      <h3 className={`mt-2 font-display font-normal text-ink ${headingBySize[size]}`}>{descriptor}</h3>
     </>
   );
 

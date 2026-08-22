@@ -5,22 +5,22 @@ import Rule from "./Rule";
 
 /**
  * Section wrapper providing editorial vertical rhythm and a consistent left-aligned
- * header block. `tone` sets the canvas so pages alternate bone / stone / charcoal
- * instead of one flat scroll:
- *  - light   : default bone canvas, ink text, muted eyebrow
- *  - stone   : deeper-paper alt-section for quiet rhythm, ink text
- *  - charcoal: dark inversion moment (closing CTAs), bone text — "charcoal punctuation"
- * Intros use the serif-italic voice (the HAUS supporting line).
+ * header block. `tone` sets the sheet so pages read as one stock in recesses —
+ * elevation only goes DOWN from milk — with the river as punctuation:
+ *  - light : default milk canvas, ink text
+ *  - bone  : first recess — the warm alt-section, the workhorse for rhythm
+ *  - stone : deepest recess — the quietest band (never carries the neon flare)
+ *  - river : the dark inversion moment (proof bands, closing CTAs), bone text
+ * The flare is rationed: the heading's accent word carries it, so the eyebrow
+ * stays muted whenever an accent is present.
  */
-type Tone = "light" | "stone" | "charcoal";
+type Tone = "light" | "bone" | "stone" | "river";
 
-const toneStyles: Record<
-  Tone,
-  { section: string; eyebrow: "flare" | "flareDark"; intro: string }
-> = {
-  light: { section: "text-ink", eyebrow: "flare", intro: "text-ink/75" },
-  stone: { section: "bg-stone text-ink", eyebrow: "flare", intro: "text-ink/75" },
-  charcoal: { section: "bg-charcoal text-bone", eyebrow: "flareDark", intro: "text-bone/75" },
+const toneStyles: Record<Tone, { section: string; intro: string }> = {
+  light: { section: "text-ink", intro: "text-ink/70" },
+  bone: { section: "bg-bone text-ink", intro: "text-ink/70" },
+  stone: { section: "bg-stone text-ink", intro: "text-ink/70" },
+  river: { section: "bg-river text-bone", intro: "text-bone/75" },
 };
 
 type Props = {
@@ -55,27 +55,32 @@ export default function SectionShell({
   className = "",
 }: Props) {
   const t = toneStyles[tone];
+  const onDark = tone === "river";
   const hasHeader = marker || Boolean(eyebrow) || Boolean(heading) || Boolean(intro);
+  // One flare element per view: the accent word wins; otherwise the eyebrow may carry it.
+  const eyebrowTone = accent ? (onDark ? "onDark" : "muted") : onDark ? "flareDark" : "flare";
 
   const inner = (
     <>
       {hasHeader ? (
         <div className="flex flex-col gap-5">
           {marker ? <Rule width="short" className="mb-2" /> : null}
-          {eyebrow ? <Eyebrow tone={t.eyebrow}>{eyebrow}</Eyebrow> : null}
+          {eyebrow ? <Eyebrow tone={eyebrowTone}>{eyebrow}</Eyebrow> : null}
           {heading ? (
             <EditorialHeading
               as={headingAs}
               size={headingSize}
               accent={accent}
-              accentOnDark={tone === "charcoal"}
-              className="max-w-[22ch]"
+              accentOnDark={onDark}
+              className="max-w-[24ch]"
             >
               {heading}
             </EditorialHeading>
           ) : null}
           {intro ? (
-            <div className={`max-w-measure font-editorial text-fluid-lg italic leading-snug ${t.intro}`}>{intro}</div>
+            <div className={`max-w-measure font-sans text-fluid-lg leading-normal ${t.intro}`}>
+              {intro}
+            </div>
           ) : null}
         </div>
       ) : null}

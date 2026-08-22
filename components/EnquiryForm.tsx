@@ -100,8 +100,8 @@ export default function EnquiryForm() {
 
   if (submitted) {
     return (
-      <div className="max-w-measure border-t border-cherry pt-8">
-        <p className="font-editorial text-fluid-xl italic text-ink">Thank you.</p>
+      <div className="max-w-measure border-t-2 border-neon pt-8">
+        <p className="font-display text-fluid-xl text-ink">Thank you.</p>
         <p className="mt-4 font-sans text-fluid-base leading-relaxed text-ink/70">
           Your email client should have opened with your enquiry ready to send. If it didn’t,
           write to{" "}
@@ -144,7 +144,7 @@ export default function EnquiryForm() {
 
       <button
         type="submit"
-        className="mt-8 inline-flex items-center justify-center rounded-[1px] border border-ink bg-ink px-7 py-3.5 font-sans text-xs font-medium uppercase tracking-[0.14em] text-bone transition hover:bg-ink/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+        className="mt-8 inline-flex items-center justify-center rounded-[1px] border border-ink bg-ink px-7 py-3.5 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-milk transition duration-300 ease-editorial hover:border-flare-deep hover:bg-flare-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
       >
         Submit your inquiry
       </button>

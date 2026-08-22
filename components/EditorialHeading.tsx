@@ -1,16 +1,16 @@
 import { type ReactNode } from "react";
 
 /**
- * Display heading — monumental UPPERCASE Neue Montreal Extrabold (the HAUS/VOL.ONE
- * register). Exactly ONE word may be lifted into the wine "flare": Editorial New
- * italic, lowercase, in cherry (blush on charcoal). Pass that word as `accent` —
- * it's matched as a substring of the heading. This is the site's signature thread:
- * read down a page, the flare words form a spine (owned → follows → worth → presence).
+ * Display heading — the Coterie register: Neue Montreal REGULAR 400, sentence
+ * case, a short declarative line that ends in a period. Tracking and leading live
+ * in the fluid size tokens — never hand-tune a heading. Exactly ONE word may be
+ * lifted into the flare (same face, no italic): neon on paper, flare-lift on
+ * river. Pass it as `accent` — matched as a substring. Every display size floors
+ * at 24px, which is what sanctions the neon stop on a heading word.
  */
 type Level = "h1" | "h2" | "h3" | "h4";
 type Size = "sm" | "md" | "lg" | "xl" | "hero";
 
-// Fluid sizes; the tokens carry their own tight leading (0.9–1.12) — ideal for caps.
 const sizeClass: Record<Size, string> = {
   sm: "text-fluid-xl",
   md: "text-fluid-2xl",
@@ -21,9 +21,9 @@ const sizeClass: Record<Size, string> = {
 
 type Props = {
   children: ReactNode;
-  /** One word (a substring of the heading) lifted into the serif-italic wine flare. */
+  /** One word (a substring of the heading) lifted into the flare — same face. */
   accent?: string;
-  /** On charcoal sections the flare shifts to blush so it stays vivid + legible. */
+  /** On river sections the flare shifts to flare-lift so it stays legible. */
   accentOnDark?: boolean;
   as?: Level;
   size?: Size;
@@ -38,11 +38,9 @@ export default function EditorialHeading({
   size = "lg",
   className = "",
 }: Props) {
-  const flareClass = `font-editorial font-normal italic normal-case tracking-normal ${
-    accentOnDark ? "text-blush" : "text-cherry"
-  }`;
+  const flareClass = accentOnDark ? "text-flare-lift" : "text-neon";
 
-  // Lift the accent word into the serif wine flare when it's found in the string.
+  // Lift the accent word into the flare when it's found in the string.
   let content: ReactNode = children;
   if (accent && typeof children === "string" && children.includes(accent)) {
     const i = children.indexOf(accent);
@@ -56,9 +54,7 @@ export default function EditorialHeading({
   }
 
   return (
-    <Tag
-      className={`font-display font-extrabold uppercase tracking-[-0.01em] text-balance ${sizeClass[size]} ${className}`}
-    >
+    <Tag className={`font-display font-normal text-balance ${sizeClass[size]} ${className}`}>
       {content}
     </Tag>
   );

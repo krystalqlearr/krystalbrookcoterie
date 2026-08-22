@@ -14,37 +14,37 @@
   --dur-xslow: 0.9s;
 }
 
-/* Bone-led canvas: warm ivory paper, charcoal ink by default. */
+/* Milk-led canvas: luminous near-white warm paper, ink by default. */
 @layer base {
   html {
-    background-color: #ebe5d8; /* bone */
+    background-color: #fdfbf6; /* milk */
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   body {
-    @apply bg-bone text-ink font-sans antialiased;
+    @apply bg-milk text-ink font-sans antialiased;
   }
 
-  /* Ink selection on bone — a quiet, confident tell. */
+  /* Neon selection — one of the flare's sanctioned graphic moments. */
   ::selection {
-    background-color: #8a1f52; /* cherry — the wine flare */
-    color: #ebe5d8; /* bone */
+    background-color: #ff0080; /* neon */
+    color: #fdfbf6; /* milk */
   }
 
   /* Restrained warm scrollbar so the chrome never fights the paper. */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #c9bfa9 #ebe5d8; /* warm stone thumb on bone track */
+    scrollbar-color: #d5cdbc #fdfbf6; /* warm stone thumb on milk track */
   }
   *::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   *::-webkit-scrollbar-track {
-    background: #ebe5d8;
+    background: #fdfbf6;
   }
   *::-webkit-scrollbar-thumb {
-    background: #c9bfa9;
+    background: #d5cdbc;
     border-radius: 9999px;
   }
 }
@@ -73,9 +73,10 @@ html.lenis body {
     text-wrap: pretty;
   }
 
-  /* Animated wine underline — the flare as the interactive signal on links. */
+  /* Animated neon underline — the hairline wipe, one of the flare's graphic
+     moments. Rationed: where a heading already carries the flare, links stay ink. */
   .link-underline {
-    background-image: linear-gradient(#8a1f52, #8a1f52);
+    background-image: linear-gradient(#ff0080, #ff0080);
     background-repeat: no-repeat;
     background-position: left 100%;
     background-size: 0% 1px;
@@ -86,17 +87,16 @@ html.lenis body {
     background-size: 100% 1px;
   }
 
-  /* Editorial drop-cap — an oversized Editorial New italic initial in wine, for
-     long-form openings (journal, case-study intros). */
+  /* Drop-cap — an oversized Regular-400 initial in neon (≥24px, so the neon stop
+     is sanctioned), for long-form openings (journal, case-study intros). */
   .dropcap::first-letter {
-    font-family: var(--font-editorial), Georgia, serif;
-    font-style: italic;
+    font-family: var(--font-sans), system-ui, sans-serif;
     font-weight: 400;
     font-size: 3.4em;
     line-height: 0.72;
     float: left;
     margin: 0.06em 0.1em 0 0;
-    color: #8a1f52;
+    color: #ff0080;
   }
 
   /* Hide the native cursor everywhere while the custom cursor is active.

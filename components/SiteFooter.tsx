@@ -3,8 +3,9 @@ import Logo from "./Logo";
 import { NAV_LINKS } from "./nav";
 
 /**
- * Global footer on charcoal — the site's closing dark moment. Text is bone; muted
- * labels are bone/60. The wine flare appears once, as the structural rule.
+ * Global footer on deep river — the site's closing dark moment. Text is bone;
+ * muted labels are bone/60. Quiet by design: hairlines stay bone/15 and the
+ * flare doesn't appear here (it's rationed to the page's one flare element).
  */
 
 const linkFocus =
@@ -12,7 +13,7 @@ const linkFocus =
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-charcoal text-bone">
+    <footer className="bg-river text-bone">
       <div className="container py-20">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
           {/* Brand + studio line */}
@@ -26,7 +27,7 @@ export default function SiteFooter() {
 
           {/* Nav repeat */}
           <nav aria-label="Footer">
-            <p className="font-sans text-xs uppercase tracking-[0.28em] text-bone/60">Studio</p>
+            <p className="font-sans text-meta font-semibold uppercase text-bone/60">Studio</p>
             <ul className="mt-5 space-y-2.5 font-sans text-sm">
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
@@ -43,7 +44,7 @@ export default function SiteFooter() {
 
           {/* Connect */}
           <div>
-            <p className="font-sans text-xs uppercase tracking-[0.28em] text-bone/60">Connect</p>
+            <p className="font-sans text-meta font-semibold uppercase text-bone/60">Connect</p>
             <ul className="mt-5 space-y-2.5 font-sans text-sm">
               <li>
                 <a
@@ -75,10 +76,10 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        {/* Single wine structural rule */}
-        <hr className="my-12 h-px border-0 bg-cherry" />
+        {/* Quiet structural hairline — bone on river, never the flare */}
+        <hr className="my-12 h-px border-0 bg-bone/15" />
 
-        <div className="flex flex-col gap-3 font-sans text-xs tracking-[0.04em] text-bone/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 font-sans text-xs tracking-[0.04em] text-bone/60 sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 Krystal Brook Coterie</span>
           <span>a DBA of Lion &amp; Gazelle Holdings LLC</span>
           <span className="flex gap-5">

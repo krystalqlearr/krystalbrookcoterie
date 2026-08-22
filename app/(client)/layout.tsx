@@ -9,7 +9,7 @@ import Logo from "@/components/Logo";
  */
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-bone">
+    <div className="flex min-h-screen flex-col bg-milk">
       <header className="container flex items-center pt-10 md:pt-14">
         <Link
           href="/"
@@ -21,7 +21,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       </header>
       <div className="flex-1">{children}</div>
       <footer className="container py-10">
-        <p className="font-sans text-xs uppercase tracking-[0.16em] text-ink/60">
+        <p className="font-sans text-xs font-semibold uppercase tracking-[0.13em] text-ink/70">
           Krystal Brook Coterie · Web Design Studio
         </p>
       </footer>

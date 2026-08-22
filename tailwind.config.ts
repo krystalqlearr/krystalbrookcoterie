@@ -1,10 +1,12 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Krystal Brook Coterie — token system.
- * BONE-LED warm-neutral palette (redesigned 2026-07; supersedes the dark-led atelier).
- * NEVER hardcode hex in components; use these token names. The inversion pair is
- * `bone` (light) + `ink` (warm charcoal); muted/hairlines are opacities of the pair.
+ * Krystal Brook Coterie — THE COTERIE SYSTEM (2026-08; supersedes wine/cherry).
+ * "Clear water, deliberate K": milk-led luminous paper, a deep-river inversion,
+ * and an electric-magenta flare rationed to ONE element per view.
+ * NEVER hardcode hex in components; use these token names. Elevation only goes
+ * DOWN from milk (bone → stone recesses); muted text/hairlines are opacities of
+ * ink (paper) or bone (river). Flare stop is chosen by SIZE and CANVAS, not taste.
  */
 const config: Config = {
   content: [
@@ -33,43 +35,49 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // — The inversion pair (canvas ↔ ink) —
-        bone: "#EBE5D8", //  primary canvas (warm ivory paper); ink-color on charcoal
-        ink: "#23201B", //  warm faded charcoal — primary ink; bg for charcoal sections
-        // — Paper elevation —
-        stone: "#E0D8C7", //  deeper paper — raised panels, subtle alt-section rhythm
-        // — Warmed dark + the wine flare (the editorial accent) —
-        charcoal: "#1E1418", //  warmed near-black — dark SECTION backgrounds (aubergine-tinted)
-        cherry: "#8A1F52", //  the wine-fuchsia flare — one word/label per view; passes AA (~7:1) as text on bone
-        maroon: "#4A1130", //  deep wine — gradient depth, button hover
-        blush: "#E9A0C6", //  the flare on charcoal — light wine tint for dark sections
-        mocha: "#9A8264", //  deep warm neutral — imagery / atmosphere only
+        // — The paper (one stock, three sheets; elevation only goes DOWN) —
+        milk: "#FDFBF6", //  the canvas — luminous near-white warm paper (default page)
+        bone: "#EBE5D8", //  first recess — warm alt-sections; also the light ink on river
+        stone: "#E0D8C7", //  deepest recess — the quietest band; never carries the neon flare
+        field: "#F1ECE2", //  inset form fields on MILK only (a soft step down from the canvas)
+        ink: "#23201B", //  warm faded charcoal-brown — primary text + the filled-button surface
+        // — The dark is punctuation —
+        river: "#0F2A2D", //  deep river — the inversion moment (water at depth); 1–2 per page
+        // — The flare, in three stops (by size + canvas, never by taste) —
+        neon: "#FF0080", //  graphics + text ≥24px on milk/bone/river; never small text, never on stone
+        "flare-deep": "#A8004F", //  flare TEXT <24px on paper (eyebrows, index) + primary-button hover
+        "flare-lift": "#FF7ABF", //  the flare on river — safe for small text on the dark
       },
-      // Fluid, clamp-based display scale — fashion-house large, no breakpoint jumps.
-      // Tight leading + negative tracking baked in for the display steps.
+      // Fluid, clamp-based display scale — Regular 400, sentence case, short
+      // declarative sentences that end in a period. Tracking + leading live HERE
+      // (never hand-tune a heading). Every display step floors ≥24px on purpose:
+      // that keeps all of them inside WCAG "large text", which is the only reason
+      // the neon flare can colour a heading word at any viewport.
       fontSize: {
+        // Meta register — Semibold 600, UPPERCASE, the only uppercase on the site.
+        meta: ["0.8125rem", { lineHeight: "1.4", letterSpacing: "0.13em" }],
         "fluid-sm": ["clamp(0.85rem, 0.82rem + 0.15vw, 0.95rem)", { lineHeight: "1.5" }],
         "fluid-base": ["clamp(1rem, 0.96rem + 0.2vw, 1.125rem)", { lineHeight: "1.6" }],
         "fluid-lg": ["clamp(1.15rem, 1.05rem + 0.5vw, 1.5rem)", { lineHeight: "1.5" }],
         "fluid-xl": [
-          "clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem)",
-          { lineHeight: "1.12", letterSpacing: "-0.01em" },
+          "clamp(1.6rem, 1.3rem + 1.5vw, 2.25rem)", //  → 36px
+          { lineHeight: "1.0", letterSpacing: "-0.045em" },
         ],
         "fluid-2xl": [
-          "clamp(2.2rem, 1.4rem + 3.2vw, 3.6rem)",
-          { lineHeight: "1.02", letterSpacing: "-0.015em" },
+          "clamp(1.9rem, 1.35rem + 2.6vw, 2.75rem)", //  → 44px
+          { lineHeight: "0.96", letterSpacing: "-0.05em" },
         ],
         "fluid-3xl": [
-          "clamp(2.8rem, 1.6rem + 5vw, 5.5rem)",
-          { lineHeight: "0.98", letterSpacing: "-0.02em" },
+          "clamp(2.4rem, 1.55rem + 4vw, 4.25rem)", //  → 68px
+          { lineHeight: "0.93", letterSpacing: "-0.055em" },
         ],
         "fluid-display": [
-          "clamp(3.4rem, 1.4rem + 8vw, 8.5rem)",
-          { lineHeight: "0.94", letterSpacing: "-0.025em" },
+          "clamp(2.75rem, 1.6rem + 5.4vw, 5.25rem)", //  → 84px
+          { lineHeight: "0.92", letterSpacing: "-0.058em" },
         ],
         "fluid-hero": [
-          "clamp(4rem, 1rem + 11vw, 12rem)",
-          { lineHeight: "0.9", letterSpacing: "-0.03em" },
+          "clamp(3.25rem, 1.9rem + 6.4vw, 6.75rem)", //  → 108px
+          { lineHeight: "0.92", letterSpacing: "-0.06em" },
         ],
       },
       // Motion tokens — the ONLY sanctioned easing/durations (mirror lib/motion.ts).
@@ -106,11 +114,10 @@ const config: Config = {
         editorial: "90rem", //  1440px — editorial content cap
       },
       fontFamily: {
-        // Neue Montreal carries both body and display (bold sans headlines);
-        // Editorial New is the italic serif accent + wordmark.
+        // ONE typeface: PP Neue Montreal carries everything (display, body, UI,
+        // meta, wordmark). PP Editorial New is RETIRED — no second voice.
         sans: ["var(--font-sans)"],
         display: ["var(--font-sans)"],
-        editorial: ["var(--font-editorial)"],
       },
     },
   },

@@ -131,9 +131,9 @@ export default function ServicesPage() {
         </Reveal>
       </SectionShell>
 
-      {/* Founding Client — petrol alt-section */}
+      {/* Founding Client — bone alt-section */}
       <SectionShell
-        tone="stone"
+        tone="bone"
         eyebrow="Founding client program"
         heading="Signature scope at $2,800 — for the right first few."
         accent="$2,800"
@@ -141,7 +141,7 @@ export default function ServicesPage() {
         intro="A limited program for a small number of founding clients: full Signature-tier scope in exchange for case-study rights. Real work, deeply discounted, while the studio builds its published proof."
       >
         <Reveal delay={0.1}>
-          <Button href="/begin" variant="primary">
+          <Button href="/begin" variant="primary" size="lg">
             Apply as a founding client
           </Button>
         </Reveal>
@@ -172,15 +172,15 @@ export default function ServicesPage() {
         </Reveal>
       </SectionShell>
 
-      {/* CTA — cream showstopper */}
+      {/* CTA — the river inversion */}
       <SectionShell
-        tone="charcoal"
+        tone="river"
         marker
         heading="Let’s build something worth owning."
         accent="worth"
         headingSize="xl"
       >
-        <Button href="/begin" variant="onCharcoal">
+        <Button href="/begin" variant="onRiver" size="lg">
           Begin your project
         </Button>
       </SectionShell>

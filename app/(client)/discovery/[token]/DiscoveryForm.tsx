@@ -10,7 +10,7 @@ import { saveDiscoveryProgress, submitDiscovery, uploadDiscoveryAudio } from "./
 
 type Answers = Record<string, string>;
 
-const meta = "font-sans text-xs font-medium uppercase tracking-[0.28em]";
+const meta = "font-sans text-meta font-semibold uppercase";
 
 const clampStep = (s: number) => Math.max(0, Math.min(DISCOVERY_TOTAL_STEPS - 1, s));
 
@@ -20,7 +20,7 @@ function splitAccent(title: string, accent: string) {
   return (
     <>
       {title.slice(0, i)}
-      <span className="font-editorial font-normal italic normal-case tracking-normal text-cherry">
+      <span className="text-neon">
         {title.slice(i, i + accent.length)}
       </span>
       {title.slice(i + accent.length)}
@@ -138,14 +138,11 @@ export default function DiscoveryForm({
   if (submitted) {
     return (
       <section className="container flex min-h-[70svh] max-w-measure flex-col justify-center py-section">
-        <p className={`${meta} text-cherry`}>Phase 01 · Complete</p>
-        <h1 className="mt-6 font-display text-fluid-2xl font-extrabold uppercase leading-[0.95] tracking-[-0.01em] text-ink">
-          That is everything{" "}
-          <span className="font-editorial font-normal italic normal-case tracking-normal text-cherry">
-            I need.
-          </span>
+        <p className={`${meta} text-flare-deep`}>Phase 01 · Complete</p>
+        <h1 className="mt-6 font-display text-fluid-2xl font-normal text-ink">
+          That is everything <span className="text-neon">I need.</span>
         </h1>
-        <p className="mt-6 max-w-measure font-editorial text-fluid-lg italic leading-snug text-ink/70">
+        <p className="mt-6 max-w-measure font-sans text-fluid-lg leading-normal text-ink/70">
           Restraint is the whole discipline — knowing what to leave out. You have given me what I
           need to leave out the right things. I will be in touch within the week.
         </p>
@@ -153,19 +150,16 @@ export default function DiscoveryForm({
     );
   }
 
-  // Cover screen (charcoal).
+  // Cover screen (deep river).
   if (step < 0) {
     return (
-      <section className="flex min-h-[80svh] items-center bg-charcoal text-bone">
+      <section className="flex min-h-[80svh] items-center bg-river text-bone">
         <div className="container max-w-measure py-section">
-          <p className={`${meta} text-blush`}>Phase 01 · Position</p>
-          <h1 className="mt-6 font-display text-fluid-3xl font-extrabold uppercase leading-[0.92] tracking-[-0.02em]">
-            Before the design,{" "}
-            <span className="font-editorial font-normal italic normal-case tracking-normal text-blush">
-              the truth.
-            </span>
+          <p className={`${meta} text-flare-lift`}>Phase 01 · Position</p>
+          <h1 className="mt-6 font-display text-fluid-3xl font-normal">
+            Before the design, <span className="text-flare-lift">the truth.</span>
           </h1>
-          <p className="mt-8 max-w-[46ch] font-editorial text-fluid-lg italic leading-snug text-bone/75">
+          <p className="mt-8 max-w-[46ch] font-sans text-fluid-lg leading-normal text-bone/75">
             Six short sections. Answer in a sentence or a paragraph — nothing here is graded, and
             there are no wrong answers. It saves as you go, so you can leave and come back. And if
             you would rather talk than type, every question takes a voice note.
@@ -174,7 +168,7 @@ export default function DiscoveryForm({
             <button
               type="button"
               onClick={() => setStep(0)}
-              className="inline-flex items-center justify-center rounded-[1px] border border-bone px-9 py-4 font-sans text-sm font-medium uppercase tracking-[0.16em] text-bone transition-colors duration-300 ease-editorial hover:bg-bone hover:text-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
+              className="inline-flex items-center justify-center rounded-[1px] border border-bone px-9 py-4 font-sans text-meta font-semibold uppercase text-bone transition-colors duration-300 ease-editorial hover:bg-bone hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone"
             >
               Begin
             </button>
@@ -190,9 +184,9 @@ export default function DiscoveryForm({
   return (
     <section className="container max-w-2xl py-section">
       <div className="flex items-baseline justify-between">
-        <p className={`${meta} text-cherry`}>Phase 01 · {current!.eyebrow}</p>
+        <p className={`${meta} text-flare-deep`}>Phase 01 · {current!.eyebrow}</p>
         <p
-          className={`${meta} text-ink/50`}
+          className={`${meta} text-ink/70`}
           aria-label={`Step ${step + 1} of ${DISCOVERY_TOTAL_STEPS}`}
         >
           {String(step + 1).padStart(2, "0")} / {String(DISCOVERY_TOTAL_STEPS).padStart(2, "0")}
@@ -206,7 +200,7 @@ export default function DiscoveryForm({
         aria-valuemax={100}
       >
         <div
-          className="h-px bg-cherry transition-[width] duration-500 ease-editorial"
+          className="h-px bg-neon transition-[width] duration-500 ease-editorial"
           style={{ width: `${pct}%` }}
         />
       </div>
@@ -220,7 +214,7 @@ export default function DiscoveryForm({
         <h2
           ref={headingRef}
           tabIndex={-1}
-          className="mt-14 font-display text-fluid-2xl font-extrabold uppercase leading-[1.0] tracking-[-0.015em] text-ink outline-none"
+          className="mt-14 font-display text-fluid-2xl font-normal text-ink outline-none"
         >
           {splitAccent(current!.title, current!.accent)}
         </h2>
@@ -230,12 +224,12 @@ export default function DiscoveryForm({
             <div key={q.id}>
               <label
                 htmlFor={q.id}
-                className="block max-w-[42ch] font-editorial text-fluid-lg italic leading-snug text-ink"
+                className="block max-w-[42ch] font-sans text-fluid-lg leading-snug tracking-[-0.01em] text-ink"
               >
                 {q.question}
               </label>
               {q.hint ? (
-                <p className="mt-2 max-w-[42ch] font-sans text-xs leading-relaxed text-ink/55">
+                <p className="mt-2 max-w-[42ch] font-sans text-xs leading-relaxed text-ink/70">
                   {q.hint}
                 </p>
               ) : null}
@@ -247,7 +241,7 @@ export default function DiscoveryForm({
                 placeholder="Type your answer…"
               />
               <details className="mt-3">
-                <summary className="cursor-pointer list-none font-sans text-xs uppercase tracking-[0.16em] text-ink/50 transition-colors hover:text-cherry">
+                <summary className="cursor-pointer list-none font-sans text-xs font-semibold uppercase tracking-[0.13em] text-ink/70 transition-colors hover:text-flare-deep">
                   Prefer to talk? Record instead
                 </summary>
                 <div className="mt-3">
@@ -256,10 +250,10 @@ export default function DiscoveryForm({
                     accept="audio/*"
                     aria-label={`Voice note for: ${q.question}`}
                     onChange={(e) => onVoice(q.id, e.target.files?.[0])}
-                    className="block w-full font-sans text-xs text-ink/70 file:mr-4 file:cursor-pointer file:rounded-[1px] file:border file:border-ink/30 file:bg-transparent file:px-4 file:py-2 file:font-sans file:text-xs file:uppercase file:tracking-[0.14em] file:text-ink hover:file:border-ink"
+                    className="block w-full font-sans text-xs text-ink/70 file:mr-4 file:cursor-pointer file:rounded-[1px] file:border file:border-ink/30 file:bg-transparent file:px-4 file:py-2 file:font-sans file:text-xs file:font-semibold file:uppercase file:tracking-[0.13em] file:text-ink hover:file:border-ink"
                   />
                   {answers[`${q.id}__audio`] ? (
-                    <p className="mt-2 font-sans text-xs tracking-[0.04em] text-cherry">
+                    <p className="mt-2 font-sans text-xs tracking-[0.04em] text-flare-deep">
                       Voice note attached.
                     </p>
                   ) : null}
@@ -270,7 +264,7 @@ export default function DiscoveryForm({
         </div>
 
         {stepError ? (
-          <p role="alert" className="mt-8 font-sans text-xs text-cherry">
+          <p role="alert" className="mt-8 font-sans text-xs text-flare-deep">
             {stepError}
           </p>
         ) : null}
@@ -281,7 +275,7 @@ export default function DiscoveryForm({
               <button
                 type="button"
                 onClick={back}
-                className="font-sans text-xs font-medium uppercase tracking-[0.14em] text-ink/60 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                className="font-sans text-xs font-semibold uppercase tracking-[0.13em] text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
               >
                 Back
               </button>

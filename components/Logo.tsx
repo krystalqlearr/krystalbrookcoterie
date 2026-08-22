@@ -1,6 +1,7 @@
 /**
- * Krystal Brook Coterie wordmark — three lockups in Neue Montreal Extrabold,
- * UPPERCASE (matches the HAUS-register display headlines). Text is uppercased via
+ * Krystal Brook Coterie wordmark — the one thing outside both registers:
+ * Neue Montreal MEDIUM 500, uppercase, lightly tracked. At 500 it holds its own
+ * beside 400-weight headlines without competing with them. Text is uppercased via
  * CSS so the accessible label stays natural case. Colors are token-mapped; the
  * monogram border uses currentColor so it tracks the chosen token.
  *
@@ -44,7 +45,7 @@ export default function Logo({
         role="img"
         aria-label={LABEL}
         style={{ fontSize }}
-        className={`inline-flex h-[2em] w-[2em] items-center justify-center rounded-[1px] border border-current font-display font-extrabold uppercase leading-none tracking-[0.02em] ${tone} ${className}`}
+        className={`inline-flex h-[2em] w-[2em] items-center justify-center rounded-[1px] border border-current font-sans font-medium uppercase leading-none tracking-[0.06em] ${tone} ${className}`}
       >
         <span aria-hidden>KBC</span>
       </span>
@@ -57,7 +58,7 @@ export default function Logo({
         role="img"
         aria-label={LABEL}
         style={{ fontSize }}
-        className={`font-display font-extrabold uppercase leading-none tracking-[-0.01em] ${tone} ${className}`}
+        className={`font-sans font-medium uppercase leading-none tracking-[0.08em] ${tone} ${className}`}
       >
         <span aria-hidden>Krystal Brook Coterie</span>
       </span>
@@ -72,10 +73,10 @@ export default function Logo({
       style={{ fontSize }}
       className={`inline-block leading-none ${tone} ${className}`}
     >
-      <span aria-hidden className="block font-display text-[1em] font-extrabold uppercase leading-[0.95] tracking-[-0.01em]">
+      <span aria-hidden className="block font-sans text-[1em] font-medium uppercase leading-[1.05] tracking-[0.08em]">
         Krystal Brook
       </span>
-      <span aria-hidden className="block font-display text-[1em] font-extrabold uppercase leading-[0.95] tracking-[-0.01em]">
+      <span aria-hidden className="block font-sans text-[1em] font-medium uppercase leading-[1.05] tracking-[0.08em]">
         Coterie
       </span>
       <span

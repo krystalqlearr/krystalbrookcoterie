@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react";
 
 /**
  * Custom cursor — a single inversion dot. It uses mix-blend-difference so it
- * optically inverts whatever it crosses: near-black on the bone canvas, light over
- * charcoal sections and imagery. Grows on hover over interactive targets. No ring,
+ * optically inverts whatever it crosses: near-black on the milk canvas, light over
+ * river sections and imagery. Grows on hover over interactive targets. No ring,
  * no label, no color — ultra-minimal, high-end.
  *
  * Guardrails:
@@ -106,7 +106,7 @@ export default function CustomCursor() {
     <div
       ref={dotRef}
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full bg-bone mix-blend-difference"
+      className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full bg-milk mix-blend-difference"
       style={{
         width: DOT,
         height: DOT,

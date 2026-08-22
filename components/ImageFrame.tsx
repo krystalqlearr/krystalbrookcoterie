@@ -53,20 +53,20 @@ export default function ImageFrame({
       {src ? (
         <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" />
       ) : (
-        /* Art-directed placeholder: a warm charcoal field (a dark image slot that
-           punctuates the bone canvas) with a mocha→wine highlight and paper grain. */
-        <div role="img" aria-label={alt} className="editorial-grain absolute inset-0 bg-charcoal">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-mocha/25 to-cherry/30 mix-blend-screen" />
+        /* Art-directed placeholder: a deep-river field (a dark image slot that
+           punctuates the milk canvas) with a light-through-water sheen and grain. */
+        <div role="img" aria-label={alt} className="editorial-grain absolute inset-0 bg-river">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-bone/10 to-flare-lift/30 mix-blend-screen" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
         </div>
       )}
       {index ? (
-        <span className="absolute right-4 top-4 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-bone/60">
+        <span className="absolute right-4 top-4 font-sans text-[0.6rem] font-semibold uppercase tracking-[0.13em] text-bone/60">
           {index}
         </span>
       ) : null}
       {caption ? (
-        <figcaption className="absolute bottom-0 left-0 p-4 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-bone/55">
+        <figcaption className="absolute bottom-0 left-0 p-4 font-sans text-[0.6rem] uppercase tracking-[0.13em] text-bone/60">
           {caption}
         </figcaption>
       ) : null}

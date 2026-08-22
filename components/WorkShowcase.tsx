@@ -64,7 +64,7 @@ export default function WorkShowcase() {
         {active && (
           <motion.div
             key="backdrop"
-            className="fixed inset-0 z-[200] bg-charcoal"
+            className="fixed inset-0 z-[200] bg-river"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -102,8 +102,8 @@ function ProjectSlot({
           data-lenis-prevent
           className={
             selected
-              ? "group fixed inset-0 z-[210] flex flex-col overflow-y-auto bg-charcoal"
-              : "group absolute inset-0 flex flex-col overflow-hidden border border-ink/15 bg-charcoal"
+              ? "group fixed inset-0 z-[210] flex flex-col overflow-y-auto bg-river"
+              : "group absolute inset-0 flex flex-col overflow-hidden border border-ink/15 bg-river"
           }
         >
           {/* Real, focusable trigger over the collapsed frame — keyboard + a11y. */}
@@ -120,11 +120,11 @@ function ProjectSlot({
           {/* Browser chrome — the "this is a real website" signal. */}
           <div className="flex shrink-0 items-center gap-3 border-b border-bone/10 px-4 py-2.5">
             <span className="flex gap-1.5" aria-hidden>
-              <span className="h-2 w-2 rounded-full bg-blush" />
+              <span className="h-2 w-2 rounded-full bg-flare-lift" />
               <span className="h-2 w-2 rounded-full bg-bone/25" />
               <span className="h-2 w-2 rounded-full bg-bone/25" />
             </span>
-            <span className="truncate rounded-sm bg-bone/5 px-3 py-1 font-sans text-[0.65rem] tracking-[0.06em] text-bone/50">
+            <span className="truncate rounded-sm bg-bone/5 px-3 py-1 font-sans text-[0.65rem] tracking-[0.06em] text-bone/60">
               {p.url}
             </span>
           </div>
@@ -146,7 +146,7 @@ function ProjectSlot({
                 {!selected && (
                   <div
                     aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
+                    className="absolute inset-0 bg-gradient-to-t from-river/70 via-transparent to-transparent"
                   />
                 )}
               </>
@@ -168,23 +168,23 @@ function ProjectSlot({
 
             {!selected && (
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 md:p-6">
-                <span className="font-sans text-xs uppercase tracking-[0.16em] text-bone/85">
+                <span className="font-sans text-xs font-semibold uppercase tracking-[0.13em] text-bone/85">
                   {p.client}
                 </span>
-                <span className="flex translate-x-[-6px] items-center gap-2 font-sans text-xs uppercase tracking-[0.12em] text-bone opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
+                <span className="flex translate-x-[-6px] items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-bone opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
                   View <span aria-hidden>→</span>
                 </span>
               </div>
             )}
 
             {selected && (
-              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-charcoal/85 to-transparent p-6 md:p-16">
+              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-river/85 to-transparent p-6 md:p-16">
                 <div>
-                  <p className="font-sans text-xs uppercase tracking-[0.2em] text-blush">
+                  <p className="font-sans text-xs font-semibold uppercase tracking-[0.13em] text-flare-lift">
                     {p.category}
                   </p>
-                  <span aria-hidden className="mt-5 block h-[3px] w-12 bg-blush" />
-                  <h2 className="mt-5 max-w-[18ch] font-editorial text-4xl font-normal italic leading-[1.1] tracking-[-0.01em] text-bone md:text-6xl">
+                  <span aria-hidden className="mt-5 block h-[2px] w-12 bg-flare-lift" />
+                  <h2 className="mt-5 max-w-[18ch] font-display text-4xl font-normal leading-[1.02] tracking-[-0.05em] text-bone md:text-6xl">
                     {renderAccent(p.descriptor, p.accent)}
                   </h2>
                 </div>
@@ -198,16 +198,16 @@ function ProjectSlot({
       </div>
 
       {/* Collapsed meta — stays in the grid slot (hidden behind backdrop when open). */}
-      <div className="mt-5 flex items-baseline justify-between font-sans text-xs tracking-[0.06em] text-ink/60">
+      <div className="mt-5 flex items-baseline justify-between font-sans text-xs tracking-[0.06em] text-ink/70">
         <span>
           {p.index} · {p.category}
         </span>
         {p.status ? <span>{p.status}</span> : null}
       </div>
-      <h3 className="mt-2 max-w-[24ch] font-editorial text-2xl font-normal italic text-ink md:text-3xl">
+      <h3 className="mt-2 max-w-[24ch] font-display text-2xl font-normal tracking-[-0.04em] text-ink md:text-3xl">
         {renderAccent(p.descriptor, p.accent, false)}
       </h3>
-      <p className="mt-3 font-sans text-xs uppercase tracking-[0.12em] text-ink/55">{p.capabilities}</p>
+      <p className="mt-3 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-ink/70">{p.capabilities}</p>
 
       {/* Close affordance — outside the morphing box, so it never distorts. */}
       {selected && (
@@ -217,7 +217,7 @@ function ProjectSlot({
           data-cursor="hover"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { delay: reduce ? 0 : 0.35 } }}
-          className="fixed right-5 top-5 z-[220] flex items-center gap-2 rounded-full border border-bone/25 bg-charcoal/60 px-4 py-2 font-sans text-xs uppercase tracking-[0.14em] text-bone backdrop-blur transition-colors hover:border-bone md:right-8 md:top-8"
+          className="fixed right-5 top-5 z-[220] flex items-center gap-2 rounded-full border border-bone/25 bg-river/60 px-4 py-2 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-bone backdrop-blur transition-colors hover:border-bone md:right-8 md:top-8"
         >
           Close <span aria-hidden>✕</span>
         </motion.button>
@@ -233,7 +233,7 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
       animate={{ opacity: 1, y: 0, transition: { delay: reduce ? 0 : 0.28, duration: DUR.base, ease: EASE } }}
       className="mx-auto w-full max-w-editorial px-6 py-16 md:px-16 md:py-24"
     >
-      <p className="max-w-[34ch] font-editorial text-2xl italic leading-snug text-bone md:text-[2rem]">
+      <p className="max-w-[34ch] font-sans text-2xl leading-snug tracking-[-0.02em] text-bone md:text-[2rem]">
         {p.intro}
       </p>
 
@@ -246,14 +246,14 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
           ["Stack", p.stack],
         ].map(([label, value]) => (
           <div key={label}>
-            <dt className="text-xs uppercase tracking-[0.16em] text-bone/60">{label}</dt>
+            <dt className="text-xs font-semibold uppercase tracking-[0.13em] text-bone/60">{label}</dt>
             <dd className="mt-2 text-bone">{value}</dd>
           </div>
         ))}
       </dl>
 
       <div className="mt-14 grid gap-x-gutter gap-y-8 md:grid-cols-[1fr_1.4fr]">
-        <p className="font-sans text-sm uppercase tracking-[0.16em] text-blush">The work</p>
+        <p className="font-sans text-meta font-semibold uppercase text-flare-lift">The work</p>
         <div className="max-w-measure space-y-5 font-sans text-lg leading-relaxed text-bone/70">
           {p.body.map((para, i) => (
             <p key={i}>{para}</p>
@@ -268,7 +268,7 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
       </div>
 
       <div className="mt-16 grid gap-x-gutter gap-y-8 md:grid-cols-[1fr_1.4fr]">
-        <p className="font-sans text-sm uppercase tracking-[0.16em] text-blush">Scope</p>
+        <p className="font-sans text-meta font-semibold uppercase text-flare-lift">Scope</p>
         <ul className="max-w-measure divide-y divide-bone/15 font-sans text-lg text-bone">
           {p.scope.map((item) => (
             <li key={item} className="py-3">
@@ -280,13 +280,13 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
 
       {p.caseStudy && (
         <div className="mt-14">
-          <Button href={`/work/${p.id}`} variant="onCharcoal">
+          <Button href={`/work/${p.id}`} variant="onRiver">
             Read the full case study
           </Button>
         </div>
       )}
 
-      <div className="mt-20 border-t border-bone/10 pt-8 font-sans text-xs uppercase tracking-[0.16em] text-bone/55">
+      <div className="mt-20 border-t border-bone/10 pt-8 font-sans text-xs font-semibold uppercase tracking-[0.13em] text-bone/60">
         Krystal Brook Coterie — {p.index}
       </div>
     </motion.div>
@@ -294,8 +294,9 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
 }
 
 /**
- * Renders the descriptor with its SINGLE accent word lifted into the wine flare
- * (blush on this charcoal overlay) — the wine thread, carried into the transition.
+ * Renders the descriptor with its SINGLE accent word lifted into the flare —
+ * same face, no italic: flare-lift on the river overlay, neon on paper (the
+ * descriptor sizes are all ≥24px, which is what sanctions the neon stop).
  */
 function renderAccent(text: string, accent: string, onDark = true) {
   const at = text.toLowerCase().indexOf(accent.toLowerCase());
@@ -306,7 +307,7 @@ function renderAccent(text: string, accent: string, onDark = true) {
   return (
     <>
       {before}
-      <em className={`italic ${onDark ? "text-blush" : "text-cherry"}`}>{match}</em>
+      <span className={onDark ? "text-flare-lift" : "text-neon"}>{match}</span>
       {after}
     </>
   );

@@ -71,11 +71,11 @@ export default function ProcessPage() {
           {PHASES.map((p) => (
             <Reveal as="li" key={p.n} className="group border-t border-ink/15 py-10 md:py-12">
               <div className="grid gap-x-gutter gap-y-4 md:grid-cols-[auto_1fr] md:items-baseline">
-                <span className="font-display text-fluid-xl font-extrabold text-ink/30 md:w-28">
-                  {p.n}
+                <span className="font-sans text-meta font-semibold uppercase text-flare-deep md:w-28">
+                  {p.n} <span className="text-ink/40">/ 05</span>
                 </span>
                 <div className="max-w-measure">
-                  <h2 className="font-display text-fluid-xl font-extrabold uppercase tracking-[-0.01em] text-ink">{p.title}</h2>
+                  <h2 className="font-display text-fluid-xl font-normal text-ink">{p.title}.</h2>
                   <p className="mt-3 font-sans text-fluid-base leading-relaxed text-ink/70">{p.body}</p>
                 </div>
               </div>
@@ -84,15 +84,15 @@ export default function ProcessPage() {
         </ol>
       </SectionShell>
 
-      {/* CTA — charcoal showstopper */}
+      {/* CTA — the river inversion */}
       <SectionShell
-        tone="charcoal"
+        tone="river"
         marker
         heading="Ready when you are."
         accent="Ready"
         headingSize="xl"
       >
-        <Button href="/begin" variant="onCharcoal">
+        <Button href="/begin" variant="onRiver" size="lg">
           Begin your project
         </Button>
       </SectionShell>

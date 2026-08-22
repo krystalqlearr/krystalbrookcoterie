@@ -1,12 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
 import Eyebrow from "./Eyebrow";
 import EditorialHeading from "./EditorialHeading";
+import ArrowLink from "./ArrowLink";
 
 /**
  * Editorial project feature — a large numbered thumbnail panel beside a detail
- * column set off by a wine structural rule. `reverse` alternates the panel side
- * for a stacked, magazine-style list. Ink text on bone; the thumb panel is charcoal.
+ * column set off by a neon structural rule (a graphic, so the neon stop is
+ * sanctioned). `reverse` alternates the panel side for a stacked, magazine-style
+ * list. Ink text on milk; the thumb panel is deep river.
  */
 type Props = {
   index: string; // "01"
@@ -39,7 +40,7 @@ export default function ProjectFeature({
     >
       {/* Thumbnail panel with numeral watermark */}
       <div className={reverse ? "lg:order-2" : ""}>
-        <div className="relative aspect-[3/2] overflow-hidden border border-ink/15 bg-gradient-to-br from-mocha/25 via-ink to-ink">
+        <div className="relative aspect-[3/2] overflow-hidden border border-ink/15 bg-gradient-to-br from-river via-ink to-ink">
           <span
             aria-hidden
             className="absolute left-6 top-3 font-display text-[6rem] leading-none text-bone/10 md:text-[8rem]"
@@ -55,7 +56,7 @@ export default function ProjectFeature({
               className="object-cover"
             />
           ) : null}
-          <span className="absolute bottom-4 left-6 font-sans text-[0.6rem] uppercase tracking-[0.22em] text-bone/55">
+          <span className="absolute bottom-4 left-6 font-sans text-[0.6rem] uppercase tracking-[0.13em] text-bone/60">
             {client}
             {year ? ` · ${year}` : ""}
           </span>
@@ -63,7 +64,7 @@ export default function ProjectFeature({
       </div>
 
       {/* Detail column — wine structural rule on the left */}
-      <div className={`border-l-2 border-cherry pl-8 ${reverse ? "lg:order-1" : ""}`}>
+      <div className={`border-l-2 border-neon pl-8 ${reverse ? "lg:order-1" : ""}`}>
         <Eyebrow>
           {eyebrow}
           {year ? ` · ${year}` : ""}
@@ -71,17 +72,14 @@ export default function ProjectFeature({
         <EditorialHeading as="h2" size="lg" className="mt-4">
           {client}
         </EditorialHeading>
-        <span className="mt-5 inline-block rounded-[1px] border border-ink/30 px-3 py-1 font-sans text-[0.6rem] uppercase tracking-[0.2em] text-ink/60">
+        <span className="mt-5 inline-block rounded-[1px] border border-ink/30 px-3 py-1 font-sans text-[0.6rem] font-semibold uppercase tracking-[0.13em] text-ink/70">
           {tag}
         </span>
         <p className="mt-6 max-w-[40ch] font-sans leading-relaxed text-ink/70">{description}</p>
         {href ? (
-          <Link
-            href={href}
-            className="mt-8 inline-flex items-center gap-2 border-b border-ink/40 pb-1 font-sans text-xs uppercase tracking-[0.16em] text-ink transition-colors hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-          >
-            View the case study <span aria-hidden>→</span>
-          </Link>
+          <ArrowLink href={href} glyph="→" className="mt-8">
+            View the case study
+          </ArrowLink>
         ) : null}
       </div>
     </article>

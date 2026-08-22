@@ -1,7 +1,8 @@
 import Image from "next/image";
 
 /**
- * Editorial testimonial — serif-italic quote with muted attribution. Optional
+ * Editorial testimonial — a Regular-400 quote under an oversized neon quote mark
+ * (a glyph ≥24px, so the neon stop is sanctioned), muted attribution. Optional
  * circular portrait. Left-aligned, held to a comfortable measure.
  */
 type Props = {
@@ -21,14 +22,14 @@ export default function Testimonial({ quote, name, role, image, className = "" }
         </div>
       ) : null}
       <div>
-        <span aria-hidden className="block font-editorial text-[3.5rem] italic leading-[0.4] text-cherry">
+        <span aria-hidden className="block font-display text-[3.5rem] leading-[0.4] text-neon">
           &ldquo;
         </span>
-        <blockquote className="mt-4 font-editorial text-fluid-xl italic leading-[1.3] text-ink">
+        <blockquote className="mt-4 font-sans text-fluid-xl leading-[1.25] tracking-[-0.02em] text-ink">
           {quote}
         </blockquote>
       </div>
-      <figcaption className="font-sans text-sm tracking-[0.04em] text-ink/60">
+      <figcaption className="font-sans text-sm tracking-[0.04em] text-ink/70">
         <span className="text-ink">{name}</span>
         {role ? <>, {role}</> : null}
       </figcaption>

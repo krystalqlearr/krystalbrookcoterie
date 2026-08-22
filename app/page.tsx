@@ -1,3 +1,4 @@
+import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
 import EditorialHeading from "@/components/EditorialHeading";
 import Hero from "@/components/Hero";
@@ -13,9 +14,9 @@ export default function HomePage() {
       {/* 1 · Hero — atmosphere + choreographed headline */}
       <Hero />
 
-      {/* 2 · Positioning band — petrol alt-section */}
+      {/* 2 · Positioning band — bone alt-section (first recess) */}
       <SectionShell
-        tone="stone"
+        tone="bone"
         marker
         heading="Your competitors’ sites are rented. Yours will be owned."
         accent="owned"
@@ -37,15 +38,15 @@ export default function HomePage() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="mt-12">
-            <Button href="/work" variant="ghost">
+            <ArrowLink href="/work" glyph="→">
               View selected work
-            </Button>
+            </ArrowLink>
           </div>
         </Reveal>
       </SectionShell>
 
       {/* 4 · The difference — strategy-led, alt-section */}
-      <SectionShell tone="stone" eyebrow="The difference">
+      <SectionShell tone="bone" eyebrow="The difference">
         <Reveal stagger={0.12}>
           <div className="grid gap-x-gutter gap-y-8 lg:grid-cols-2 lg:items-start">
             <RevealItem>
@@ -104,9 +105,9 @@ export default function HomePage() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="mt-12">
-            <Button href="/services" variant="ghost">
+            <ArrowLink href="/services" glyph="→">
               View all services
-            </Button>
+            </ArrowLink>
           </div>
         </Reveal>
       </SectionShell>
@@ -122,15 +123,15 @@ export default function HomePage() {
         </Reveal>
       </SectionShell>
 
-      {/* 7 · Closing CTA — cream showstopper */}
+      {/* 7 · Closing CTA — the river inversion */}
       <SectionShell
-        tone="charcoal"
+        tone="river"
         marker
         heading="Let’s build something worth owning."
         accent="worth"
         headingSize="xl"
       >
-        <Button href="/begin" variant="onCharcoal">
+        <Button href="/begin" variant="onRiver" size="lg">
           Begin your project
         </Button>
       </SectionShell>
