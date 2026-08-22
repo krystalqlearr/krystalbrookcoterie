@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
 import FAQAccordion from "@/components/FAQAccordion";
 import IndexMeta from "@/components/IndexMeta";
+import TextReveal from "@/components/motion/TextReveal";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
@@ -179,68 +180,75 @@ export default function ServicesPage() {
           quarter-width card cannot do; the row gives it a headline, the reasoning,
           and its own way in. Price and duration stay INK — ink-forward reads
           expensive, and the flare is spent on the index. */}
+      {/* Every line of prose in a tier row — name, description, best-for, each scope
+          bullet, the exclusion line — now self-animates via TextReveal, so the row is
+          no longer wrapped in a fade-up Reveal (that fired a second, competing
+          entrance on the same text). LEFT UNWRAPPED, deliberately: IndexMeta, price
+          and duration. Those are DATA/meta, the same register as a stat or a label,
+          not lines of copy — sliding a number in sentence-by-sentence is degenerate
+          motion for content that was never a sentence. Same rule as /process. */}
       <SectionShell as="section" className="pt-0">
         <ul className="border-b border-ink/15">
           {TIERS.map((tier, i) => (
             <li key={tier.name} className="border-t border-ink/15">
-              <Reveal>
-                <div className="grid gap-x-gutter gap-y-6 py-14 lg:grid-cols-[13rem_1fr]">
-                  {/* Left rail — position, price, timeline */}
-                  <div className="flex flex-col gap-4">
-                    <IndexMeta index={i + 1} total={TIERS.length} />
-                    <p className="font-sans text-fluid-lg text-ink">{tier.price}</p>
-                    <p className="type-meta text-ink/70">{tier.duration}</p>
-                  </div>
-
-                  {/* The argument */}
-                  <div className="max-w-measure">
-                    {tier.featured ? (
-                      <Eyebrow tone="flare" className="mb-4">
-                        Most commissioned
-                      </Eyebrow>
-                    ) : null}
-                    <h3 className="type-display text-fluid-2xl text-ink">{tier.name}</h3>
-                    <p className="mt-6 font-sans text-fluid-base leading-relaxed text-ink/70">
-                      {tier.description}
-                    </p>
-                    <p className="mt-4 font-sans text-fluid-sm leading-relaxed text-ink/70">
-                      {tier.bestFor}
-                    </p>
-
-                    {/* Scope. A tier at this price has to say exactly what it is —
-                        a paragraph of adjectives is not an answer to "what do I get". */}
-                    <div className="mt-8">
-                      <p className="type-meta text-ink/70">What&rsquo;s included</p>
-                      <ul className="mt-4 space-y-2.5">
-                        {tier.includes.map((item) => (
-                          <li key={item} className="flex gap-3.5">
-                            <span
-                              aria-hidden
-                              className="mt-[0.6em] h-px w-3 shrink-0 bg-flare-deep"
-                            />
-                            <span className="font-sans text-fluid-sm leading-relaxed text-ink/70">
-                              {item}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {tier.excludes.length ? (
-                      <div className="mt-7">
-                        <p className="type-meta text-ink/70">Not at this tier</p>
-                        <p className="mt-3 font-sans text-fluid-sm leading-relaxed text-ink/70">
-                          {tier.excludes.join(" · ")}
-                        </p>
-                      </div>
-                    ) : null}
-
-                    <ArrowLink href="/begin" className="mt-8">
-                      Commission {tier.name}
-                    </ArrowLink>
-                  </div>
+              <div className="grid gap-x-gutter gap-y-6 py-14 lg:grid-cols-[13rem_1fr]">
+                {/* Left rail — position, price, timeline */}
+                <div className="flex flex-col gap-4">
+                  <IndexMeta index={i + 1} total={TIERS.length} />
+                  <p className="font-sans text-fluid-lg text-ink">{tier.price}</p>
+                  <p className="type-meta text-ink/70">{tier.duration}</p>
                 </div>
-              </Reveal>
+
+                {/* The argument */}
+                <div className="max-w-measure">
+                  {tier.featured ? (
+                    <Eyebrow tone="flare" className="mb-4">
+                      Most commissioned
+                    </Eyebrow>
+                  ) : null}
+                  <h3 className="type-display text-fluid-2xl text-ink">
+                    <TextReveal>{tier.name}</TextReveal>
+                  </h3>
+                  <p className="mt-6 font-sans text-fluid-base leading-relaxed text-ink/70">
+                    <TextReveal delay={0.06}>{tier.description}</TextReveal>
+                  </p>
+                  <p className="mt-4 font-sans text-fluid-sm leading-relaxed text-ink/70">
+                    <TextReveal delay={0.12}>{tier.bestFor}</TextReveal>
+                  </p>
+
+                  {/* Scope. A tier at this price has to say exactly what it is —
+                      a paragraph of adjectives is not an answer to "what do I get". */}
+                  <div className="mt-8">
+                    <p className="type-meta text-ink/70">What&rsquo;s included</p>
+                    <ul className="mt-4 space-y-2.5">
+                      {tier.includes.map((item, idx) => (
+                        <li key={item} className="flex gap-3.5">
+                          <span
+                            aria-hidden
+                            className="mt-[0.6em] h-px w-3 shrink-0 bg-flare-deep"
+                          />
+                          <span className="font-sans text-fluid-sm leading-relaxed text-ink/70">
+                            <TextReveal delay={0.03 * idx}>{item}</TextReveal>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {tier.excludes.length ? (
+                    <div className="mt-7">
+                      <p className="type-meta text-ink/70">Not at this tier</p>
+                      <p className="mt-3 font-sans text-fluid-sm leading-relaxed text-ink/70">
+                        <TextReveal>{tier.excludes.join(" · ")}</TextReveal>
+                      </p>
+                    </div>
+                  ) : null}
+
+                  <ArrowLink href="/begin" className="mt-8">
+                    Commission {tier.name}
+                  </ArrowLink>
+                </div>
+              </div>
             </li>
           ))}
         </ul>

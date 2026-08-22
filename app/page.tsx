@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import ArrowLink from "@/components/ArrowLink";
 import EditorialHeading from "@/components/EditorialHeading";
+import TextReveal from "@/components/motion/TextReveal";
 import Hero from "@/components/Hero";
 import IndexMeta from "@/components/IndexMeta";
 import Marquee from "@/components/Marquee";
@@ -108,29 +109,33 @@ export default function HomePage() {
         </Reveal>
       </SectionShell>
 
-      {/* 5 · Point of view — the studio's argument for why strategy comes first */}
+      {/* 5 · Point of view — the studio's argument for why strategy comes first. Both
+             the heading and the body copy now self-animate via TextReveal (their own
+             whileInView), so the outer Reveal/RevealItem stagger this section used to
+             coordinate them with is gone — it was already down to one real item once
+             the heading moved off it. */}
       <SectionShell eyebrow="The difference">
-        <Reveal stagger={0.12}>
-          <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-2 lg:items-start">
-            <EditorialHeading as="h2" size="lg" accent="follows" className="max-w-[16ch]">
-              Strategy leads. Everything else follows.
-            </EditorialHeading>
-            <RevealItem>
-              <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-                <p>
-                  Every brand I take on is shaped from its positioning up — who it must
-                  move, what it must be trusted for, and where it intends to go. The
-                  design serves that strategy; it never chases a trend.
-                </p>
-                <p>
-                  The result is a digital identity that reads established, distinctive,
-                  and impossible to confuse with anyone else — one senior mind on every
-                  decision, from strategy to the last interaction on screen.
-                </p>
-              </div>
-            </RevealItem>
+        <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-2 lg:items-start">
+          <EditorialHeading as="h2" size="lg" accent="follows" className="max-w-[16ch]">
+            Strategy leads. Everything else follows.
+          </EditorialHeading>
+          <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
+            <p>
+              <TextReveal>
+                Every brand I take on is shaped from its positioning up — who it must
+                move, what it must be trusted for, and where it intends to go. The
+                design serves that strategy; it never chases a trend.
+              </TextReveal>
+            </p>
+            <p>
+              <TextReveal delay={0.1}>
+                The result is a digital identity that reads established, distinctive,
+                and impossible to confuse with anyone else — one senior mind on every
+                decision, from strategy to the last interaction on screen.
+              </TextReveal>
+            </p>
           </div>
-        </Reveal>
+        </div>
       </SectionShell>
 
       {/* 6 · The studio — four ways in, Signature flagged */}

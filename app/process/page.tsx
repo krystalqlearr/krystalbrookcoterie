@@ -3,6 +3,7 @@ import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
+import TextReveal from "@/components/motion/TextReveal";
 import Reveal from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 
@@ -48,19 +49,21 @@ export default function ProcessPage() {
 
       {/* The argument, before the mechanics */}
       <SectionShell as="section" className="pt-0">
-        <Reveal>
-          <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-            <p>
+        <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
+          <p>
+            <TextReveal>
               Every project begins beneath the surface. We clarify what the brand stands
               for, who it must move, and what the website needs to accomplish before a
               visual direction is established.
-            </p>
-            <p>
+            </TextReveal>
+          </p>
+          <p>
+            <TextReveal delay={0.08}>
               The result is not decoration. It is a complete digital system built to
               sharpen perception and support the next stage of the business.
-            </p>
-          </div>
-        </Reveal>
+            </TextReveal>
+          </p>
+        </div>
       </SectionShell>
 
       {/* The five phases — the same counted-row pattern as the /services tiers, so a
@@ -69,19 +72,27 @@ export default function ProcessPage() {
           on one page. IndexMeta carries the count in the AA-safe stop instead, and
           the phase name takes the display weight. */}
       <SectionShell tone="bone" eyebrow="How it runs" heading="Five phases, in order.">
+        {/* Each row's title and body now self-animate via TextReveal (their own
+            whileInView), which is why the row is no longer wrapped in a fade-up
+            Reveal — that would fire a second, competing entrance on the same text.
+            IndexMeta rides in unanimated, which is deliberate: it is a meta label,
+            not a line of copy, and a numeral popping in on its own reads as noise
+            rather than as part of the sentence-by-sentence arrival. */}
         <ol className="border-b border-ink/15">
           {PHASES.map((phase, i) => (
-            <Reveal as="li" key={phase.title} className="border-t border-ink/15">
+            <li key={phase.title} className="border-t border-ink/15">
               <div className="grid gap-x-gutter gap-y-5 py-12 lg:grid-cols-[13rem_1fr]">
                 <IndexMeta index={i + 1} total={PHASES.length} />
                 <div className="max-w-measure">
-                  <h2 className="type-display text-fluid-2xl text-ink">{phase.title}</h2>
+                  <h2 className="type-display text-fluid-2xl text-ink">
+                    <TextReveal>{phase.title}</TextReveal>
+                  </h2>
                   <p className="mt-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-                    {phase.body}
+                    <TextReveal delay={0.06}>{phase.body}</TextReveal>
                   </p>
                 </div>
               </div>
-            </Reveal>
+            </li>
           ))}
         </ol>
 
