@@ -3,6 +3,7 @@ import EditorialHeading from "./EditorialHeading";
 import Eyebrow from "./Eyebrow";
 import SectionMarker from "./SectionMarker";
 import Reveal, { RevealItem } from "./motion/Reveal";
+import TextReveal from "./motion/TextReveal";
 
 /**
  * Consistent page opener — META eyebrow + fluid DISPLAY headline + grotesk intro,
@@ -31,17 +32,13 @@ export default function PageHero({ eyebrow, title, accent, intro, size = "xl", m
           <RevealItem>
             <Eyebrow>{eyebrow}</Eyebrow>
           </RevealItem>
-          <RevealItem>
-            <EditorialHeading as="h1" size={size} accent={accent} className="mt-6 max-w-[20ch]">
-              {title}
-            </EditorialHeading>
-          </RevealItem>
+          <EditorialHeading as="h1" size={size} accent={accent} className="mt-6 max-w-[20ch]">
+            {title}
+          </EditorialHeading>
           {intro ? (
-            <RevealItem>
-              <div className="mt-8 max-w-measure font-sans text-fluid-lg text-ink/70">
-                {intro}
-              </div>
-            </RevealItem>
+            <div className="mt-8 max-w-measure font-sans text-fluid-lg text-ink/70">
+              {typeof intro === "string" ? <TextReveal>{intro}</TextReveal> : intro}
+            </div>
           ) : null}
         </Reveal>
       </div>

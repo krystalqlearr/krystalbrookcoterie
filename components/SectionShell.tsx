@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import Eyebrow from "./Eyebrow";
 import EditorialHeading from "./EditorialHeading";
+import TextReveal from "./motion/TextReveal";
 import Rule from "./Rule";
 
 /**
@@ -90,7 +91,9 @@ export default function SectionShell({
             </EditorialHeading>
           ) : null}
           {intro ? (
-            <div className={`max-w-measure font-sans text-fluid-lg ${t.intro}`}>{intro}</div>
+            <div className={`max-w-measure font-sans text-fluid-lg ${t.intro}`}>
+              {typeof intro === "string" ? <TextReveal>{intro}</TextReveal> : intro}
+            </div>
           ) : null}
         </div>
       ) : null}

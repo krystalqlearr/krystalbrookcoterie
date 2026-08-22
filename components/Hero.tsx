@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { EASE, DUR } from "@/lib/motion";
 import Button from "./Button";
 import ArrowLink from "./ArrowLink";
+import TextReveal from "./motion/TextReveal";
 
 /**
  * Home hero — the first-impression showstopper on warm bone paper: an enormous
@@ -18,15 +19,6 @@ import ArrowLink from "./ArrowLink";
  * no reveal, no pointer drift, content is simply present.
  */
 
-// Headline set as discrete lines so each can mask-reveal independently.
-const LINE_PARENT: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
-};
-const LINE_CHILD: Variants = {
-  hidden: { y: "115%" },
-  visible: { y: "0%", transition: { duration: DUR.xslow, ease: EASE } },
-};
 const FADE_UP: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (delay: number = 0) => ({
@@ -86,28 +78,19 @@ export default function Hero() {
         </motion.p>
 
         {/* Headline — DISPLAY register (regular weight, sentence case, hard negative
-            tracking), revealed line by line behind a mask. The flare is COLOR on one
-            word, in the same face: the serif-italic accent is retired. */}
-        <motion.h1
-          variants={reduce ? undefined : LINE_PARENT}
-          initial={reduce ? undefined : "hidden"}
-          animate={reduce ? undefined : "visible"}
-          className="type-display mt-8 max-w-[14ch] text-fluid-hero text-ink"
-        >
-          <span className="block overflow-hidden pb-[0.05em]">
-            <motion.span variants={reduce ? undefined : LINE_CHILD} className="block">
-              Websites with
-            </motion.span>
+            tracking), revealed character by character via TextReveal (blur + fade,
+            no translation — see components/motion/TextReveal.tsx). The flare is
+            COLOR on one line, in the same face: the serif-italic accent is retired. */}
+        <h1 className="type-display mt-8 max-w-[14ch] text-fluid-hero text-ink">
+          <span className="block pb-[0.05em]">
+            <TextReveal>Websites with</TextReveal>
           </span>
-          <span className="block overflow-hidden pb-[0.08em]">
-            <motion.span
-              variants={reduce ? undefined : LINE_CHILD}
-              className="block text-flare"
-            >
+          <span className="block pb-[0.08em]">
+            <TextReveal delay={0.12} className="text-flare">
               presence.
-            </motion.span>
+            </TextReveal>
           </span>
-        </motion.h1>
+        </h1>
 
         {/* Subline — the quiet voice under the statement, now grotesk */}
         <motion.p

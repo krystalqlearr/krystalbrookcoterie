@@ -4,8 +4,8 @@ import Button from "@/components/Button";
 import Eyebrow from "@/components/Eyebrow";
 import FAQAccordion from "@/components/FAQAccordion";
 import IndexMeta from "@/components/IndexMeta";
+import TextReveal from "@/components/motion/TextReveal";
 import PageHero from "@/components/PageHero";
-import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
 
@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     "Four custom-coded tiers — The Edit, Signature, Atelier, Private Commission — plus ongoing Care Plans. Agency-grade engineering at boutique scale.",
 };
 
+// SCOPE IS CONTRACTUAL. Signature's list is taken from the documented scope in
+// docs/kbc-founding-client-offer.md — those are confirmed terms. The Edit and
+// Atelier are described QUALITATIVELY where no page count or revision count is
+// documented anywhere: a number invented here would become a commitment the moment
+// a prospect read it. Add the figures once they are decided.
 const TIERS = [
   {
     name: "The Edit",
@@ -24,6 +29,16 @@ const TIERS = [
       "A focused digital debut for brands ready to stop looking new. Strategic direction, custom design, and a polished online presence built to establish credibility from the first click.",
     bestFor:
       "Best for emerging brands, focused offers, and founders who need a refined foundation without an expansive build.",
+    includes: [
+      "Art direction and a design system bespoke to the brand — no theme, no template",
+      "A focused set of pages: the essential path from first impression to enquiry",
+      "Privacy, Terms and a custom 404, which never count against the page count",
+      "Hand-built in code — Next.js, Tailwind, deployed to Vercel",
+      "Foundational SEO: metadata, Open Graph, structured data, sitemap",
+      "Core Web Vitals and WCAG 2.1 AA held as build standards, not afterthoughts",
+      "Launch and full handover — you own the code, the design system and the deployment",
+    ],
+    excludes: ["A CMS", "Booking integration", "Editorial motion beyond the standard reveals"],
   },
   {
     name: "Signature",
@@ -34,6 +49,21 @@ const TIERS = [
       "The complete brand website. Strategy, creative direction, custom design, and an intuitive CMS come together in a digital identity that feels unmistakably yours — and guides visitors toward action.",
     bestFor:
       "Designed for established founders ready for a website that carries the full weight of the brand.",
+    includes: [
+      "Art direction and design system bespoke to the brand — no theme, no template",
+      "Up to six custom-designed pages or templates, hand-built in code",
+      "A CMS-driven template counts as one design and can power unlimited entries",
+      "Privacy, Terms and a custom 404 — they don’t count against the six",
+      "A CMS where it earns its place: self-serve updates where genuinely useful",
+      "Editorial motion and interaction — the reveals, transitions and pacing of the studio standard",
+      "Embedded booking: integration of your existing scheduler (Square, Acuity, Vagaro)",
+      "Foundational SEO — metadata, Open Graph, structured data, sitemap",
+      "Core Web Vitals engineered, WCAG 2.1 AA held",
+      "An art-directed shot list for your photographer, so imagery matches design intent",
+      "Two consolidated revision rounds — one at design, one at build",
+      "Launch and full handover to your own infrastructure",
+    ],
+    excludes: ["E-commerce — that’s an Atelier conversation", "Brand identity design", "Rush delivery"],
   },
   {
     name: "Atelier",
@@ -42,6 +72,16 @@ const TIERS = [
     description:
       "For brands whose website must do more than look beautiful. A deeper strategic and creative engagement — immersive art direction, advanced interactions, custom user journeys, and a digital experience designed for authority and scale.",
     bestFor: "Built for flagship brands, expanding businesses, and high-consideration offers.",
+    includes: [
+      "Everything in Signature, at a larger page and template count",
+      "Immersive art direction — the site treated as a flagship location, not a brochure",
+      "Advanced interaction and signature motion moments built for this brand alone",
+      "Custom user journeys designed around how this business actually converts",
+      "Deeper content modelling so the CMS holds a real editorial operation",
+      "E-commerce where the model calls for it",
+      "Analytics and conversion instrumentation configured at launch",
+    ],
+    excludes: ["Brand identity design", "Rush delivery"],
   },
   {
     name: "Private Commission",
@@ -51,7 +91,27 @@ const TIERS = [
       "No standard scope. No predetermined ceiling. A fully commissioned digital experience shaped around the complexity, ambition, and operating model of the brand.",
     bestFor:
       "Custom platforms, original interactions, integrated systems, and creative direction developed entirely from the ground up.",
+    includes: [
+      "Scoped entirely to the work — there is no fixed inclusion list, by design",
+      "Custom platforms, original interactions and integrated systems",
+      "Creative direction developed from the ground up rather than adapted",
+      "Scope, timeline and investment are defined together before anything is committed",
+    ],
+    excludes: [],
   },
+];
+
+// Available on any engagement, quoted with the proposal. Rates are deliberately
+// NOT published: the figures in docs/kbc-founding-client-offer.md are marked
+// "suggested" and are not confirmed commercial terms.
+const ADD_ONS = [
+  "Additional pages or templates",
+  "Full site copywriting, rather than a polish of your drafts",
+  "Journal or blog — CMS templates plus the index",
+  "Email marketing setup: capture and welcome flow",
+  "A custom booking or enquiry flow beyond an embed",
+  "An additional revision round",
+  "Photography sourcing and stock curation",
 ];
 
 const CARE = [
@@ -119,59 +179,100 @@ export default function ServicesPage() {
           quarter-width card cannot do; the row gives it a headline, the reasoning,
           and its own way in. Price and duration stay INK — ink-forward reads
           expensive, and the flare is spent on the index. */}
+      {/* Every line of prose in a tier row — name, description, best-for, each scope
+          bullet, the exclusion line — now self-animates via TextReveal, so the row is
+          no longer wrapped in a fade-up Reveal (that fired a second, competing
+          entrance on the same text). LEFT UNWRAPPED, deliberately: IndexMeta, price
+          and duration. Those are DATA/meta, the same register as a stat or a label,
+          not lines of copy — sliding a number in sentence-by-sentence is degenerate
+          motion for content that was never a sentence. Same rule as /process. */}
       <SectionShell as="section" className="pt-0">
         <ul className="border-b border-ink/15">
           {TIERS.map((tier, i) => (
             <li key={tier.name} className="border-t border-ink/15">
-              <Reveal>
-                <div className="grid gap-x-gutter gap-y-6 py-14 lg:grid-cols-[13rem_1fr]">
-                  {/* Left rail — position, price, timeline */}
-                  <div className="flex flex-col gap-4">
-                    <IndexMeta index={i + 1} total={TIERS.length} />
-                    <p className="font-sans text-fluid-lg text-ink">{tier.price}</p>
-                    <p className="type-meta text-ink/70">{tier.duration}</p>
+              <div className="grid gap-x-gutter gap-y-6 py-14 lg:grid-cols-[13rem_1fr]">
+                {/* Left rail — position, price, timeline */}
+                <div className="flex flex-col gap-4">
+                  <IndexMeta index={i + 1} total={TIERS.length} />
+                  <p className="font-sans text-fluid-lg text-ink">{tier.price}</p>
+                  <p className="type-meta text-ink/70">{tier.duration}</p>
+                </div>
+
+                {/* The argument */}
+                <div className="max-w-measure">
+                  {tier.featured ? (
+                    <Eyebrow tone="flare" className="mb-4">
+                      Most commissioned
+                    </Eyebrow>
+                  ) : null}
+                  <h3 className="type-display text-fluid-2xl text-ink">
+                    <TextReveal>{tier.name}</TextReveal>
+                  </h3>
+                  <p className="mt-6 font-sans text-fluid-base leading-relaxed text-ink/70">
+                    <TextReveal delay={0.06}>{tier.description}</TextReveal>
+                  </p>
+                  <p className="mt-4 font-sans text-fluid-sm leading-relaxed text-ink/70">
+                    <TextReveal delay={0.12}>{tier.bestFor}</TextReveal>
+                  </p>
+
+                  {/* Scope. A tier at this price has to say exactly what it is —
+                      a paragraph of adjectives is not an answer to "what do I get". */}
+                  <div className="mt-8">
+                    <p className="type-meta text-ink/70">What&rsquo;s included</p>
+                    <ul className="mt-4 space-y-2.5">
+                      {tier.includes.map((item, idx) => (
+                        <li key={item} className="flex gap-3.5">
+                          <span
+                            aria-hidden
+                            className="mt-[0.6em] h-px w-3 shrink-0 bg-flare-deep"
+                          />
+                          <span className="font-sans text-fluid-sm leading-relaxed text-ink/70">
+                            <TextReveal delay={0.03 * idx}>{item}</TextReveal>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  {/* The argument */}
-                  <div className="max-w-measure">
-                    {tier.featured ? (
-                      <Eyebrow tone="flare" className="mb-4">
-                        Most commissioned
-                      </Eyebrow>
-                    ) : null}
-                    <h3 className="type-display text-fluid-2xl text-ink">{tier.name}</h3>
-                    <p className="mt-6 font-sans text-fluid-base leading-relaxed text-ink/70">
-                      {tier.description}
-                    </p>
-                    <p className="mt-4 font-sans text-fluid-sm leading-relaxed text-ink/70">
-                      {tier.bestFor}
-                    </p>
-                    <ArrowLink href="/begin" className="mt-8">
-                      Commission {tier.name}
-                    </ArrowLink>
-                  </div>
+                  {tier.excludes.length ? (
+                    <div className="mt-7">
+                      <p className="type-meta text-ink/70">Not at this tier</p>
+                      <p className="mt-3 font-sans text-fluid-sm leading-relaxed text-ink/70">
+                        <TextReveal>{tier.excludes.join(" · ")}</TextReveal>
+                      </p>
+                    </div>
+                  ) : null}
+
+                  <ArrowLink href="/begin" className="mt-8">
+                    Commission {tier.name}
+                  </ArrowLink>
                 </div>
-              </Reveal>
+              </div>
             </li>
           ))}
         </ul>
       </SectionShell>
 
-      {/* Founding client — first-recess alt-section. The price is deliberately NOT
-          the accent word: prices stay ink, so the flare here is the marker tick. */}
+      {/* Add-ons — what is deliberately extra, so the tier scope stays honest.
+          Rates are NOT published: the figures on file are marked "suggested". */}
       <SectionShell
         tone="bone"
         marker
-        eyebrow="Founding client program"
-        heading="Signature scope at $2,800 — for the right first few."
+        eyebrow="Add-ons"
+        heading="Anything outside a tier is quoted, never assumed."
         headingSize="md"
-        intro="A limited program for a small number of founding clients: full Signature-tier scope in exchange for case-study rights. Real work, deeply discounted, while the studio builds its published proof."
+        intro="Each engagement holds a defined scope so the timeline and the quality both hold. Everything below is available on any tier and priced with your proposal — never added silently to an invoice."
       >
-        <Reveal delay={0.1}>
-          <Button href="/begin" variant="primary">
-            Apply as a founding client
-          </Button>
-        </Reveal>
+        <ul className="grid max-w-editorial gap-x-gutter gap-y-3 sm:grid-cols-2">
+          {ADD_ONS.map((item, idx) => (
+            <li key={item} className="flex gap-3.5 border-t border-ink/15 pt-3">
+              <span aria-hidden className="mt-[0.6em] h-px w-3 shrink-0 bg-flare-deep" />
+              <span className="font-sans text-fluid-sm leading-relaxed text-ink/70">
+                <TextReveal delay={0.02 * idx}>{item}</TextReveal>
+              </span>
+            </li>
+          ))}
+        </ul>
       </SectionShell>
 
       {/* Care Plans */}
@@ -181,22 +282,21 @@ export default function ServicesPage() {
         headingSize="md"
         intro="A website is an asset — it performs best when it’s maintained. Care Plans keep yours fast, current, and evolving after launch."
       >
-        <Reveal stagger={0.08}>
-          <div className="grid gap-x-gutter gap-y-10 sm:grid-cols-3">
-            {CARE.map((c) => (
-              <RevealItem key={c.name}>
-                <ServiceCard name={c.name} price={c.price} description={c.description} />
-              </RevealItem>
-            ))}
-          </div>
-        </Reveal>
+        {/* Each card's own name/description now self-animates via TextReveal, so the
+            grid is no longer wrapped in a stagger Reveal — see the same rule on the
+            home page's studio grid. */}
+        <div className="grid gap-x-gutter gap-y-10 sm:grid-cols-3">
+          {CARE.map((c) => (
+            <ServiceCard key={c.name} name={c.name} price={c.price} description={c.description} />
+          ))}
+        </div>
       </SectionShell>
 
       {/* FAQ — first-recess, so the page keeps alternating rather than running flat */}
       <SectionShell tone="bone" eyebrow="Questions" heading="The honest answers." headingSize="md">
-        <Reveal>
-          <FAQAccordion items={FAQ} />
-        </Reveal>
+        {/* FAQAccordion's own question/answer text self-animates via TextReveal now,
+            so no outer Reveal here — that would fire a second, competing entrance. */}
+        <FAQAccordion items={FAQ} />
       </SectionShell>
 
       {/* CTA — the page's ONE dark moment. `marker` is off: the heading already

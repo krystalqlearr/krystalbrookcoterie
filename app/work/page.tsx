@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ArrowLink from "@/components/ArrowLink";
 import Eyebrow from "@/components/Eyebrow";
 import SectionMarker from "@/components/SectionMarker";
+import TextReveal from "@/components/motion/TextReveal";
 import WorkShowcase from "@/components/WorkShowcase";
 
 export const metadata: Metadata = {
@@ -18,11 +19,13 @@ export default function WorkPage() {
         <div className="container relative z-10">
         <Eyebrow>Selected work</Eyebrow>
         <h1 className="type-display mt-8 max-w-[15ch] text-fluid-display text-ink">
-          The work speaks first.
+          <TextReveal>The work speaks first.</TextReveal>
         </h1>
         <p className="mt-8 max-w-measure font-sans text-fluid-lg text-ink/70">
-          Selected identities and digital experiences created for brands with a clear
-          point of view — and the ambition to build something people remember.
+          <TextReveal delay={0.06}>
+            Selected identities and digital experiences created for brands with a clear
+            point of view — and the ambition to build something people remember.
+          </TextReveal>
         </p>
         </div>
       </div>

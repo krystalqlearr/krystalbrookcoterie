@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Button from "@/components/Button";
 import EditorialHeading from "@/components/EditorialHeading";
+import TextReveal from "@/components/motion/TextReveal";
 import ImageFrame from "@/components/ImageFrame";
 import PageHero from "@/components/PageHero";
-import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import Reveal from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
@@ -36,33 +37,35 @@ export default function AboutPage() {
               sizes="(min-width: 1024px) 33vw, 100vw"
             />
           </Reveal>
-          <Reveal stagger={0.12}>
-            <RevealItem>
-              <EditorialHeading as="h2" size="md" accent="own" className="max-w-[20ch]">
-                A studio, and a point of view of its own.
-              </EditorialHeading>
-            </RevealItem>
-            <RevealItem>
-              <div className="mt-6 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-                <p>
+          <div>
+            <EditorialHeading as="h2" size="md" accent="own" className="max-w-[20ch]">
+              A studio, and a point of view of its own.
+            </EditorialHeading>
+            <div className="mt-6 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
+              <p>
+                <TextReveal>
                   I’m Krystal — the designer and creative partner behind Krystal Brook
                   Coterie, working at the intersection of brand strategy, editorial
                   design, and digital experience.
-                </p>
-                <p>
+                </TextReveal>
+              </p>
+              <p>
+                <TextReveal delay={0.08}>
                   My work is for founders who understand that a website is not simply
                   where information lives. It is where value is perceived, trust is
                   formed, and the brand becomes real in the mind of the customer.
-                </p>
-                <p>
+                </TextReveal>
+              </p>
+              <p>
+                <TextReveal delay={0.16}>
                   Each project is approached as its own visual world — considered from
                   the positioning beneath it to the smallest interaction on screen. The
                   result is a website that does not merely represent the business. It
                   strengthens it.
-                </p>
-              </div>
-            </RevealItem>
-          </Reveal>
+                </TextReveal>
+              </p>
+            </div>
+          </div>
         </div>
       </SectionShell>
 
@@ -74,26 +77,29 @@ export default function AboutPage() {
         accent="distinction"
         headingSize="md"
       >
-        <Reveal>
-          <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-            <p>
+        <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
+          <p>
+            <TextReveal>
               Luxury is not created by adding more. It is created through restraint,
               precision, consistency, and a clear point of view.
-            </p>
-            <p>
+            </TextReveal>
+          </p>
+          <p>
+            <TextReveal delay={0.08}>
               That principle shapes every engagement. No interchangeable layouts. No
               visual excess without purpose. No trend applied without understanding what
               it communicates.
-            </p>
-            <p>
+            </TextReveal>
+          </p>
+          <p>
+            <TextReveal delay={0.16}>
               Only the elements that make the brand more recognizable, more credible, and
               more difficult to replace.
-            </p>
-          </div>
-        </Reveal>
+            </TextReveal>
+          </p>
+        </div>
       </SectionShell>
 
-      {/* CTA — dark showstopper */}
       {/* CTA — the page's one dark moment. `marker` off: the heading has the flare. */}
       <SectionShell
         tone="dark"

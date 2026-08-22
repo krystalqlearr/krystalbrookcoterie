@@ -1,4 +1,5 @@
 import Button from "./Button";
+import TextReveal from "./motion/TextReveal";
 
 /**
  * Service tier card — ink top rule, uppercase sans name, ink price, muted-ink
@@ -39,13 +40,17 @@ export default function ServiceCard({
       {featured ? (
         <span className="type-meta mb-4 block text-flare-deep">Most commissioned</span>
       ) : null}
-      <h3 className="type-display text-fluid-2xl text-ink">{name}</h3>
+      <h3 className="type-display text-fluid-2xl text-ink">
+        <TextReveal>{name}</TextReveal>
+      </h3>
       <p className="mt-3 font-sans font-medium text-ink">{price}</p>
       {duration ? <p className="type-meta mt-2 text-ink/70">{duration}</p> : null}
-      <p className="mt-5 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70">{description}</p>
+      <p className="mt-5 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70">
+        <TextReveal delay={0.04}>{description}</TextReveal>
+      </p>
       {bestFor ? (
         <p className="mt-3 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70">
-          {bestFor}
+          <TextReveal delay={0.08}>{bestFor}</TextReveal>
         </p>
       ) : null}
       {href ? (

@@ -189,6 +189,38 @@ html.lenis body {
   navigation: auto;
 }
 
+/* ── Text reveal — character-by-character blur + fade ───────────────────────
+   The site's text entrance (components/motion/TextReveal.tsx). Pure CSS, driven
+   by a single data-attribute flip per block plus one custom property per
+   character — deliberately NOT Framer variants, since a page can carry thousands
+   of these spans once every text block on the site uses it, and per-character JS
+   orchestration does not stay cheap at that count.
+
+   Recipe matches bionicegg.com exactly (confirmed against the live, triggered
+   DOM, not just its stylesheet): opacity 0→1 over 0.28s, blur(4px)→blur(0) over
+   0.34s, both ease, staggered by --char-index at 9ms/char capped at 0.52s so a
+   long paragraph still finishes quickly regardless of length. These numbers are
+   deliberately NOT lib/motion.ts's DUR/EASE tokens — that system is tuned for a
+   handful of slow, weighted block entrances (xslow = 0.9s); running that cadence
+   per character across a whole page of copy would take seconds to settle. This is
+   a different motion register serving a different job, so it gets its own,
+   equally deliberate, equally documented constants — here, since the mechanism
+   is CSS, not JS, this file is the source of truth for these values, not
+   lib/motion.ts. */
+.text-reveal-char {
+  opacity: 0;
+  filter: blur(4px);
+  white-space: pre-wrap;
+  transition-property: opacity, filter;
+  transition-duration: 0.28s, 0.34s;
+  transition-timing-function: ease, ease;
+  transition-delay: min(calc(var(--char-index) * 9ms), 0.52s);
+}
+[data-text-reveal-visible="true"] .text-reveal-char {
+  opacity: 1;
+  filter: blur(0);
+}
+
 /* ── Reduced motion: hard damp everything ────────────────────────────────────
    Lenis is skipped in JS; this covers CSS transitions/animations and parallax. */
 @media (prefers-reduced-motion: reduce) {
@@ -205,5 +237,11 @@ html.lenis body {
   .marquee-track {
     animation: none !important;
     transform: none !important;
+  }
+  /* TextReveal already renders plain, unsplit text under reduced motion — this is
+     a CSS-level safety net for the brief window before that JS check resolves. */
+  .text-reveal-char {
+    opacity: 1 !important;
+    filter: none !important;
   }
 }

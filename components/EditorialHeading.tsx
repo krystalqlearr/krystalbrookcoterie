@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import TextReveal from "./motion/TextReveal";
 
 /**
  * Display heading — the site's headline voice.
@@ -70,19 +71,15 @@ export default function EditorialHeading({
   // Same face, same weight, same tracking — only the color changes.
   const flareClass = accentByCanvas[canvas];
 
-  let content: ReactNode = children;
-  if (accent && typeof children === "string" && children.includes(accent)) {
-    const i = children.indexOf(accent);
-    content = (
-      <>
-        {children.slice(0, i)}
-        <span className={flareClass}>{accent}</span>
-        {children.slice(i + accent.length)}
-      </>
-    );
-  }
-
   return (
-    <Tag className={`type-display ${sizeClass[size]} ${className}`}>{content}</Tag>
+    <Tag className={`type-display ${sizeClass[size]} ${className}`}>
+      {typeof children === "string" ? (
+        <TextReveal highlight={accent} highlightClassName={flareClass}>
+          {children}
+        </TextReveal>
+      ) : (
+        children
+      )}
+    </Tag>
   );
 }
