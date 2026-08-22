@@ -37,11 +37,9 @@ export default function AboutPage() {
             />
           </Reveal>
           <Reveal stagger={0.12}>
-            <RevealItem>
-              <EditorialHeading as="h2" size="md" accent="own" className="max-w-[20ch]">
-                A studio, and a point of view of its own.
-              </EditorialHeading>
-            </RevealItem>
+            <EditorialHeading as="h2" size="md" accent="own" className="max-w-[20ch]">
+              A studio, and a point of view of its own.
+            </EditorialHeading>
             <RevealItem>
               <div className="mt-6 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
                 <p>

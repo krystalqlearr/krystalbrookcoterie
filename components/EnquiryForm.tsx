@@ -16,12 +16,14 @@ import { useState, type FormEvent } from "react";
 const STUDIO_EMAIL = "hello@krystalbrookcoterie.com";
 
 const INDUSTRIES = ["Beauty", "Med-spa", "Wellness", "Bridal", "Luxury lifestyle", "Other"];
+// These MUST match the tiers on /services exactly — this is the list a prospect
+// actually submits, and it was still offering the retired "Launch" and "Atelier
+// Custom" names long after the tiers were renamed.
 const INVESTMENT = [
-  "Launch — $4,500",
+  "The Edit — $4,500",
   "Signature — $9,800",
   "Atelier — $22,000+",
-  "Atelier Custom — $32,000+",
-  "Founding Client — $2,800",
+  "Private Commission — $32,000+",
   "Not sure yet",
 ];
 const TIMING = ["As soon as possible", "Within 1–3 months", "In 3–6 months", "Just exploring"];

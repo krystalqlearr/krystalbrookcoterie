@@ -112,11 +112,9 @@ export default function HomePage() {
       <SectionShell eyebrow="The difference">
         <Reveal stagger={0.12}>
           <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-2 lg:items-start">
-            <RevealItem>
-              <EditorialHeading as="h2" size="lg" accent="follows" className="max-w-[16ch]">
-                Strategy leads. Everything else follows.
-              </EditorialHeading>
-            </RevealItem>
+            <EditorialHeading as="h2" size="lg" accent="follows" className="max-w-[16ch]">
+              Strategy leads. Everything else follows.
+            </EditorialHeading>
             <RevealItem>
               <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
                 <p>

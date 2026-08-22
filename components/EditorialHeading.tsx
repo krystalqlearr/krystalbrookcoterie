@@ -1,4 +1,6 @@
 import { type ReactNode } from "react";
+import LineReveal from "./motion/LineReveal";
+import { splitLines } from "@/lib/lines";
 
 /**
  * Display heading — the site's headline voice.
@@ -70,19 +72,28 @@ export default function EditorialHeading({
   // Same face, same weight, same tracking — only the color changes.
   const flareClass = accentByCanvas[canvas];
 
-  let content: ReactNode = children;
-  if (accent && typeof children === "string" && children.includes(accent)) {
-    const i = children.indexOf(accent);
-    content = (
-      <>
-        {children.slice(0, i)}
+  // Lift the accent word inside whichever LINE contains it, so the split and the
+  // flare can coexist — doing it on the whole string first would leave a React
+  // element that can no longer be split on sentences.
+  const lift = (line: string, key: number): ReactNode => {
+    if (!accent || !line.includes(accent)) return line;
+    const i = line.indexOf(accent);
+    return (
+      <span key={key}>
+        {line.slice(0, i)}
         <span className={flareClass}>{accent}</span>
-        {children.slice(i + accent.length)}
-      </>
+        {line.slice(i + accent.length)}
+      </span>
     );
-  }
+  };
+
+  // Only a plain string can be split into lines; anything richer animates whole.
+  const lines: ReactNode[] =
+    typeof children === "string" ? splitLines(children).map(lift) : [children];
 
   return (
-    <Tag className={`type-display ${sizeClass[size]} ${className}`}>{content}</Tag>
+    <Tag className={`type-display ${sizeClass[size]} ${className}`}>
+      <LineReveal lines={lines} />
+    </Tag>
   );
 }

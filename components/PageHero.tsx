@@ -31,11 +31,9 @@ export default function PageHero({ eyebrow, title, accent, intro, size = "xl", m
           <RevealItem>
             <Eyebrow>{eyebrow}</Eyebrow>
           </RevealItem>
-          <RevealItem>
-            <EditorialHeading as="h1" size={size} accent={accent} className="mt-6 max-w-[20ch]">
-              {title}
-            </EditorialHeading>
-          </RevealItem>
+          <EditorialHeading as="h1" size={size} accent={accent} className="mt-6 max-w-[20ch]">
+            {title}
+          </EditorialHeading>
           {intro ? (
             <RevealItem>
               <div className="mt-8 max-w-measure font-sans text-fluid-lg text-ink/70">
