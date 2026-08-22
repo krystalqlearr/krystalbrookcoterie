@@ -6,7 +6,7 @@ import Hero from "@/components/Hero";
 import IndexMeta from "@/components/IndexMeta";
 import Marquee from "@/components/Marquee";
 import ProjectCard from "@/components/ProjectCard";
-import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import Reveal from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
 import StatStrip from "@/components/StatStrip";
@@ -145,42 +145,36 @@ export default function HomePage() {
         heading="Four ways to enter the studio."
         headingSize="md"
       >
-        <Reveal stagger={0.08}>
-          <div className="grid gap-x-gutter gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            <RevealItem>
-              <ServiceCard
-                name="The Edit"
-                price="$4,500"
-                duration="2–3 weeks"
-                description="A refined debut that stops a brand looking new."
-              />
-            </RevealItem>
-            <RevealItem>
-              <ServiceCard
-                name="Signature"
-                price="$9,800"
-                duration="6–8 weeks"
-                featured
-                description="The complete brand website."
-              />
-            </RevealItem>
-            <RevealItem>
-              <ServiceCard
-                name="Atelier"
-                price="$22,000+"
-                duration="8–12 weeks"
-                description="For brands whose site must carry real authority."
-              />
-            </RevealItem>
-            <RevealItem>
-              <ServiceCard
-                name="Private Commission"
-                price="$32,000+"
-                description="A digital experience built from the ground up."
-              />
-            </RevealItem>
-          </div>
-        </Reveal>
+        {/* Each card's own name/description now self-animates via TextReveal, so the
+            grid is no longer wrapped in a stagger Reveal — that fired a second,
+            competing entrance on the same text. Price and duration ride in
+            unanimated: meta/data, not lines of copy. */}
+        <div className="grid gap-x-gutter gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          <ServiceCard
+            name="The Edit"
+            price="$4,500"
+            duration="2–3 weeks"
+            description="A refined debut that stops a brand looking new."
+          />
+          <ServiceCard
+            name="Signature"
+            price="$9,800"
+            duration="6–8 weeks"
+            featured
+            description="The complete brand website."
+          />
+          <ServiceCard
+            name="Atelier"
+            price="$22,000+"
+            duration="8–12 weeks"
+            description="For brands whose site must carry real authority."
+          />
+          <ServiceCard
+            name="Private Commission"
+            price="$32,000+"
+            description="A digital experience built from the ground up."
+          />
+        </div>
         <Reveal delay={0.1}>
           <div className="mt-18">
             <ArrowLink href="/services">View all services</ArrowLink>

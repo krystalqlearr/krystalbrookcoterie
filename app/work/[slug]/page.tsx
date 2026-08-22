@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
 import Reveal from "@/components/motion/Reveal";
+import TextReveal from "@/components/motion/TextReveal";
 import SectionShell from "@/components/SectionShell";
 import Testimonial from "@/components/Testimonial";
 import { WORK, caseStudySlugs, getProject } from "@/lib/work";
@@ -29,19 +30,6 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       images: p.image ? [{ url: p.image, width: 1200, height: 630 }] : undefined,
     },
   };
-}
-
-/** Renders a heading with a single italic accent word (first match) — same color, quiet. */
-function accented(text: string, accent: string) {
-  const at = text.toLowerCase().indexOf(accent.toLowerCase());
-  if (at === -1) return text;
-  return (
-    <>
-      {text.slice(0, at)}
-      <em className="italic">{text.slice(at, at + accent.length)}</em>
-      {text.slice(at + accent.length)}
-    </>
-  );
 }
 
 export default function CaseStudyPage({ params }: { params: { slug: string } }) {
@@ -74,7 +62,11 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Header */}
+      {/* Header — breadcrumb and category are meta, so they keep the simple fade-up;
+          the headline now self-animates via TextReveal (its own whileInView), pulled
+          out of that Reveal so the two don't fire a competing double entrance on the
+          same text. The italic accent word survives as a highlightClassName on the
+          same per-character mechanism, rather than a separate <em> wrapper. */}
       <section className="pb-10 pt-32 md:pt-40">
         <div className="container">
           <Reveal stagger={0.1}>
@@ -87,10 +79,12 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             <p className="mt-8 type-meta text-ink/70">
               {p.category}
             </p>
-            <h1 className="type-display mt-7 max-w-[20ch] text-fluid-display text-ink">
-              {accented(p.descriptor, p.accent)}
-            </h1>
           </Reveal>
+          <h1 className="type-display mt-7 max-w-[20ch] text-fluid-display text-ink">
+            <TextReveal highlight={p.accent} highlightClassName="italic">
+              {p.descriptor}
+            </TextReveal>
+          </h1>
         </div>
       </section>
 
@@ -128,21 +122,33 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </div>
       </section>
 
-      {/* Overview + meta */}
+      {/* Overview + meta — intro and body now self-animate via TextReveal, so this
+          column loses its own Reveal wrapper (the sidebar dl keeps its, since it
+          isn't sharing a row with any self-animating text). */}
       <SectionShell as="section" className="pt-0">
         <div className="grid gap-x-gutter gap-y-12 lg:grid-cols-[1.4fr_0.6fr]">
-          <Reveal>
+          <div>
             <p className="type-display max-w-measure text-fluid-xl text-ink">
-              {p.intro}
+              <TextReveal>{p.intro}</TextReveal>
             </p>
             <div className="mt-10 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-              {p.body.map((para, i) => (
-                <p key={i} className={i === 0 ? "dropcap" : undefined}>
-                  {para}
-                </p>
-              ))}
+              {p.body.map((para, i) =>
+                // The first paragraph carries the flare drop-cap (.dropcap::first-letter
+                // in globals.css), which needs its own first character as plain text to
+                // target — splitting it into per-character spans would fight that pseudo-
+                // element, so it keeps the simple block-level fade instead of TextReveal.
+                i === 0 ? (
+                  <Reveal key={i}>
+                    <p className="dropcap">{para}</p>
+                  </Reveal>
+                ) : (
+                  <p key={i}>
+                    <TextReveal delay={0.04 * i}>{para}</TextReveal>
+                  </p>
+                ),
+              )}
             </div>
-          </Reveal>
+          </div>
 
           <Reveal delay={0.1}>
             <dl className="space-y-6 lg:border-l lg:border-ink/12 lg:pl-10">
@@ -178,30 +184,28 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </SectionShell>
       ) : null}
 
-      {/* Scope */}
+      {/* Scope — each item now self-animates via TextReveal, so the list loses its
+          outer Reveal, same rule as the /services tier `includes` bullets. */}
       <SectionShell eyebrow="Scope" heading="What the engagement covered." headingSize="md">
-        <Reveal>
-          <ul className="grid max-w-editorial gap-x-gutter gap-y-4 font-sans text-fluid-lg text-ink sm:grid-cols-2">
-            {p.scope.map((item) => (
-              <li key={item} className="flex items-baseline gap-4 border-t border-ink/12 py-4">
-                <span aria-hidden className="h-px w-6 flex-shrink-0 translate-y-2 bg-flare" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        <ul className="grid max-w-editorial gap-x-gutter gap-y-4 font-sans text-fluid-lg text-ink sm:grid-cols-2">
+          {p.scope.map((item, idx) => (
+            <li key={item} className="flex items-baseline gap-4 border-t border-ink/12 py-4">
+              <span aria-hidden className="h-px w-6 flex-shrink-0 translate-y-2 bg-flare" />
+              <TextReveal delay={0.03 * idx}>{item}</TextReveal>
+            </li>
+          ))}
+        </ul>
       </SectionShell>
 
-      {/* Testimonial */}
+      {/* Testimonial — the quote self-animates via TextReveal inside the component,
+          so no outer Reveal here either. */}
       {p.testimonial ? (
         <SectionShell eyebrow="Proof">
-          <Reveal>
-            <Testimonial
-              quote={p.testimonial.quote}
-              name={p.testimonial.name}
-              role={p.testimonial.role}
-            />
-          </Reveal>
+          <Testimonial
+            quote={p.testimonial.quote}
+            name={p.testimonial.name}
+            role={p.testimonial.role}
+          />
         </SectionShell>
       ) : null}
 

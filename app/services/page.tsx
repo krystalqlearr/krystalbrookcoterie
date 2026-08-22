@@ -6,7 +6,6 @@ import FAQAccordion from "@/components/FAQAccordion";
 import IndexMeta from "@/components/IndexMeta";
 import TextReveal from "@/components/motion/TextReveal";
 import PageHero from "@/components/PageHero";
-import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
 
@@ -264,18 +263,16 @@ export default function ServicesPage() {
         headingSize="md"
         intro="Each engagement holds a defined scope so the timeline and the quality both hold. Everything below is available on any tier and priced with your proposal — never added silently to an invoice."
       >
-        <Reveal>
-          <ul className="grid max-w-editorial gap-x-gutter gap-y-3 sm:grid-cols-2">
-            {ADD_ONS.map((item) => (
-              <li key={item} className="flex gap-3.5 border-t border-ink/15 pt-3">
-                <span aria-hidden className="mt-[0.6em] h-px w-3 shrink-0 bg-flare-deep" />
-                <span className="font-sans text-fluid-sm leading-relaxed text-ink/70">
-                  {item}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        <ul className="grid max-w-editorial gap-x-gutter gap-y-3 sm:grid-cols-2">
+          {ADD_ONS.map((item, idx) => (
+            <li key={item} className="flex gap-3.5 border-t border-ink/15 pt-3">
+              <span aria-hidden className="mt-[0.6em] h-px w-3 shrink-0 bg-flare-deep" />
+              <span className="font-sans text-fluid-sm leading-relaxed text-ink/70">
+                <TextReveal delay={0.02 * idx}>{item}</TextReveal>
+              </span>
+            </li>
+          ))}
+        </ul>
       </SectionShell>
 
       {/* Care Plans */}
@@ -285,22 +282,21 @@ export default function ServicesPage() {
         headingSize="md"
         intro="A website is an asset — it performs best when it’s maintained. Care Plans keep yours fast, current, and evolving after launch."
       >
-        <Reveal stagger={0.08}>
-          <div className="grid gap-x-gutter gap-y-10 sm:grid-cols-3">
-            {CARE.map((c) => (
-              <RevealItem key={c.name}>
-                <ServiceCard name={c.name} price={c.price} description={c.description} />
-              </RevealItem>
-            ))}
-          </div>
-        </Reveal>
+        {/* Each card's own name/description now self-animates via TextReveal, so the
+            grid is no longer wrapped in a stagger Reveal — see the same rule on the
+            home page's studio grid. */}
+        <div className="grid gap-x-gutter gap-y-10 sm:grid-cols-3">
+          {CARE.map((c) => (
+            <ServiceCard key={c.name} name={c.name} price={c.price} description={c.description} />
+          ))}
+        </div>
       </SectionShell>
 
       {/* FAQ — first-recess, so the page keeps alternating rather than running flat */}
       <SectionShell tone="bone" eyebrow="Questions" heading="The honest answers." headingSize="md">
-        <Reveal>
-          <FAQAccordion items={FAQ} />
-        </Reveal>
+        {/* FAQAccordion's own question/answer text self-animates via TextReveal now,
+            so no outer Reveal here — that would fire a second, competing entrance. */}
+        <FAQAccordion items={FAQ} />
       </SectionShell>
 
       {/* CTA — the page's ONE dark moment. `marker` is off: the heading already

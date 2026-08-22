@@ -1,4 +1,5 @@
 import Image from "next/image";
+import TextReveal from "./motion/TextReveal";
 
 /**
  * Editorial testimonial. The quote is set in the DISPLAY register — regular
@@ -61,7 +62,9 @@ export default function Testimonial({
           <Image src={image.src} alt={image.alt} fill sizes="56px" className="object-cover" />
         </div>
       ) : null}
-      <blockquote className={`type-display text-fluid-xl ${t.quote}`}>{quote}</blockquote>
+      <blockquote className={`type-display text-fluid-xl ${t.quote}`}>
+        <TextReveal>{quote}</TextReveal>
+      </blockquote>
       <figcaption className={`type-meta ${t.meta}`}>
         <span className={t.name}>{name}</span>
         {role ? <span aria-hidden> — </span> : null}

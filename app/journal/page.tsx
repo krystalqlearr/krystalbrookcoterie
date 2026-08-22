@@ -3,7 +3,8 @@ import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
-import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import Reveal from "@/components/motion/Reveal";
+import TextReveal from "@/components/motion/TextReveal";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
@@ -43,20 +44,22 @@ export default function JournalPage() {
         headingSize="md"
         intro="Written as the studio publishes them — no filler, no cadence for its own sake."
       >
-        <Reveal stagger={0.1}>
-          <ol className="border-b border-ink/15">
-            {ENTRIES.map((entry, i) => (
-              <RevealItem as="li" key={entry.title} className="border-t border-ink/15">
-                <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-[13rem_1fr]">
-                  <IndexMeta index={i + 1} total={ENTRIES.length} tag={entry.tag} />
-                  <h2 className="type-display max-w-[34ch] text-fluid-xl text-ink">
-                    {entry.title}
-                  </h2>
-                </div>
-              </RevealItem>
-            ))}
-          </ol>
-        </Reveal>
+        {/* Each row's title now self-animates via TextReveal (its own whileInView),
+            which is why the row is no longer wrapped in a fade-up Reveal — that
+            would fire a second, competing entrance on the same text. IndexMeta
+            rides in unanimated, same rule as /process and /services. */}
+        <ol className="border-b border-ink/15">
+          {ENTRIES.map((entry, i) => (
+            <li key={entry.title} className="border-t border-ink/15">
+              <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-[13rem_1fr]">
+                <IndexMeta index={i + 1} total={ENTRIES.length} tag={entry.tag} />
+                <h2 className="type-display max-w-[34ch] text-fluid-xl text-ink">
+                  <TextReveal>{entry.title}</TextReveal>
+                </h2>
+              </div>
+            </li>
+          ))}
+        </ol>
 
         <Reveal delay={0.1}>
           <div className="mt-18">
