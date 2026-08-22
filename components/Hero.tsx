@@ -18,14 +18,21 @@ import ArrowLink from "./ArrowLink";
  * no reveal, no pointer drift, content is simply present.
  */
 
-// Headline set as discrete lines so each can mask-reveal independently.
+// Headline set as discrete lines so each can mask-reveal independently. Slides
+// in from the RIGHT toward rest on the left — matching LineReveal
+// (components/motion/LineReveal.tsx), which promotes this same choreography to
+// every other display heading on the site. Kept as a local copy rather than
+// importing LineReveal because the hero needs bespoke stagger/delay timing tuned
+// against the atmosphere and CTA entrances below; the DIRECTION and EASE must
+// still match exactly, or the hero sets an expectation the rest of the site
+// breaks on the very next scroll.
 const LINE_PARENT: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
 };
 const LINE_CHILD: Variants = {
-  hidden: { y: "115%" },
-  visible: { y: "0%", transition: { duration: DUR.xslow, ease: EASE } },
+  hidden: { x: "100%" },
+  visible: { x: "0%", transition: { duration: DUR.xslow, ease: EASE } },
 };
 const FADE_UP: Variants = {
   hidden: { opacity: 0, y: 20 },

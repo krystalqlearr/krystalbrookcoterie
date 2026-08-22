@@ -8,11 +8,23 @@ import { splitLines } from "@/lib/lines";
 /**
  * Line-by-line slide — the display register's entrance.
  *
- * Each line sits in an `overflow-hidden` block and travels up from fully below it,
- * so the type appears to rise from behind the paper rather than fade toward the
- * reader. That is a materially different gesture from the old rise-and-fade: no
- * opacity ramp, no drift, just weight arriving. It is the same choreography the
- * hero already used, promoted to the whole site.
+ * Each line sits in an `overflow-hidden` block and travels in from the RIGHT
+ * toward its resting position on the left. Moving AGAINST the reading direction
+ * before settling reads as a firmer arrival than a same-direction slide would —
+ * the line has to cross the whole box and stop exactly on the left margin, so the
+ * stop itself becomes the emphasis. No opacity ramp, no vertical drift — just
+ * weight arriving.
+ *
+ * This is per-heading, not a single scroll-scrubbed effect: every EditorialHeading
+ * on the site already runs through this component, and each fires independently
+ * via `whileInView` the moment its own heading crosses into the viewport — so the
+ * same slide repeats every time you scroll a new heading into view, all the way
+ * down the page. It does NOT continue to move once settled; if what's wanted is a
+ * single transform tied continuously to scroll position (each line still drifting
+ * as you keep scrolling past it, not settling once), that is a different
+ * mechanism — a scroll-linked transform (Framer's `useScroll`/`useTransform`
+ * against each heading's own scroll progress) rather than a viewport-triggered
+ * one-shot — and would need to be built separately from this component.
  *
  * HOW A LINE IS DECIDED — this is the load-bearing decision. Measuring real wrap
  * points at runtime (the SplitText approach) means reading layout after mount,
@@ -36,10 +48,12 @@ const LINES: Variants = {
 };
 
 const LINE: Variants = {
-  // 110% not 100%: descenders (g, y, p) sit below the box, and at 100% their tails
-  // stay visible above the mask edge for the whole travel.
-  hidden: { y: "110%" },
-  visible: { y: "0%", transition: { duration: DUR.xslow, ease: EASE } },
+  // 100% of the line's OWN width, from the right. A masked reveal can only ever
+  // show what is inside the mask box — which is exactly the line's own width —
+  // so anything travelled beyond 100% is invisible dead motion; 100% is not a
+  // rounded number, it is the mask's actual edge.
+  hidden: { x: "100%" },
+  visible: { x: "0%", transition: { duration: DUR.xslow, ease: EASE } },
 };
 
 export default function LineReveal({
@@ -83,7 +97,9 @@ export default function LineReveal({
       viewport={{ once: true, amount: 0.4 }}
     >
       {resolved.map((line, i) => (
-        // pb keeps descenders from being clipped by the mask at rest.
+        // pb keeps descenders (g, y, p) from being clipped by the mask at rest —
+        // still needed here even though the TRAVEL is now horizontal, because the
+        // mask box itself is still only as tall as the line.
         <span key={i} className="block overflow-hidden pb-[0.08em]">
           <motion.span variants={LINE} className="block">
             {line}
