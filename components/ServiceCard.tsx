@@ -15,7 +15,8 @@ import Button from "./Button";
  */
 type Props = {
   name: string;
-  price: string;
+  /** Optional since 2026-09-07 — no price list on the site; the proposal carries it. */
+  price?: string;
   description: string;
   duration?: string;
   bestFor?: string;
@@ -50,7 +51,7 @@ export default function ServiceCard({
       <h3 className="type-display text-fluid-2xl text-ink transition-colors duration-600 ease-editorial group-hover:text-milk group-focus-within:text-milk">
         {name}
       </h3>
-      <p className="mt-3 font-sans font-medium text-ink">{price}</p>
+      {price ? <p className="mt-3 font-sans font-medium text-ink">{price}</p> : null}
       {duration ? (
         <p className="type-meta mt-2 text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-within:text-ink">
           {duration}

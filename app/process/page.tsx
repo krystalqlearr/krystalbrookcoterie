@@ -3,7 +3,7 @@ import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
-import Reveal from "@/components/motion/Reveal";
+import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
@@ -89,6 +89,31 @@ export default function ProcessPage() {
           <div className="mt-18">
             <ArrowLink href="/services">See what each phase covers</ArrowLink>
           </div>
+        </Reveal>
+      </SectionShell>
+
+      {/* The coterie — how each client is held, not just what the steps are. The
+          word in the name means a small circle; this is what it means in practice.
+          WORKING COPY until the copy review (docs/kbc-copy.md, "Process"). */}
+      <SectionShell
+        tone="rule"
+        eyebrow="The coterie"
+        heading="A small circle, on purpose."
+        headingSize="md"
+        intro="Coterie means a small, chosen circle. It is also how the studio runs."
+      >
+        <Reveal as="ul" stagger={0.08} className="grid max-w-editorial gap-x-gutter gap-y-8 sm:grid-cols-2">
+          {[
+            ["One senior hand", "Every decision — strategy, design, code, the words — is made by the person you commissioned. Nothing is handed down."],
+            ["A fixed number at a time", "The studio takes a limited number of commissions at once, so each one has the attention its price implies."],
+            ["Direct access", "You talk to the person doing the work. Questions are answered by the person who knows the answer."],
+            ["Revisions in hours", "Because the whole system is held in one head, a change is a conversation, not a ticket."],
+          ].map(([title, body]) => (
+            <RevealItem as="li" variant="fade" key={title} className="border-t border-ink/12 pt-5">
+              <h3 className="type-display text-fluid-xl text-ink">{title}</h3>
+              <p className="mt-3 max-w-[40ch] font-sans text-fluid-base leading-relaxed text-ink/70">{body}</p>
+            </RevealItem>
+          ))}
         </Reveal>
       </SectionShell>
 

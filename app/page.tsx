@@ -3,8 +3,10 @@ import EditorialHeading from "@/components/EditorialHeading";
 import IndexMeta from "@/components/IndexMeta";
 import Marquee from "@/components/Marquee";
 import LandingWordmark from "@/components/motion/LandingWordmark";
+import Link from "next/link";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import WorkShowcase from "@/components/WorkShowcase";
+import { SERVICES } from "@/lib/services";
 import { WORK } from "@/lib/work";
 
 /**
@@ -38,14 +40,8 @@ const SECTORS = [
   "Founder-led",
 ];
 
-// Real prices and durations — the same claims /services makes. If one changes
-// there, change it here.
-const TIERS = [
-  { name: "The Edit", price: "$4,500", duration: "2–3 weeks" },
-  { name: "Signature", price: "$9,800", duration: "6–8 weeks", flag: "Most commissioned" },
-  { name: "Atelier", price: "$22,000+", duration: "8–12 weeks" },
-  { name: "Private Commission", price: "$32,000+", duration: "Scoped to the work" },
-];
+// "Ways in" lists the SERVICES (what), from lib/services.ts — the tier names live on
+// the hub as engagement sizes, and no price is public but the floor (2026-09-07).
 
 export default function HomePage() {
   const [feature, ...concepts] = WORK;
@@ -89,7 +85,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4 · Four ways in — one line each. */}
+      {/* 4 · Seven ways in — one line each, each the door to its page. */}
       <section className="bg-milk pb-section">
         <div className="container">
           <Reveal variant="soft">
@@ -97,29 +93,23 @@ export default function HomePage() {
           </Reveal>
           <Reveal as="ul" stagger={0.08} className="mt-8 divide-y divide-ink/12 border-y border-ink/12">
             {/* The flood: a row fills with the flare on hover and every line goes ink
-                (4.3 on lipstick — legal for small text). Negative margin + padding so
+                (4.2 on cherry — legal for small text). Negative margin + padding so
                 the fill runs edge to edge of the list, not just the text. */}
-            {TIERS.map((tier) => (
-              <RevealItem
-                as="li"
-                variant="fade"
-                key={tier.name}
-                className="group -mx-4 grid gap-y-1 px-4 py-5 transition-colors duration-600 ease-editorial hover:bg-flare motion-reduce:transition-none sm:grid-cols-[1.4fr_1fr_1fr] sm:items-baseline"
-              >
-                <span className="flex items-baseline gap-4 font-sans text-fluid-base text-ink">
-                  {tier.name}
-                  {tier.flag ? (
-                    <span className="type-meta text-flare-deep transition-colors duration-600 ease-editorial group-hover:text-ink">
-                      {tier.flag}
-                    </span>
-                  ) : null}
-                </span>
-                <span className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink [font-variant-numeric:tabular-nums]">
-                  {tier.price}
-                </span>
-                <span className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink">
-                  {tier.duration}
-                </span>
+            {SERVICES.map((s) => (
+              <RevealItem as="li" variant="fade" key={s.slug}>
+                <Link
+                  href={`/services/${s.slug}`}
+                  aria-label={`${s.name} — ${s.eyebrow}`}
+                  className="group -mx-4 grid gap-y-1 px-4 py-5 transition-colors duration-600 ease-editorial hover:bg-flare focus-visible:bg-flare focus-visible:outline-none motion-reduce:transition-none sm:grid-cols-[1.4fr_1fr_auto] sm:items-baseline"
+                >
+                  <span className="font-sans text-fluid-base text-ink">{s.name}</span>
+                  <span className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink">
+                    {s.eyebrow}
+                  </span>
+                  <span aria-hidden className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink">
+                    →
+                  </span>
+                </Link>
               </RevealItem>
             ))}
           </Reveal>

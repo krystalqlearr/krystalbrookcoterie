@@ -1,75 +1,47 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
-import Eyebrow from "@/components/Eyebrow";
 import FAQAccordion from "@/components/FAQAccordion";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
+import { FLOOR_LINE, SERVICES, TIERS } from "@/lib/services";
+
+/**
+ * The services hub (2026-09-07). Services are sold BY DISCIPLINE — seven, each
+ * with its own page — the way the studios Krystal measures against do it. The
+ * four tier names survive as engagement SIZES beneath them, without prices:
+ * exactly one figure is public (`FLOOR_LINE`), everything else is priced in the
+ * proposal and the enquiry is the filter.
+ *
+ * Every row floods on hover (the flare as a surface — see CLAUDE.md, Color).
+ * FLARE BUDGET — the hero's accent word and the closing CTA's; the index numbers
+ * and the tier flag are the functional carve-outs. DARK — the closing CTA only.
+ */
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Four custom-coded tiers — The Edit, Signature, Atelier, Private Commission — plus ongoing Care Plans. Agency-grade engineering at boutique scale.",
+    "Seven services, sold by discipline — identity, collateral, websites, redesign, development, search, Squarespace — and four sizes of engagement to commission them.",
 };
 
-const TIERS = [
-  {
-    name: "The Edit",
-    price: "$4,500",
-    duration: "2–3 weeks",
-    description:
-      "A focused digital debut for brands ready to stop looking new. Strategic direction, custom design, and a polished online presence built to establish credibility from the first click.",
-    bestFor:
-      "Best for emerging brands, focused offers, and founders who need a refined foundation without an expansive build.",
-  },
-  {
-    name: "Signature",
-    price: "$9,800",
-    duration: "6–8 weeks",
-    featured: true,
-    description:
-      "The complete brand website. Strategy, creative direction, custom design, and an intuitive CMS come together in a digital identity that feels unmistakably yours — and guides visitors toward action.",
-    bestFor:
-      "Designed for established founders ready for a website that carries the full weight of the brand.",
-  },
-  {
-    name: "Atelier",
-    price: "$22,000+",
-    duration: "8–12 weeks",
-    description:
-      "For brands whose website must do more than look beautiful. A deeper strategic and creative engagement — immersive art direction, advanced interactions, custom user journeys, and a digital experience designed for authority and scale.",
-    bestFor: "Built for flagship brands, expanding businesses, and high-consideration offers.",
-  },
-  {
-    name: "Private Commission",
-    price: "$32,000+",
-    duration: "Custom timeline",
-    description:
-      "No standard scope. No predetermined ceiling. A fully commissioned digital experience shaped around the complexity, ambition, and operating model of the brand.",
-    bestFor:
-      "Custom platforms, original interactions, integrated systems, and creative direction developed entirely from the ground up.",
-  },
-];
-
+// Care Plans — names and what they do. No prices on the site (2026-09-07).
 const CARE = [
   {
     name: "Essential",
-    price: "$175 / mo",
     description:
       "The site stays fast, secure, and online — platform oversight, security updates, monthly performance checks, and the booking path tested every month.",
   },
   {
     name: "Growth",
-    price: "$450 / mo",
     description:
       "Everything in Essential, plus dedicated hours each month for content and design evolution — seasonal refreshes, new sections — with analytics reporting and SEO upkeep.",
   },
   {
     name: "Partner",
-    price: "$950 / mo",
     description:
       "The retained studio: monthly design and development hours, same-day priority, strategy calls, and a proactive roadmap for the brand’s next move.",
   },
@@ -79,7 +51,11 @@ const FAQ = [
   {
     question: "Why custom code instead of a template or page builder?",
     answer:
-      "A template is rented — you build your brand on ground you don’t own, constrained by someone else’s system and paying to keep it. Custom code is owned: faster, distinctive in ways a builder structurally can’t match, and an asset that compounds in value instead of aging into a liability.",
+      "A template is rented — you build your brand on ground you don’t own, constrained by someone else’s system and paying to keep it. Custom code is owned: faster, distinctive in ways a builder structurally can’t match, and an asset that compounds in value instead of aging into a liability. That is the default here. When a business doesn’t need that yet, a Squarespace commission is a real option — designed, not templated — and the design carries across the day you outgrow it.",
+  },
+  {
+    question: "What does it cost?",
+    answer: `${FLOOR_LINE} Every engagement is priced in the proposal, against its scope — never from a menu. The enquiry form asks for a range so the proposal lands in the right size the first time.`,
   },
   {
     question: "Do you use AI?",
@@ -103,6 +79,15 @@ const FAQ = [
   },
 ];
 
+// The flood on a row: the fill, then the type re-colours to stay legal —
+// display line → milk (≥24px), everything smaller → ink.
+const row =
+  "group -mx-4 grid gap-x-gutter gap-y-4 px-4 py-10 transition-colors duration-600 ease-editorial hover:bg-flare focus-visible:bg-flare focus-visible:outline-none motion-reduce:transition-none lg:grid-cols-[13rem_1fr]";
+const toMilk =
+  "transition-colors duration-600 ease-editorial group-hover:text-milk group-focus-visible:text-milk";
+const toInk =
+  "transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink";
+
 export default function ServicesPage() {
   return (
     <>
@@ -111,96 +96,93 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="A different level of presence."
         accent="presence"
-        intro="Four ways to enter the studio. Every engagement is strategically led, visually distinct, and built around where your brand is now — and where it intends to go next."
+        intro="Seven services, sold by discipline. Every engagement is strategically led, visually distinct, and built around where your brand is now — and where it intends to go next."
       />
 
-      {/* Tiers — a counted SEQUENCE of full-width rows, not a four-up card grid.
-          At this price point each tier has to be able to argue for itself, which a
-          quarter-width card cannot do; the row gives it a headline, the reasoning,
-          and its own way in. Price and duration stay INK — ink-forward reads
-          expensive, and the flare is spent on the index. */}
+      {/* The seven — a counted sequence; each row is the way in to its page. */}
       <SectionShell as="section" className="pt-0">
-        <ul className="border-b border-ink/15">
-          {TIERS.map((tier, i) => (
-            <li key={tier.name} className="border-t border-ink/15">
-              <Reveal variant="fade">
-                <div className="grid gap-x-gutter gap-y-6 py-14 lg:grid-cols-[13rem_1fr]">
-                  {/* Left rail — position, price, timeline */}
-                  <div className="flex flex-col gap-4">
-                    <IndexMeta index={i + 1} total={TIERS.length} />
-                    <p className="font-sans text-fluid-lg text-ink">{tier.price}</p>
-                    <p className="type-meta text-ink/70">{tier.duration}</p>
-                  </div>
+        <Reveal as="ol" stagger={0.06} className="border-b border-ink/12">
+          {SERVICES.map((s, i) => (
+            <RevealItem as="li" variant="fade" key={s.slug} className="border-t border-ink/12">
+              <Link href={`/services/${s.slug}`} aria-label={`${s.name} — ${s.eyebrow}`} className={row}>
+                <div className="flex flex-col gap-3">
+                  <IndexMeta index={i + 1} total={SERVICES.length} />
+                  <span className={`type-meta text-ink/70 ${toInk}`}>{s.eyebrow}</span>
+                </div>
+                <div className="max-w-measure">
+                  <span className={`type-display block text-fluid-2xl text-ink ${toMilk}`}>{s.name}</span>
+                  <span className={`mt-4 block font-sans text-fluid-base leading-relaxed text-ink/70 ${toInk}`}>
+                    {s.line}
+                  </span>
+                </div>
+              </Link>
+            </RevealItem>
+          ))}
+        </Reveal>
+      </SectionShell>
 
-                  {/* The argument */}
-                  <div className="max-w-measure">
-                    {tier.featured ? (
-                      <Eyebrow tone="flare" className="mb-4">
-                        Most commissioned
-                      </Eyebrow>
+      {/* Four sizes of engagement — names and timelines. The one public figure sits
+          in the intro; everything else is priced in the proposal. */}
+      <SectionShell
+        tone="rule"
+        eyebrow="Ways to commission"
+        heading="Four sizes of engagement."
+        headingSize="md"
+        intro={`${FLOOR_LINE} Every engagement is priced in the proposal, against its scope.`}
+      >
+        <ul className="border-b border-ink/12">
+          {TIERS.map((tier) => (
+            <li key={tier.name} className="border-t border-ink/12">
+              <Reveal variant="fade">
+                <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-[13rem_1fr]">
+                  <div className="flex flex-col gap-3">
+                    <p className="type-meta text-ink/70">{tier.duration}</p>
+                    {"flag" in tier && tier.flag ? (
+                      <p className="type-meta text-flare-deep">{tier.flag}</p>
                     ) : null}
+                  </div>
+                  <div className="max-w-measure">
                     <h3 className="type-display text-fluid-2xl text-ink">{tier.name}</h3>
-                    <p className="mt-6 font-sans text-fluid-base leading-relaxed text-ink/70">
+                    <p className="mt-4 font-sans text-fluid-base leading-relaxed text-ink/70">
                       {tier.description}
                     </p>
-                    <p className="mt-4 font-sans text-fluid-sm leading-relaxed text-ink/70">
-                      {tier.bestFor}
-                    </p>
-                    <ArrowLink href="/begin" className="mt-8">
-                      Commission {tier.name}
-                    </ArrowLink>
                   </div>
                 </div>
               </Reveal>
             </li>
           ))}
         </ul>
-      </SectionShell>
-
-      {/* Founding client — first-recess alt-section. The price is deliberately NOT
-          the accent word: prices stay ink, so the flare here is the marker tick. */}
-      <SectionShell
-        tone="rule"
-        marker
-        eyebrow="Founding client program"
-        heading="Signature scope at $2,800 — for the right first few."
-        headingSize="md"
-        intro="A limited program for a small number of founding clients: full Signature-tier scope in exchange for case-study rights. Real work, deeply discounted, while the studio builds its published proof."
-      >
-        <Reveal variant="fade" delay={0.1}>
-          <Button href="/begin" variant="primary">
-            Apply as a founding client
-          </Button>
+        <Reveal variant="fade" className="mt-10">
+          <ArrowLink href="/begin">Commission</ArrowLink>
         </Reveal>
       </SectionShell>
 
-      {/* Care Plans */}
+      {/* Care Plans — white sheets on the milk; they flood on hover. */}
       <SectionShell
+        tone="rule"
         eyebrow="Care plans"
         heading="Built to compound, kept in condition."
         headingSize="md"
         intro="A website is an asset — it performs best when it’s maintained. Care Plans keep yours fast, current, and evolving after launch."
       >
         <Reveal stagger={0.08}>
-          <div className="grid gap-x-gutter gap-y-10 sm:grid-cols-3">
+          <div className="grid gap-x-gutter gap-y-6 sm:grid-cols-3">
             {CARE.map((c) => (
               <RevealItem key={c.name} variant="fade">
-                <ServiceCard name={c.name} price={c.price} description={c.description} />
+                <ServiceCard name={c.name} description={c.description} />
               </RevealItem>
             ))}
           </div>
         </Reveal>
       </SectionShell>
 
-      {/* FAQ — first-recess, so the page keeps alternating rather than running flat */}
       <SectionShell tone="rule" eyebrow="Questions" heading="The honest answers." headingSize="md">
         <Reveal variant="fade">
           <FAQAccordion items={FAQ} />
         </Reveal>
       </SectionShell>
 
-      {/* CTA — the page's ONE dark moment. `marker` is off: the heading already
-          carries the flare, and a section gets one flare element, not two. */}
+      {/* CTA — the page's ONE dark moment. */}
       <SectionShell
         tone="dark"
         heading="Let’s build something worth owning."

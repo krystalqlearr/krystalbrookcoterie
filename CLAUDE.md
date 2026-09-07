@@ -239,9 +239,26 @@ lowercase wordmark left, `Menu` right in meta caps — no link row, no outlined 
 (that layout was Glowtoure's, and a studio's own header must not look like a client's).
 `Menu` opens a full-screen milk panel with the six links + Commission set at
 `fluid-3xl` Light, one per line; focus-trapped, Esc closes, body scroll locked. The bar
-stays above the panel so the name and `Close` never move. Existing: / · /work · /work/[slug] · /services · /process · /about ·
-/journal · /begin · /styleguide(noindex) · /for/[slug](noindex, outreach). No route may
-404 at launch. Prototype routes are temporary by definition and must be deleted once
+stays above the panel so the name and `Close` never move. The panel's second column is
+the SERVICES index (2026-09-07): seven one-word names from `lib/services.ts`, folded
+under a `+` on small screens — the "dropdown" done as an index, never a hover menu.
+Existing: / · /work · /work/[slug] · /services · /services/[slug] (seven: identity ·
+collateral · websites · redesign · development · search · squarespace) · /process ·
+/about · /journal · /begin · /styleguide(noindex) · /for/[slug](noindex, outreach). No
+route may 404 at launch.
+
+SERVICES ARE SOLD BY DISCIPLINE, NOT BY PRICE (2026-09-07 — checked against Bionic
+Egg, Clay and Studio Krista, none of whom publish a price). Seven services, each its
+own page from one template and one data file (`lib/services.ts`): hero line → what it
+covers → who it's for + "commissioned as" → the five phases in one row → one frame of
+work → two or three questions → related → Commission. A third the length of the
+studios it was measured against, on purpose. The four tier names survive as
+ENGAGEMENT SIZES on the hub, without prices. EXACTLY ONE FIGURE IS PUBLIC — `FLOOR`,
+"Engagements begin at $4,500." — on the hub, on every service page and on /begin; the
+enquiry form asks for a range. Squarespace is the seventh service, framed as a stage
+("When the business doesn't need custom code yet, it still deserves a designer"),
+never with the word "template". Krystal's list was Bionic Egg's list nearly verbatim —
+the NAMES and the ANATOMY are what keep the pages hers; never copy their sections. Prototype routes are temporary by definition and must be deleted once
 their question is answered — /prototype and /prototype-shatter both have been.
 
 ## Accessibility — WCAG 2.1 AA minimum
@@ -270,8 +287,11 @@ then let capability support it. Craft/tech ("hand-built in code," "the stack big
 runs," "advanced architecture," "custom systems") is a PROOF POINT, never the headline;
 keep it to the FAQ and case-study depth. Frame projects as the SHIFT created (e.g.
 "a clinical brand, repositioned as a modern authority"), not the deliverable.
-Nomenclature: services are an ENGAGEMENT/COMMISSION (nav CTA = "Commission"); tiers are
-The Edit · Signature (flag: "Most commissioned") · Atelier · Private Commission.
+Nomenclature: services are an ENGAGEMENT/COMMISSION (nav CTA = "Commission"). The seven
+SERVICES are one word each — Identity · Collateral · Websites · Redesign · Development ·
+Search · Squarespace (full names as eyebrows). The four ENGAGEMENT SIZES are The Edit ·
+Signature (flag: "Most commissioned") · Atelier · Private Commission — names and
+timelines only; no prices on the site but the floor.
 Display headings are UPPERCASE monumental sans; body and serif sublines sentence case.
 NEVER name competitors. AVOID empty luxury filler — "elevated," "bespoke," "intentional,"
 "curated," "timeless" — unless it says something specific. Positioning: rented vs. owned.

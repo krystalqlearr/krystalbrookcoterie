@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { serviceSlugs } from "@/lib/services";
 import { caseStudySlugs } from "@/lib/work";
 
 const SITE_URL = "https://krystalbrookcoterie.com";
@@ -15,6 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
     })),
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
+    ...serviceSlugs().map((slug) => ({
+      path: `/services/${slug}`,
+      priority: 0.8,
+      changeFrequency: "monthly" as const,
+    })),
     { path: "/process", priority: 0.7, changeFrequency: "yearly" },
     { path: "/about", priority: 0.7, changeFrequency: "yearly" },
     { path: "/begin", priority: 0.8, changeFrequency: "yearly" },

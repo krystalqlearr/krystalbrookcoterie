@@ -265,6 +265,27 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   scrolled header over a dark band reads as a pale strip; the cursor reads mint over
   the flood (accepted for now). Her own `:3000` server needs a restart to compile the
   new tokens.
+- **Phase 9 — Services by discipline (2026-09-07).** Her ask: services "laid out more
+  like a page underneath each category", a services "dropdown in the menu bar", the
+  seven disciplines she listed, and a process section tied to the name. Decisions:
+  tiers → "check how Bionic Egg and the others do it" (they sell by discipline with
+  NO price list; Bionic Egg's nine service pages are her list nearly verbatim; Clay
+  names engagement models in its FAQ; Studio Krista has three services and a
+  10-step process page) → option (a): services by discipline, tier names as sizes,
+  exactly one public figure (`FLOOR`); Squarespace = the seventh page, framed as a
+  stage; process keeps Position · Direct · Design · Build · Release and gains "the
+  coterie". Built: `lib/services.ts` (one data file → hub, seven pages, panel
+  column, home rows, sitemap); `/services/[slug]` template (hero → covers →
+  for + commissioned-as → phases row → one frame → questions → alongside →
+  Commission, JSON-LD `Service`); the hub rewritten (counted flooding rows → sizes
+  without prices → Care Plans without prices → FAQ with "What does it cost?" and the
+  template answer softened for Squarespace → dark CTA); the Menu panel's second
+  column (folds under `+` below `lg`); home "Ways in" → the seven services;
+  `/begin` carries the floor and the form asks for a RANGE (the mis-named tier
+  prices are gone — deck inconsistency #2 settled); `/process` "The coterie"
+  section; sitemap. Copy is all WORKING DEFAULT — deck §16. Retired from public:
+  tier prices, Care Plan prices, the $2,800 founding figure (restore as a row if
+  she wants it). OPEN: her copy for §16; the Founding Client program's fate.
 - **The work frame** — `WorkShowcase variant="sequence" gem` (`components/WorkShowcase.tsx`):
   one project per screen in `BrowserChrome` (`components/BrowserFrame.tsx`, shared
   with the /work grid; all dots milk/25), 16:9, capped to the viewport; caption
