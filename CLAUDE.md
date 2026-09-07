@@ -164,13 +164,17 @@ motion": the vocabulary is six moments plus the basics, each used once —
 2. THE WORK, expanding in place — `WorkShowcase variant="sequence"`: one real project
    in a browser frame, one screen, that morphs into its case study (the documented
    signature). Video-ready: a project with `video` plays a looping muted recording.
-3. WORDS FADE, MEDIA SLIDES — the every-page register (live on every route, 2026-09-06).
-   Text: `Reveal variant="soft"` (blur-to-sharp, ~0.9s) on headings, eyebrows,
-   captions, one-liners; `variant="fade"` (opacity + 12px) on paragraphs, lists,
-   forms, meta rows. `SectionShell` and `PageHero` stagger their own headers this
-   way, so section openings are uniform. Media: `Reveal from="up|down|left|right"`
-   with `distance` from `TRAVEL` (text 12 · aside 24 · media 48 · frame 64), once, on
-   `EASE`. Directions are ART-DIRECTED per placement, never random: the homepage
+3. WORDS FADE, MEDIA SLIDES — the every-page register (live on every route). TEXT
+   (retuned 2026-09-07 to Bionic Egg's measured recipe — Krystal: "a quick fade into
+   visibility as you scroll"): ONE recipe on every text block, `revealText` — hidden
+   `opacity 0 · 32px below · blur(10px)`; opacity 0.65s on CSS ease (0 → 0.7 in the
+   first ~220ms), rise 0.7s and blur 0.75s on `EASE_REVEAL` (0.2, 0.72, 0.2, 1) —
+   fast front, soft tail. `soft` and `fade` are aliases of it. Reveals fire at 15%
+   in view, so a block is already arriving as you scroll to it. `SectionShell` and
+   `PageHero` stagger their own headers this way, so section openings are uniform.
+   Media: `Reveal from="up|down|left|right"` with `distance` from `TRAVEL` (text 32
+   · aside 24 · media 48 · frame 64), once, on the same clock (0.7s `EASE_REVEAL`,
+   fade 0.65s). Directions are ART-DIRECTED per placement, never random: the homepage
    frame DROPS (the name just rose); `/work` frames enter from the grid side they
    sit on (`WorkProject.enter`, set beside `span`); the /about portrait slides from
    the left; side columns (/begin aside, case-study meta) slide from the right; the

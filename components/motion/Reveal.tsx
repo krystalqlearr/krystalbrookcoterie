@@ -15,12 +15,12 @@ import {
  * Scroll-reveal primitive — the canonical entrance across the site (build-plan §3).
  * Under reduced motion it renders content immediately with no transform.
  *
- * THE REGISTER (2026-09-06): words fade, media slides.
- *  - `variant`  : "soft" — blur-to-sharp + a breath of rise, ~0.9s; headings,
- *                 eyebrows, captions, one-liners (`filter` isn't compositor-only —
- *                 never on images, frames or long blocks).
- *                 "fade" — opacity + 12px; paragraphs, lists, forms, meta rows.
- *                 "rise" (default, legacy) — 24px rise + fade.
+ * THE REGISTER (2026-09-07): words fade, media slides — on Bionic Egg's clock.
+ *  - `variant`  : "soft" and "fade" are now the SAME text recipe (`revealText`):
+ *                 opacity 0.65s on CSS ease, a 32px rise and a 10px blur clearing
+ *                 over 0.7/0.75s on EASE_REVEAL — a quick fade into visibility with
+ *                 a soft tail. Measured off bionicegg.com; see lib/motion.ts.
+ *                 "rise" (default, legacy) — 24px rise + fade on EASE.
  *  - `from`     : a direction — "up" rises from below, "down" drops from above,
  *                 "left"/"right" slide in from that edge — with `distance` px of
  *                 travel (TRAVEL.media by default; pass TRAVEL.aside / .frame).
@@ -30,7 +30,9 @@ import {
  *  - `as`       : element tag (default div)
  *  - `stagger`  : when set, children animate in sequence (children should be <RevealItem>)
  *  - `delay`    : delay before the (first) child animates
- *  - `amount`   : how much must be in view before firing (0–1)
+ *  - `amount`   : how much must be in view before firing (0–1). Default 0.15 —
+ *                 the reveal starts as the block clears the bottom edge, so it
+ *                 is already arriving while you scroll to it, never waiting.
  */
 type Variant = "rise" | "soft" | "fade";
 
@@ -59,7 +61,7 @@ function RevealRoot({
   distance,
   stagger,
   delay = 0,
-  amount = 0.3,
+  amount = 0.15,
   className = "",
 }: Props) {
   const reduce = useReducedMotion();

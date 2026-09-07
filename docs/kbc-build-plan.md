@@ -265,6 +265,19 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   scrolled header over a dark band reads as a pale strip; the cursor reads mint over
   the flood (accepted for now). Her own `:3000` server needs a restart to compile the
   new tokens.
+- **Reveal retuned to Bionic Egg's clock (2026-09-07).** Her ask: "I want it to do
+  what bionicegg does. It almost looks like a quick fade into visibility as you
+  scroll." Measured by headless probe, not by eye: their `[data-reveal]` hidden
+  state is `opacity 0 · translate3d(0,32px,0) · blur(10px)`; `.is-visible`
+  transitions `opacity 0.65s, filter 0.75s, transform 0.7s cubic-bezier(0.2, 0.72,
+  0.2, 1)`; sampled at 50ms, opacity hits 0.7 by ~220ms and the rise has covered
+  two-thirds of its travel by ~100ms — a fast front and a soft tail, on ONE recipe
+  for every text block; the reveal begins ~250ms after the block enters. Ours was
+  0.9s on the expo-out `EASE`, 12px, blur 6, split into soft/fade. Now: `revealText`
+  reproduces theirs property for property (`EASE_REVEAL`, `EASE_CSS` in
+  lib/motion.ts); `soft`/`fade` alias it; `TRAVEL.text` 32; media slides moved onto
+  the same 0.7s curve; `Reveal` fires at `amount 0.15` (was 0.3). Verified by
+  sampling our own reveal on `/services` the same way.
 - **Phase 9 — Services by discipline (2026-09-07).** Her ask: services "laid out more
   like a page underneath each category", a services "dropdown in the menu bar", the
   seven disciplines she listed, and a process section tied to the name. Decisions:
