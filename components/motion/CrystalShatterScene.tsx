@@ -1,5 +1,10 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-unused-vars -- PARKED reference file
+   (imported by nothing): its palette constants document the retired material and
+   the magenta-era stops, and are kept on purpose even where unused. Without this,
+   `next build` lints them as errors and a clean-clone (Vercel) build fails. */
+
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import gsap from "gsap";
