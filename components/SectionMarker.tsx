@@ -6,19 +6,19 @@
  * (aria-hidden), sits behind the content, clipped by the section's
  * overflow-hidden. Desktop only — there's no room on mobile.
  *
- * Tone: `ink` on bone/stone sections, `bone` on the forest dark. Opacity is deliberately
+ * Tone: `ink` on milk sections, `milk` on the onyx dark. Opacity is deliberately
  * low so it reads as structure, never as a second headline — raise the color
  * opacity below to make it louder.
  */
 type Props = {
   label: string;
   side?: "left" | "right";
-  tone?: "ink" | "bone";
+  tone?: "ink" | "milk";
   className?: string;
 };
 
 export default function SectionMarker({ label, side = "right", tone = "ink", className = "" }: Props) {
-  const color = tone === "ink" ? "text-ink/[0.09]" : "text-bone/[0.10]";
+  const color = tone === "ink" ? "text-ink/[0.09]" : "text-milk/[0.10]";
   const pos = side === "right" ? "right-[-0.08em]" : "left-[-0.08em]";
 
   return (

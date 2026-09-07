@@ -6,12 +6,12 @@ import { type ReactNode } from "react";
  * body copy: section labels, cover-lines, tags, categories, captions, credits.
  *
  * Tone is canvas-aware:
- *  - muted     → ink/60 on bone/stone (the default; quiet structural label)
- *  - onDark    → bone/60 on the forest dark
+ *  - muted     → ink/60 on milk (the default; quiet structural label)
+ *  - onDark    → milk/60 on the onyx dark
  *  - ink       → full ink, for labels that need to sit forward
- *  - flare     → flare-deep (the cover-line on bone/stone — the AA-safe stop, since
+ *  - flare     → flare-deep (the cover-line on milk — the AA-safe stop, since
  *                this is 13px text and the neon default fails at that size)
- *  - flareDark → flare-lift (the cover-line on the forest dark)
+ *  - flareDark → flare (the cover-line on the onyx dark)
  *
  * The flare is rationed: one flare element per view, total, across eyebrow + rule
  * tick + heading accent. If the heading already carries it, keep the eyebrow muted.
@@ -27,10 +27,10 @@ type EyebrowProps = {
 
 const toneClass: Record<EyebrowTone, string> = {
   muted: "text-ink/70",
-  onDark: "text-bone/60",
+  onDark: "text-milk/60",
   ink: "text-ink",
   flare: "text-flare-deep",
-  flareDark: "text-flare-lift",
+  flareDark: "text-flare",
 };
 
 export default function Eyebrow({

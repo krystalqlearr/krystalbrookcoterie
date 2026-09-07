@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import Reveal from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
@@ -40,19 +41,23 @@ export default function PrivacyPage() {
       <PageHero eyebrow="Legal" title="Privacy policy." size="lg" />
       <SectionShell as="section" className="pt-0">
         <div className="max-w-measure space-y-10">
-          <p className="font-sans text-fluid-base leading-relaxed text-ink/70">
-            Krystal Brook Coterie (a DBA of Lion &amp; Gazelle Holdings LLC) respects your
-            privacy. This summary explains what we collect and how we use it.
-          </p>
+          <Reveal variant="fade">
+            <p className="font-sans text-fluid-base leading-relaxed text-ink/70">
+              Krystal Brook Coterie (a DBA of Lion &amp; Gazelle Holdings LLC) respects
+              your privacy. This summary explains what we collect and how we use it.
+            </p>
+          </Reveal>
           {SECTIONS.map((s) => (
-            <div key={s.h} className="border-t border-ink/12 pt-6">
+            <Reveal variant="fade" key={s.h} className="border-t border-ink/12 pt-6">
               <h2 className="type-display text-fluid-xl text-ink">{s.h}</h2>
               <p className="mt-3 font-sans text-fluid-base leading-relaxed text-ink/70">{s.p}</p>
-            </div>
+            </Reveal>
           ))}
-          <p className="border-t border-ink/12 pt-6 type-meta text-ink/70">
-            This is a working summary pending final review by counsel before launch.
-          </p>
+          <Reveal variant="fade">
+            <p className="border-t border-ink/12 pt-6 type-meta text-ink/70">
+              This is a working summary pending final review by counsel before launch.
+            </p>
+          </Reveal>
         </div>
       </SectionShell>
     </>

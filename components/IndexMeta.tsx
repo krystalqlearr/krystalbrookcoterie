@@ -7,7 +7,7 @@
  * The live number takes the flare (the AA-safe `deep` stop — this is 13px text);
  * the total and tag sit at the muted floor, so the eye lands on position first.
  * Hierarchy here is carried by COLOR, not by opacity: ink/70 is the lowest value
- * that clears 4.5:1 on both bone and stone, so there is no fainter step available. Numbers are zero-padded to two digits and set in
+ * that clears 4.5:1 on both milk, so there is no fainter step available. Numbers are zero-padded to two digits and set in
  * tabular figures so a column of them aligns.
  *
  * Use on project cards, service rows, and process steps.
@@ -16,7 +16,7 @@ type Tone = "onLight" | "onDark";
 
 const toneClass: Record<Tone, { current: string; total: string; tag: string }> = {
   onLight: { current: "text-flare-deep", total: "text-ink/70", tag: "text-ink/70" },
-  onDark: { current: "text-flare-lift", total: "text-bone/60", tag: "text-bone/60" },
+  onDark: { current: "text-flare", total: "text-milk/60", tag: "text-milk/60" },
 };
 
 type Props = {

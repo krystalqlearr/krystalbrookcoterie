@@ -16,18 +16,22 @@ import { useState, type FormEvent } from "react";
 const STUDIO_EMAIL = "hello@krystalbrookcoterie.com";
 
 const INDUSTRIES = ["Beauty", "Med-spa", "Wellness", "Bridal", "Luxury lifestyle", "Other"];
+// Ranges, not tier prices (2026-09-07): the site carries no price list — this is
+// a private qualifier so the proposal lands in the right size. The old options
+// used names the site never had ("Launch", "Atelier Custom").
 const INVESTMENT = [
-  "Launch — $4,500",
-  "Signature — $9,800",
-  "Atelier — $22,000+",
-  "Atelier Custom — $32,000+",
-  "Founding Client — $2,800",
+  "Under $5,000",
+  "$5,000 – $10,000",
+  "$10,000 – $25,000",
+  "$25,000 and above",
   "Not sure yet",
 ];
 const TIMING = ["As soon as possible", "Within 1–3 months", "In 3–6 months", "Just exploring"];
 
 const fieldBase =
-  "mt-2 w-full rounded-[1px] border border-ink/20 bg-stone px-4 py-3 font-sans text-fluid-base text-ink placeholder:text-ink/70 transition-colors focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink";
+  // Fields are LIFTED off the milk in white with a hairline — not an inset beige
+  // tint (retired 2026-09-07, see SectionShell). White is the sheet above the canvas.
+  "mt-2 w-full rounded-[1px] border border-ink/20 bg-white px-4 py-3 font-sans text-fluid-base text-ink placeholder:text-ink/70 transition-colors focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink";
 const labelBase = "type-meta text-ink/70";
 
 export default function EnquiryForm() {
@@ -188,7 +192,7 @@ export default function EnquiryForm() {
 
       <button
         type="submit"
-        className="mt-8 inline-flex items-center justify-center rounded-[1px] border border-ink bg-ink px-8 py-4 font-sans text-meta-lg font-semibold uppercase text-bone transition duration-400 ease-editorial hover:border-flare-deep hover:bg-flare-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+        className="mt-8 inline-flex items-center justify-center rounded-[1px] border border-ink bg-ink px-8 py-4 font-sans text-meta-lg font-semibold uppercase text-milk transition duration-400 ease-editorial hover:border-flare-deep hover:bg-flare-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
       >
         Submit your inquiry
       </button>

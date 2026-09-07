@@ -21,7 +21,7 @@ export const contentType = "image/png";
 const MILK = "#FAF7F0";
 const INK = "#23201B";
 const INK_MUTED = "#615C53"; // ink at ~70% over milk — clears AA on this canvas
-const FLARE = "#FF0080";
+const FLARE = "#FF1744"; // cherry trial (under review 2026-09-07 — keep in step with tailwind.config.ts)
 
 export default function OpengraphImage() {
   return new ImageResponse(

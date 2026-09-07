@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
-import Reveal from "@/components/motion/Reveal";
+import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 import Testimonial from "@/components/Testimonial";
+import { TRAVEL } from "@/lib/motion";
 import { WORK, caseStudySlugs, getProject } from "@/lib/work";
 
 const SITE_URL = "https://krystalbrookcoterie.com";
@@ -78,34 +79,38 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       <section className="pb-10 pt-32 md:pt-40">
         <div className="container">
           <Reveal stagger={0.1}>
-            <Link
-              href="/work"
-              className="type-meta text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-            >
-              ← All work
-            </Link>
-            <p className="mt-8 type-meta text-ink/70">
-              {p.category}
-            </p>
-            <h1 className="type-display mt-7 max-w-[20ch] text-fluid-display text-ink">
-              {accented(p.descriptor, p.accent)}
-            </h1>
+            <RevealItem variant="soft">
+              <Link
+                href="/work"
+                className="type-meta text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+              >
+                ← All work
+              </Link>
+            </RevealItem>
+            <RevealItem variant="soft">
+              <p className="mt-8 type-meta text-ink/70">{p.category}</p>
+            </RevealItem>
+            <RevealItem variant="soft">
+              <h1 className="type-display mt-7 max-w-[20ch] text-fluid-display text-ink">
+                {accented(p.descriptor, p.accent)}
+              </h1>
+            </RevealItem>
           </Reveal>
         </div>
       </section>
 
-      {/* Hero — the real site inside a browser frame */}
+      {/* Hero — the real site inside a browser frame. Full-width, so it rises. */}
       <section className="pb-section">
         <div className="container">
-          <Reveal>
-            <figure className="overflow-hidden border border-ink/15 bg-forest">
-              <div className="flex items-center gap-3 border-b border-bone/10 px-4 py-2.5">
+          <Reveal from="up" distance={TRAVEL.frame}>
+            <figure className="overflow-hidden border border-ink/15 bg-onyx">
+              <div className="flex items-center gap-3 border-b border-milk/10 px-4 py-2.5">
                 <span className="flex gap-1.5" aria-hidden>
-                  <span className="h-2 w-2 rounded-full bg-bone/25" />
-                  <span className="h-2 w-2 rounded-full bg-bone/25" />
-                  <span className="h-2 w-2 rounded-full bg-bone/25" />
+                  <span className="h-2 w-2 rounded-full bg-milk/25" />
+                  <span className="h-2 w-2 rounded-full bg-milk/25" />
+                  <span className="h-2 w-2 rounded-full bg-milk/25" />
                 </span>
-                <span className="truncate rounded-sm bg-bone/5 px-3 py-1 font-sans text-[0.65rem] tracking-[0.06em] text-bone/60">
+                <span className="truncate rounded-sm bg-milk/5 px-3 py-1 font-sans text-[0.65rem] tracking-[0.06em] text-milk/60">
                   {p.url}
                 </span>
               </div>
@@ -131,7 +136,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       {/* Overview + meta */}
       <SectionShell as="section" className="pt-0">
         <div className="grid gap-x-gutter gap-y-12 lg:grid-cols-[1.4fr_0.6fr]">
-          <Reveal>
+          <Reveal variant="fade">
             <p className="type-display max-w-measure text-fluid-xl text-ink">
               {p.intro}
             </p>
@@ -144,7 +149,8 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             </div>
           </Reveal>
 
-          <Reveal delay={0.1}>
+          {/* The meta column hangs off the right edge, so it slides in from the right. */}
+          <Reveal from="right" distance={TRAVEL.aside} delay={0.1}>
             <dl className="space-y-6 lg:border-l lg:border-ink/12 lg:pl-10">
               {[
                 ["Client", p.client],
@@ -164,14 +170,16 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
       {/* Results — first-recess alt-section */}
       {p.results && p.results.length > 0 ? (
-        <SectionShell tone="bone" eyebrow="Results" heading="Engineered to perform." headingSize="md">
+        <SectionShell tone="rule" eyebrow="Results" heading="Engineered to perform." headingSize="md">
+          {/* Each figure is its own staggered item — a stagger container with plain
+              children animates nothing. */}
           <Reveal stagger={0.08}>
             <dl className="grid gap-x-gutter gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {p.results.map((r) => (
-                <div key={r.label} className="border-t border-ink/20 pt-5">
+                <RevealItem key={r.label} variant="fade" className="border-t border-ink/20 pt-5">
                   <dt className="type-meta text-ink/70">{r.label}</dt>
                   <dd className="type-display mt-3 text-fluid-xl text-ink">{r.value}</dd>
-                </div>
+                </RevealItem>
               ))}
             </dl>
           </Reveal>
@@ -180,7 +188,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
 
       {/* Scope */}
       <SectionShell eyebrow="Scope" heading="What the engagement covered." headingSize="md">
-        <Reveal>
+        <Reveal variant="fade">
           <ul className="grid max-w-editorial gap-x-gutter gap-y-4 font-sans text-fluid-lg text-ink sm:grid-cols-2">
             {p.scope.map((item) => (
               <li key={item} className="flex items-baseline gap-4 border-t border-ink/12 py-4">
@@ -195,7 +203,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       {/* Testimonial */}
       {p.testimonial ? (
         <SectionShell eyebrow="Proof">
-          <Reveal>
+          <Reveal variant="fade">
             <Testimonial
               quote={p.testimonial.quote}
               name={p.testimonial.name}
@@ -219,7 +227,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </Button>
           <Link
             href={nextCase ? `/work/${nextCase.id}` : "/work"}
-            className="type-meta text-bone underline decoration-bone/30 underline-offset-4 transition-colors hover:decoration-bone"
+            className="type-meta text-milk underline decoration-milk/30 underline-offset-4 transition-colors hover:decoration-milk"
           >
             {nextCase ? `Next — ${nextCase.client}` : "See all work"}
           </Link>

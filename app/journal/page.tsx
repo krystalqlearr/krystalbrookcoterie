@@ -32,12 +32,12 @@ export default function JournalPage() {
       />
 
       {/* The index — the same counted-row pattern as /services and /process, on the
-          bone recess so the page alternates rather than running milk into the dark.
+          milk recess so the page alternates rather than running milk into the dark.
           Titles sit in INK: these are unpublished, but a muted title read as broken
           rather than forthcoming. "Forthcoming" is stated once, as a status, instead
           of being implied by greying out every headline. */}
       <SectionShell
-        tone="bone"
+        tone="rule"
         eyebrow="The index"
         heading="Five pieces, forthcoming."
         headingSize="md"
@@ -46,7 +46,7 @@ export default function JournalPage() {
         <Reveal stagger={0.1}>
           <ol className="border-b border-ink/15">
             {ENTRIES.map((entry, i) => (
-              <RevealItem as="li" key={entry.title} className="border-t border-ink/15">
+              <RevealItem as="li" variant="soft" key={entry.title} className="border-t border-ink/15">
                 <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-[13rem_1fr]">
                   <IndexMeta index={i + 1} total={ENTRIES.length} tag={entry.tag} />
                   <h2 className="type-display max-w-[34ch] text-fluid-xl text-ink">
@@ -58,7 +58,7 @@ export default function JournalPage() {
           </ol>
         </Reveal>
 
-        <Reveal delay={0.1}>
+        <Reveal variant="fade" delay={0.1}>
           <div className="mt-18">
             <ArrowLink href="/begin">Ask about a piece</ArrowLink>
           </div>

@@ -33,9 +33,23 @@ noticed, trusted, and chosen.*
    (Brand Strategy · Web Design · Development · Copy Direction).
 3. Nomenclature: an **engagement / commission**, not a "package." Nav CTA = "Commission."
 4. Never name competitors. Confidence doesn't name the cheap option.
-5. Display headings UPPERCASE sans; serif italic is the supporting voice.
+5. Headings are sentence case, end in a period, and are set LIGHT (300) in the one
+   grotesk — there is no serif and no uppercase display (both retired 2026-08; the
+   2026-09 Round 2 pivot went lighter still). Meta labels are the only uppercase.
+6. Never mention AI anywhere except the single "Do you use AI?" FAQ on /services
+   (CLAUDE.md, hard rule).
+7. **Fewest true declarative words** (2026-09). The site no longer argues for its
+   own quality; it has it. No adjective that sells. The homepage's studio line is
+   the `h1` and must contain "websites" or "web design". The wordmark is lowercase.
 
-## Canonical copy (current site)
+## Canonical copy — SUPERSEDED (2026-09-06)
+
+The copy below is the 2026-07 site and is being rewritten wholesale. The working
+source is now **`docs/kbc-copy.md`** — every line on the site, by route and slot,
+with the current text and a "new" column. Rewrite there; it is applied verbatim.
+This section is kept only as history of the earlier register.
+
+### Canonical copy (2026-07 site, historical)
 
 **Home hero** — eyebrow "Digital identities for beauty, wellness & luxury brands";
 headline "WEBSITES WITH PRESENCE."; sub "For founder-led brands ready to look as

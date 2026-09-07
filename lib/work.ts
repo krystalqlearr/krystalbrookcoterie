@@ -23,8 +23,16 @@ export type WorkProject = {
   // Index-grid presentation
   span: string; // asymmetric grid placement
   pt: string; // collapsed frame aspect, as padding-top %
+  // Which edge the frame slides in from on /work — the side of the grid it sits
+  // on (left-heavy → "left", right column → "right", centred → rises "up").
+  // Art-directed with `span`; change them together.
+  enter: "left" | "right" | "up";
   field: string; // token-based gradient classes (fallback when no image)
   image?: string; // real screenshot/asset; overrides the gradient field
+  // A looping, muted screen recording of the live site. Takes precedence over
+  // `image` in the work frame; `poster` (normally the image) stands in under
+  // reduced motion and before the video decodes. Files live in /public/video.
+  video?: { mp4: string; webm?: string; poster: string };
   // Narrative
   intro: string;
   body: string[];
@@ -51,8 +59,17 @@ export const WORK: WorkProject[] = [
       "How Krystal Brook Coterie designed and hand-built Glowtoure — a custom-coded, editorial digital flagship for a founder-led luxury spray-tan house across the Sacramento region.",
     span: "lg:col-span-7",
     pt: "62.5%",
-    field: "from-mocha/35 via-mocha/20 to-forest",
+    enter: "left",
+    field: "from-mocha/35 via-mocha/20 to-onyx",
     image: "/images/glowtoure/og-glowtoure.webp",
+    // The first 31s of Krystal's 2026-09-06 full-screen recording — the
+    // homepage, hero to footer, at its natural scroll pace — side-trimmed to
+    // 16:9 (1440×810). No browser chrome; the site's own cursor dot is in shot.
+    video: {
+      mp4: "/video/glowtoure.mp4",
+      webm: "/video/glowtoure.webm",
+      poster: "/video/glowtoure-poster.jpg",
+    },
     intro:
       "A founder-led tanning house whose service was far more considered than its first website let on. The brief: a digital presence that felt as premium as the ritual — and priced it accordingly.",
     body: [
@@ -68,11 +85,19 @@ export const WORK: WorkProject[] = [
       "Booking flow",
       "Performance & SEO",
     ],
+    // Measured 2026-08-18, Lighthouse 12.8.2 against the live https://glowtoure.com,
+    // MOBILE emulation — the harder of the two runs and the one Google ranks on.
+    //
+    // Performance is deliberately ABSENT. Desktop scores 98 (LCP 1.1s) but mobile
+    // scores 77 (LCP 4.8s), and publishing the desktop figure alone would be a
+    // selective truth. Two fixable causes on the Glowtoure side: an apex→www redirect
+    // chain costing ~864ms, and a 2,424ms load delay on the hero LCP image (missing
+    // priority/fetchpriority). Fix those, re-measure, and add the row back honestly.
     results: [
-      { label: "Lighthouse performance", value: "To publish" },
-      { label: "Core Web Vitals", value: "To publish" },
+      { label: "Accessibility", value: "97 / 100" },
+      { label: "Best practices · SEO", value: "100 · 100" },
+      { label: "Layout shift (CLS)", value: "0.001" },
       { label: "Stack", value: "Next.js · Tailwind · Vercel" },
-      { label: "Engagement", value: "Fully custom-coded" },
     ],
     // NO TESTIMONIAL until a real, approved, attributed quote exists.
     //
@@ -102,7 +127,8 @@ export const WORK: WorkProject[] = [
     status: "In production",
     span: "lg:col-span-4 lg:col-start-9 lg:mt-32",
     pt: "125%",
-    field: "from-mocha/25 via-forest to-forest",
+    enter: "right",
+    field: "from-mocha/25 via-onyx to-onyx",
     intro:
       "A concept for a med-spa that wanted to read like a maison, not a clinic — where credentials and calm hold the same page, and the brand feels like the authority in its market.",
     body: [
@@ -126,7 +152,8 @@ export const WORK: WorkProject[] = [
     status: "Concept",
     span: "lg:col-span-6 lg:col-start-3 lg:mt-10",
     pt: "66%",
-    field: "from-mocha/30 via-forest to-forest",
+    enter: "up",
+    field: "from-mocha/30 via-onyx to-onyx",
     intro:
       "A lifestyle house where the founder is the brand — and the site had to make it legible to a market that had never heard the name, and impossible to mistake for anyone else.",
     body: [

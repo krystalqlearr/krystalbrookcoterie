@@ -7,8 +7,8 @@ import Image from "next/image";
  * a decorative serif aside.
  *
  * `tone` follows the canvas. `onFlare` is for the full-bleed flare band, which uses
- * the `deep` stop (#A8004F): bone on deep clears AA at 6.02 at ANY size, including
- * the 13px attribution. The neon default would only manage 3.01 for bone and 4.30
+ * the `deep` stop (#A8004F): milk on deep clears AA at 6.02 at ANY size, including
+ * the 13px attribution. The neon default would only manage 3.01 for milk and 4.30
  * for ink — fine for the big quote, short for the caption beneath it. One band per
  * page, at most.
  */
@@ -22,16 +22,16 @@ const toneClass: Record<Tone, { quote: string; name: string; meta: string; ring:
     ring: "border-ink/15",
   },
   onDark: {
-    quote: "text-bone",
-    name: "text-bone",
-    meta: "text-bone/60",
-    ring: "border-bone/20",
+    quote: "text-milk",
+    name: "text-milk",
+    meta: "text-milk/60",
+    ring: "border-milk/20",
   },
   onFlare: {
-    quote: "text-bone",
-    name: "text-bone",
-    meta: "text-bone/70",
-    ring: "border-bone/30",
+    quote: "text-milk",
+    name: "text-milk",
+    meta: "text-milk/70",
+    ring: "border-milk/30",
   },
 };
 

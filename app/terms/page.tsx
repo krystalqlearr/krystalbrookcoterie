@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import Reveal from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
@@ -40,19 +41,23 @@ export default function TermsPage() {
       <PageHero eyebrow="Legal" title="Terms of use." size="lg" />
       <SectionShell as="section" className="pt-0">
         <div className="max-w-measure space-y-10">
-          <p className="font-sans text-fluid-base leading-relaxed text-ink/70">
-            These terms govern your use of the Krystal Brook Coterie website, operated by
-            Lion &amp; Gazelle Holdings LLC.
-          </p>
+          <Reveal variant="fade">
+            <p className="font-sans text-fluid-base leading-relaxed text-ink/70">
+              These terms govern your use of the Krystal Brook Coterie website, operated
+              by Lion &amp; Gazelle Holdings LLC.
+            </p>
+          </Reveal>
           {SECTIONS.map((s) => (
-            <div key={s.h} className="border-t border-ink/12 pt-6">
+            <Reveal variant="fade" key={s.h} className="border-t border-ink/12 pt-6">
               <h2 className="type-display text-fluid-xl text-ink">{s.h}</h2>
               <p className="mt-3 font-sans text-fluid-base leading-relaxed text-ink/70">{s.p}</p>
-            </div>
+            </Reveal>
           ))}
-          <p className="border-t border-ink/12 pt-6 type-meta text-ink/70">
-            This is a working summary pending final review by counsel before launch.
-          </p>
+          <Reveal variant="fade">
+            <p className="border-t border-ink/12 pt-6 type-meta text-ink/70">
+              This is a working summary pending final review by counsel before launch.
+            </p>
+          </Reveal>
         </div>
       </SectionShell>
     </>

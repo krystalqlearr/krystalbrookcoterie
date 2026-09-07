@@ -73,11 +73,11 @@ export default function ImageFrame({
           className={`object-cover ${zoom}`}
         />
       ) : (
-        /* Art-directed placeholder: a warm forest field (a dark image slot that
+        /* Art-directed placeholder: a warm onyx field (a dark image slot that
            punctuates the paper) lit by a mocha highlight, under paper grain. The
            flare is deliberately NOT in here — tinting every empty image slot with
            the accent turned the whole page plum and spent the flare on nothing. */
-        <div role="img" aria-label={alt} className={`editorial-grain absolute inset-0 bg-forest ${zoom}`}>
+        <div role="img" aria-label={alt} className={`editorial-grain absolute inset-0 bg-onyx ${zoom}`}>
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-mocha/20 to-mocha/35 mix-blend-screen" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
         </div>
@@ -92,12 +92,12 @@ export default function ImageFrame({
         />
       ) : null}
       {index ? (
-        <span className="type-meta absolute right-4 top-4 text-bone/60">
+        <span className="type-meta absolute right-4 top-4 text-milk/60">
           {index}
         </span>
       ) : null}
       {caption ? (
-        <figcaption className="type-meta absolute bottom-0 left-0 p-4 text-bone/60">
+        <figcaption className="type-meta absolute bottom-0 left-0 p-4 text-milk/60">
           {caption}
         </figcaption>
       ) : null}

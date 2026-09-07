@@ -3,6 +3,8 @@ import EnquiryForm from "@/components/EnquiryForm";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
+import { TRAVEL } from "@/lib/motion";
+import { FLOOR_LINE } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Commission",
@@ -23,10 +25,12 @@ export default function BeginPage() {
 
       <SectionShell as="section" className="pt-0">
         <div className="grid gap-x-gutter gap-y-14 lg:grid-cols-[1.4fr_0.6fr]">
-          <Reveal>
+          <Reveal variant="fade">
             <p className="mb-8 max-w-measure font-sans text-fluid-base leading-relaxed text-ink/70">
               Every engagement begins with alignment. The details below help determine
-              the right scope, timing, and level of partnership for your project.
+              the right scope, timing, and level of partnership for your project.{" "}
+              {/* The one public figure — the filter. Everything else is in the proposal. */}
+              <span className="text-ink">{FLOOR_LINE}</span>
             </p>
             <EnquiryForm />
             <p className="mt-10 max-w-measure font-sans text-fluid-base text-ink/70">
@@ -35,7 +39,8 @@ export default function BeginPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={0.1}>
+          {/* The aside hangs off the right edge, so it slides in from the right. */}
+          <Reveal from="right" distance={TRAVEL.aside} delay={0.1}>
             <aside className="space-y-10 lg:border-l lg:border-ink/12 lg:pl-12">
               <div>
                 <p className="type-meta text-ink/70">Prefer email?</p>

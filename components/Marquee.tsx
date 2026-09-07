@@ -15,9 +15,14 @@ import { type ReactNode } from "react";
  */
 type Tone = "onLight" | "onDark";
 
+// The separators are hairline punctuation, NOT accents. They were flare
+// until the 2026-09 quiet-luxury pivot, which put ~13 magenta ticks in a
+// single decorative band — the exact "accent as habit" the flare budget
+// now forbids (CLAUDE.md, Color). As aria-hidden decorative marks they sit
+// under the hairline exemption, not the muted text floor.
 const toneClass: Record<Tone, { text: string; separator: string }> = {
-  onLight: { text: "text-ink", separator: "text-flare-deep" },
-  onDark: { text: "text-bone", separator: "text-flare-lift" },
+  onLight: { text: "text-ink", separator: "text-ink/25" },
+  onDark: { text: "text-milk", separator: "text-milk/30" },
 };
 
 type Props = {
@@ -31,7 +36,7 @@ type Props = {
 export default function Marquee({
   items,
   tone = "onLight",
-  duration = 42,
+  duration = 90,
   className = "",
 }: Props) {
   const t = toneClass[tone];
