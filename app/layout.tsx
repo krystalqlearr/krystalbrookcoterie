@@ -120,7 +120,7 @@ export default function RootLayout({
         <SmoothScroll />
         <a
           href="#main"
-          className="type-meta sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[300] focus:rounded-[1px] focus:bg-ink focus:px-5 focus:py-3 focus:text-bone"
+          className="type-meta sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[300] focus:rounded-[1px] focus:bg-ink focus:px-5 focus:py-3 focus:text-milk"
         >
           Skip to content
         </a>

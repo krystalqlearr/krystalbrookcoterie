@@ -28,16 +28,16 @@ export default function PageHero({ eyebrow, title, accent, intro, size = "xl", m
       {marker ? <SectionMarker label={marker} side="right" /> : null}
       <div className="container relative z-10">
         <Reveal stagger={0.1}>
-          <RevealItem>
+          <RevealItem variant="soft">
             <Eyebrow>{eyebrow}</Eyebrow>
           </RevealItem>
-          <RevealItem>
+          <RevealItem variant="soft">
             <EditorialHeading as="h1" size={size} accent={accent} className="mt-6 max-w-[20ch]">
               {title}
             </EditorialHeading>
           </RevealItem>
           {intro ? (
-            <RevealItem>
+            <RevealItem variant="fade">
               <div className="mt-8 max-w-measure font-sans text-fluid-lg text-ink/70">
                 {intro}
               </div>

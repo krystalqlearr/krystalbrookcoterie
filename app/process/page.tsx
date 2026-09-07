@@ -48,7 +48,7 @@ export default function ProcessPage() {
 
       {/* The argument, before the mechanics */}
       <SectionShell as="section" className="pt-0">
-        <Reveal>
+        <Reveal variant="fade">
           <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
             <p>
               Every project begins beneath the surface. We clarify what the brand stands
@@ -68,10 +68,10 @@ export default function ProcessPage() {
           previously ran as five neon display figures; that spent the flare five times
           on one page. IndexMeta carries the count in the AA-safe stop instead, and
           the phase name takes the display weight. */}
-      <SectionShell tone="bone" eyebrow="How it runs" heading="Five phases, in order.">
+      <SectionShell tone="rule" eyebrow="How it runs" heading="Five phases, in order.">
         <ol className="border-b border-ink/15">
           {PHASES.map((phase, i) => (
-            <Reveal as="li" key={phase.title} className="border-t border-ink/15">
+            <Reveal as="li" variant="fade" key={phase.title} className="border-t border-ink/15">
               <div className="grid gap-x-gutter gap-y-5 py-12 lg:grid-cols-[13rem_1fr]">
                 <IndexMeta index={i + 1} total={PHASES.length} />
                 <div className="max-w-measure">
@@ -85,7 +85,7 @@ export default function ProcessPage() {
           ))}
         </ol>
 
-        <Reveal delay={0.1}>
+        <Reveal variant="fade" delay={0.1}>
           <div className="mt-18">
             <ArrowLink href="/services">See what each phase covers</ArrowLink>
           </div>

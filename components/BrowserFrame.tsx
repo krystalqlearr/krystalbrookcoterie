@@ -1,11 +1,29 @@
 import { type ReactNode } from "react";
 
 /**
- * Minimal browser chrome for presenting site screenshots. A restrained CHARCOAL
- * frame — muted dots + a quiet address pill — so a light site UI (and real
- * screenshots) pop against the bone canvas and read as "a website we built."
- * Wrap an ImageFrame (or image) as the child.
+ * Minimal browser chrome for presenting a site. A restrained onyx frame —
+ * muted dots + a quiet address pill — so a light site UI reads as "a website
+ * we built." The dots are chrome, not an accent: all three stay milk/25 so a
+ * page with several frames never spends its flare budget on window dressing.
+ *
+ * `BrowserChrome` is the bar alone, shared with WorkShowcase's morphing frame
+ * so the two can never drift; `BrowserFrame` is the bar plus a bordered body.
  */
+export function BrowserChrome({ label }: { label: string }) {
+  return (
+    <div className="flex shrink-0 items-center gap-3 border-b border-milk/10 px-4 py-2.5">
+      <span className="flex gap-1.5" aria-hidden>
+        <span className="h-2 w-2 rounded-full bg-milk/25" />
+        <span className="h-2 w-2 rounded-full bg-milk/25" />
+        <span className="h-2 w-2 rounded-full bg-milk/25" />
+      </span>
+      <span className="truncate rounded-sm bg-milk/5 px-3 py-1 font-sans text-[0.7rem] tracking-[0.04em] text-milk/60">
+        {label}
+      </span>
+    </div>
+  );
+}
+
 type Props = {
   url?: string;
   children: ReactNode;
@@ -14,17 +32,8 @@ type Props = {
 
 export default function BrowserFrame({ url = "glowtoure.com", children, className = "" }: Props) {
   return (
-    <div className={`overflow-hidden border border-ink/15 bg-forest ${className}`}>
-      <div className="flex items-center gap-3 border-b border-bone/10 px-4 py-2.5">
-        <span className="flex gap-1.5" aria-hidden>
-          <span className="h-2 w-2 rounded-full bg-flare" />
-          <span className="h-2 w-2 rounded-full bg-bone/25" />
-          <span className="h-2 w-2 rounded-full bg-bone/25" />
-        </span>
-        <span className="truncate rounded-sm bg-bone/5 px-3 py-1 font-sans text-[0.7rem] tracking-[0.04em] text-bone/60">
-          {url}
-        </span>
-      </div>
+    <div className={`overflow-hidden border border-ink/15 bg-onyx ${className}`}>
+      <BrowserChrome label={url} />
       <div className="relative">{children}</div>
     </div>
   );

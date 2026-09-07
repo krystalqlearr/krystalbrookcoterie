@@ -26,7 +26,8 @@ export default function AboutPage() {
       {/* Founder — portrait + narrative, asymmetric */}
       <SectionShell as="section" className="pt-0">
         <div className="grid items-start gap-x-gutter gap-y-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <Reveal>
+          {/* The portrait sits in the left column, so it slides in from the left. */}
+          <Reveal from="left">
             <ImageFrame
               ratio="4/5"
               index="KB"
@@ -37,12 +38,12 @@ export default function AboutPage() {
             />
           </Reveal>
           <Reveal stagger={0.12}>
-            <RevealItem>
+            <RevealItem variant="soft">
               <EditorialHeading as="h2" size="md" accent="own" className="max-w-[20ch]">
                 A studio, and a point of view of its own.
               </EditorialHeading>
             </RevealItem>
-            <RevealItem>
+            <RevealItem variant="fade">
               <div className="mt-6 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
                 <p>
                   I’m Krystal — the designer and creative partner behind Krystal Brook
@@ -68,13 +69,13 @@ export default function AboutPage() {
 
       {/* Philosophy — alt-section */}
       <SectionShell
-        tone="bone"
+        tone="rule"
         eyebrow="Philosophy"
         heading="The standard is distinction."
         accent="distinction"
         headingSize="md"
       >
-        <Reveal>
+        <Reveal variant="fade">
           <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
             <p>
               Luxury is not created by adding more. It is created through restraint,

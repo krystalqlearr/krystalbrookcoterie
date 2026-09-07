@@ -3,22 +3,22 @@ import Logo from "./Logo";
 import { NAV_LINKS } from "./nav";
 
 /**
- * Global footer on the forest dark — the site's closing dark moment. Text is bone; muted
- * labels are bone/60. The flare appears once, as the structural rule.
+ * Global footer on the onyx dark — the site's closing dark moment. Text is milk; muted
+ * labels are milk/60. The flare appears once, as the structural rule.
  */
 
 const linkFocus =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bone";
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-milk";
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-forest text-bone">
+    <footer className="bg-onyx text-milk">
       <div className="container py-20">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
           {/* Brand + studio line */}
           <div>
-            <Logo variant="stacked" color="bone" />
-            <p className="mt-8 max-w-[40ch] font-sans text-sm leading-relaxed text-bone/60">
+            <Logo variant="stacked" color="milk" />
+            <p className="mt-8 max-w-[40ch] font-sans text-sm leading-relaxed text-milk/60">
               Distinctive digital identities for founder-led beauty, wellness, med-spa,
               and luxury lifestyle brands — built to lead their category.
             </p>
@@ -26,13 +26,13 @@ export default function SiteFooter() {
 
           {/* Nav repeat */}
           <nav aria-label="Footer">
-            <p className="type-meta text-bone/60">Studio</p>
+            <p className="type-meta text-milk/60">Studio</p>
             <ul className="mt-5 space-y-2.5 font-sans text-sm">
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`link-underline text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
+                    className={`link-underline text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
                   >
                     {item.label}
                   </Link>
@@ -43,12 +43,12 @@ export default function SiteFooter() {
 
           {/* Connect */}
           <div>
-            <p className="type-meta text-bone/60">Connect</p>
+            <p className="type-meta text-milk/60">Connect</p>
             <ul className="mt-5 space-y-2.5 font-sans text-sm">
               <li>
                 <a
                   href="mailto:hello@krystalbrookcoterie.com"
-                  className={`link-underline text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
+                  className={`link-underline text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
                 >
                   hello@krystalbrookcoterie.com
                 </a>
@@ -58,7 +58,7 @@ export default function SiteFooter() {
                   href="https://www.instagram.com/krystalbrookcoterie/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`link-underline text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
+                  className={`link-underline text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
                 >
                   Instagram
                 </a>
@@ -66,7 +66,7 @@ export default function SiteFooter() {
               <li>
                 <Link
                   href="/begin"
-                  className={`link-underline text-bone transition-colors hover:text-bone/60 ${linkFocus}`}
+                  className={`link-underline text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
                 >
                   Commission a project
                 </Link>
@@ -78,14 +78,14 @@ export default function SiteFooter() {
         {/* Single flare structural rule */}
         <hr className="my-12 h-px border-0 bg-flare" />
 
-        <div className="flex flex-col gap-3 font-sans text-fluid-sm text-bone/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 font-sans text-fluid-sm text-milk/60 sm:flex-row sm:items-center sm:justify-between">
           <span>© 2026 Krystal Brook Coterie</span>
           <span>a DBA of Lion &amp; Gazelle Holdings LLC</span>
           <span className="flex gap-5">
-            <Link href="/privacy" className={`transition-colors hover:text-bone ${linkFocus}`}>
+            <Link href="/privacy" className={`transition-colors hover:text-milk ${linkFocus}`}>
               Privacy
             </Link>
-            <Link href="/terms" className={`transition-colors hover:text-bone ${linkFocus}`}>
+            <Link href="/terms" className={`transition-colors hover:text-milk ${linkFocus}`}>
               Terms
             </Link>
           </span>

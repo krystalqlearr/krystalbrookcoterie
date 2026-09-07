@@ -1,42 +1,32 @@
-import Button from "@/components/Button";
 import ArrowLink from "@/components/ArrowLink";
 import EditorialHeading from "@/components/EditorialHeading";
-import Hero from "@/components/Hero";
 import IndexMeta from "@/components/IndexMeta";
 import Marquee from "@/components/Marquee";
-import ProjectCard from "@/components/ProjectCard";
+import LandingWordmark from "@/components/motion/LandingWordmark";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
-import SectionShell from "@/components/SectionShell";
-import ServiceCard from "@/components/ServiceCard";
-import StatStrip from "@/components/StatStrip";
+import WorkShowcase from "@/components/WorkShowcase";
 import { WORK } from "@/lib/work";
 
 /**
- * Home — the section rhythm the whole system was built for:
+ * Home — "The Row's aesthetic, Bionic Egg's motion." The name, alone, grows and
+ * floats into the header; then the site arrives small and stays small:
  *
- *   hero → proof band (DARK) → positioning → indexed work → point of view
- *        → the studio → marquee → proof → closing CTA (DARK)
+ *   landing → the work (one frame, expanding in place) → the two concepts, quiet
+ *        → the studio line → four tiers, one line each → marquee → closing line
+ *        → footer (the page's only dark surface)
  *
- * Two rules govern the composition and both are deliberate:
+ * Nothing on the page persuades. Copy is the fewest true declarative words —
+ * the studio line and the closing line are WORKING DEFAULTS until the copy
+ * review. See docs/kbc-build-plan.md, Phase 8.
  *
- *  CHARCOAL IS PUNCTUATION — exactly two dark moments, the proof band under the
- *  hero and the closing CTA. Everything between them alternates milk (canvas) and
- *  bone (first recess) so the page reads with cadence, never one flat scroll.
+ * FLARE BUDGET — the page spends zero accent touches. What's coloured is
+ * functional and carved out: IndexMeta's numbers, ArrowLink's glyph, the tier
+ * flag. TYPE — two tiers: the h1 at `fluid-xl` (Light 300), every h2 at
+ * `type-meta`. DARK — the footer only.
  *
- *  ONE FLARE PER VIEW — the accent words form a spine read top to bottom:
- *  presence → owned → follows → worth. The indexed work section spends its flare
- *  on the IndexMeta numbers instead of a heading accent, which is why that
- *  heading has none.
+ * MOTION — words fade, media slides: the frame drops from above (the name just
+ * rose), every line sharpens or fades in on scroll, the tiers arrive one by one.
  */
-
-// Every figure here is a claim the site already makes in the /services FAQ —
-// nothing is estimated. If a claim changes there, change it here too.
-const PROOF = [
-  { figure: "6–8 wks", label: "Signature build", note: "Brief to launch, once content is in hand." },
-  { figure: "100%", label: "Yours to own", note: "Code, design system, deployment. No lock-in." },
-  { figure: "One", label: "Senior hand", note: "Every decision mine. Nothing handed to a junior." },
-  { figure: "Hours", label: "Revision turnaround", note: "Not the weeks an agency queue takes." },
-];
 
 const SECTORS = [
   "Beauty",
@@ -48,183 +38,115 @@ const SECTORS = [
   "Founder-led",
 ];
 
+// Real prices and durations — the same claims /services makes. If one changes
+// there, change it here.
+const TIERS = [
+  { name: "The Edit", price: "$4,500", duration: "2–3 weeks" },
+  { name: "Signature", price: "$9,800", duration: "6–8 weeks", flag: "Most commissioned" },
+  { name: "Atelier", price: "$22,000+", duration: "8–12 weeks" },
+  { name: "Private Commission", price: "$32,000+", duration: "Scoped to the work" },
+];
+
 export default function HomePage() {
-  const [feature, ...rest] = WORK;
+  const [feature, ...concepts] = WORK;
 
   return (
     <>
-      {/* 1 · Hero — atmosphere + choreographed headline */}
-      <Hero />
+      {/* 1 · The landing — the name, alone. It grows, then floats into the header. */}
+      <LandingWordmark />
 
-      {/* 2 · Proof band — the first dark inversion, directly under the hero. It
-             converts the headline's claim into something checkable before the
-             visitor has scrolled past one screen. */}
-      <StatStrip stats={PROOF} />
+      {/* 2 · The work — one real, live project in a frame that expands in place.
+             No heading here on purpose: the studio line below is the h1. */}
+      <section aria-label="Selected work" className="bg-milk">
+        <div className="container">
+          <WorkShowcase variant="sequence" gem projects={[feature]} total={WORK.length} />
 
-      {/* 3 · Positioning — the argument, stated once, in the display register */}
-      <SectionShell
-        heading="Your competitors’ sites are rented. Yours will be owned."
-        accent="owned"
-        headingSize="lg"
-        intro="The difference is presence. Strategy, art direction, and custom design that make a founder-led brand look as established as it has become — and turn attention into trust, and trust into demand."
-      />
-
-      {/* 4 · Selected work — an EDITED SEQUENCE, not a grid. IndexMeta carries the
-             count so the reader always knows where they are and how much is left. */}
-      <SectionShell tone="bone" eyebrow="Selected work" heading="The work speaks first.">
-        <Reveal>
-          <IndexMeta index={1} total={WORK.length} tag={feature.category} />
-          <ProjectCard
-            className="mt-5"
-            size="feature"
-            client={feature.client}
-            tag={feature.capabilities}
-            descriptor={feature.descriptor}
-            browserUrl={feature.url}
-            href={`/work/${feature.id}`}
-          />
-        </Reveal>
-
-        <div className="mt-26 grid gap-x-gutter gap-y-18 md:grid-cols-2">
-          {rest.map((project, i) => (
-            <Reveal key={project.id} delay={0.08 * (i + 1)}>
-              <IndexMeta index={i + 2} total={WORK.length} tag={project.category} />
-              <ProjectCard
-                className="mt-5"
-                size="side"
-                client={project.client}
-                tag={project.status ?? project.capabilities}
-                descriptor={project.descriptor}
-                href="/work"
-              />
-            </Reveal>
-          ))}
+          {/* The two concepts — quiet, honest, not expandable. */}
+          <ul className="mx-auto max-w-[calc((100svh-14rem)*1.7778)] divide-y divide-ink/12 border-t border-ink/12 pb-24">
+            {concepts.map((p, i) => (
+              <li key={p.id} className="py-8">
+                <Reveal variant="soft">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
+                    <IndexMeta index={i + 2} total={WORK.length} tag={p.client} />
+                    {p.status ? <span className="type-meta text-ink/70">{p.status}</span> : null}
+                  </div>
+                  <p className="mt-3 max-w-measure font-sans text-fluid-base text-ink/70">{p.descriptor}</p>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        <Reveal delay={0.1}>
-          <div className="mt-22">
-            <ArrowLink href="/work">View all work</ArrowLink>
-          </div>
-        </Reveal>
-      </SectionShell>
-
-      {/* 5 · Point of view — the studio's argument for why strategy comes first */}
-      <SectionShell eyebrow="The difference">
-        <Reveal stagger={0.12}>
-          <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-2 lg:items-start">
-            <RevealItem>
-              <EditorialHeading as="h2" size="lg" accent="follows" className="max-w-[16ch]">
-                Strategy leads. Everything else follows.
-              </EditorialHeading>
-            </RevealItem>
-            <RevealItem>
-              <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-                <p>
-                  Every brand I take on is shaped from its positioning up — who it must
-                  move, what it must be trusted for, and where it intends to go. The
-                  design serves that strategy; it never chases a trend.
-                </p>
-                <p>
-                  The result is a digital identity that reads established, distinctive,
-                  and impossible to confuse with anyone else — one senior mind on every
-                  decision, from strategy to the last interaction on screen.
-                </p>
-              </div>
-            </RevealItem>
-          </div>
-        </Reveal>
-      </SectionShell>
-
-      {/* 6 · The studio — four ways in, Signature flagged */}
-      <SectionShell
-        tone="bone"
-        eyebrow="The studio"
-        heading="Four ways to enter the studio."
-        headingSize="md"
-      >
-        <Reveal stagger={0.08}>
-          <div className="grid gap-x-gutter gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            <RevealItem>
-              <ServiceCard
-                name="The Edit"
-                price="$4,500"
-                duration="2–3 weeks"
-                description="A refined debut that stops a brand looking new."
-              />
-            </RevealItem>
-            <RevealItem>
-              <ServiceCard
-                name="Signature"
-                price="$9,800"
-                duration="6–8 weeks"
-                featured
-                description="The complete brand website."
-              />
-            </RevealItem>
-            <RevealItem>
-              <ServiceCard
-                name="Atelier"
-                price="$22,000+"
-                duration="8–12 weeks"
-                description="For brands whose site must carry real authority."
-              />
-            </RevealItem>
-            <RevealItem>
-              <ServiceCard
-                name="Private Commission"
-                price="$32,000+"
-                description="A digital experience built from the ground up."
-              />
-            </RevealItem>
-          </div>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <div className="mt-18">
-            <ArrowLink href="/services">View all services</ArrowLink>
-          </div>
-        </Reveal>
-      </SectionShell>
-
-      {/* 7 · Sectors — the page's heartbeat between two still sections. Presentational
-             only: every sector here is named as real content on /services and /work. */}
-      <section aria-hidden className="border-y border-ink/12 py-10">
-        <Marquee items={SECTORS} duration={48} />
       </section>
 
-      {/* 8 · Proof — a live, verifiable site rather than a quote. This section used to
-             carry an invented testimonial credited to a real client; a link the visitor
-             can actually click and check is stronger evidence than words nobody said.
-             When a real approved quote exists, a Testimonial belongs here too. */}
-      <SectionShell
-        eyebrow="Proof"
-        heading="The work is live."
-        headingSize="md"
-        intro="Glowtoure — a founder-led luxury tanning house serving the greater Sacramento region. Designed, built, and running in production."
-      >
-        <Reveal>
-          <ArrowLink href="https://glowtoure.com" target="_blank" rel="noopener noreferrer">
-            Visit glowtoure.com
-          </ArrowLink>
-        </Reveal>
-      </SectionShell>
+      {/* 3 · The studio line — the page's h1, small. */}
+      <section className="bg-milk py-section">
+        <div className="container">
+          <Reveal variant="soft">
+            <EditorialHeading as="h1" size="sm" className="max-w-[24ch]">
+              Websites for brands that don&rsquo;t need to explain themselves.
+            </EditorialHeading>
+          </Reveal>
+        </div>
+      </section>
 
-      {/* 9 · Closing CTA — the second and final dark moment. It runs INTO the forest
-             footer, so the two read as one closing movement; the section's normal
-             120px bottom rhythm would leave 200px of dead dark before the footer's
-             first line, so it is deliberately trimmed here. */}
-      <SectionShell
-        tone="dark"
-        heading="Let’s build something worth owning."
-        accent="worth"
-        headingSize="xl"
-        className="!pb-14"
-      >
-        {/* The one filled control on the page besides the hero: ArrowLink is for
-            navigation, Button for conversion, and this is the conversion moment. */}
-        <Button href="/begin" variant="onDark">
-          Begin your project
-        </Button>
-      </SectionShell>
+      {/* 4 · Four ways in — one line each. */}
+      <section className="bg-milk pb-section">
+        <div className="container">
+          <Reveal variant="soft">
+            <h2 className="type-meta text-ink/70">Ways in</h2>
+          </Reveal>
+          <Reveal as="ul" stagger={0.08} className="mt-8 divide-y divide-ink/12 border-y border-ink/12">
+            {/* The flood: a row fills with the flare on hover and every line goes ink
+                (4.3 on lipstick — legal for small text). Negative margin + padding so
+                the fill runs edge to edge of the list, not just the text. */}
+            {TIERS.map((tier) => (
+              <RevealItem
+                as="li"
+                variant="fade"
+                key={tier.name}
+                className="group -mx-4 grid gap-y-1 px-4 py-5 transition-colors duration-600 ease-editorial hover:bg-flare motion-reduce:transition-none sm:grid-cols-[1.4fr_1fr_1fr] sm:items-baseline"
+              >
+                <span className="flex items-baseline gap-4 font-sans text-fluid-base text-ink">
+                  {tier.name}
+                  {tier.flag ? (
+                    <span className="type-meta text-flare-deep transition-colors duration-600 ease-editorial group-hover:text-ink">
+                      {tier.flag}
+                    </span>
+                  ) : null}
+                </span>
+                <span className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink [font-variant-numeric:tabular-nums]">
+                  {tier.price}
+                </span>
+                <span className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink">
+                  {tier.duration}
+                </span>
+              </RevealItem>
+            ))}
+          </Reveal>
+          <Reveal variant="fade" className="mt-8">
+            <ArrowLink href="/services" direction="right">
+              The engagements
+            </ArrowLink>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 5 · Sectors — the page's heartbeat, slow. */}
+      <section aria-hidden className="border-y border-ink/12 py-10">
+        <Marquee items={SECTORS} />
+      </section>
+
+      {/* 6 · The closing line — on milk; the footer is the only dark surface. */}
+      <section className="bg-milk py-section">
+        <div className="container">
+          <Reveal variant="soft">
+            <p className="max-w-[24ch] font-sans text-fluid-lg text-ink">Ready when you are.</p>
+            <div className="mt-8">
+              <ArrowLink href="/begin">Commission</ArrowLink>
+            </div>
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }

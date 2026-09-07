@@ -9,7 +9,7 @@ import type { Config } from "tailwindcss";
  * (cherry) survives as the one accent, used barely.
  *
  * NEVER hardcode hex in components; use these token names. The inversion pair is
- * `bone` (light) + `ink` (warm charcoal); muted/hairlines are opacities of the pair.
+ * `milk` (the canvas) + `onyx` (the dark), ink text; muted/hairlines are opacities of the pair.
  */
 const config: Config = {
   content: [
@@ -43,63 +43,76 @@ const config: Config = {
       },
     },
     extend: {
+      /**
+       * Tailwind's opacity scale is 0, 5, 10, 15, 20 … — 12 is NOT on it, so every
+       * `border-ink/12` / `divide-ink/12` hairline (the CLAUDE.md "ink/12–15" rule)
+       * was silently ignored and fell back to preflight's grey #E5E7EB. Found
+       * 2026-09-07 while re-judging hairlines next to the lipstick flare. Adding
+       * the step makes the site's own rule true.
+       */
+      opacity: { 12: "0.12" },
       colors: {
-        // — The ink, and the light half of the inversion pair (see `bone` below) —
-        ink: "#23201B", //  warm faded charcoal — primary ink; bg for charcoal sections
         /**
-         * — Paper elevation: one stock, three sheets, lightest on top —
-         *   milk  THE CANVAS (2026-08). The default page. Ink 16.2 (AAA); the neon
-         *         flare reads 3.53 here vs 3.01 on bone, so the accent is safest on
-         *         the canvas itself. Everything below it is a recess.
-         *   bone  FIRST RECESS — the alt-section, and still the light INK on charcoal
-         *         (the inversion pair is bone + ink, unchanged).
-         *   stone DEEPEST RECESS — form fields, inset panels, the quietest band.
-         * Nothing sits ABOVE milk: elevation only goes down from the canvas, which is
-         * why an inset field is stone rather than something lighter.
+         * — THE TWO GROUNDS (2026-09-07 palette) —
+         * The site is milk and the blackest black, and nothing in between. The beige
+         * recesses (bone #EBE5D8, stone #E0D8C7) are RETIRED: Krystal — "I like the
+         * milk, I don't like the stone… there needs to be more contrast; the stone is
+         * not a good-looking colour with these bright and vibrant colours." A tint
+         * next to a hot red reads cream-and-terracotta; a pale grey would have been
+         * cleaner but no more contrasty (1.1–1.3:1 against milk either way). Rhythm on
+         * the milk is whitespace and ink hairlines, never tint.
+         *
+         *   milk   THE CANVAS — every paper surface, and the light ink ON the dark.
+         *          Ink 16.2 (AAA); the neon 3.60 (clears the 3:1 large-text bar).
+         *   white  THE LIFT — the one sheet ABOVE the canvas: cards and form fields
+         *          sit on it with an ink hairline. Never a section fill.
+         *   ink    primary text and the filled-button surface. Prices/tags stay ink.
          */
-        milk: "#FAF7F0", //  THE CANVAS — the default page background
-        bone: "#EBE5D8", //  first recess / the light ink on charcoal
-        stone: "#E0D8C7", //  deepest recess. NEVER carries the neon flare (2.66)
+        milk: "#FAF7F0",
+        white: "#FFFFFF",
+        ink: "#23201B",
         /**
-         * — The dark inversion surface —
+         * — THE DARK: onyx —
+         * "The blackest warm black" (her words) — a black gemstone, which is the
+         * right family for a studio whose living mark is a crystal. Milk text ≈18:1
+         * (AAA); the neon 5.07 on it, text-legal at ANY size, so the flare needs no
+         * pale "lift" stop on the dark any more. The inversion pair is milk + onyx.
          *
-         * Deep forest. Green is electric magenta's TRUE COMPLEMENT — opposite it on
-         * the wheel — which is why the flare reads hotter here than on any neutral,
-         * and why the pair looks like a scheme rather than an accent dropped onto a
-         * black. Named for the pigment; the SectionShell tone that uses it is called
-         * `dark`, because tones describe role and colours describe pigment.
-         *
-         * It survives being nearly black: bone text 13.49, flare-lift 7.09, and the
-         * neon flare 4.49 as a graphic. Complementary pairs are loud by construction
-         * — this one works because the green is almost black and the flare is
-         * rationed. Lighten either and it tips into Christmas.
-         *
-         * Retired: #1E1418 (muddy aubergine — blue over green, an echo of the wine
-         * flare) and #13120F (the neutral warm black that briefly replaced it).
+         * Retired darks, in order: forest #0F2018 (colour-wheel complement of
+         * magenta), aubergine #1E1418, warm black #13120F, RIVER #0F2A2D (teal —
+         * "water at depth", the name story; she: "not liking that teal"), oxblood
+         * #24100F (tried live on 2026-09-07, lost to the board's black), warm black
+         * #161311 (the interim). Lighten onyx and it stops being the ground the
+         * cherry glows against.
          */
-        forest: "#0F2018", //  deep forest — THE dark inversion surface
-        mocha: "#9A8264", //  deep warm neutral — imagery / atmosphere only
+        onyx: "#0E0C0B",
+        mocha: "#9A8264", //  deep warm neutral — imagery / atmosphere haze only
         /**
-         * THE FLARE — electric magenta (2026-08, replaces the wine `cherry`).
+         * THE FLARE — CHERRY (2026-09-07, replaces the electric magenta).
          *
-         * Three stops, because neon and AA can't be the same swatch. Which stop you
-         * reach for is decided by SIZE and CANVAS, never by taste:
+         * Hue 349°, the red side of pink. Magenta #FF0080 sat at 330° and leaned
+         * purple; lipstick #FF1F52 (346°) was the runner-up, chosen against cherry
+         * on the live site with the flooded card as the swatch. The brief it had to
+         * meet: "read feminine but bold enough for a masculine luxury site to still
+         * choose me." Neon and AA still can't be one swatch, so the stop is chosen
+         * by SIZE, never by taste:
          *
-         *  DEFAULT #FF0080  NEON. Graphics and LARGE display only, on bone or
-         *                   charcoal: arrow glyphs, hairline wipes, Rule ticks,
-         *                   heading accent words (every display size is ≥24px, so
-         *                   the 3:1 large-text bar applies — 3.01 on bone). Never
-         *                   small text. Never on stone (2.66 — below the bar).
-         *  deep    #A8004F  TEXT. Anything under 24px that must be flare-colored —
-         *                   13px eyebrows, indices, tier flags — plus the one
-         *                   full-bleed band, which carries bone text. 6.02 on bone,
-         *                   5.33 on stone, so it is safe on both papers.
-         *  lift    #FF7ABF  The flare ON charcoal — 7.52, safe at any size.
+         *  DEFAULT #FF1744  NEON. On milk and white: graphics and text ≥24px only
+         *                   (3.60 / 3.85 — the 3:1 large-text bar): arrow glyphs,
+         *                   hairline wipes, Rule ticks, heading accent words, the
+         *                   drop-cap, ::selection (with ink text, 4.2). On onyx:
+         *                   ANY size (5.07). Also the FLOOD — a card/row fills with
+         *                   it on hover; display line → milk (3.6), smaller → ink.
+         *  deep    #B3102E  TEXT ON PAPER. Anything under 24px that must be
+         *                   flare-coloured — 13px eyebrows, indices, tier flags —
+         *                   plus the one full-bleed band (milk text) and the
+         *                   primary-button hover. 6.48 on milk.
+         *
+         * `lift` is retired: the neon is its own text colour on onyx.
          */
         flare: {
-          DEFAULT: "#FF0080",
-          deep: "#A8004F",
-          lift: "#FF7ABF",
+          DEFAULT: "#FF1744",
+          deep: "#B3102E",
         },
       },
       /**
@@ -194,7 +207,7 @@ const config: Config = {
         },
       },
       animation: {
-        marquee: "marquee 42s linear infinite",
+        marquee: "marquee 90s linear infinite",
       },
       fontFamily: {
         // ONE typeface carries the whole site: Neue Montreal for display, body, and

@@ -1,44 +1,54 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 import { NAV_LINKS } from "./nav";
+import { LANDING } from "@/lib/motion";
 
+/**
+ * The header is the name and one word. No link row, no outlined button — a
+ * client site needs its "reserve" button in view; a studio's own site is
+ * calmer than that. `menu` opens a full-screen milk page with the six links
+ * set large and light, one per line, and Commission last. The bar stays
+ * above the panel so the name and `close` remain where they were.
+ *
+ * On the homepage the header stays out entirely (opacity 0 + inert) until the
+ * landing name has floated into the wordmark slot — `LandingWordmark` sets
+ * `data-landing` on <html>, observed here because the header mounts before
+ * <main>. See docs/kbc-build-plan.md §3.
+ */
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
+  const [atLanding, setAtLanding] = useState(false);
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Transparent over the hero → solidify to rich-black on scroll.
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+  useLayoutEffect(() => {
+    const sync = () => {
+      setScrolled(window.scrollY > 8);
+      const hasLanding = document.documentElement.hasAttribute("data-landing");
+      setAtLanding(hasLanding && window.scrollY < window.innerHeight * LANDING.endVh);
+    };
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+    const observer = new MutationObserver(sync);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-landing"] });
+    return () => {
+      window.removeEventListener("scroll", sync);
+      observer.disconnect();
+    };
   }, []);
 
-  // Close the menu if the viewport grows to desktop.
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const onChange = () => mq.matches && setOpen(false);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
-  // Mobile menu: focus trap + Escape to close + body scroll lock + focus return.
+  // Menu: focus trap + Escape to close + body scroll lock + focus return.
   useEffect(() => {
     if (!open) return;
     const panel = panelRef.current;
     if (!panel) return;
-    // Capture the trigger now so cleanup returns focus to the right node.
     const toggleButton = toggleRef.current;
 
-    const focusable = () =>
-      Array.from(
-        panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
-      );
+    const focusable = () => Array.from(panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'));
     focusable()[0]?.focus();
 
     const onKey = (e: KeyboardEvent) => {
@@ -75,99 +85,77 @@ export default function SiteHeader() {
   const linkFocus =
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
+  // `inert` keeps the invisible header out of the tab order. React 18's DOM
+  // layer predates the attribute (passing `true` warns; the types only allow
+  // boolean), so it's spread in as the empty-string form the browser reads.
+  const hiddenAtLanding = atLanding && !open;
+  const inertProps = hiddenAtLanding ? ({ inert: "" } as Record<string, string>) : {};
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
-        scrolled || open
-          ? "border-ink/10 bg-milk/90 backdrop-blur"
-          : "border-transparent bg-transparent"
-      }`}
+      {...inertProps}
+      // No backdrop-blur while the menu is open: `backdrop-filter` makes the
+      // header the containing block for its fixed descendants, which collapsed
+      // the panel's `inset-0` to the 80px bar (height 0). Solid milk instead.
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,opacity] duration-600 ease-editorial ${
+        open
+          ? "border-ink/10 bg-milk"
+          : scrolled
+            ? "border-ink/10 bg-milk/90 backdrop-blur"
+            : "border-transparent bg-transparent"
+      } ${hiddenAtLanding ? "pointer-events-none opacity-0" : "opacity-100"}`}
     >
       <div className="container flex h-20 items-center justify-between">
-        {/* Wordmark — horizontal on desktop, monogram on mobile */}
-        <Link href="/" aria-label="Krystal Brook Coterie — home" className={`shrink-0 text-ink ${linkFocus}`}>
-          <Logo variant="horizontal" color="ink" size="1rem" className="hidden lg:block" />
-          <Logo variant="monogram" color="ink" size="0.9rem" className="lg:hidden" />
+        {/* The landing's name floats into this slot and becomes the logo;
+            `data-wordmark-slot` is what LandingWordmark measures against. */}
+        <Link
+          href="/"
+          aria-label="Krystal Brook Coterie — home"
+          data-wordmark-slot
+          className={`shrink-0 text-ink ${linkFocus}`}
+        >
+          <Logo variant="horizontal" color="ink" size="0.95rem" />
         </Link>
 
-        {/* Desktop nav */}
-        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex xl:gap-9">
-          {NAV_LINKS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`link-underline type-meta text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            href="/begin"
-            className={`rounded-[1px] border border-ink px-5 py-2.5 type-meta text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
-          >
-            Commission
-          </Link>
-        </nav>
-
-        {/* Mobile toggle */}
         <button
           ref={toggleRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
-          aria-controls="mobile-menu"
+          aria-controls="site-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className={`flex h-11 w-11 items-center justify-center text-ink lg:hidden ${linkFocus}`}
+          data-cursor="hover"
+          data-cursor-label={open ? "close" : "menu"}
+          className={`-mr-3 px-3 py-2 type-meta text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
         >
-          <span className="relative block h-3.5 w-6" aria-hidden>
-            <span
-              className={`absolute left-0 block h-px w-6 bg-current transition-transform duration-300 ${
-                open ? "top-1.5 rotate-45" : "top-0"
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-1.5 block h-px w-6 bg-current transition-opacity duration-200 ${
-                open ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`absolute left-0 block h-px w-6 bg-current transition-transform duration-300 ${
-                open ? "top-1.5 -rotate-45" : "top-3"
-              }`}
-            />
-          </span>
+          {open ? "Close" : "Menu"}
         </button>
       </div>
 
-      {/* Mobile menu overlay */}
       {open ? (
         <div
-          id="mobile-menu"
+          id="site-menu"
           ref={panelRef}
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="fixed inset-0 top-20 z-40 flex flex-col justify-between bg-milk px-6 pb-12 pt-10 lg:hidden"
+          className="fixed inset-0 top-20 z-40 flex flex-col justify-center bg-milk"
         >
-          <nav aria-label="Primary" className="flex flex-col gap-6">
-            {NAV_LINKS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className={`type-display text-fluid-2xl text-ink ${linkFocus}`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav aria-label="Primary" className="container">
+            <ul className="flex flex-col gap-2">
+              {[...NAV_LINKS, { href: "/begin", label: "Commission" }].map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={`type-display inline-block text-fluid-3xl text-ink transition-colors hover:text-ink/60 ${linkFocus}`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
-          <Link
-            href="/begin"
-            onClick={() => setOpen(false)}
-            className={`mt-10 inline-block self-start rounded-[1px] border border-ink px-7 py-3.5 type-meta text-ink transition-colors hover:bg-ink hover:text-bone ${linkFocus}`}
-          >
-            Commission a project
-          </Link>
         </div>
       ) : null}
     </header>

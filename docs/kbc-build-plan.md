@@ -35,74 +35,118 @@
 
 ## 2. Design system
 
-### 2.1 Color — MILK-LED warm-neutral + an ELECTRIC FLARE (redesigned 2026-08)
+### 2.1 Color — TWO GROUNDS + ONE CHERRY FLARE (re-chosen 2026-09-07)
 
-Second pivot: from the bone-paper studio to a milk-led canvas carrying an electric
-magenta flare against a forest dark. Reference for the SYSTEM (not the palette):
-bionicegg.com. Muted text and hairlines are OPACITIES of the pair, not separate tokens.
-
-PAPER — one stock, three sheets, lightest on top. Nothing sits ABOVE the canvas:
-elevation only goes DOWN from it, so an inset field is `stone`, not something lighter.
+Third pivot (2026-09-07): from the milk/bone/stone recesses with a magenta flare on a
+teal river to TWO GROUNDS — milk and the blackest black — with one CHERRY flare.
+Krystal's words, in order: "I like the milk, I like the typography colours, I think
+the forest or the dark teal colour and the magenta I'm not liking as much. I want the
+flare to be more of a pretty neon for a real flare moment." → "Magenta is just too
+purple leaning." → "Not pretty and bold enough. Needs to read feminine but bold enough
+for a masculine luxury site to still choose me." → "I like the milk, I don't like the
+stone. There needs to be more contrast." → "The blackest warm black with milk and
+white white and then the lipstick and cherry. And when you scroll over a service card
+the whole card turns the flare colour and the text changes to work with it." → cherry.
+Muted text and hairlines are OPACITIES of the pair, not separate tokens.
 
 | token | hex | role |
 |---|---|---|
-| `milk` | `#FAF7F0` | THE CANVAS — the default page. Ink 16.2 (AAA) |
-| `bone` | `#EBE5D8` | FIRST RECESS — the warm alt-section, AND the light ink on forest |
-| `stone` | `#E0D8C7` | DEEPEST RECESS — inset form fields, the quietest band |
+| `milk` | `#FAF7F0` | THE CANVAS — every paper surface, AND the light ink on onyx. Ink 16.2 (AAA) |
+| `white` | `#FFFFFF` | THE LIFT — the one sheet above the canvas: cards, form fields (ink hairline). Never a section fill |
 | `ink` | `#23201B` | warm faded charcoal-brown — primary ink + button fill |
-| `forest` | `#0F2018` | THE dark inversion surface |
+| `onyx` | `#0E0C0B` | THE DARK — "the blackest warm black"; a black gemstone beside the crystal mark. Milk ≈18 · neon 5.07 |
 | `mocha` | `#9A8264` | deep warm neutral — imagery / atmosphere haze only |
 
-THE FLARE — electric magenta, THREE STOPS. Neon and AA cannot be one swatch, so the
-stop is chosen by SIZE and CANVAS, never by taste:
+THE FLARE — CHERRY, TWO STOPS (hue 349°, the red side of pink; magenta at 330° leaned
+purple, lipstick #FF1F52 at 346° was the runner-up). Neon and AA cannot be one swatch,
+so the stop is chosen by SIZE, never by taste:
 
 | token | hex | rule |
 |---|---|---|
-| `flare` | `#FF0080` | NEON. Graphics + text ≥24px ONLY, on milk/bone/forest. NEVER on stone (2.66) |
-| `flare-deep` | `#A8004F` | TEXT. Anything under 24px, plus the one full band. 6.02 on bone, 5.33 on stone |
-| `flare-lift` | `#FF7ABF` | The flare ON forest — 7.09, safe at any size |
+| `flare` | `#FF1744` | NEON. On milk/white: graphics + text ≥24px ONLY (3.60 / 3.85). On onyx: any size (5.07). Also the FLOOD |
+| `flare-deep` | `#B3102E` | TEXT ON PAPER. Anything under 24px, plus the one full band (milk text) and the button hover. 6.48 on milk |
 
-Green is electric magenta's TRUE COMPLEMENT, which is why the flare reads hotter on
-forest than on any neutral. It works because the green is nearly black and the flare is
-rationed — lighten either and it tips into Christmas.
+`flare-lift` is retired (the neon is its own text colour on onyx); so are `bone`
+`#EBE5D8` and `stone` `#E0D8C7` (the beige recesses — a tint next to a hot red reads
+cream-and-terracotta; a pale grey would be cleaner but no more contrasty, 1.1–1.3:1
+against milk either way) and `river` `#0F2A2D` (the teal). `SectionShell` tones are now
+`light | rule | dark` — `rule` is milk with an ink hairline above. THE FLOOD: a card or
+row fills cherry on hover/focus-within; display line → milk (3.6), smaller → ink (4.2).
+Also fixed on the way: Tailwind's opacity scale has no `12`, so every `ink/12` hairline
+had rendered as preflight grey since the rule was written — `theme.extend.opacity.12`.
 
-ONE flare element PER VIEW, not per section. This is ENFORCED IN CODE: `SectionShell`
-derives the stop from `tone` and passes it to `EditorialHeading`, so a heading cannot
-silently ship a failing pair. Every display size floors at 24px precisely so the neon
-stop stays legal on headings.
+The physics that decided the shape (recorded so it's never re-litigated): a neon
+GLOWS against dark. Lime / mint / cyan / coral sit at 1.1–1.4:1 on milk and cannot
+carry a word or an arrow on paper. Magenta was only ever there because #FF0080 is the
+one hue that reads neon AND clears 3:1 on milk; cherry keeps that property (3.60) with
+the purple taken out. Two boards were made (`public/_tmp-flare-board.html`, gitignored):
+five hue families first, then the red-pink band (lipstick → cherry → signal red) with a
+global dark switcher; the decision was made on the live site with the flooded card as
+the swatch, from headless-Chrome renders (the pane's screenshots are blank while it's
+hidden).
 
-MUTED TEXT FLOOR = `ink/70` on milk, bone AND stone (5.72 / 5.37 / 5.05) · `bone/60` on
-forest (5.82). These are FLOORS: `ink/65` clears bone at 4.62 but FAILS stone at 4.38,
-and `ink/60` fails both. Opacity is therefore NOT available as a hierarchy step below
-the floor; use color instead. Prices/tags/asterisks stay INK. Focus rings are NEVER the
-flare. Grain is `mix-blend: multiply` (paper tooth).
+ONE OR TWO flare touches PER PAGE — not per view, not per section (tightened in the
+2026-09 quiet-luxury pivot; it was previously one per view). MOST SECTIONS CARRY NO
+FLARE AT ALL. Spend the budget on the page's actual moments — typically the hero's
+heading accent word and the closing CTA's — and leave everything between them plain
+ink. An accent in every section stops reading as a decision and starts reading as a
+habit. Carved out because they're functional rather than decorative: `IndexMeta`'s
+live index numbers and `ArrowLink`'s glyph. A full-bleed flare band is at most once
+per page and spends the entire budget.
 
-**RETIRED:** cherry/maroon/blush (the wine flare), charcoal `#1E1418` (its blue channel
-sat above green, which made every dark band read aubergine), camel, rich-black, cream,
-deep-petrol, teal, greige, surface-1/2.
+The CONTRAST half of this is ENFORCED IN CODE: `SectionShell` derives the stop from
+`tone` and passes it to `EditorialHeading`, so a heading cannot silently ship a
+failing pair. Every display size floors at 24px precisely so the neon stop stays legal
+on headings. The FREQUENCY half is a judgment call and cannot be enforced by a
+component — count the flare touches on a page before shipping it.
+
+MUTED TEXT FLOOR = `ink/70` on milk (5.72) and on white (≈6) · `milk/60` on onyx (≈7.8).
+These are FLOORS — never below `ink/70` for text. Opacity is therefore NOT available as
+a hierarchy step below the floor; use color instead. Hairlines and decorative
+aria-hidden marks are exempt: `ink/12–15` · `milk/15–20`. Prices/tags/asterisks stay
+INK. Focus rings are NEVER the flare (ink on milk/white, milk on onyx). Grain is
+`mix-blend: multiply` (paper tooth).
+
+**RETIRED (in order):** the wine cherry/maroon/blush of 2026-07 (a darker red — not
+this cherry), camel, rich-black, cream, deep-petrol, teal, greige, surface-1/2; forest
+green `#0F2018`; aubergine `#1E1418`; warm black `#13120F`; the electric magenta
+`#FF0080 / #A8004F / #FF7ABF`; river `#0F2A2D`; bone `#EBE5D8`; stone `#E0D8C7`; the
+interim oxblood `#24100F` and warm black `#161311`; lipstick `#FF1F52 / #B01A3F` (the
+runner-up flare).
 
 ### 2.2 The dark is punctuation
 
-Forest (`forest` bg, bone text) is NOT the default — it's the dark inversion moment:
-footer, closing-CTA showstoppers, scrolled header, browser frames, work-transition
-overlay. One or two dark moments per page for rhythm — home and /services each run
-exactly two.
+Onyx (`onyx` bg, milk text) is NOT the default — it's the inversion moment: the
+footer, closing-CTA showstoppers, the expanded case study, browser-frame chrome. One
+or two dark moments per page for rhythm; the homepage has only its footer. OPEN: the
+scrolled header over a dark band reads as a pale strip (milk/90 over black) — hers to
+call.
 
 ### 2.3 Typography — ONE typeface, TWO registers (grotesk pivot 2026-08)
 
 **PP Neue Montreal carries everything. There is no second typeface and no third voice.**
 
-- **DISPLAY — weight 400 (REGULAR), sentence case**, enormous, hard negative tracking
-  (−0.045 → −0.06em), sub-1 leading (0.92), capped ~108px. Tracking and leading live in
-  the `fluid-xl … fluid-hero` tokens — NEVER hand-tune a heading. Write headlines as
-  short declarative sentences ending in a period, stacked two or three deep. The
-  restraint IS the luxury signal: 400-weight at 108px outranks any bold cut.
+- **DISPLAY — weight 300 (LIGHT, Round 2 2026-09; was 400), sentence case**, hard
+  negative tracking (−0.045 → −0.06em), sub-1 leading (0.92), capped ~108px. The
+  weight is set in exactly one place (`.type-display`, globals.css); tracking and
+  leading live in the `fluid-xl … fluid-hero` tokens — NEVER hand-tune a heading.
+  Light is Studio Krista's airiness in KBC's own family (the Light cut was already
+  loaded); no serif returns. On the homepage the register is used SMALL — the h1 is
+  `fluid-xl`; the only large type there is the name, transiently, as it floats into
+  the header.
 - **META — 13px UPPERCASE Semibold (600) at +0.13em.** The ONLY uppercase on the site:
   eyebrows, tags, indices, captions, credits, nav, form labels, CTAs. (The family has
   no 700, hence 600.)
 
 THE FLARE THREAD survives as COLOR, not as a second face: one word per heading passed
-as `accent`, in the SAME face and weight.
+as `accent`, in the SAME face and weight — and spent against the one-or-two-per-PAGE
+budget in §2.1, not per heading.
+
+**TWO SIZE TIERS PER PAGE, not a different size per section** (2026-09 pivot). A page
+has one or two MOMENTS — the hero, and usually a closing CTA — which carry `hero`/`lg`.
+Every other section heading on that page takes the SAME smaller size (`md`). Varying
+the scale section by section reads as a system being exercised; holding one secondary
+size and letting whitespace do the pacing reads as confidence.
 
 Scale: fluid clamp tokens (`fluid-sm … fluid-hero`). `fluid-xl` floors at 24px so every
 display size stays inside WCAG "large text". The hero atmosphere is a faint warm paper
@@ -111,7 +155,10 @@ haze (mocha), not colored glows.
 **RETIRED:** Neue Montreal Extrabold/Black (800/900 — loaded, never set), uppercase
 display, and PP Editorial New entirely (serif italic sublines, pull-quotes, the serif
 accent word). The .woff2 files remain in /public/fonts; the font is no longer loaded.
-Only the wordmark sits outside the two registers, at Medium 500 uppercase.
+Only the wordmark sits outside the two registers, at Medium 500 — LOWERCASE since
+Round 2 (one shared recipe in `components/Logo.tsx`; header, footer, styleguide): the
+landing name floats into the header and becomes the logo, so the mark matches it.
+The monogram "KBC" keeps uppercase.
 
 ### 2.3b Signature devices (2026-08)
 
@@ -121,7 +168,7 @@ Only the wordmark sits outside the two registers, at Medium 500 uppercase.
 | `IndexMeta` | `01 / 07 — Med-spa · Brand + Web`. Live number takes flare-deep (13px text); turns a grid into an edited sequence |
 | `Rule` | 1px hairline. `flare`+`short` opens a section header; `hair` splits rows |
 | `Marquee` | Pure-CSS band. Pauses on hover, STOPS under reduced motion. Presentational only |
-| `StatStrip` | The proof band on forest under the hero. 3–4 DEFENSIBLE figures — every one must already be a claim the site makes elsewhere |
+| `StatStrip` | The proof band on onyx under the hero. 3–4 DEFENSIBLE figures — every one must already be a claim the site makes elsewhere |
 
 ### 2.4 Motion tokens (NEW — single source, never inline magic numbers)
 
@@ -147,18 +194,131 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
 - **Smooth scroll** — Lenis (`SmoothScroll`), reduced-motion aware, `data-lenis-prevent`
   on inner scroll containers (e.g. the case-study modal).
 - **Reveal** — scroll-linked entrance primitive (`components/motion/Reveal.tsx`):
-  mask/clip + subtle y + fade, staggerable, off under reduced-motion.
+  `soft` (blur-to-sharp, short text) · `fade` (opacity + 12px, blocks) · `rise`
+  (legacy 24px) · `from` + `distance` (directional, for media), staggerable, off
+  under reduced-motion. The site-wide register since 2026-09-06: words fade, media
+  slides — see Phase 8.
 - **Signature: the work transition** — a browser-framed project card expands in place
   into a full-bleed, scrolling case study (Framer shared-layout FLIP). The credibility
   moment. Prototype lives in `WorkShowcase`; promoted to `/work` + real route
   transitions (View Transitions API) in Phase 4.
-- **Cursor** — terracotta dot + teal ring (exists). Enhance: grows + labels "View"
-  over work, shrinks over text.
+- **Cursor** — the milk inversion dot (`mix-blend-difference`; mint over the cherry flood), 14px, growing to 44px
+  over interactive targets and to 64px carrying a word over `data-cursor-label`
+  targets (`open` on a work frame, `close` on the expanded close button). The label
+  sits INSIDE the blended dot so it's always the dot's inverse. Done in Round 2.
 - **Page transitions** — View Transitions API on route change (progressive
   enhancement; native where supported, instant fallback elsewhere).
 - **Type choreography** — hero headline arrives per-line (mask reveal + blur-to-focus);
   accent word settles distinctly.
+- **Dispersion** (`components/motion/Dispersion.tsx`) — the positioning claim
+  demonstrated rather than stated: incidence angle separates three readings of one
+  sentence. Live on `/` and on the `/for/[slug]` outreach pages.
+- **CrystalMark** (`components/motion/CrystalMark.tsx`) — a 36px refractive glass gem;
+  ordered hex-bipyramid geometry on a real `MeshPhysicalMaterial` (transmission + ior
+  + PMREM environment). Three.js is dynamic-imported inside the effect so it never
+  enters the first-load bundle; `preloadCrystalMark()` warms those imports on hover.
+  Since Round 2 it is the work expand's BETWEEN-MOMENT: on click the gem holds alone
+  on milk for `GEM_BEAT_MS` (400) at `z-[230]`, then the morph starts as it fades.
+  Skipped under reduced motion.
+- **Reveal `variant="soft"`** — blur-to-sharp (`revealSoft` in lib/motion.ts:
+  `filter blur(6px)→0`, y 12→0, `DUR.xslow` on `EASE`) for short captions and
+  one-liners only; `filter` isn't compositor-only. Existing `rise` reveals untouched.
+- **Reveal `from` + the site-wide pass (DONE 2026-09-06, on her "go ahead")** —
+  `revealFrom(direction, distance, soft)` and `revealFade` in lib/motion.ts;
+  `TRAVEL = { text: 12, aside: 24, media: 48, frame: 64 }` so no page carries a
+  magic number. Krystal's ask: "the words as you scroll on each page fade in, and
+  certain pics or videos slide in from different places." The register: WORDS FADE
+  (`soft` on headings/eyebrows/captions, `fade` on paragraphs/lists/forms/meta),
+  MEDIA SLIDES (`from`, art-directed). Applied: `SectionShell` and `PageHero` stagger
+  their headers (tick/eyebrow/heading soft, intro fade); `/` — the work frame drops
+  from above (mirrors the name's ascent), tiers stagger in, every line soft/fade;
+  `/work` — hero stagger, each frame enters from its grid side via
+  `WorkProject.enter` (glowtoure left · maison right · étoile up), meta fades after;
+  `/work/[slug]` — header stagger, hero frame rises 64, meta column from the right,
+  results were a stagger with no items (animated nothing) → real `RevealItem`s;
+  `/about` — portrait from the left, text stagger; `/begin` — form fades, aside from
+  the right; `/services` `/process` `/journal` — rows fade, journal titles soft;
+  `/privacy` `/terms` `/for/[slug]` — had no reveals at all; blocks fade.
+  `/styleguide` deliberately untouched (a spec sheet, not a visitor page). The
+  `WorkShowcase` entrance sits on the frame's own `motion.div` (variants +
+  `whileInView`), NOT a wrapper: a transformed ancestor becomes the containing
+  block for the frame's `fixed` expanded state and clips the morph — verified the
+  open frame still measures 0,0 × viewport. `html { overflow-x: clip }` (not
+  `hidden`, which would make a scroll container and break sticky/Lenis) absorbs
+  the sideways travel; scrollWidth stayed ≤ innerWidth. Verified by DOM probe on
+  her server: hidden states (`y ±64`, `x −48/+24`, `blur(6px)`) and settled states
+  (`opacity 1`, `transform none`) on /, /work, /about, /begin, /services; zero
+  console errors; `tsc` clean.
+- **The palette re-chosen (DONE 2026-09-07)** — see §2 for the system and the
+  physics. Sequence: magenta + teal rejected → five-family board (mint/cyan/coral/
+  tangerine/two-colour) rejected as "not pretty and bold enough" → red-pink band
+  board (lipstick / cherry / signal) with a dark switcher → lipstick on oxblood put
+  live → "the board's warm black" → stone rejected, "more contrast" → beige recesses
+  retired as fills, `white` added as the lift, `bone` repointed to milk → "the
+  blackest warm black… milk and white… lipstick and cherry… the whole card turns the
+  flare colour" → THE FLOOD built on `ServiceCard` + the home tier rows → cherry
+  chosen from headless-Chrome renders of both. Confirmation pass: `river`→`onyx`,
+  `bone`→`milk`, `stone` removed, `flare-lift` folded into `flare`, `SectionShell`
+  tones `light | rule | dark`, `EditorialHeading` canvas `milk | dark`, the
+  `opacity.12` fix, CLAUDE.md / styleguide / this doc rewritten. The four parked
+  scenes keep their old hex constants (they document a retired era). OPEN: the
+  scrolled header over a dark band reads as a pale strip; the cursor reads mint over
+  the flood (accepted for now). Her own `:3000` server needs a restart to compile the
+  new tokens.
+- **The work frame** — `WorkShowcase variant="sequence" gem` (`components/WorkShowcase.tsx`):
+  one project per screen in `BrowserChrome` (`components/BrowserFrame.tsx`, shared
+  with the /work grid; all dots milk/25), 16:9, capped to the viewport; caption
+  beneath via IndexMeta; the same `layout` morph as /work; focus to Close on open and
+  back to the trigger on close. Video-ready: `WorkProject.video {mp4, webm, poster}`
+  renders a looping muted `<video>` (poster under reduced motion). Non-live projects
+  show `status` in the pill, never a URL; the homepage lists them, doesn't frame them.
+- **The landing** (`components/motion/LandingWordmark.tsx`) — the homepage opens on
+  the name alone: lowercase, small, wide-tracked, centred on an empty milk screen —
+  no headline, no CTA, and no header or nav either. Scrolling doesn't cut to the
+  site; the name GROWS toward you first (viewport-capped so a phone never clips it
+  mid-word; no growth floor), then FLOATS into the header's wordmark slot and becomes
+  the logo — one continuous element at Medium 500, lowercase, ending at the logo's
+  measured size and tracking. Float, not snap (Round 2, "I do want the name to float
+  into its position"): scroll progress over `LANDING.endVh` is fed through a spring
+  (`LANDING.spring`, no overshoot) so the name trails the scroll by a beat; the path
+  lifts by `LANDING.arcPx` mid-travel; `transformOrigin 0% 50%` anchors the LEFT edge
+  so tightening tracking lands it exactly on the slot's left edge; arrival is the
+  spring settling (≥0.985), not a threshold — the traveler fades over `DUR.base` as
+  the header fades in over `duration-600`. The sticky box is pinned for `endVh` plus
+  a hold (`HOLD_VH`) so a fast scroll never drags the still-fading name off the
+  header. A ghost span measures the name at rest (a reload mid-scroll would otherwise
+  measure a mid-morph element); the target is `[data-wordmark-slot]` (the header
+  Link) and its `[role=img]` Logo. It sets `data-landing` on `<html>`; `SiteHeader`
+  observes
+  that (MutationObserver — the header mounts before the page, so a one-shot read
+  would miss it) and stays out with `opacity-0` + `inert` until the same 0.6vh, so
+  the nav is never on screen while the name is, and never in the tab order while
+  invisible. Fade is driven from raw `scrollY` against viewport height, NOT
+  `useScroll({ target })` — the section is sized in `svh`, which resolves after
+  framer measures, so target-relative progress never advanced. Decorative by design:
+  the real `<h1>` and every CTA sit in the hero directly beneath. Reduced motion
+  renders a short static band, no pin, no fade, header visible from the start.
 - Respect `prefers-reduced-motion` everywhere: instant, no morph, no parallax.
+
+**MOTION IS SMALL AND SPECIFIC, NEVER AMBIENT (2026-09 quiet-luxury pivot).** Nothing
+runs full-screen or continuously behind content. Retired to parked status — real,
+working, and deliberately unshipped, because each one announces itself and the site's
+register is now restraint:
+
+- `components/motion/CurrentScene.tsx` — the full-bleed "riding the current" engine
+  (particle current, wave-morphing grid, caustics, bloom, scroll-driven content
+  waypoints). The entire homepage was built on it before this pivot.
+- `components/motion/CrystalShatterScene.tsx` — a rotating refractive crystal
+  shattering into that current on scroll. Prototyped at `/prototype-shatter` (route
+  since deleted); never shipped.
+- `components/Hero.tsx` + `components/motion/HeroCrystal.tsx` — Nucleation, the
+  pointer-seeded crystal-growth hero with a shareable seed.
+
+All four stay in the tree, unimported, as raw material for the **crystal generator**:
+a FUTURE, SEPARATE per-client product — a parametric brand visual (facets, symmetry,
+edge sharpness, clarity, refraction) that each client generates, keeps, and alone
+has. It is explicitly NOT part of the homepage or the site IA; where it lives is
+unscoped.
 
 ---
 
@@ -169,7 +329,7 @@ split — header linked `/contact`, homepage linked `/begin`.) All "Begin" CTAs 
 
 | route | status | notes |
 |---|---|---|
-| `/` | rebuild | home — atmosphere → work → philosophy → services teaser → CTA |
+| `/` | done | home (Round 2) — landing (name grows, floats into the header) → the work (one frame, expands in place after the gem beat) → the two concepts, listed → studio line (the h1, small, Light) → four tiers, one line each → marquee 90s → closing line → footer (the only dark surface) |
 | `/work` | rebuild | the signature transition index (from `WorkShowcase`) |
 | `/work/[slug]` | build | real case-study routes w/ View Transitions; `glowtoure` first |
 | `/services` | build | 4 tiers; pricing revealed after desire, not a lead grid |
@@ -177,8 +337,14 @@ split — header linked `/contact`, homepage linked `/begin`.) All "Begin" CTAs 
 | `/about` | build | founder-led story; the person is the brand |
 | `/journal` | build | editorial notes / SEO surface (optional MDX) |
 | `/begin` | build | the enquiry experience (canonical CTA) — no financial fields |
-| `/styleguide` | keep | internal token/system reference; keep in sync |
-| `/prototype` | temp | delete once `/work` is promoted |
+| `/styleguide` | keep | internal token/system reference (noindex); keep in sync |
+| `/for/[slug]` | done | personalized outreach landing pages (noindex); data in `lib/prospects.ts` |
+
+Prototype routes are temporary by definition — delete each one the moment its question
+is answered, so the tree never accumulates dead exploration. `/prototype` (deleted once
+`/work` was promoted) and `/prototype-shatter` (deleted when the crystal-shatter opener
+was rejected in the 2026-09 pivot) are both gone; the components they exercised are
+parked, not deleted (see §3).
 
 Nav data lives in `components/nav.ts` (shared server/client). Keep it the single source.
 
@@ -193,6 +359,17 @@ Nav data lives in `components/nav.ts` (shared server/client). Keep it the single
 
 **New (foundation):** `lib/motion.ts`, `components/motion/SmoothScroll.tsx`,
 `components/motion/Reveal.tsx`, `WorkShowcase` (done, prototype).
+
+**Live devices (2026-08 → 09):** `ArrowLink`, `IndexMeta`, `Marquee` (90s), `Rule`,
+`StatStrip` (on /services and the styleguide; no longer on `/`), `Dispersion` (on
+`/for/[slug]`; no longer on `/`), `CrystalMark` (the expand's between-moment),
+`WorkShowcase` (`index` on /work, `sequence` + `gem` on `/`), `BrowserChrome`
+(shared browser bar), `Reveal` `soft` variant, `LandingWordmark`, the cursor's labels.
+
+**Parked / retired — in the tree, imported by nothing:** `Hero` (Nucleation),
+`motion/HeroCrystal`, `motion/CurrentScene`, `motion/CrystalShatterScene`. Kept as
+raw material for the future per-client crystal generator (§3). Do not re-import them
+into a page without a deliberate decision to reverse the quiet-luxury pivot.
 
 **New (later):** `WorkTransitionProvider` (route-based View Transitions), case-study
 content blocks, `EnquiryForm` (`/begin`), live/scroll-through work preview.
@@ -272,7 +449,7 @@ compliant token.
 
 - [x] **Phase 5 — Grotesk pivot (2026-08).** Identity rebuilt around bionicegg.com's
       typographic SYSTEM in KBC's own palette. Milk-led canvas; electric magenta flare
-      in three stops; forest dark. One typeface, two registers (§2.1–2.3). New devices:
+      in three stops; river dark. One typeface, two registers (§2.1–2.3). New devices:
       `ArrowLink`, `IndexMeta`, `Marquee`, `StatStrip`. Home, `/services`, `/process`,
       `/journal` recomposed into the section rhythm; `/work`, `/about`, `/begin` brought
       onto the register. PP Editorial New retired and unloaded.
@@ -284,6 +461,116 @@ compliant token.
       retired tier names; the OG share card still rendered the entire old brand.
       **Verified:** 1,498 text nodes across 11 routes at 1440/390 — zero contrast
       failures, zero horizontal overflow, every route has an `h1`.
+
+- [x] **Phase 6 — River swap (2026-08).** `forest` (#0F2018) → `river` (#0F2A2D)
+      site-wide: the token itself renamed, not just the hex, across 18 files. The
+      rationale was rewritten honestly — river is NOT magenta's color-wheel
+      complement the way forest green was, so that claim was dropped in favour of
+      what the name literally means (Krystal = clear water; Brook = the current).
+      Contrast recomputed, not guessed: bone-on-river 12.0:1 (AAA), flare-lift 6.3:1,
+      neon-as-graphic 4.0:1.
+
+- [x] **Phase 7 — Quiet-luxury pivot (2026-09).** A full-bleed Three.js homepage —
+      particle current, wave grid, caustics, bloom, scroll waypoints, and a rotating
+      refractive crystal that shattered into it — was built, made to work, and then
+      **deliberately withdrawn**. The brief that killed it, in Krystal's words:
+      *"restrained on purpose that reads this designer is brilliant and look how she
+      doesn't even have to try"* and *"quiet luxury that holds authority — you feel it
+      first and it makes you wonder who is this and how did they make something so
+      minimal so high end."* A shattering crystal is effort made visible; authority
+      comes from what's withheld. What changed:
+      - `/` rebuilt as flat, real content (§4). `StatStrip` finally wired into Home as
+        the first dark inversion — **three** figures, not four: the placeholder
+        "< 24h reply window" matched no documented commitment (real reply times are
+        tiered per care plan: 48h / next business day / same day), so it was dropped
+        rather than invented.
+      - **Flare budget tightened** from one element per VIEW to one or two per PAGE
+        (§2.1). Home spends exactly two — "presence." and "worth" — and every heading
+        between them is plain ink.
+      - **Type scale tightened** to two tiers per page (§2.3): the moments carry
+        hero/lg, every other section heading holds one shared `md`.
+      - `CurrentScene`, `CrystalShatterScene`, `Hero`, `HeroCrystal` parked (§5);
+        `/prototype-shatter` deleted.
+      - `CrystalMark` added as the one surviving high-tech detail — a 36px refractive
+        glass gem above the hero headline, Three.js dynamic-imported after mount so
+        the homepage first-load JS is **146 kB, not the 292 kB** a static import cost.
+      - **The landing.** Krystal then went one step further than the plan: the hero
+        should open on *"literally just the brand name"* — no headline, no CTA, and
+        no header either — with a transition into the site. `LandingWordmark` + the
+        `SiteHeader` hide/observe mechanic (§3). The wordmark is lowercase there, a
+        documented exception to the uppercase rule (§2.3). Marquee separators went
+        from flare-deep to ink/25 in the same pass — thirteen magenta ticks in one
+        decorative band was the exact "accent as habit" the new budget forbids.
+      - The crystal generator survives as a future, separate per-client product,
+        explicitly out of the site IA (§3).
+      **Open:** whether the restraint should go further into the tokens themselves
+      (different hexes, a different typeface). This phase deliberately changed
+      FREQUENCY and DENSITY, not values — the palette and typeface were already
+      minimal and contrast-verified, and density was the actual problem.
+
+- [x] **Phase 8 — Round 2, "The Row's aesthetic, Bionic Egg's motion" (2026-09-06).**
+      Krystal named four references and they were characterised by DOM probe, not
+      memory: **The Row** (tiny caps wordmark, one photo, zero words), **Bionic Egg**
+      (loud today: mockup collage, count-ups, no motion library — its whole vocabulary
+      is CSS blur reveals, logo shrink, a 92s marquee), **Studio Krista** (a light 70px
+      serif at 300, a 25px header, six looping videos in a hero collage, Lenis), and
+      **Clay** (heavy 74px grotesk, 8.6k px of full-bleed video, hand-rolled reveals on
+      `cubic-bezier(0.16,1,0.3,1)` — literally KBC's own `EASE`). What they agree on
+      became the brief: warm ground, no colour, VIDEO as the medium of the work,
+      expo-out reveals on every line, no cursor. Her decisions: moments 1–6 built
+      (name floats into the header; the work expands in place; blur-to-sharp captions;
+      cursor `open`/`close`; the gem as the 400ms between-moment; marquee 90s), 7–9
+      parked; dark on home = footer only; **Neue Montreal Light 300** for display (the
+      Light cut was already loaded — one line in `.type-display`), no serif; the
+      wordmark goes **lowercase** everywhere so the floating name IS the logo; she
+      will **record glowtoure.com** (1440×900, 14–20s slow scroll, MP4+WebM, no audio)
+      and the frame is built video-ready. The big-type hero, proof band, Dispersion
+      and the dark closing section left the homepage; the h1 is now the small studio
+      line ("Websites for brands that don't need to explain themselves." — a working
+      default until copy review). Calls made inside scope: only Glowtoure gets the
+      expanding frame (concepts are a quiet list — a full-screen "Concept" gradient
+      reads as padding); browser-chrome dots neutralised to bone/25 (flare budget);
+      the mobile header uses the horizontal lowercase wordmark, not the monogram.
+      **Verified:** typecheck clean; fresh tab, zero console errors; traveler and logo
+      identical in case/weight/tracking, x landing to the pixel; a fast-scroll bug
+      (the sticky box releasing before the spring settled) found and fixed with a
+      pinned hold. **The video landed the same night, in two takes.** Take one was
+      a 5:23 site tour at 2560×1392 with her Chrome tabs/bookmarks in shot; at that
+      width the Glowtoure hero is left-aligned while its sections centre, so no 16:10
+      crop could keep both — it shipped briefly as a left-favouring interim. Take
+      two, on a regular screen with the browser full-screened (1896×998, 1:38, 99 MB):
+      the first 31s are one unhurried hero-to-footer scroll, and a **16:9** side-trim
+      (`crop=1774:998:61:0` → `scale=1440:810`) clears both the hero's headline
+      flourish and the widest section. So the work frame is **16:9** (`paddingTop
+      56.25%`, width capped at `(100svh − 14rem) × 16/9`) — the recording's own
+      aspect, and the aspect Krista's and Clay's video tiles use — and
+      `public/video/glowtoure.{mp4,webm}` are that 0–31s cut at natural pace: H.264
+      2.77 MB, VP9 2.44 MB, poster from the video's own first frame (106 KB). Encoded
+      with a static ffmpeg pulled into the session scratchpad — nothing installed on
+      the machine or added to the repo. Verified playing in the frame (WebM chosen,
+      1440×810, 31.0s, zero console errors).
+      **Header, same night:** Krystal flagged that the header looked like Glowtoure's
+      (same hand, same instincts: logo left, link row, outlined CTA). Rebuilt as "the
+      name and one word": wordmark + `Menu`; a full-screen milk panel with the six
+      links + Commission at `fluid-3xl` Light, one per line; the old desktop nav row,
+      the outlined Commission box and the hamburger glyph are gone; the mobile-only
+      panel became THE menu at every breakpoint (`SiteHeader.tsx`). **Copy rewrite
+      started:** every user-facing line — 447 rows across 15 routes/sections, data
+      files, metadata, JSON-LD, aria text — is in `docs/kbc-copy.md`, a deck with the
+      verbatim current text, a register/length note, and a "new" column she writes
+      into; it ends with a list of cross-page inconsistencies to settle while
+      rewriting (tier durations, "inquiry/enquiry", "48 hours" vs "two business days",
+      We/I voice, duplicated dark-CTA headings, long meta descriptions); `docs/kbc-voice.md`
+      rule 5 (uppercase/serif) corrected to the current register and its canonical
+      copy marked superseded. **Crystal generator — proposed, not built:** a
+      parametric mark (symmetry, belt, cap, bevel, clarity, tint, glint, pace) on the
+      existing hex-bipyramid + glass pipeline, collapsing to a seed string that is the
+      client's; a private noindex `/atelier/crystal` used during commissions; exports
+      = WebM/MP4 from the canvas + PNGs + the embeddable component; the homepage's
+      CrystalMark is KBC's own seed. Phases: parameters + preview + seed URL; exports;
+      per-client tokens + saved seeds. After copy and header. **Open:** the studio
+      line and closing line at copy review; whether the Signature tier flag keeps
+      its flare-deep.
 
 ## 9. Anti-drift protocol
 

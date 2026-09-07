@@ -25,17 +25,18 @@
     @apply bg-milk text-ink font-sans antialiased;
   }
 
-  /* Electric selection — a quiet, confident tell. Ink on flare, not bone on flare:
-     ink clears 4.30 against #FF0080 where bone manages only 3.01. */
+  /* Cherry selection — a quiet, confident tell. Ink on flare, not milk on flare:
+     ink clears 4.2 against #FF1744 where milk manages only 3.6. Keep this hex in
+     step with `flare` in tailwind.config.ts (CSS can't read the token). */
   ::selection {
-    background-color: #ff0080; /* flare */
+    background-color: #ff1744; /* flare */
     color: #23201b; /* ink */
   }
 
-  /* Restrained warm scrollbar so the chrome never fights the paper. */
+  /* Restrained scrollbar so the chrome never fights the paper. */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #c9bfa9 #faf7f0; /* warm stone thumb on the milk track */
+    scrollbar-color: #c4c1bb #faf7f0; /* ink/25 over milk — no beige; the milk track */
   }
   *::-webkit-scrollbar {
     width: 10px;
@@ -66,6 +67,14 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* Media slides in from the page's edges (Reveal `from="left" | "right"`). The
+   document clips that sideways travel so it never widens the page or shows a
+   horizontal scrollbar mid-entrance. `clip`, not `hidden`: clip makes no scroll
+   container, so sticky (the landing) and window scroll (Lenis) are untouched. */
+html {
+  overflow-x: clip;
+}
+
 /* ── The two registers ───────────────────────────────────────────────────────
    The whole site is one typeface set two ways. Everything is DISPLAY or META;
    there is no third voice. Prefer the components (EditorialHeading, Eyebrow,
@@ -74,7 +83,7 @@ html.lenis body {
   /* DISPLAY — sentence case, weight 400. Size tokens (text-fluid-*) already carry
      the negative tracking and sub-1 leading; this sets face, weight, and casing. */
   .type-display {
-    @apply font-display font-normal normal-case text-balance;
+    @apply font-display font-light normal-case text-balance;
   }
 
   /* META — 13px uppercase Semibold at +0.13em. The only uppercase on the site:
@@ -95,7 +104,7 @@ html.lenis body {
   /* Animated flare underline — the accent as the interactive signal on inline links.
      A 1px rule is a graphic, so the neon stop is correct here. */
   .link-underline {
-    background-image: linear-gradient(#ff0080, #ff0080);
+    background-image: linear-gradient(#ff1744, #ff1744);
     background-repeat: no-repeat;
     background-position: left 100%;
     background-size: 0% 1px;
@@ -146,7 +155,7 @@ html.lenis body {
     letter-spacing: -0.055em;
     float: left;
     margin: 0.08em 0.12em 0 0;
-    color: #ff0080;
+    color: #ff1744;
   }
 
   /* Hide the native cursor everywhere while the custom cursor is active.
@@ -168,7 +177,43 @@ html.lenis body {
     pointer-events: none;
   }
 
-  /* Whole-page paper grain — a fine, fixed tooth over the bone canvas for material
+  /* Dispersion — see components/motion/Dispersion.tsx. Layout-only rules; the
+     component drives --dispersion-fan/-shear/-pitch per breakpoint and writes
+     transform/opacity directly to .dispersion-variant every frame. A slot's
+     width is measured once and pinned inline, so these never touch layout. */
+  .dispersion-line {
+    position: relative;
+    height: 1.06em;
+    margin-bottom: var(--dispersion-pitch, 2.18em);
+    white-space: nowrap;
+  }
+  .dispersion-line:last-child {
+    margin-bottom: 0;
+  }
+  .dispersion-anchor,
+  .dispersion-slot {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1.06;
+    height: 1.06em;
+  }
+  .dispersion-anchor {
+    margin-right: 0.3em;
+  }
+  .dispersion-slot {
+    position: relative;
+    margin-right: 0.3em;
+  }
+  .dispersion-variant {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    white-space: nowrap;
+    line-height: 1.06;
+    will-change: transform, opacity;
+  }
+
+  /* Whole-page paper grain — a fine, fixed tooth over the milk canvas for material
      depth. Very low opacity so it reads as texture, never noise. */
   .page-grain::before {
     content: "";

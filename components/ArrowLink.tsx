@@ -35,10 +35,10 @@ const toneClass: Record<Tone, { label: string; glyph: string; rule: string; ring
     ring: "focus-visible:outline-ink",
   },
   onDark: {
-    label: "text-bone",
-    glyph: "text-flare-lift",
-    rule: "bg-bone/25",
-    ring: "focus-visible:outline-bone",
+    label: "text-milk",
+    glyph: "text-flare",
+    rule: "bg-milk/25",
+    ring: "focus-visible:outline-milk",
   },
   // For a CTA that must lead the view on its own — the label itself takes the flare.
   // It is 13px text, so it uses the AA-safe `deep` stop, never the neon default.

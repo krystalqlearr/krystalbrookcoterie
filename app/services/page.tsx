@@ -123,7 +123,7 @@ export default function ServicesPage() {
         <ul className="border-b border-ink/15">
           {TIERS.map((tier, i) => (
             <li key={tier.name} className="border-t border-ink/15">
-              <Reveal>
+              <Reveal variant="fade">
                 <div className="grid gap-x-gutter gap-y-6 py-14 lg:grid-cols-[13rem_1fr]">
                   {/* Left rail — position, price, timeline */}
                   <div className="flex flex-col gap-4">
@@ -160,14 +160,14 @@ export default function ServicesPage() {
       {/* Founding client — first-recess alt-section. The price is deliberately NOT
           the accent word: prices stay ink, so the flare here is the marker tick. */}
       <SectionShell
-        tone="bone"
+        tone="rule"
         marker
         eyebrow="Founding client program"
         heading="Signature scope at $2,800 — for the right first few."
         headingSize="md"
         intro="A limited program for a small number of founding clients: full Signature-tier scope in exchange for case-study rights. Real work, deeply discounted, while the studio builds its published proof."
       >
-        <Reveal delay={0.1}>
+        <Reveal variant="fade" delay={0.1}>
           <Button href="/begin" variant="primary">
             Apply as a founding client
           </Button>
@@ -184,7 +184,7 @@ export default function ServicesPage() {
         <Reveal stagger={0.08}>
           <div className="grid gap-x-gutter gap-y-10 sm:grid-cols-3">
             {CARE.map((c) => (
-              <RevealItem key={c.name}>
+              <RevealItem key={c.name} variant="fade">
                 <ServiceCard name={c.name} price={c.price} description={c.description} />
               </RevealItem>
             ))}
@@ -193,8 +193,8 @@ export default function ServicesPage() {
       </SectionShell>
 
       {/* FAQ — first-recess, so the page keeps alternating rather than running flat */}
-      <SectionShell tone="bone" eyebrow="Questions" heading="The honest answers." headingSize="md">
-        <Reveal>
+      <SectionShell tone="rule" eyebrow="Questions" heading="The honest answers." headingSize="md">
+        <Reveal variant="fade">
           <FAQAccordion items={FAQ} />
         </Reveal>
       </SectionShell>

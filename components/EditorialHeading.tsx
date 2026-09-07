@@ -11,8 +11,8 @@ import { type ReactNode } from "react";
  *   "Digital identities. Built to be chosen."
  *
  * The flare thread survives as COLOR, not as a second typeface: pass one word (or
- * one short phrase) as `accent` and it lifts into the neon flare — `flare-lift` on
- * the forest dark — in the same face and weight. One per view. The serif-italic accent
+ * one short phrase) as `accent` and it lifts into the neon flare — `flare` on
+ * the onyx dark — in the same face and weight. One per view. The serif-italic accent
  * word is retired; so is uppercase extrabold.
  *
  * The neon stop is safe here and ONLY here among text: every display size floors at
@@ -20,19 +20,18 @@ import { type ReactNode } from "react";
  */
 type Level = "h1" | "h2" | "h3" | "h4";
 type Size = "sm" | "md" | "lg" | "xl" | "hero";
-type Canvas = "milk" | "bone" | "stone" | "dark";
+type Canvas = "milk" | "dark";
 
 /**
- * The accent stop is chosen by CANVAS, not by taste — this is the enforcement
- * point for the rule in CLAUDE.md, so a heading can never silently ship a failing
- * pair. The neon flare measures 3.53 on milk and 3.01 on bone (both clear the 3:1
- * large-text bar) but only 2.66 on stone, so stone drops to the `deep` stop.
+ * The accent is the neon on both grounds (2026-09-07 palette): cherry #FF1744
+ * measures 3.60 on milk — every display size floors at 24px, so the 3:1 large-text
+ * bar applies — and 4.81 on onyx, text-legal at any size. The map stays as the
+ * enforcement point: if a ground ever appears on which the neon fails, its stop
+ * changes HERE, not in a page.
  */
 const accentByCanvas: Record<Canvas, string> = {
   milk: "text-flare",
-  bone: "text-flare",
-  stone: "text-flare-deep",
-  dark: "text-flare-lift",
+  dark: "text-flare",
 };
 
 // Fluid sizes; each token carries its own negative tracking + sub-1 leading.
@@ -50,7 +49,7 @@ type Props = {
   accent?: string;
   /**
    * The canvas this heading sits on. Selects the accent's flare stop so it always
-   * clears contrast — pass it whenever the section is not the default bone paper.
+   * clears contrast — pass it whenever the section is not the default milk paper.
    * SectionShell derives it from `tone` automatically.
    */
   canvas?: Canvas;
@@ -62,7 +61,7 @@ type Props = {
 export default function EditorialHeading({
   children,
   accent,
-  canvas = "bone",
+  canvas = "milk",
   as: Tag = "h2",
   size = "lg",
   className = "",

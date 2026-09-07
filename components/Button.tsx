@@ -8,9 +8,9 @@ import { type ReactNode } from "react";
  * button used freely makes the page look like software instead of a magazine.
  *
  * Set in the META register (14px uppercase Semibold, +0.11em) with sharp corners.
- *  - primary    : ink fill / bone text — the main action on bone/stone
- *  - ghost      : ink hairline / ink text — secondary on bone/stone
- *  - onDark : bone hairline / bone text — for the forest dark sections
+ *  - primary    : ink fill / milk text — the main action on milk
+ *  - ghost      : ink hairline / ink text — secondary on milk
+ *  - onDark : milk hairline / milk text — for the onyx dark sections
  *
  * Renders an anchor when `href` is set, otherwise a <button>. Focus ring color is
  * per-variant so it stays visible on both canvases.
@@ -19,10 +19,10 @@ type Variant = "primary" | "ghost" | "onDark";
 
 const variantClass: Record<Variant, string> = {
   primary:
-    "border border-ink bg-ink text-bone hover:border-flare-deep hover:bg-flare-deep focus-visible:outline-ink",
+    "border border-ink bg-ink text-milk hover:border-flare-deep hover:bg-flare-deep focus-visible:outline-ink",
   ghost: "border border-ink/25 text-ink hover:border-ink focus-visible:outline-ink",
   onDark:
-    "border border-bone/40 text-bone hover:border-bone hover:bg-bone hover:text-ink focus-visible:outline-bone",
+    "border border-milk/40 text-milk hover:border-milk hover:bg-milk hover:text-ink focus-visible:outline-milk",
 };
 
 const base =

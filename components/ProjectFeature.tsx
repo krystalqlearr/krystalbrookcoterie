@@ -6,7 +6,7 @@ import EditorialHeading from "./EditorialHeading";
 /**
  * Editorial project feature — a large numbered thumbnail panel beside a detail
  * column set off by a flare structural rule. `reverse` alternates the panel side
- * for a stacked, magazine-style list. Ink text on bone; the thumb panel is forest.
+ * for a stacked, magazine-style list. Ink text on milk; the thumb panel is onyx.
  */
 type Props = {
   index: string; // "01"
@@ -42,7 +42,7 @@ export default function ProjectFeature({
         <div className="relative aspect-[3/2] overflow-hidden border border-ink/15 bg-gradient-to-br from-mocha/25 via-ink to-ink">
           <span
             aria-hidden
-            className="absolute left-6 top-3 font-display text-[6rem] leading-none text-bone/10 md:text-[8rem]"
+            className="absolute left-6 top-3 font-display text-[6rem] leading-none text-milk/10 md:text-[8rem]"
           >
             {index}
           </span>
@@ -55,7 +55,7 @@ export default function ProjectFeature({
               className="object-cover"
             />
           ) : null}
-          <span className="absolute bottom-4 left-6 type-meta text-bone/60">
+          <span className="absolute bottom-4 left-6 type-meta text-milk/60">
             {client}
             {year ? ` · ${year}` : ""}
           </span>
