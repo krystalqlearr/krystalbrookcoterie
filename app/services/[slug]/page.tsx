@@ -122,6 +122,14 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               <dd className="mt-3 font-sans text-fluid-base text-ink">{s.commissionedAs.join(" · ")}</dd>
               <dt className="mt-8 type-meta text-ink/70">Investment</dt>
               <dd className="mt-3 font-sans text-fluid-base text-ink">{FLOOR_LINE} Priced in the proposal.</dd>
+              {s.builtWith ? (
+                <>
+                  {/* The stack, named where it belongs — a proof point in the meta
+                      column, never the headline (docs/kbc-voice.md). */}
+                  <dt className="mt-8 type-meta text-ink/70">Built with</dt>
+                  <dd className="mt-3 font-sans text-fluid-base text-ink">{s.builtWith.join(" · ")}</dd>
+                </>
+              ) : null}
             </dl>
           </Reveal>
         </div>

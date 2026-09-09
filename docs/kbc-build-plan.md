@@ -299,6 +299,18 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   section; sitemap. Copy is all WORKING DEFAULT — deck §16. Retired from public:
   tier prices, Care Plan prices, the $2,800 founding figure (restore as a row if
   she wants it). OPEN: her copy for §16; the Founding Client program's fate.
+  **Addendum (2026-09-07, "add all of those under the services they belong in and
+  under the Glowtoure case study"):** `Service.builtWith` — a "Built with" row in
+  the meta column of a service page (Websites: the full stack; Redesign; Development
+  with Sanity; Search; Squarespace: the platform; Identity and Collateral none).
+  Glowtoure's `stack` was re-verified by probing the live site's own bundles before
+  widening it: Next.js, next/image, Lenis, Tailwind, next/font local fonts and a
+  Vercel deployment id are all present; Framer Motion, Sanity and Three.js are NOT,
+  so they are not claimed on the case study (the invented-testimonial rule applies
+  to tools too). Her follow-up, "it should be using Pangram Pangram fonts": the
+  foundry is now named — on Websites/Redesign ("Pangram Pangram type, self-hosted"),
+  on Identity, and on Glowtoure, where a computed-font census found four PP faces
+  (Frama, Frama Text, Right Serif, Playground) self-hosted through next/font.
 - **The work frame** — `WorkShowcase variant="sequence" gem` (`components/WorkShowcase.tsx`):
   one project per screen in `BrowserChrome` (`components/BrowserFrame.tsx`, shared
   with the /work grid; all dots milk/25), 16:9, capped to the viewport; caption
