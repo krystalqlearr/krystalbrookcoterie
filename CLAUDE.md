@@ -262,7 +262,10 @@ ENGAGEMENT SIZES on the hub, without prices. EXACTLY ONE FIGURE IS PUBLIC — `F
 enquiry form asks for a range. Squarespace is the seventh service, framed as a stage
 ("When the business doesn't need custom code yet, it still deserves a designer"),
 never with the word "template". Krystal's list was Bionic Egg's list nearly verbatim —
-the NAMES and the ANATOMY are what keep the pages hers; never copy their sections. Prototype routes are temporary by definition and must be deleted once
+the NAMES and the ANATOMY are what keep the pages hers; never copy their sections. Each
+page's meta column may carry a "Built with" row (`Service.builtWith`) — the stack as a
+proof point beside "Commissioned as", never in the hero; a case study's `stack` names
+only what its live site verifiably runs. Prototype routes are temporary by definition and must be deleted once
 their question is answered — /prototype and /prototype-shatter both have been.
 
 ## Accessibility — WCAG 2.1 AA minimum

@@ -50,7 +50,13 @@ export const WORK: WorkProject[] = [
     accent: "luxury service",
     category: "Beauty · Self-tan",
     capabilities: "Brand Strategy · Art Direction · Web Design · Development",
-    stack: "Next.js · Tailwind · Vercel",
+    // Verified against the live site 2026-09-07 (its own bundles, not memory):
+    // /_next/ assets and next/image, the `lenis` class + two Lenis chunks,
+    // Tailwind classes, and four Pangram Pangram faces self-hosted through
+    // next/font (PP Frama, PP Frama Text, PP Right Serif, PP Playground) served
+    // with a Vercel deployment id. Framer Motion, Sanity and Three.js left no
+    // signature — not claimed.
+    stack: "Next.js · Tailwind CSS · Lenis · next/image · Pangram Pangram type · Vercel",
     url: "glowtoure.com",
     year: "2025",
     role: "Design & build",
@@ -97,7 +103,7 @@ export const WORK: WorkProject[] = [
       { label: "Accessibility", value: "97 / 100" },
       { label: "Best practices · SEO", value: "100 · 100" },
       { label: "Layout shift (CLS)", value: "0.001" },
-      { label: "Stack", value: "Next.js · Tailwind · Vercel" },
+      { label: "Stack", value: "Next.js · Tailwind CSS · Lenis · Pangram Pangram type · Vercel" },
     ],
     // NO TESTIMONIAL until a real, approved, attributed quote exists.
     //

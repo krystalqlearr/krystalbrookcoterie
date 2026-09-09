@@ -34,6 +34,10 @@ export type Service = {
   forWhom: string;
   /** Which engagement sizes carry it. */
   commissionedAs: string[];
+  /** What it is built with — the studio's own stack, named where it belongs. A
+   *  proof point, not a headline (docs/kbc-voice.md), so it sits in the meta
+   *  column of the page beside "Commissioned as", never in the hero. */
+  builtWith?: string[];
   /** Two or three questions, answered plainly. */
   questions: { question: string; answer: string }[];
   /** Related service slugs, in order. */
@@ -94,6 +98,7 @@ export const SERVICES: Service[] = [
     forWhom:
       "Founders launching, renaming, or outgrowing a brand that was made in a hurry. The position is set first; the mark follows from it, so the identity holds up long after the launch.",
     commissionedAs: ["The Edit", "Signature", "Atelier"],
+    builtWith: ["Pangram Pangram type"],
     questions: [
       {
         question: "Do I need a full identity before a website?",
@@ -165,6 +170,7 @@ export const SERVICES: Service[] = [
     forWhom:
       "Founder-led brands whose website has to carry the full weight of the business — the first impression, the proof, and the next step. Built around the brand and its goals, and owned outright at the end.",
     commissionedAs: ["Signature", "Atelier", "Private Commission"],
+    builtWith: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Lenis", "next/image", "Pangram Pangram type, self-hosted", "Three.js — where a project earns it", "Vercel"],
     questions: [
       {
         question: "What makes it custom?",
@@ -197,6 +203,7 @@ export const SERVICES: Service[] = [
     forWhom:
       "The business has changed and the site hasn't. A redesign is not a refresh of the old one — it starts from where the brand is now and keeps only what still earns its place.",
     commissionedAs: ["Signature", "Atelier"],
+    builtWith: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Pangram Pangram type, self-hosted", "Vercel"],
     questions: [
       {
         question: "Redesign, or start again?",
@@ -223,6 +230,7 @@ export const SERVICES: Service[] = [
     forWhom:
       "Brands with a design in hand — mine or another studio's — that needs building properly, and brands whose site needs to do more than it does.",
     commissionedAs: ["Signature", "Atelier", "Private Commission"],
+    builtWith: ["Next.js", "TypeScript", "Sanity", "Vercel"],
     questions: [
       {
         question: "Can you build a design that isn't yours?",
@@ -251,6 +259,7 @@ export const SERVICES: Service[] = [
     forWhom:
       "Brands that want to be found for what they actually do, where they do it — not ranked for everything, chosen for the right thing.",
     commissionedAs: ["The Edit", "Signature", "a Care Plan"],
+    builtWith: ["Next.js", "next/image", "Vercel"],
     questions: [
       {
         question: "Is search included in a website?",
@@ -277,6 +286,7 @@ export const SERVICES: Service[] = [
     forWhom:
       "Brands that want a custom look and real creative thinking without complexity the business doesn't need yet. Intentional, not templated — and a step, not a ceiling: when the brand outgrows it, the design comes with you.",
     commissionedAs: ["The Edit", "Signature"],
+    builtWith: ["Squarespace"],
     questions: [
       {
         question: "Isn't Squarespace a template?",
