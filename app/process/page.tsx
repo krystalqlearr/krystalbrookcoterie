@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
@@ -68,7 +69,7 @@ export default function ProcessPage() {
           previously ran as five neon display figures; that spent the flare five times
           on one page. IndexMeta carries the count in the AA-safe stop instead, and
           the phase name takes the display weight. */}
-      <SectionShell tone="rule" eyebrow="How it runs" heading="Five phases, in order.">
+      <SectionShell tone="rule" eyebrow="How it runs" heading="Five phases, in order." headingSize="md">
         <ol className="border-b border-ink/15">
           {PHASES.map((phase, i) => (
             <Reveal as="li" variant="fade" key={phase.title} className="border-t border-ink/15">
@@ -119,17 +120,14 @@ export default function ProcessPage() {
 
       {/* CTA — the page's one dark moment. `marker` is off: the heading already
           carries the flare, and a section gets one flare element, not two. */}
-      <SectionShell
-        tone="dark"
+      <ClosingCTA
         heading="Ready when you are."
         accent="Ready"
-        headingSize="xl"
-        className="!pb-14"
       >
         <Button href="/begin" variant="onDark">
           Begin your project
         </Button>
-      </SectionShell>
+      </ClosingCTA>
     </>
   );
 }

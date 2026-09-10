@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
@@ -66,17 +67,14 @@ export default function JournalPage() {
       </SectionShell>
 
       {/* CTA — the page's one dark moment. `marker` off: the heading has the flare. */}
-      <SectionShell
-        tone="dark"
+      <ClosingCTA
         heading="Rather see the work?"
         accent="work"
-        headingSize="xl"
-        className="!pb-14"
       >
         <Button href="/work" variant="onDark">
           View the work
         </Button>
-      </SectionShell>
+      </ClosingCTA>
     </>
   );
 }

@@ -1,0 +1,756 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style><title>Glowtoure Brand System — Krystal Brook Coterie</title><meta name="description" content="The brand system for Glowtoure: the locked palette, the type system and the governance that holds them. Identity, design system and art direction by Krystal Brook."><link rel="canonical" href="https://krystalbrookcoterie.com/work/glowtoure/brand-system"></head><body>
+
+<style>
+/* ─────────────────────────────────────────────────────────────
+   GLOWTOURE BRAND SYSTEM
+   Set in its own system: the nine locked colors, and the four
+   licensed Pangram Pangram families embedded below.
+   ───────────────────────────────────────────────────────────── */
+
+@font-face{font-family:"PP Frama";font-style:normal;font-weight:200;font-display:swap;src:url("/brand/fonts/pp-frama-200.woff2") format("woff2")}
+@font-face{font-family:"PP Frama";font-style:normal;font-weight:300;font-display:swap;src:url("/brand/fonts/pp-frama-300.woff2") format("woff2")}
+@font-face{font-family:"PP Frama";font-style:normal;font-weight:400;font-display:swap;src:url("/brand/fonts/pp-frama-400.woff2") format("woff2")}
+@font-face{font-family:"PP Frama Text";font-style:normal;font-weight:300;font-display:swap;src:url("/brand/fonts/pp-frama-text-300.woff2") format("woff2")}
+@font-face{font-family:"PP Frama Text";font-style:italic;font-weight:300;font-display:swap;src:url("/brand/fonts/pp-frama-text-300-italic.woff2") format("woff2")}
+@font-face{font-family:"PP Frama Text";font-style:normal;font-weight:400;font-display:swap;src:url("/brand/fonts/pp-frama-text-400.woff2") format("woff2")}
+@font-face{font-family:"PP Right Serif";font-style:normal;font-weight:300;font-display:swap;src:url("/brand/fonts/pp-right-serif-300.woff2") format("woff2")}
+@font-face{font-family:"PP Right Serif";font-style:italic;font-weight:300;font-display:swap;src:url("/brand/fonts/pp-right-serif-300-italic.woff2") format("woff2")}
+@font-face{font-family:"PP Playground";font-style:normal;font-weight:400;font-display:swap;src:url("/brand/fonts/pp-playground-400.woff2") format("woff2")}
+
+
+:root {
+  /* The nine locked colors — production hex values. */
+  --pearl:    #FAF8F5;
+  --coconut:  #F3EFE7;
+  --oat:      #DFDACF;
+  --taupe:    #A3968D;
+  --latte:    #AA9174;
+  --cinnamon: #966A4A;
+  --cacao:    #4D403A;
+  --charcoal: #262626;
+  --caramel:  #AC7148;
+
+  /* Semantic surface tokens (light) */
+  --ground:      var(--pearl);
+  --panel:       var(--coconut);
+  --ink:         var(--cacao);
+  --ink-muted:   var(--taupe);
+  --rule:        var(--oat);
+  --accent:      var(--cinnamon);
+  --accent-rare: var(--caramel);
+  --swatch-ring: rgba(77, 64, 58, .14);
+
+  --measure: 66ch;
+  --display: "PP Frama", "Iowan Old Style", Georgia, serif;
+  --sans:    "PP Frama Text", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --serif:   "PP Right Serif", "Iowan Old Style", Georgia, serif;
+  --script:  "PP Playground", cursive;
+}
+
+/* Dark: the brand's own section-cocoa pattern — Cacao ground, Pearl ink. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:      #3E332E;
+    --panel:       #4D403A;
+    --ink:         #FAF8F5;
+    --ink-muted:   rgba(250, 248, 245, .62);
+    --rule:        rgba(223, 218, 207, .22);
+    --accent:      #C9925E;
+    --accent-rare: #D69A6B;
+    --swatch-ring: rgba(250, 248, 245, .18);
+  }
+}
+:root[data-theme="dark"] {
+  --ground:      #3E332E;
+  --panel:       #4D403A;
+  --ink:         #FAF8F5;
+  --ink-muted:   rgba(250, 248, 245, .62);
+  --rule:        rgba(223, 218, 207, .22);
+  --accent:      #C9925E;
+  --accent-rare: #D69A6B;
+  --swatch-ring: rgba(250, 248, 245, .18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 940px; margin: 0 auto; padding: 0 28px 96px; }
+
+/* ── Brand type roles, reproduced in the real faces ───────── */
+.eyebrow {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .4em;
+  color: var(--ink-muted);
+  margin: 0;
+}
+/* Signature device: a caramel hairline before every eyebrow label. */
+.eyebrow-mark { display: flex; align-items: center; gap: 14px; }
+.eyebrow-mark::before {
+  content: ""; width: 26px; height: 1px;
+  background: var(--accent-rare); flex: none;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  letter-spacing: .01em;
+  font-size: clamp(1.65rem, 3.5vw, 2.3rem);
+  line-height: 1.18;
+  text-wrap: balance;
+  margin: 14px 0 0;
+  color: var(--ink);
+}
+
+.prose {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: 1.12rem;
+  line-height: 1.7;
+  max-width: var(--measure);
+  color: var(--ink);
+}
+.prose + .prose { margin-top: 1.1em; }
+
+.note {
+  font-family: var(--sans);
+  font-size: .8rem; line-height: 1.65;
+  color: var(--ink-muted); max-width: var(--measure);
+}
+
+/* The one script accent — Playground, Caramel, larger than the roman. */
+.accent {
+  font-family: var(--script);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--accent-rare);
+  font-size: 1.55em;
+  line-height: .82;
+  display: inline-block;
+  vertical-align: -0.06em;
+  margin: 0 .02em;
+}
+
+/* ── Section rhythm — mirrors .editorial-section ──────────── */
+section { border-top: 1px solid var(--rule); padding-top: 64px; margin-top: 64px; }
+section:first-of-type { border-top: 0; }
+
+/* ── Masthead ─────────────────────────────────────────────── */
+.masthead { padding: 84px 0 0; }
+.wordmark {
+  font-family: var(--display);
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  line-height: .95;
+  font-size: clamp(2.5rem, 10.5vw, 6.2rem);
+  margin: 26px 0 0;
+  color: var(--ink);
+}
+.masthead-tag {
+  font-family: var(--display); font-weight: 300;
+  text-transform: uppercase; letter-spacing: .34em;
+  font-size: 10px; color: var(--accent); margin: 22px 0 0;
+}
+.masthead-meta {
+  display: flex; flex-wrap: wrap; gap: 8px 34px;
+  margin-top: 46px; padding-top: 22px; border-top: 1px solid var(--rule);
+}
+.masthead-meta div { display: flex; flex-direction: column; gap: 5px; }
+.masthead-meta dt {
+  font-family: var(--display); font-size: 9px; font-weight: 300;
+  text-transform: uppercase; letter-spacing: .28em; color: var(--ink-muted);
+}
+.masthead-meta dd { margin: 0; font-family: var(--serif); font-size: 1rem; color: var(--ink); }
+
+/* ── Palette ──────────────────────────────────────────────── */
+.swatches {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr));
+  gap: 1px; margin-top: 34px; background: var(--rule); border: 1px solid var(--rule);
+}
+.swatch { background: var(--ground); }
+.swatch-chip { height: 92px; border-bottom: 1px solid var(--swatch-ring); }
+.swatch-body { padding: 14px 15px 17px; }
+.swatch-name { font-family: var(--serif); font-size: 1.08rem; color: var(--ink); margin: 0; }
+.swatch-hex {
+  font-family: var(--display); font-weight: 400; font-size: .76rem;
+  letter-spacing: .1em; color: var(--ink); margin: 5px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.swatch-role {
+  font-family: var(--sans); font-size: .74rem; line-height: 1.5;
+  color: var(--ink-muted); margin: 7px 0 0;
+}
+.swatch-token {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .64rem; color: var(--ink-muted); margin: 8px 0 0; word-break: break-all;
+}
+
+/* Distribution bar — the real 80 / 15 / 5 rule, to scale. */
+.dist { margin-top: 44px; }
+.dist-bar { display: flex; height: 44px; border: 1px solid var(--swatch-ring); }
+.dist-bar span { display: block; height: 100%; }
+.dist-key { display: flex; flex-wrap: wrap; gap: 10px 30px; margin-top: 14px; }
+.dist-key div { display: flex; align-items: baseline; gap: 9px; }
+.dist-pct {
+  font-family: var(--display); font-weight: 400; font-size: .98rem;
+  color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.dist-label { font-family: var(--sans); font-size: .78rem; color: var(--ink-muted); }
+
+/* ── Rule callouts ────────────────────────────────────────── */
+.rule-note {
+  margin-top: 30px; padding-left: 18px;
+  border-left: 2px solid var(--accent-rare); max-width: var(--measure);
+}
+.rule-note h4 {
+  font-family: var(--display); font-size: 10px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: .26em;
+  color: var(--accent); margin: 0 0 9px;
+}
+.rule-note p { margin: 0; font-family: var(--serif); font-size: 1.06rem; line-height: 1.65; }
+
+/* ── Type specimens ───────────────────────────────────────── */
+.families {
+  display: grid; gap: 1px; margin-top: 34px;
+  background: var(--rule); border: 1px solid var(--rule);
+}
+.family {
+  background: var(--ground); padding: 26px 24px 28px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 26px; align-items: start;
+}
+.family-specimen { font-size: 2.6rem; line-height: 1; color: var(--ink); margin: 0 0 12px; }
+.f-frama    { font-family: var(--display); font-weight: 200; letter-spacing: .04em; }
+.f-framatext{ font-family: var(--sans);    font-weight: 300; }
+.f-rightserif{font-family: var(--serif);   font-weight: 300; }
+.f-playground{font-family: var(--script);  font-weight: 400; color: var(--accent-rare); }
+.family-name {
+  font-family: var(--display); font-weight: 400; font-size: .78rem;
+  text-transform: uppercase; letter-spacing: .22em; margin: 0; color: var(--ink);
+}
+.family-role {
+  font-family: var(--sans); font-size: .8rem; line-height: 1.6;
+  color: var(--ink-muted); margin: 9px 0 0; max-width: 52ch;
+}
+.family-spec {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .66rem; line-height: 1.75; color: var(--ink-muted);
+  text-align: right; white-space: nowrap;
+}
+.family-spec b { color: var(--ink); font-weight: 400; }
+
+.ladder { margin-top: 38px; display: grid; gap: 0; }
+.rung {
+  display: grid; grid-template-columns: minmax(0, 1fr) 190px;
+  gap: 16px 26px; align-items: baseline;
+  padding: 22px 0; border-bottom: 1px solid var(--rule);
+}
+.rung:first-child { border-top: 1px solid var(--rule); }
+.rung-spec {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .64rem; line-height: 1.7; color: var(--ink-muted);
+}
+.rung-spec b { display: block; color: var(--ink); font-weight: 400; letter-spacing: .04em; }
+
+.d-wordmark { font-family: var(--display); font-weight: 200; text-transform: uppercase;
+  letter-spacing: .14em; font-size: 1.9rem; line-height: 1; }
+.d-pagetitle { font-family: var(--display); font-weight: 200; text-transform: uppercase;
+  letter-spacing: .4em; font-size: 1rem; }
+.d-eyebrow { font-family: var(--display); font-weight: 300; text-transform: uppercase;
+  letter-spacing: .4em; font-size: 10px; color: var(--ink-muted); }
+.d-section { font-family: var(--serif); font-weight: 300; font-size: 2rem;
+  letter-spacing: .01em; line-height: 1.22; }
+.d-price { font-family: var(--display); font-weight: 300; font-size: 1.75rem;
+  letter-spacing: -.005em; font-variant-numeric: tabular-nums; }
+.d-city { font-family: var(--display); font-weight: 300; text-transform: uppercase;
+  letter-spacing: .16em; font-size: .95rem; }
+.d-body { font-family: var(--serif); font-weight: 300; font-size: 1.06rem; line-height: 1.7; }
+.d-soft { font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: 1.06rem; line-height: 1.7; color: var(--ink-muted); }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.btn {
+  min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 26px; font-family: var(--sans); font-size: 10.5px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: .22em; border-radius: 0;
+  border: 1px solid transparent; cursor: default; transition: background .25s, color .25s;
+}
+.btn-primary { background: var(--cacao); color: var(--pearl); }
+.btn-primary:hover { background: var(--cinnamon); }
+.btn-outline { background: transparent; color: var(--ink); border-color: currentColor; }
+.btn-caramel { background: var(--caramel); color: var(--pearl); }
+
+/* ── Lists ────────────────────────────────────────────────── */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+  gap: 34px 44px; margin-top: 32px; }
+.stack { display: flex; flex-direction: column; gap: 11px; }
+.stack h4 {
+  font-family: var(--display); font-size: 10px; font-weight: 400; margin: 0;
+  text-transform: uppercase; letter-spacing: .26em; color: var(--ink-muted);
+}
+.stack ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.stack li {
+  font-family: var(--serif); font-size: 1.06rem; line-height: 1.55; color: var(--ink);
+  padding-left: 16px; position: relative;
+}
+.stack li::before {
+  content: ""; position: absolute; left: 0; top: .68em;
+  width: 6px; height: 1px; background: var(--accent);
+}
+.stack li.neg::before { background: var(--ink-muted); }
+
+.quotes { display: grid; gap: 1px; margin-top: 30px; background: var(--rule);
+  border: 1px solid var(--rule); }
+.quote { background: var(--ground); padding: 24px; }
+.quote p {
+  margin: 0; font-family: var(--serif); font-weight: 300; font-size: 1.35rem;
+  line-height: 1.35; color: var(--ink);
+}
+.quote cite {
+  display: block; margin-top: 11px; font-style: normal; font-family: var(--display);
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-muted);
+}
+
+/* ── Tables ───────────────────────────────────────────────── */
+.table-scroll { overflow-x: auto; margin-top: 30px; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; }
+th, td { text-align: left; padding: 13px 16px 13px 0;
+  border-bottom: 1px solid var(--rule); vertical-align: top; }
+th {
+  font-family: var(--display); font-size: 9px; font-weight: 400; text-transform: uppercase;
+  letter-spacing: .26em; color: var(--ink-muted); border-bottom-color: var(--ink-muted);
+}
+td { font-family: var(--serif); font-size: 1.02rem; line-height: 1.55; color: var(--ink); }
+td.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .72rem; color: var(--ink-muted); white-space: nowrap; }
+
+/* ── Colophon ─────────────────────────────────────────────── */
+.colophon {
+  margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--rule);
+  display: flex; flex-wrap: wrap; gap: 12px 40px; justify-content: space-between;
+}
+.colophon p { margin: 0; font-family: var(--sans); font-size: .74rem;
+  line-height: 1.7; color: var(--ink-muted); max-width: 46ch; }
+
+a { color: var(--accent); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (max-width: 640px) {
+  .family { grid-template-columns: minmax(0, 1fr); }
+  .family-spec { text-align: left; white-space: normal; }
+  .rung { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow eyebrow-mark">Brand System</p>
+    <h1 class="wordmark">Glowtoure</h1>
+    <p class="masthead-tag">Luxury Spray Tanning &nbsp;·&nbsp; Plumas Lake, California</p>
+
+    <dl class="masthead-meta">
+      <div><dt>Discipline</dt><dd>Identity, design system, art direction</dd></div>
+      <div><dt>Built by</dt><dd>Krystal Brook</dd></div>
+      <div><dt>Surface</dt><dd>glowtoure.com &amp; brand collateral</dd></div>
+      <div><dt>Palette</dt><dd>Nine locked colors</dd></div>
+    </dl>
+  </header>
+
+  <section>
+    <p class="eyebrow eyebrow-mark">The brand</p>
+    <h2 class="section-title">A custom-matched glow, never a shade off a shelf.</h2>
+
+    <p class="prose">
+      Glowtoure is a luxury mobile and studio spray tanning practice. The founder moved away
+      from UV tanning beds after learning the health risks, and built the brand around a
+      simple promise: the confidence of a glow without the damage. Every solution is mixed
+      to the individual client rather than pulled from a single-shade lineup.
+    </p>
+    <p class="prose">
+      The identity has to hold two things at once — the intimacy of a private appointment,
+      and the polish of an editorial beauty brand. Warm, unhurried, and precise. It reads as
+      a practice, not a salon chain.
+    </p>
+
+    <div class="cols">
+      <div class="stack">
+        <h4>What it is</h4>
+        <ul>
+          <li>Custom-matched to the individual</li>
+          <li>A private, unhurried appointment</li>
+          <li>An editorial finish — polished, not overdone</li>
+          <li>Warm and in your corner</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <h4>What it is not</h4>
+        <ul>
+          <li class="neg">One-shade-fits-all</li>
+          <li class="neg">A rushed in-and-out salon</li>
+          <li class="neg">Generic, copied, or orange</li>
+          <li class="neg">Clinical or salesy</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow eyebrow-mark">Color</p>
+    <h2 class="section-title">Nine locked colors, one warm neutral spine.</h2>
+    <p class="prose">
+      The palette is closed. Every surface, label, border and call to action in the product
+      resolves to one of these nine values — there is no tenth color, and legacy class names
+      alias back into the set rather than extending it. The range runs warm neutral to deep
+      cacao, so contrast comes from depth rather than hue shifts.
+    </p>
+
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-chip" style="background:#FAF8F5"></div>
+        <div class="swatch-body"><p class="swatch-name">Pearl</p><p class="swatch-hex">#FAF8F5</p>
+        <p class="swatch-role">Main background</p><p class="swatch-token">--color-glow-pearl</p></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#F3EFE7"></div>
+        <div class="swatch-body"><p class="swatch-name">Coconut</p><p class="swatch-hex">#F3EFE7</p>
+        <p class="swatch-role">Soft section background, panels</p><p class="swatch-token">--color-glow-coconut</p></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#DFDACF"></div>
+        <div class="swatch-body"><p class="swatch-name">Oat</p><p class="swatch-hex">#DFDACF</p>
+        <p class="swatch-role">Hairline borders, dividers</p><p class="swatch-token">--color-glow-oat</p></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#A3968D"></div>
+        <div class="swatch-body"><p class="swatch-name">Taupe</p><p class="swatch-hex">#A3968D</p>
+        <p class="swatch-role">Muted text and labels</p><p class="swatch-token">--color-glow-taupe</p></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#AA9174"></div>
+        <div class="swatch-body"><p class="swatch-name">Latte</p><p class="swatch-hex">#AA9174</p>
+        <p class="swatch-role">Soft warm accent</p><p class="swatch-token">--color-glow-latte</p></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#966A4A"></div>
+        <div class="swatch-body"><p class="swatch-name">Cinnamon</p><p class="swatch-hex">#966A4A</p>
+        <p class="swatch-role">Warm brand accent, CTAs on light</p><p class="swatch-token">--color-glow-cinnamon</p></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#4D403A"></div>
+        <div class="swatch-body"><p class="swatch-name">Cacao</p><p class="swatch-hex">#4D403A</p>
+        <p class="swatch-role">Primary dark — the brand's ink</p><p class="swatch-token">--color-glow-cacao</p></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#AC7148"></div>
+        <div class="swatch-body"><p class="swatch-name">Caramel</p><p class="swatch-hex">#AC7148</p>
+        <p class="swatch-role">Rare accent — script moments, founding callouts</p><p class="swatch-token">--color-glow-caramel</p></div></div>
+      <div class="swatch"><div class="swatch-chip" style="background:#262626"></div>
+        <div class="swatch-body"><p class="swatch-name">Charcoal</p><p class="swatch-hex">#262626</p>
+        <p class="swatch-role">Rare deepest contrast only</p><p class="swatch-token">--color-glow-charcoal</p></div></div>
+    </div>
+
+    <div class="dist">
+      <p class="eyebrow" style="margin-bottom:12px">Distribution — 80 / 15 / 5</p>
+      <div class="dist-bar" role="img"
+           aria-label="Color distribution: 80 percent everyday surfaces, 15 percent supporting accents, 5 percent rare caramel accent.">
+        <span style="width:44%;background:#FAF8F5"></span>
+        <span style="width:22%;background:#F3EFE7"></span>
+        <span style="width:14%;background:#4D403A"></span>
+        <span style="width:6%;background:#966A4A"></span>
+        <span style="width:5%;background:#AA9174"></span>
+        <span style="width:4%;background:#A3968D"></span>
+        <span style="width:5%;background:#AC7148"></span>
+      </div>
+      <div class="dist-key">
+        <div><span class="dist-pct">80%</span><span class="dist-label">Pearl, Coconut, Cacao — the everyday surfaces</span></div>
+        <div><span class="dist-pct">15%</span><span class="dist-label">Cinnamon, Latte, Taupe, Oat — supporting accents</span></div>
+        <div><span class="dist-pct">5%</span><span class="dist-label">Caramel — rare accent moments only</span></div>
+      </div>
+    </div>
+
+    <div class="rule-note">
+      <h4>The Caramel rule</h4>
+      <p>
+        Caramel is accent-only and never the everyday button. The default primary call to
+        action is a Cacao fill that warms to Cinnamon on hover. Caramel is held back for
+        script accent moments and founding-member callouts — spending it everywhere is what
+        would make the palette feel ordinary.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow eyebrow-mark">Typography</p>
+    <h2 class="section-title">Four faces, four jobs, no overlap.</h2>
+    <p class="prose">
+      The type system is four Pangram Pangram families, self-hosted and served from the
+      site's own origin — no third-party font host. Each family owns a distinct job, which
+      is what keeps a four-face system from reading as noise: display and body never trade
+      places, and the script appears at most once in any composition.
+    </p>
+
+    <div class="families">
+      <div class="family">
+        <div>
+          <p class="family-specimen f-frama">Glowtoure</p>
+          <p class="family-name">PP Frama · Display</p>
+          <p class="family-role">Wordmark, page titles, eyebrows, labels, prices, city names —
+            anything set in caps or asked to hold wide tracking.</p>
+        </div>
+        <p class="family-spec"><b>200 · 300 · 400</b>Thin &amp; Medium deliberately<br>unregistered — nothing renders them</p>
+      </div>
+      <div class="family">
+        <div>
+          <p class="family-specimen f-framatext">Custom-matched</p>
+          <p class="family-name">PP Frama Text · Body</p>
+          <p class="family-role">The document default — every element inherits it unless
+            overridden. Paragraphs, buttons, interface labels.</p>
+        </div>
+        <p class="family-spec"><b>300 · 300 italic · 400</b></p>
+      </div>
+      <div class="family">
+        <div>
+          <p class="family-specimen f-rightserif">Never orange</p>
+          <p class="family-name">PP Right Serif · Editorial</p>
+          <p class="family-role">Section titles and long-form reading copy — the face that
+            carries warmth where the sans would read as interface.</p>
+        </div>
+        <p class="family-spec"><b>Light · Light Italic</b></p>
+      </div>
+      <div class="family">
+        <div>
+          <p class="family-specimen f-playground">simplified</p>
+          <p class="family-name">PP Playground · Script accent</p>
+          <p class="family-role">One word, one time — set in Caramel, larger than the roman
+            around it. A second use in the same composition breaks it.</p>
+        </div>
+        <p class="family-spec"><b>400</b>Excluded from preload —<br>never competes with the hero image</p>
+      </div>
+    </div>
+
+    <p class="eyebrow eyebrow-mark" style="margin-top:52px">The scale</p>
+    <div class="ladder">
+      <div class="rung">
+        <div class="d-wordmark">Glowtoure</div>
+        <p class="rung-spec"><b>Wordmark</b>Frama 200 · uppercase<br>tracking 0.14em · Cacao</p>
+      </div>
+      <div class="rung">
+        <div class="d-pagetitle">The Signature Glow</div>
+        <p class="rung-spec"><b>Page title</b>Frama 200 · uppercase<br>tracking 0.4em · Cacao</p>
+      </div>
+      <div class="rung">
+        <div class="d-eyebrow">Membership</div>
+        <p class="rung-spec"><b>Eyebrow</b>Frama 300 · 10px · uppercase<br>tracking 0.4em · Taupe</p>
+      </div>
+      <div class="rung">
+        <div class="d-section">Your monthly glow routine, <span class="accent">simplified</span>.</div>
+        <p class="rung-spec"><b>Section title</b>Right Serif Light · sentence case<br>with the single script accent</p>
+      </div>
+      <div class="rung">
+        <div class="d-body">Regular tanning builds more even, predictable color over time — and a
+          membership makes that routine effortless.</div>
+        <p class="rung-spec"><b>Body editorial</b>Right Serif Light<br>line-height 1.7 · Cacao</p>
+      </div>
+      <div class="rung">
+        <div class="d-soft">Your skin, your timeline, your ideal finish.</div>
+        <p class="rung-spec"><b>Body soft</b>Right Serif Light Italic<br>a true italic cut, never faux</p>
+      </div>
+      <div class="rung">
+        <div class="d-price">$129<span style="font-size:.62em">/month</span></div>
+        <p class="rung-spec"><b>Price</b>Frama 300<br>tracking −0.005em</p>
+      </div>
+      <div class="rung">
+        <div class="d-city">Plumas Lake · Sacramento · Yuba</div>
+        <p class="rung-spec"><b>City label</b>Frama 300 · uppercase<br>tracking 0.16em</p>
+      </div>
+    </div>
+
+    <div class="rule-note">
+      <h4>The script rule</h4>
+      <p>
+        PP Playground appears once per composition and never twice — always in Caramel, always
+        larger than the roman it sits in, always on a word that carries feeling rather than
+        information. It is the only place the system permits a flourish, which is exactly what
+        makes it land.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow eyebrow-mark">Voice</p>
+    <h2 class="section-title">The friend who knows her stuff.</h2>
+    <p class="prose">
+      The tone is warm, intentional and never rushed — in your corner, focused on how a
+      client will feel rather than on what is being sold. It avoids clinical language on one
+      side and hard-sell language on the other. Where most beauty copy reaches for urgency,
+      this brand reaches for reassurance.
+    </p>
+
+    <div class="cols">
+      <div class="stack">
+        <h4>Recurring language</h4>
+        <ul>
+          <li>Custom-matched</li>
+          <li>Never orange</li>
+          <li>Editorial finish</li>
+          <li>Polished without overdone</li>
+          <li>Your private appointment</li>
+          <li>Your skin, your timeline, your ideal finish</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <h4>Standing rules</h4>
+        <ul>
+          <li>Glowtoure takes a single capital G — never GlowTouré, never all-caps in body copy</li>
+          <li>Say <em>complimentary</em> or <em>included</em> — never <em>free</em> or <em>discounted</em></li>
+          <li>Claims stay to what can be shown; no invented results or credentials</li>
+          <li>Sentence case for headlines; caps reserved for labels</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="eyebrow eyebrow-mark" style="margin-top:48px">In production</p>
+    <div class="quotes">
+      <div class="quote"><p>Your monthly glow routine, <span class="accent">simplified</span>.</p>
+        <cite>Membership — page headline</cite></div>
+      <div class="quote"><p>The best spray tans don't happen once.</p>
+        <cite>Membership — section opener</cite></div>
+      <div class="quote"><p>Maintain your glow without the planning.</p>
+        <cite>Membership — value proposition</cite></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow eyebrow-mark">Components</p>
+    <h2 class="section-title">One button geometry, many weights.</h2>
+    <p class="prose">
+      Every button in the system shares the same geometry — 48px minimum height, uppercase
+      label at 10.5px, tracking 0.22em, and square corners. Only the fill changes. Holding the
+      geometry constant is what lets a dozen contexts feel like one brand.
+    </p>
+
+    <div class="btn-row">
+      <span class="btn btn-primary">Reserve your glow</span>
+      <span class="btn btn-outline">See the menu</span>
+      <span class="btn btn-caramel">Founding 25</span>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Role</th><th>Treatment</th><th>Class</th></tr></thead>
+        <tbody>
+          <tr><td>Primary</td><td>Cacao fill, Pearl label, warms to Cinnamon on hover</td><td class="mono">.btn-primary</td></tr>
+          <tr><td>Primary on dark</td><td>Pearl fill, Cacao label</td><td class="mono">.btn-primary-on-dark</td></tr>
+          <tr><td>Outline</td><td>Hairline rule, transparent fill</td><td class="mono">.btn-outline-espresso</td></tr>
+          <tr><td>Accent</td><td>Caramel fill — founding and script moments only</td><td class="mono">.btn-caramel</td></tr>
+          <tr><td>Deep warm</td><td>Cinnamon fill, AA-safe on light grounds</td><td class="mono">.btn-cinnamon</td></tr>
+          <tr><td>Editorial link</td><td>Inline label with a trailing arrow</td><td class="mono">.link-cta-arrow</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="eyebrow eyebrow-mark" style="margin-top:52px">Signature devices</p>
+    <div class="cols">
+      <div class="stack">
+        <h4>Marks and rules</h4>
+        <ul>
+          <li>A Caramel hairline set before or above every eyebrow label — the device used throughout this document</li>
+          <li>Hairline dividers in Oat at 70% opacity, never a solid rule</li>
+          <li>Editorial sections separated by a rule plus deep vertical air, not a box</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <h4>Motion</h4>
+        <ul>
+          <li>Editorial reveal — a 1.8s eased fade with a 2.5rem rise, triggered on scroll</li>
+          <li>Media zoom — imagery scales to 1.04 over 700ms on hover, site-wide</li>
+          <li>Focus rings appear on keyboard navigation only: 2px Cinnamon at 70%</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow eyebrow-mark">Applications</p>
+    <h2 class="section-title">Five logo variants, one lockup.</h2>
+    <p class="prose">
+      The mark pairs a Cinnamon <em>G</em> with the wordmark and the tagline
+      <em>Luxury Spray Tanning</em>. It ships in five locked variants so no context requires
+      a recreation — and the rule is absolute: the logo is never recolored. Dark surfaces get
+      the Pearl-on-Cacao file, not a manual inversion.
+    </p>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Variant</th><th>Primary use</th></tr></thead>
+        <tbody>
+          <tr><td>Square, cream</td><td>The primary mark — profiles, print, workspace icons</td></tr>
+          <tr><td>Square, dark</td><td>Dark surfaces and social dark mode</td></tr>
+          <tr><td>Horizontal, cream</td><td>Wide banners, email headers, site header contexts</td></tr>
+          <tr><td>Horizontal, dark</td><td>Dark banners, video end cards</td></tr>
+          <tr><td>Circular seal</td><td>Stickers, packaging seals, watermarks</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cols">
+      <div class="stack">
+        <h4>Photography</h4>
+        <ul>
+          <li>Every image is real client photography — corrected and web-optimized, never restaged</li>
+          <li>Before-and-after results are always real results, never composed or simulated</li>
+        </ul>
+      </div>
+      <div class="stack">
+        <h4>Print</h4>
+        <ul>
+          <li>Business card is a 3&quot; square: Pearl front with the mark, Cinnamon reverse in Pearl text</li>
+          <li>New collateral carries the published business line, not a personal number</li>
+          <li>Print files are held as locked assets — collateral is never rebuilt from scratch</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow eyebrow-mark">Governance</p>
+    <h2 class="section-title">A system only stays a system if it's enforced.</h2>
+    <p class="prose">
+      The palette and type scale live as tokens in a single stylesheet, and the font
+      registration lives in a single layout file. Nothing is hand-declared at the component
+      level — a color that isn't a token can't ship, which is what keeps a tenth color from
+      quietly appearing eighteen months in.
+    </p>
+
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>When the brand changes</th><th>Order of operations</th></tr></thead>
+        <tbody>
+          <tr><td>Tokens and utility classes</td><td class="mono">src/app/globals.css</td></tr>
+          <tr><td>Font registration</td><td class="mono">src/app/layout.tsx</td></tr>
+          <tr><td>Documentation</td><td>Updated within 24 hours of the change</td></tr>
+          <tr><td>Verification</td><td>Rendered colors spot-checked against production</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule-note">
+      <h4>Accessibility baseline</h4>
+      <p>
+        Focus indicators are keyboard-only, so pointer users never see a ring they didn't ask
+        for. Warm accents are checked for contrast before they carry text — Cinnamon is the
+        AA-safe deep warm, which is why it, not Caramel, handles CTA duty on light grounds.
+      </p>
+    </div>
+  </section>
+
+  <footer class="colophon">
+    <p>
+      Glowtoure Brand System. Set in its own type system — PP Frama, PP Frama Text,
+      PP Right Serif and PP Playground by Pangram Pangram, licensed to Glowtoure.
+      Specifications verified against production source.
+    </p>
+    <p>Identity, design system and art direction by Krystal Brook.</p>
+  </footer>
+
+</div>
+
+</body></html>

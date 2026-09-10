@@ -60,6 +60,12 @@ type Props = {
   type?: "button" | "submit" | "reset";
   target?: string;
   rel?: string;
+  /**
+   * Off for a same-origin href that is NOT a Next route — a rewrite onto a
+   * static document, say. Next would otherwise fetch an RSC payload that route
+   * can never produce.
+   */
+  prefetch?: boolean;
   "aria-label"?: string;
   className?: string;
 };
@@ -73,6 +79,7 @@ export default function ArrowLink({
   type = "button",
   target,
   rel,
+  prefetch,
   "aria-label": ariaLabel,
   className = "",
 }: Props) {
@@ -105,6 +112,7 @@ export default function ArrowLink({
         href={href}
         target={target}
         rel={rel}
+        prefetch={prefetch}
         aria-label={ariaLabel}
         data-direction={direction}
         className={cls}

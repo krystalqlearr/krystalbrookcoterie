@@ -1,6 +1,5 @@
 import ArrowLink from "@/components/ArrowLink";
 import EditorialHeading from "@/components/EditorialHeading";
-import IndexMeta from "@/components/IndexMeta";
 import Marquee from "@/components/Marquee";
 import LandingWordmark from "@/components/motion/LandingWordmark";
 import Link from "next/link";
@@ -13,7 +12,7 @@ import { WORK } from "@/lib/work";
  * Home — "The Row's aesthetic, Bionic Egg's motion." The name, alone, grows and
  * floats into the header; then the site arrives small and stays small:
  *
- *   landing → the work (one frame, expanding in place) → the two concepts, quiet
+ *   landing → the work (one frame, expanding in place)
  *        → the studio line → four tiers, one line each → marquee → closing line
  *        → footer (the page's only dark surface)
  *
@@ -44,7 +43,7 @@ const SECTORS = [
 // the hub as engagement sizes, and no price is public but the floor (2026-09-07).
 
 export default function HomePage() {
-  const [feature, ...concepts] = WORK;
+  const [feature] = WORK;
 
   return (
     <>
@@ -54,23 +53,8 @@ export default function HomePage() {
       {/* 2 · The work — one real, live project in a frame that expands in place.
              No heading here on purpose: the studio line below is the h1. */}
       <section aria-label="Selected work" className="bg-milk">
-        <div className="container">
+        <div className="container pb-24">
           <WorkShowcase variant="sequence" gem projects={[feature]} total={WORK.length} />
-
-          {/* The two concepts — quiet, honest, not expandable. */}
-          <ul className="mx-auto max-w-[calc((100svh-14rem)*1.7778)] divide-y divide-ink/12 border-t border-ink/12 pb-24">
-            {concepts.map((p, i) => (
-              <li key={p.id} className="py-8">
-                <Reveal variant="soft">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
-                    <IndexMeta index={i + 2} total={WORK.length} tag={p.client} />
-                    {p.status ? <span className="type-meta text-ink/70">{p.status}</span> : null}
-                  </div>
-                  <p className="mt-3 max-w-measure font-sans text-fluid-base text-ink/70">{p.descriptor}</p>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
@@ -102,11 +86,18 @@ export default function HomePage() {
                   aria-label={`${s.name} — ${s.eyebrow}`}
                   className="group -mx-4 grid gap-y-1 px-4 py-5 transition-colors duration-600 ease-editorial hover:bg-flare focus-visible:bg-flare focus-visible:outline-none motion-reduce:transition-none sm:grid-cols-[1.4fr_1fr_auto] sm:items-baseline"
                 >
-                  <span className="font-sans text-fluid-base text-ink">{s.name}</span>
+                  {/* On a phone the arrow rides the name's line rather than orphaning
+                      onto a third row (audit 2026-09-09, finding 13). */}
+                  <span className="flex items-baseline justify-between gap-4 font-sans text-fluid-base text-ink sm:justify-start">
+                    {s.name}
+                    <span aria-hidden className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink sm:hidden">
+                      →
+                    </span>
+                  </span>
                   <span className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink">
                     {s.eyebrow}
                   </span>
-                  <span aria-hidden className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink">
+                  <span aria-hidden className="hidden type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink sm:inline">
                     →
                   </span>
                 </Link>

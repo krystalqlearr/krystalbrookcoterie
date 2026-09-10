@@ -6,6 +6,7 @@ import FAQAccordion from "@/components/FAQAccordion";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
 import { FLOOR_LINE, SERVICES, TIERS } from "@/lib/services";
@@ -183,17 +184,14 @@ export default function ServicesPage() {
       </SectionShell>
 
       {/* CTA — the page's ONE dark moment. */}
-      <SectionShell
-        tone="dark"
+      <ClosingCTA
         heading="Let’s build something worth owning."
         accent="worth"
-        headingSize="xl"
-        className="!pb-14"
       >
         <Button href="/begin" variant="onDark">
           Begin your project
         </Button>
-      </SectionShell>
+      </ClosingCTA>
     </>
   );
 }

@@ -278,6 +278,83 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   lib/motion.ts); `soft`/`fade` alias it; `TRAVEL.text` 32; media slides moved onto
   the same 0.7s curve; `Reveal` fires at `amount 0.15` (was 0.3). Verified by
   sampling our own reveal on `/services` the same way.
+- **The case study opens the deliverable (2026-09-10, her call).** The Glowtoure
+  brand book — published as an artefact, credited on its own last line to
+  "Identity, design system and art direction by Krystal Brook" — is linked from
+  `/work/glowtoure`, directly under the Scope list. That placement is the whole
+  argument: the list says "Art direction" and "Design system", and the next thing
+  on the page opens them. `WorkProject.deliverable` ({ label, href, note }) keeps
+  it in the data file, so the template carries the pattern for any project that
+  earns one; a case study with no published artefact renders nothing.
+  Verified in place: `target="_blank" rel="noopener noreferrer"`, ink label,
+  neon glyph, no mobile overflow, and the page's flare census still reads exactly
+  two decorative touches ("Nothing" at 44px, "worth" at 81px, both on onyx) plus
+  the ArrowLink glyph, which the budget carves out as a CTA affordance.
+  Cross-check that cost nothing: the book names PP Frama, Frama Text, Right Serif
+  and Playground — the same four faces found by probing the live site's bundles
+  for row 16.29, from two independent directions.
+  ON OUR OWN DOMAIN, ALWAYS (same day, her call, emphatic: "I DON'T WANT AN AI
+  URL VISIBLE"). It shipped for one commit pointing at the artifact host it was
+  authored on. That was wrong on the site's own terms — the positioning is rented
+  vs. owned, and the AI rule is never-volunteer; handing a prospect a URL on
+  someone else's platform, one that names the tool in the domain, breaks both at
+  the exact moment the case study is asking to be trusted. The document is now a
+  static file under `/public/brand`, served at `/work/glowtoure/brand-system` by
+  a rewrite in next.config.mjs, and `git grep claude.ai` over app/components/lib/
+  public returns nothing.
+  HOW IT MOVES, and why it is a script (`scripts/split-brand-book.mjs`) rather
+  than a copy-paste: the authored document embeds all nine Pangram Pangram faces
+  as base64 — 447 KB of 631 KB — which re-downloads every visit and gzips badly,
+  woff2 being compressed already. Split out, the document is 35 KB and the faces
+  cache. The script also refuses to write anything that still reaches an external
+  host (a brand book that phones home defeats the whole point of moving it), and
+  fixes the head: the authoring host wraps content in its own skeleton, so the
+  `<title>` had landed inside `<body>` and the page carried no description and no
+  canonical — on our domain it is a real indexable page and now has all three,
+  plus a sitemap row derived from `deliverable.href`. Deterministic, so re-running
+  it against an unchanged source is a no-op in git. Verified end to end: the
+  rewrite serves 200 text/html, all nine faces resolve 200, `document.fonts`
+  reports every face loaded, zero failed requests and zero console errors.
+  TWO THINGS STILL HERS. (1) FONT LICENSING is the one open question and it is a
+  real one: the book states the four faces are "licensed to Glowtoure", and
+  Pangram Pangram webfont licences are ordinarily per-domain. Serving them from
+  krystalbrookcoterie.com is a second domain. Worth confirming with the foundry;
+  if it is not covered, the clean answer is to host the book at glowtoure.com and
+  repoint `deliverable.href` — still not an AI URL, and arguably better, since a
+  client's brand book on the client's own domain is the strongest possible proof.
+  (2) The book's photography section discloses that AI-assisted illustration is
+  permitted for hero and editorial imagery, never for before-and-after results.
+  That is Glowtoure's own published rule, not KBC copy, so the never-volunteer-AI
+  rule is not broken by linking it — but a prospect who clicks does read it.
+  NIT, in the source document rather than here: on the type page the weight badge
+  "400" butts straight against "Excluded from preload…" with no space. Fix it in
+  the source and re-run the script.
+- **The case study shows the phone (2026-09-09).** Five pages of glowtoure.com
+  recorded at iPhone width and put on `/work/glowtoure` as an "On the phone"
+  section — the mobile counterpart to the desktop frame at the top, and the
+  page's one mid-scroll dark moment. Three are used (Home · Services · Booking —
+  the journey); bridal and gallery are captured and swap in by editing
+  `WorkProject.phones`. The recordings are driven rather than hand-captured
+  (`scratchpad/gt-record.mjs`, kept): a constant 300 css px a second so every
+  clip reads at one pace, TRIMMED to each page's best 12–15 seconds instead of
+  sped up to cover all of it — which also took them from 5–6 MB to 1.1–1.4 MB,
+  since a slower scroll compresses far better. Cookie banner declined before
+  each capture and every lazy image woken first. mp4 only (H.264 plays
+  everywhere and these are small enough that a second format buys nothing).
+  `PhoneRow` attaches `src` only when the row is near the viewport, so the case
+  study's initial load is byte-for-byte what it was — verified: zero video
+  requests until the section is scrolled to, then all three play.
+- **The work is one project (2026-09-09, her call).** Maison Dermé and Étoile
+  Atelier deleted from `lib/work.ts` — both were invented concepts carried with
+  gradient placeholders and a "Concept" / "In production" label to make the work
+  look fuller, which is the invented-testimonial failure with a brand name instead
+  of a quote. Ripples handled rather than left: the home concepts list and its now
+  unused `IndexMeta` import are gone; `IndexMeta`'s total is suppressed at a count
+  of one (`01 — Glowtoure`); a lone frame on `/work` takes the full 12-column track
+  and enters rising instead of hugging a 7-column slot with a dead half-page beside
+  it. All three reverse themselves the moment a second real project lands. OPEN:
+  `/work`'s intro still says "Selected identities and digital experiences" (plural)
+  — hers to reword at the copy review.
 - **Phase 9 — Services by discipline (2026-09-07).** Her ask: services "laid out more
   like a page underneath each category", a services "dropdown in the menu bar", the
   seven disciplines she listed, and a process section tied to the name. Decisions:
