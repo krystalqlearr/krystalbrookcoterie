@@ -332,16 +332,32 @@ a { color: var(--accent); text-underline-offset: 3px; }
 }
 
 /* ── The document shows the brand, not only its specification ──────────────
-   Measured off the production recordings: glowtoure.com is Pearl for ~90% of
-   its height and uses dark as punctuation — at the top of home, and again at
-   the close. The book now has that same shape. These two blocks invert by
-   re-pointing the document's own tokens, so every child re-colours with them,
-   and each value is one of the nine locked colours. Oat, not Caramel, is the
-   accent here: Caramel on Cacao is 2.47 and fails even the 3:1 graphic bar,
-   while Oat is 7.14. Pearl on Cacao is 9.39; Pearl 62% is 4.75.            */
+   Measured off the production recordings and the real footer frame, not
+   assumed: glowtoure.com is Pearl for ~90% of its height, and its dark is
+   structured — the footer nav is CHARCOAL #262626, the legal strip beneath it
+   is CACAO #4C3F38, and the section eyebrow there is Caramel. The book now has
+   that same shape: an espresso moment at the open, a Pearl body, a Charcoal
+   footer, a Cacao credit strip.
+
+   Each block inverts by re-pointing the document's OWN tokens, so every child
+   re-colours with them and no bespoke rule is needed. Every value is one of the
+   nine. The accent differs by ground because the numbers differ: Caramel is
+   3.75 on Charcoal (clears the 3:1 graphic bar, which is all it carries there)
+   but only 2.47 on Cacao, where it fails even that — so the Cacao blocks take
+   Oat, at 7.14. Pearl is 14.28 on Charcoal and 9.39 on Cacao; the muted stops
+   are 8.09 and 5.78.                                                        */
 html { overflow-x: clip; }
 .masthead,
-.colophon {
+.colophon,
+.colophon-credit {
+  background: var(--ground);
+  color: var(--ink);
+  /* Full-bleed out of .wrap (940px, 28px gutters), content held on the column. */
+  margin-inline: calc(50% - 50vw);
+  padding-inline: max(28px, calc((100vw - 884px) / 2));
+}
+/* The espresso moment at the open. */
+.masthead {
   --ground:      var(--cacao);
   --panel:       var(--cacao);
   --ink:         var(--pearl);
@@ -350,26 +366,43 @@ html { overflow-x: clip; }
   --accent:      var(--oat);
   --accent-rare: var(--oat);
   --swatch-ring: rgba(250, 248, 245, .18);
-  background: var(--ground);
-  color: var(--ink);
-  /* Full-bleed out of .wrap (940px, 28px gutters), content held on the column. */
-  margin-inline: calc(50% - 50vw);
-  padding-inline: max(28px, calc((100vw - 884px) / 2));
-}
-.masthead {
   padding-top: 88px;
   padding-bottom: 64px;
   margin-bottom: 84px;
 }
+/* The footer, as the site builds it: Charcoal, with Caramel as the accent. */
 .colophon {
+  --ground:      var(--charcoal);
+  --panel:       var(--charcoal);
+  --ink:         var(--pearl);
+  --ink-muted:   rgba(250, 248, 245, .72);
+  --rule:        rgba(250, 248, 245, .22);
+  --accent:      var(--caramel);
+  --accent-rare: var(--caramel);
   margin-top: 104px;
-  padding-top: 46px;
-  padding-bottom: 56px;
+  padding-top: 52px;
+  padding-bottom: 44px;
   border-top: 0;
+  display: block;
+}
+.colophon p { max-width: 62ch; }
+/* The legal strip under it — Cacao, exactly as the site stacks them. */
+.colophon-credit {
+  --ground:      var(--cacao);
+  --ink:         var(--pearl);
+  --ink-muted:   rgba(250, 248, 245, .72);
+  padding-top: 22px;
+  padding-bottom: 26px;
+}
+.colophon-credit p {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: .74rem;
+  line-height: 1.7;
+  color: var(--ink-muted);
 }
 /* The wrap's own 96px bottom padding would leave a Pearl strip under the dark
-   colophon, so the document ends on a light sliver instead of on the band. The
-   colophon carries its own bottom padding now. */
+   bands, so the document would end on a light sliver instead of on the strip. */
 .wrap { padding-bottom: 0; }
 
 </style>
@@ -768,8 +801,10 @@ html { overflow-x: clip; }
       PP Right Serif and PP Playground by Pangram Pangram, licensed to Glowtoure.
       Specifications verified against production source.
     </p>
-    <p>Identity, design system and art direction by Krystal Brook.</p>
   </footer>
+  <aside class="colophon-credit">
+    <p>Identity, design system and art direction by Krystal Brook.</p>
+  </aside>
 
 </div>
 
