@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import ArrowLink from "@/components/ArrowLink";
 import Button from "@/components/Button";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import ClosingCTA from "@/components/ClosingCTA";
@@ -223,6 +224,23 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             ))}
           </ul>
         </Reveal>
+
+        {/* The deliverable itself, directly under the list that claims it — the
+            scope says "Design system", this opens it. One ArrowLink, ↗ because
+            it leaves the site; the flare it carries is the glyph, which is the
+            CTA affordance and therefore outside the page's accent budget. */}
+        {p.deliverable ? (
+          <Reveal variant="fade" delay={0.1} className="mt-14 max-w-measure">
+            <p className="font-sans text-fluid-base leading-relaxed text-ink/70">
+              {p.deliverable.note}
+            </p>
+            <div className="mt-7">
+              <ArrowLink href={p.deliverable.href} target="_blank" rel="noopener noreferrer">
+                {p.deliverable.label}
+              </ArrowLink>
+            </div>
+          </Reveal>
+        ) : null}
       </SectionShell>
 
       {/* Testimonial */}

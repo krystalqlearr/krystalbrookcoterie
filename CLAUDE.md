@@ -289,7 +289,13 @@ never with the word "template". Krystal's list was Bionic Egg's list nearly verb
 the NAMES and the ANATOMY are what keep the pages hers; never copy their sections. Each
 page's meta column may carry a "Built with" row (`Service.builtWith`) — the stack as a
 proof point beside "Commissioned as", never in the hero; a case study's `stack` names
-only what its live site verifiably runs. Prototype routes are temporary by definition and must be deleted once
+only what its live site verifiably runs. A case study may also carry `deliverable` — ONE
+published artefact from the engagement, linked directly under Scope so the list that
+CLAIMS the work opens the work; external by definition, so ↗ and a new tab, and the
+glyph's flare is the carved-out CTA affordance, not a spend from the page budget.
+Glowtoure's is the brand book (nine locked colours, four PP faces, governance), credited
+to Krystal on its own last line — nothing is claimed on the client's behalf that the
+document doesn't say itself. Prototype routes are temporary by definition and must be deleted once
 their question is answered — /prototype and /prototype-shatter both have been.
 
 ## Accessibility — WCAG 2.1 AA minimum

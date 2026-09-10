@@ -278,6 +278,30 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   lib/motion.ts); `soft`/`fade` alias it; `TRAVEL.text` 32; media slides moved onto
   the same 0.7s curve; `Reveal` fires at `amount 0.15` (was 0.3). Verified by
   sampling our own reveal on `/services` the same way.
+- **The case study opens the deliverable (2026-09-10, her call).** The Glowtoure
+  brand book — published as an artefact, credited on its own last line to
+  "Identity, design system and art direction by Krystal Brook" — is linked from
+  `/work/glowtoure`, directly under the Scope list. That placement is the whole
+  argument: the list says "Art direction" and "Design system", and the next thing
+  on the page opens them. `WorkProject.deliverable` ({ label, href, note }) keeps
+  it in the data file, so the template carries the pattern for any project that
+  earns one; a case study with no published artefact renders nothing.
+  Verified in place: `target="_blank" rel="noopener noreferrer"`, ink label,
+  neon glyph, no mobile overflow, and the page's flare census still reads exactly
+  two decorative touches ("Nothing" at 44px, "worth" at 81px, both on onyx) plus
+  the ArrowLink glyph, which the budget carves out as a CTA affordance.
+  Cross-check that cost nothing: the book names PP Frama, Frama Text, Right Serif
+  and Playground — the same four faces found by probing the live site's bundles
+  for row 16.29, from two independent directions.
+  TWO THINGS HERS TO CALL. (1) The link leaves for a `claude.ai/code/artifact/…`
+  URL, which is visible on hover and in the address bar — fine, but if it ever
+  grates, the fix is to serve the book from the KBC domain (a `/work/glowtoure/
+  brand-system` route) and point `deliverable.href` at that instead; one line.
+  (2) The book's photography section discloses that AI-assisted illustration is
+  permitted for hero and editorial imagery, never for before-and-after results.
+  That is Glowtoure's own published rule, not KBC copy, so the never-volunteer-AI
+  rule is not broken by linking it — but a prospect who clicks does read it, and
+  it reads as governance rigour rather than a weakness. Flagged, not decided.
 - **The case study shows the phone (2026-09-09).** Five pages of glowtoure.com
   recorded at iPhone width and put on `/work/glowtoure` as an "On the phone"
   section — the mobile counterpart to the desktop frame at the top, and the
