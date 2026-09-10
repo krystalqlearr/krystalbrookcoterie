@@ -66,7 +66,14 @@ export const WORK: WorkProject[] = [
     client: "Glowtoure",
     descriptor: "A luxury service, given the digital experience its pricing demanded.",
     accent: "luxury service",
-    category: "Beauty · Self-tan",
+    // "Self-tan" was wrong and it undersold the client (hers, 2026-09-10): that
+    // word means a bottle you take home, and Glowtoure is a professional
+    // spray-tanning service applied by hand, in studio or on location. The
+    // category is the first thing read on the card and in the case-study header,
+    // so it has to name the actual business. "Luxury" stays out of it — the
+    // descriptor beneath already carries that, and a self-applied adjective in a
+    // classification tag reads as filler (docs/kbc-voice.md).
+    category: "Beauty · Spray tanning",
     capabilities: "Brand Strategy · Art Direction · Web Design · Development",
     // Verified against the live site 2026-09-07 (its own bundles, not memory):
     // /_next/ assets and next/image, the `lenis` class + two Lenis chunks,
@@ -120,7 +127,7 @@ export const WORK: WorkProject[] = [
       },
     ],
     intro:
-      "A founder-led tanning house whose service was far more considered than its first website let on. The brief: a digital presence that felt as premium as the ritual — and priced it accordingly.",
+      "A founder-led spray-tanning studio whose service was far more considered than its first website let on. The brief: a digital presence that felt as premium as the ritual — and priced it accordingly.",
     body: [
       "Glowtoure is a private, custom-colour spray-tan studio, mobile and in-studio across the greater Sacramento region. The service is intimate and exacting; the old site read like a booking utility, quietly undercutting the price and the positioning.",
       "We rebuilt the brand from its positioning up — a warm, editorial world where the photography leads and every screen signals authority. Custom colour, private appointments, bridal and event work, prep-to-aftercare: each given the room a luxury service deserves, paced like a magazine rather than a landing page.",
