@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "framer-motion";
 import Button from "./Button";
 import IndexMeta from "./IndexMeta";
@@ -201,6 +202,9 @@ function ProjectSlot({
 }) {
   const sequence = variant === "sequence";
   const triggerRef = useRef<HTMLButtonElement>(null);
+  // On the index, a project with a published case study navigates instead of
+  // expanding — see the trigger below. The homepage sequence always expands.
+  const navigates = !sequence && !!p.caseStudy;
   const closeRef = useRef<HTMLButtonElement>(null);
   const wasSelected = useRef(false);
 
@@ -296,20 +300,40 @@ function ProjectSlot({
           : "group absolute inset-0 flex flex-col overflow-hidden border border-ink/15 bg-onyx"
       }
     >
-      {/* Real, focusable trigger over the collapsed frame — keyboard + a11y. */}
-      {!selected && (
-        <button
-          ref={triggerRef}
-          type="button"
-          onClick={onOpen}
-          onPointerEnter={preload}
-          onFocus={preload}
-          data-cursor="hover"
-          data-cursor-label="open"
-          aria-label={`Open ${p.client} case study`}
-          className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-milk"
-        />
-      )}
+      {/* Real, focusable trigger over the collapsed frame — keyboard + a11y.
+          ON `/work` IT IS A LINK, NOT A BUTTON (2026-09-10, hers: "it takes
+          multiple clicks to see all of Glowtoure's project"). The index used to
+          expand in place and then ask for a second click on a CTA inside the
+          expanded state — two clicks and a morph to reach a page, with no
+          crawlable link to the case study anywhere on `/work`. A project with a
+          case study now navigates straight to it: one click, a real href, and
+          next/link prefetches it on hover.
+          THE EXPAND SURVIVES WHERE IT IS THE POINT — the homepage's `sequence`
+          variant, which is the documented signature moment, and any project
+          without a case study, where expanding in place is the only way to see
+          anything at all. */}
+      {!selected &&
+        (navigates ? (
+          <Link
+            href={`/work/${p.id}`}
+            data-cursor="hover"
+            data-cursor-label="open"
+            aria-label={`Open ${p.client} case study`}
+            className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-milk"
+          />
+        ) : (
+          <button
+            ref={triggerRef}
+            type="button"
+            onClick={onOpen}
+            onPointerEnter={preload}
+            onFocus={preload}
+            data-cursor="hover"
+            data-cursor-label="open"
+            aria-label={`Open ${p.client} case study`}
+            className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-milk"
+          />
+        ))}
 
       <BrowserChrome label={chromeLabel} />
 

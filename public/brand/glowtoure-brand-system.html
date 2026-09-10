@@ -18,6 +18,7 @@
 @font-face{font-family:"PP Playground";font-style:normal;font-weight:400;font-display:swap;src:url("/brand/fonts/pp-playground-400.woff2") format("woff2")}
 
 
+:root { color-scheme: light; }
 :root {
   /* The nine locked colors — production hex values. */
   --pearl:    #FAF8F5;
@@ -47,29 +48,6 @@
   --script:  "PP Playground", cursive;
 }
 
-/* Dark: the brand's own section-cocoa pattern — Cacao ground, Pearl ink. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ground:      #3E332E;
-    --panel:       #4D403A;
-    --ink:         #FAF8F5;
-    --ink-muted:   rgba(250, 248, 245, .62);
-    --rule:        rgba(223, 218, 207, .22);
-    --accent:      #C9925E;
-    --accent-rare: #D69A6B;
-    --swatch-ring: rgba(250, 248, 245, .18);
-  }
-}
-:root[data-theme="dark"] {
-  --ground:      #3E332E;
-  --panel:       #4D403A;
-  --ink:         #FAF8F5;
-  --ink-muted:   rgba(250, 248, 245, .62);
-  --rule:        rgba(223, 218, 207, .22);
-  --accent:      #C9925E;
-  --accent-rare: #D69A6B;
-  --swatch-ring: rgba(250, 248, 245, .18);
-}
 
 * { box-sizing: border-box; }
 
@@ -352,6 +330,48 @@ a { color: var(--accent); text-underline-offset: 3px; }
   .family-spec { text-align: left; white-space: normal; }
   .rung { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ── The document shows the brand, not only its specification ──────────────
+   Measured off the production recordings: glowtoure.com is Pearl for ~90% of
+   its height and uses dark as punctuation — at the top of home, and again at
+   the close. The book now has that same shape. These two blocks invert by
+   re-pointing the document's own tokens, so every child re-colours with them,
+   and each value is one of the nine locked colours. Oat, not Caramel, is the
+   accent here: Caramel on Cacao is 2.47 and fails even the 3:1 graphic bar,
+   while Oat is 7.14. Pearl on Cacao is 9.39; Pearl 62% is 4.75.            */
+html { overflow-x: clip; }
+.masthead,
+.colophon {
+  --ground:      var(--cacao);
+  --panel:       var(--cacao);
+  --ink:         var(--pearl);
+  --ink-muted:   rgba(250, 248, 245, .62);
+  --rule:        rgba(250, 248, 245, .22);
+  --accent:      var(--oat);
+  --accent-rare: var(--oat);
+  --swatch-ring: rgba(250, 248, 245, .18);
+  background: var(--ground);
+  color: var(--ink);
+  /* Full-bleed out of .wrap (940px, 28px gutters), content held on the column. */
+  margin-inline: calc(50% - 50vw);
+  padding-inline: max(28px, calc((100vw - 884px) / 2));
+}
+.masthead {
+  padding-top: 88px;
+  padding-bottom: 64px;
+  margin-bottom: 84px;
+}
+.colophon {
+  margin-top: 104px;
+  padding-top: 46px;
+  padding-bottom: 56px;
+  border-top: 0;
+}
+/* The wrap's own 96px bottom padding would leave a Pearl strip under the dark
+   colophon, so the document ends on a light sliver instead of on the band. The
+   colophon carries its own bottom padding now. */
+.wrap { padding-bottom: 0; }
+
 </style>
 
 <div class="wrap">
@@ -752,5 +772,6 @@ a { color: var(--accent); text-underline-offset: 3px; }
   </footer>
 
 </div>
+
 
 </body></html>
