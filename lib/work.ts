@@ -126,16 +126,22 @@ export const WORK: WorkProject[] = [
       "We rebuilt the brand from its positioning up — a warm, editorial world where the photography leads and every screen signals authority. Custom colour, private appointments, bridal and event work, prep-to-aftercare: each given the room a luxury service deserves, paced like a magazine rather than a landing page.",
       "The result reads unmistakably high-end on the first scroll, makes the offer feel worth its price, and turns a browse into a booking.",
     ],
-    // The brand book, published 2026-09-10 and credited on its own last line
-    // ("Identity, design system and art direction by Krystal Brook"). It is the
-    // visible proof of the first two scope lines: nine locked colours with the
-    // 80/15/5 distribution, four Pangram Pangram faces with one job each, one
-    // button geometry, five logo variants, voice and standing rules, and the
-    // governance that holds it. Nothing here is claimed on the client's behalf —
-    // the document says it itself.
+    // The brand book, credited on its own last line ("Identity, design system
+    // and art direction by Krystal Brook"). It is the visible proof of the first
+    // two scope lines: nine locked colours with the 80/15/5 distribution, four
+    // Pangram Pangram faces with one job each, one button geometry, five logo
+    // variants, voice and standing rules, and the governance that holds it.
+    // Nothing here is claimed on the client's behalf — the document says it
+    // itself.
+    //
+    // ON OUR OWN DOMAIN, ALWAYS (2026-09-10, her call, emphatic). It was briefly
+    // linked at the artifact host it was authored on; a studio that sells owned
+    // over rented cannot hand a prospect a URL on someone else's platform, least
+    // of all one that names the tool. The document is a static file under
+    // /public/brand with a rewrite giving it this path — see next.config.mjs.
     deliverable: {
       label: "Open the Glowtoure brand system",
-      href: "https://claude.ai/code/artifact/0aa87c97-cc95-45c5-910b-d195575b7c16",
+      href: "/work/glowtoure/brand-system",
       note: "The system was written down, not just built — nine locked colours, four faces with one job each, and the governance that keeps a tenth colour from quietly appearing eighteen months in.",
     },
     scope: [

@@ -226,16 +226,24 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </Reveal>
 
         {/* The deliverable itself, directly under the list that claims it — the
-            scope says "Design system", this opens it. One ArrowLink, ↗ because
-            it leaves the site; the flare it carries is the glyph, which is the
-            CTA affordance and therefore outside the page's accent budget. */}
+            scope says "Design system", this opens it. ↗ and a new tab because it
+            is a separate document with its own type system, not a page of this
+            site; the flare it carries is the glyph, which is the CTA affordance
+            and therefore outside the page's accent budget. `prefetch` off: the
+            href is same-origin but rewritten onto a static file, so there is no
+            RSC payload for Next to fetch. */}
         {p.deliverable ? (
           <Reveal variant="fade" delay={0.1} className="mt-14 max-w-measure">
             <p className="font-sans text-fluid-base leading-relaxed text-ink/70">
               {p.deliverable.note}
             </p>
             <div className="mt-7">
-              <ArrowLink href={p.deliverable.href} target="_blank" rel="noopener noreferrer">
+              <ArrowLink
+                href={p.deliverable.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                prefetch={false}
+              >
                 {p.deliverable.label}
               </ArrowLink>
             </div>

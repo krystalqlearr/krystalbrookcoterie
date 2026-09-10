@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { serviceSlugs } from "@/lib/services";
-import { caseStudySlugs } from "@/lib/work";
+import { WORK, caseStudySlugs } from "@/lib/work";
 
 const SITE_URL = "https://krystalbrookcoterie.com";
 
@@ -13,6 +13,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...caseStudySlugs().map((slug) => ({
       path: `/work/${slug}`,
       priority: 0.8,
+      changeFrequency: "yearly" as const,
+    })),
+    // Published deliverables — static documents under /public/brand, given a real
+    // URL by a rewrite in next.config.mjs. They are linked from their case study
+    // and are substantial public pages, so they belong in our own index; they are
+    // not Next routes, which is why they are listed by hand rather than derived.
+    ...WORK.filter((p) => p.deliverable?.href.startsWith("/")).map((p) => ({
+      path: p.deliverable!.href,
+      priority: 0.5,
       changeFrequency: "yearly" as const,
     })),
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },

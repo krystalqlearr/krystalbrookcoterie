@@ -291,11 +291,24 @@ page's meta column may carry a "Built with" row (`Service.builtWith`) — the st
 proof point beside "Commissioned as", never in the hero; a case study's `stack` names
 only what its live site verifiably runs. A case study may also carry `deliverable` — ONE
 published artefact from the engagement, linked directly under Scope so the list that
-CLAIMS the work opens the work; external by definition, so ↗ and a new tab, and the
-glyph's flare is the carved-out CTA affordance, not a spend from the page budget.
-Glowtoure's is the brand book (nine locked colours, four PP faces, governance), credited
-to Krystal on its own last line — nothing is claimed on the client's behalf that the
-document doesn't say itself. Prototype routes are temporary by definition and must be deleted once
+CLAIMS the work opens the work; ↗ and a new tab because it's a separate document with
+its own type system, and the glyph's flare is the carved-out CTA affordance, not a spend
+from the page budget. Glowtoure's is the brand book (nine locked colours, four PP faces,
+governance), credited to Krystal on its own last line — nothing is claimed on the
+client's behalf that the document doesn't say itself.
+DELIVERABLES LIVE ON THIS DOMAIN, NEVER SOMEONE ELSE'S (2026-09-10, hers, emphatic).
+The positioning is rented vs. owned and the AI rule is never-volunteer, so a deliverable
+linked to the host it was authored on breaks both — worst of all in a domain that names
+the tool. A brand book is a self-contained document with its own CSS, so it can't sit
+inside the layout: it ships as a static file under `public/brand` via
+`scripts/split-brand-book.mjs` (which lifts the base64 fonts out to cacheable .woff2,
+refuses any document still reaching an external host, and fixes title/description/
+canonical) and gets a real URL from a rewrite in next.config.mjs —
+`/work/glowtoure/brand-system`. `deliverable.href` is that path, `prefetch={false}`
+because it is not a Next route, and the sitemap derives its row from the same field.
+OPEN: the faces are licensed to the CLIENT; per-domain webfont licensing is worth
+confirming, and hosting the book on the client's own domain is the fallback.
+Prototype routes are temporary by definition and must be deleted once
 their question is answered — /prototype and /prototype-shatter both have been.
 
 ## Accessibility — WCAG 2.1 AA minimum

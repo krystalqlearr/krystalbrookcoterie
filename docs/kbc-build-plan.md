@@ -293,15 +293,42 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   Cross-check that cost nothing: the book names PP Frama, Frama Text, Right Serif
   and Playground — the same four faces found by probing the live site's bundles
   for row 16.29, from two independent directions.
-  TWO THINGS HERS TO CALL. (1) The link leaves for a `claude.ai/code/artifact/…`
-  URL, which is visible on hover and in the address bar — fine, but if it ever
-  grates, the fix is to serve the book from the KBC domain (a `/work/glowtoure/
-  brand-system` route) and point `deliverable.href` at that instead; one line.
+  ON OUR OWN DOMAIN, ALWAYS (same day, her call, emphatic: "I DON'T WANT AN AI
+  URL VISIBLE"). It shipped for one commit pointing at the artifact host it was
+  authored on. That was wrong on the site's own terms — the positioning is rented
+  vs. owned, and the AI rule is never-volunteer; handing a prospect a URL on
+  someone else's platform, one that names the tool in the domain, breaks both at
+  the exact moment the case study is asking to be trusted. The document is now a
+  static file under `/public/brand`, served at `/work/glowtoure/brand-system` by
+  a rewrite in next.config.mjs, and `git grep claude.ai` over app/components/lib/
+  public returns nothing.
+  HOW IT MOVES, and why it is a script (`scripts/split-brand-book.mjs`) rather
+  than a copy-paste: the authored document embeds all nine Pangram Pangram faces
+  as base64 — 447 KB of 631 KB — which re-downloads every visit and gzips badly,
+  woff2 being compressed already. Split out, the document is 35 KB and the faces
+  cache. The script also refuses to write anything that still reaches an external
+  host (a brand book that phones home defeats the whole point of moving it), and
+  fixes the head: the authoring host wraps content in its own skeleton, so the
+  `<title>` had landed inside `<body>` and the page carried no description and no
+  canonical — on our domain it is a real indexable page and now has all three,
+  plus a sitemap row derived from `deliverable.href`. Deterministic, so re-running
+  it against an unchanged source is a no-op in git. Verified end to end: the
+  rewrite serves 200 text/html, all nine faces resolve 200, `document.fonts`
+  reports every face loaded, zero failed requests and zero console errors.
+  TWO THINGS STILL HERS. (1) FONT LICENSING is the one open question and it is a
+  real one: the book states the four faces are "licensed to Glowtoure", and
+  Pangram Pangram webfont licences are ordinarily per-domain. Serving them from
+  krystalbrookcoterie.com is a second domain. Worth confirming with the foundry;
+  if it is not covered, the clean answer is to host the book at glowtoure.com and
+  repoint `deliverable.href` — still not an AI URL, and arguably better, since a
+  client's brand book on the client's own domain is the strongest possible proof.
   (2) The book's photography section discloses that AI-assisted illustration is
   permitted for hero and editorial imagery, never for before-and-after results.
   That is Glowtoure's own published rule, not KBC copy, so the never-volunteer-AI
-  rule is not broken by linking it — but a prospect who clicks does read it, and
-  it reads as governance rigour rather than a weakness. Flagged, not decided.
+  rule is not broken by linking it — but a prospect who clicks does read it.
+  NIT, in the source document rather than here: on the type page the weight badge
+  "400" butts straight against "Excluded from preload…" with no space. Fix it in
+  the source and re-run the script.
 - **The case study shows the phone (2026-09-09).** Five pages of glowtoure.com
   recorded at iPhone width and put on `/work/glowtoure` as an "On the phone"
   section — the mobile counterpart to the desktop frame at the top, and the
