@@ -96,7 +96,7 @@ The whole band is aria-hidden (decorative) — screen readers never hear it. Ite
 Renders all three projects as the editorial grid. Each card shows: client (meta), "View →" on hover, `{index} · {category}`, `{status}`, the descriptor (h3, accent word in flare) and the capabilities line. Chrome + labels are in Shared › Work frame; the words are in Data.
 | slot | file | current | notes | new |
 |---|---|---|---|---|
-| card meta | components/WorkShowcase.tsx:377 | {index} · {category} | auto-formatted from data, e.g. "01 · Beauty · Self-tan" | (keep) |
+| card meta | components/WorkShowcase.tsx:377 | {index} · {category} | auto-formatted from data, e.g. "01 · Beauty · Spray tanning" | (keep) |
 | card status | components/WorkShowcase.tsx:379 | {status} | meta; only for non-live projects | (keep) |
 | card title | components/WorkShowcase.tsx:382 | {descriptor} | h3; see Data | (keep) |
 | card capabilities | components/WorkShowcase.tsx:384 | {capabilities} | meta line; see Data | (keep) |
@@ -685,14 +685,14 @@ The sentence is assembled from fixed "anchor" words and three-way "variant" slot
 | client | lib/work.ts:44 | Glowtoure | client name; appears in titles, alt text, captions | (keep) |
 | descriptor | lib/work.ts:45 | A luxury service, given the digital experience its pricing demanded. | the project's one-line "shift created", ≤ 12 words, ends in a period; is the case-study h1 and the card title | (keep) |
 | accent | lib/work.ts:46 | luxury service | substring of descriptor that takes the flare / italic; must appear verbatim in the new descriptor | (keep) |
-| category | lib/work.ts:47 | Beauty · Self-tan | meta category, 1–3 words with · separators | (keep) |
+| category | lib/work.ts:47 | Beauty · Spray tanning | meta category, 1–3 words with · separators | (keep) |
 | capabilities | lib/work.ts:48 | Brand Strategy · Art Direction · Web Design · Development | meta capability line on the /work card; 3–5 items | (keep) |
 | stack | lib/work.ts:49 | Next.js · Tailwind · Vercel | "Stack" dl value; tech is a proof point, keep it here | (keep) |
 | url | lib/work.ts:50 | glowtoure.com | browser pill address | (keep) |
 | year | lib/work.ts:51 | 2025 | "Year" dl value | (keep) |
 | role | lib/work.ts:52 | Design & build | "Role" dl value, 2–4 words | (keep) |
 | seoDescription | lib/work.ts:55 | How Krystal Brook Coterie designed and hand-built Glowtoure — a custom-coded, editorial digital flagship for a founder-led luxury spray-tan house across the Sacramento region. | meta description for /work/glowtoure, ≤ 155 chars (this is 178) | (keep) |
-| intro | lib/work.ts:69 | A founder-led tanning house whose service was far more considered than its first website let on. The brief: a digital presence that felt as premium as the ritual — and priced it accordingly. | display lead, ≤ 45 words | (keep) |
+| intro | lib/work.ts:69 | A founder-led spray-tanning studio whose service was far more considered than its first website let on. The brief: a digital presence that felt as premium as the ritual — and priced it accordingly. | display lead, ≤ 45 words | (keep) |
 | body 1 | lib/work.ts:71 | Glowtoure is a private, custom-colour spray-tan studio, mobile and in-studio across the greater Sacramento region. The service is intimate and exacting; the old site read like a booking utility, quietly undercutting the price and the positioning. | body, ≤ 45 words (gets the drop cap on the case-study page) | (keep) |
 | body 2 | lib/work.ts:72 | We rebuilt the brand from its positioning up — a warm, editorial world where the photography leads and every screen signals authority. Custom colour, private appointments, bridal and event work, prep-to-aftercare: each given the room a luxury service deserves, paced like a magazine rather than a landing page. | body, ≤ 55 words; note "We" | (keep) |
 | body 3 | lib/work.ts:73 | The result reads unmistakably high-end on the first scroll, makes the offer feel worth its price, and turns a browse into a booking. | body, ≤ 30 words | (keep) |

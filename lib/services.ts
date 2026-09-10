@@ -44,6 +44,16 @@ export type Service = {
   related: string[];
   /** A project id from lib/work.ts to frame on the page. */
   work?: string;
+  /**
+   * A project id whose published `deliverable` this page should open.
+   *
+   * A screenshot of a website is the wrong proof for a discipline whose output
+   * ISN'T a website — Identity ships a system, so the proof is the system. This
+   * puts it on the page where the buying intent actually is, instead of three
+   * clicks deep in a case study. Renders nothing if the project has no
+   * deliverable, so it can never point at a page that doesn't exist.
+   */
+  deliverable?: string;
 };
 
 /** The one public figure. Everything else is priced in the proposal. */
@@ -112,6 +122,11 @@ export const SERVICES: Service[] = [
       },
     ],
     related: ["collateral", "websites"],
+    // The page that sells identity work had no proof on it at all — it asked a
+    // prospect to take the studio's word for it while a complete, real brand
+    // system sat three clicks away in a case study. Glowtoure's book IS an
+    // identity deliverable, so it belongs here more than anywhere.
+    deliverable: "glowtoure",
   },
   {
     slug: "collateral",

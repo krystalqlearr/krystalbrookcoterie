@@ -18,6 +18,7 @@
 @font-face{font-family:"PP Playground";font-style:normal;font-weight:400;font-display:swap;src:url("/brand/fonts/pp-playground-400.woff2") format("woff2")}
 
 
+:root { color-scheme: light; }
 :root {
   /* The nine locked colors — production hex values. */
   --pearl:    #FAF8F5;
@@ -47,29 +48,6 @@
   --script:  "PP Playground", cursive;
 }
 
-/* Dark: the brand's own section-cocoa pattern — Cacao ground, Pearl ink. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --ground:      #3E332E;
-    --panel:       #4D403A;
-    --ink:         #FAF8F5;
-    --ink-muted:   rgba(250, 248, 245, .62);
-    --rule:        rgba(223, 218, 207, .22);
-    --accent:      #C9925E;
-    --accent-rare: #D69A6B;
-    --swatch-ring: rgba(250, 248, 245, .18);
-  }
-}
-:root[data-theme="dark"] {
-  --ground:      #3E332E;
-  --panel:       #4D403A;
-  --ink:         #FAF8F5;
-  --ink-muted:   rgba(250, 248, 245, .62);
-  --rule:        rgba(223, 218, 207, .22);
-  --accent:      #C9925E;
-  --accent-rare: #D69A6B;
-  --swatch-ring: rgba(250, 248, 245, .18);
-}
 
 * { box-sizing: border-box; }
 
@@ -352,6 +330,81 @@ a { color: var(--accent); text-underline-offset: 3px; }
   .family-spec { text-align: left; white-space: normal; }
   .rung { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ── The document shows the brand, not only its specification ──────────────
+   Measured off the production recordings and the real footer frame, not
+   assumed: glowtoure.com is Pearl for ~90% of its height, and its dark is
+   structured — the footer nav is CHARCOAL #262626, the legal strip beneath it
+   is CACAO #4C3F38, and the section eyebrow there is Caramel. The book now has
+   that same shape: an espresso moment at the open, a Pearl body, a Charcoal
+   footer, a Cacao credit strip.
+
+   Each block inverts by re-pointing the document's OWN tokens, so every child
+   re-colours with them and no bespoke rule is needed. Every value is one of the
+   nine. The accent differs by ground because the numbers differ: Caramel is
+   3.75 on Charcoal (clears the 3:1 graphic bar, which is all it carries there)
+   but only 2.47 on Cacao, where it fails even that — so the Cacao blocks take
+   Oat, at 7.14. Pearl is 14.28 on Charcoal and 9.39 on Cacao; the muted stops
+   are 8.09 and 5.78.                                                        */
+html { overflow-x: clip; }
+.masthead,
+.colophon,
+.colophon-credit {
+  background: var(--ground);
+  color: var(--ink);
+  /* Full-bleed out of .wrap (940px, 28px gutters), content held on the column. */
+  margin-inline: calc(50% - 50vw);
+  padding-inline: max(28px, calc((100vw - 884px) / 2));
+}
+/* The espresso moment at the open. */
+.masthead {
+  --ground:      var(--cacao);
+  --panel:       var(--cacao);
+  --ink:         var(--pearl);
+  --ink-muted:   rgba(250, 248, 245, .62);
+  --rule:        rgba(250, 248, 245, .22);
+  --accent:      var(--oat);
+  --accent-rare: var(--oat);
+  --swatch-ring: rgba(250, 248, 245, .18);
+  padding-top: 88px;
+  padding-bottom: 64px;
+  margin-bottom: 84px;
+}
+/* The footer, as the site builds it: Charcoal, with Caramel as the accent. */
+.colophon {
+  --ground:      var(--charcoal);
+  --panel:       var(--charcoal);
+  --ink:         var(--pearl);
+  --ink-muted:   rgba(250, 248, 245, .72);
+  --rule:        rgba(250, 248, 245, .22);
+  --accent:      var(--caramel);
+  --accent-rare: var(--caramel);
+  margin-top: 104px;
+  padding-top: 52px;
+  padding-bottom: 44px;
+  border-top: 0;
+  display: block;
+}
+.colophon p { max-width: 62ch; }
+/* The legal strip under it — Cacao, exactly as the site stacks them. */
+.colophon-credit {
+  --ground:      var(--cacao);
+  --ink:         var(--pearl);
+  --ink-muted:   rgba(250, 248, 245, .72);
+  padding-top: 22px;
+  padding-bottom: 26px;
+}
+.colophon-credit p {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: .74rem;
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+/* The wrap's own 96px bottom padding would leave a Pearl strip under the dark
+   bands, so the document would end on a light sliver instead of on the strip. */
+.wrap { padding-bottom: 0; }
+
 </style>
 
 <div class="wrap">
@@ -748,9 +801,12 @@ a { color: var(--accent); text-underline-offset: 3px; }
       PP Right Serif and PP Playground by Pangram Pangram, licensed to Glowtoure.
       Specifications verified against production source.
     </p>
-    <p>Identity, design system and art direction by Krystal Brook.</p>
   </footer>
+  <aside class="colophon-credit">
+    <p>Identity, design system and art direction by Krystal Brook.</p>
+  </aside>
 
 </div>
+
 
 </body></html>

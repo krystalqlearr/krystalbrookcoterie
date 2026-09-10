@@ -58,6 +58,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
   const index = SERVICES.findIndex((x) => x.slug === s.slug) + 1;
   const work = s.work ? getProject(s.work) : undefined;
+  // Only renders if the named project actually publishes one — a service page
+  // can never link a deliverable that doesn't exist.
+  const deliverable = s.deliverable ? getProject(s.deliverable)?.deliverable : undefined;
   const related = s.related.map((slug) => getService(slug)).filter(Boolean) as typeof SERVICES;
 
   const jsonLd = {
@@ -190,6 +193,33 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <Reveal variant="soft" className="mt-6">
             <IndexMeta index={1} total={1} tag={work.client} />
             <p className="mt-3 max-w-measure font-sans text-fluid-base text-ink/70">{work.descriptor}</p>
+          </Reveal>
+        </SectionShell>
+      ) : null}
+
+      {/* The deliverable itself, for a discipline whose output isn't a website.
+          Same device as the case study's: the claim, then the thing that proves
+          it. `tone="rule"` only when there was no work frame above, so two
+          hairline sections never stack. */}
+      {deliverable ? (
+        <SectionShell
+          tone={work ? "light" : "rule"}
+          eyebrow="The proof"
+          heading="A system, not a logo file."
+          headingSize="md"
+        >
+          <Reveal variant="fade" className="max-w-measure">
+            <p className="font-sans text-fluid-base leading-relaxed text-ink/70">{deliverable.note}</p>
+            <div className="mt-7">
+              <ArrowLink
+                href={deliverable.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                prefetch={false}
+              >
+                {deliverable.label}
+              </ArrowLink>
+            </div>
           </Reveal>
         </SectionShell>
       ) : null}
