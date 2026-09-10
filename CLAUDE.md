@@ -87,8 +87,15 @@ rich-black, cream, deep-petrol, teal, greige, surface-1/2.
 ## The dark is punctuation
 Onyx (`onyx` bg, milk text) is NOT the default — it's the inversion moment: the footer,
 the closing-CTA showstoppers, the expanded case study, the browser-frame chrome. One
-or two dark moments per page. OPEN: the scrolled header over a dark band currently
-reads as a pale strip (milk/90 over black) — hers to call.
+or two dark moments per page.
+THE DARK ENDING IS ONE OBJECT (2026-09-09). An inner page closes with `ClosingCTA`, not
+a bare `SectionShell tone="dark"`: the section runs to zero bottom padding and draws a
+single `milk/12` hairline 80px under its action, and the footer's own 80px sits below
+it. Two stacked onyx blocks with different paddings read as a 900px slab with a gap in
+the middle; one rule, symmetrically spaced, reads as an invitation followed by an index.
+Home is the exception — it closes on milk, so its footer is its only dark surface and it
+uses no `ClosingCTA`. OPEN: the scrolled header over a dark band reads as a pale strip
+(milk/90 over onyx) — hers to call.
 
 ## Typography — ONE typeface, TWO registers (grotesk pivot, 2026-08)
 PP Neue Montreal carries everything. There is no second typeface and no third voice.
@@ -203,7 +210,10 @@ NOT part of the homepage. See docs/kbc-build-plan.md §3 and Phase 7.
 ## Canvas rhythm
 Two grounds. Pages run on milk and are paced by whitespace and hairlines; `SectionShell
 tone="rule"` is milk with an ink hairline above (the former bone alt-section), and
-`tone="dark"` is the onyx inversion event. There is no tinted recess: the tones are
+`tone="dark"` is the onyx inversion event. When a `SectionShell` has an eyebrow and no
+display heading, the EYEBROW IS THE SECTION'S HEADING element (it renders as `headingAs`,
+default h2) so the document outline matches what a reader sees — and an eyebrow-only
+header drops 32px to its children, not 64 (audit 2026-09-09). There is no tinted recess: the tones are
 `light | rule | dark`, nothing else. White lifts cards and fields off the milk; it never
 fills a section. The move INTO onyx is a designed inversion event.
 
@@ -231,10 +241,24 @@ StatStrip   The proof band on onyx: 3–4 defensible figures in DISPLAY over MET
 ServiceCard A white sheet lifted off the milk with an ink hairline — and THE FLOOD on
             hover/focus-within: the card fills cherry, the name goes milk, the rest
             goes ink (Color section). The pattern for the coming service pages.
+PhoneRow    The site ON A PHONE — a row of bare screens playing silent, looping
+            ~15s scrolls of the real pages, on onyx, as a case study's one
+            mid-scroll dark moment. Bare screens, never device mockups: phone
+            bezels would be the only round corners on a site whose rule is
+            `rounded-[1px]`. WEIGHT IS THE CONSTRAINT — `src` is attached only
+            when an IntersectionObserver says the row is near, so a page that is
+            never scrolled that far downloads nothing; reduced motion gets the
+            poster and no `<video>` at all. Clips are DRIVEN, not hand-recorded
+            (scratchpad/gt-record.mjs): a constant 300 css px a second, trimmed
+            to the page's best 12–15s rather than sped up to fit all of it.
 WorkFrame   `WorkShowcase variant="sequence"` — the homepage's work: one project in
             `BrowserChrome` (all three dots milk/25 — chrome is never an accent),
-            `01 / 03` caption beneath, expands in place after the gem beat. Concept
-            projects with no built site are a quiet hairline list, never a frame.
+            caption beneath, expands in place after the gem beat. THE WORK IS REAL
+            WORK ONLY (2026-09-09): the two concept projects were deleted rather
+            than dressed up — invented clients beside a real one is the invented
+            testimonial again. With one project the counted total is suppressed
+            (`01 — Glowtoure`, not `01 / 01`) and the lone frame takes the full
+            grid track and rises; both restore themselves at project two.
 
 ## Routes — canonical (see build-plan §4)
 Primary CTA route is `/begin` (all "Begin" CTAs point there). Nav data is single-source

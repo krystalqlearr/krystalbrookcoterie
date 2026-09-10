@@ -27,12 +27,14 @@ export default function SiteFooter() {
           {/* Nav repeat */}
           <nav aria-label="Footer">
             <p className="type-meta text-milk/60">Studio</p>
-            <ul className="mt-5 space-y-2.5 font-sans text-sm">
+            {/* -my-1 + py-1 keeps the visual rhythm while clearing the 24px tap
+                minimum on a phone (audit 2026-09-09, finding 14). */}
+            <ul className="mt-4 space-y-1.5 font-sans text-sm">
               {NAV_LINKS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`link-underline text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
+                    className={`link-underline -my-1 inline-block py-1 text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
                   >
                     {item.label}
                   </Link>
@@ -44,11 +46,11 @@ export default function SiteFooter() {
           {/* Connect */}
           <div>
             <p className="type-meta text-milk/60">Connect</p>
-            <ul className="mt-5 space-y-2.5 font-sans text-sm">
+            <ul className="mt-4 space-y-1.5 font-sans text-sm">
               <li>
                 <a
                   href="mailto:hello@krystalbrookcoterie.com"
-                  className={`link-underline text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
+                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
                 >
                   hello@krystalbrookcoterie.com
                 </a>
@@ -58,7 +60,7 @@ export default function SiteFooter() {
                   href="https://www.instagram.com/krystalbrookcoterie/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`link-underline text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
+                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
                 >
                   Instagram
                 </a>
@@ -66,7 +68,7 @@ export default function SiteFooter() {
               <li>
                 <Link
                   href="/begin"
-                  className={`link-underline text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
+                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
                 >
                   Commission a project
                 </Link>
@@ -82,10 +84,10 @@ export default function SiteFooter() {
           <span>© 2026 Krystal Brook Coterie</span>
           <span>a DBA of Lion &amp; Gazelle Holdings LLC</span>
           <span className="flex gap-5">
-            <Link href="/privacy" className={`transition-colors hover:text-milk ${linkFocus}`}>
+            <Link href="/privacy" className={`-my-1 inline-block py-1 transition-colors hover:text-milk ${linkFocus}`}>
               Privacy
             </Link>
-            <Link href="/terms" className={`transition-colors hover:text-milk ${linkFocus}`}>
+            <Link href="/terms" className={`-my-1 inline-block py-1 transition-colors hover:text-milk ${linkFocus}`}>
               Terms
             </Link>
           </span>

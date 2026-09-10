@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import ClosingCTA from "@/components/ClosingCTA";
+import PhoneRow from "@/components/PhoneRow";
 import SectionShell from "@/components/SectionShell";
 import Testimonial from "@/components/Testimonial";
 import { TRAVEL } from "@/lib/motion";
@@ -82,7 +84,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
             <RevealItem variant="soft">
               <Link
                 href="/work"
-                className="type-meta text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                className="type-meta -my-2 inline-block py-2 text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
               >
                 ← All work
               </Link>
@@ -114,10 +116,13 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                   {p.url}
                 </span>
               </div>
+              {/* The site, not the logo card: `image` is the OG asset (a wordmark on a
+                  field), while the video poster is the actual homepage — which is what
+                  every other frame of this project shows (audit 2026-09-09, finding 8). */}
               <div className="relative aspect-[16/9] w-full">
-                {p.image ? (
+                {p.video?.poster ?? p.image ? (
                   <Image
-                    src={p.image}
+                    src={p.video?.poster ?? p.image!}
                     alt={`${p.client} — ${p.descriptor}`}
                     fill
                     priority
@@ -168,6 +173,24 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         </div>
       </SectionShell>
 
+      {/* The site on a phone — the page's one mid-scroll dark moment, and the
+          mobile counterpart to the desktop frame at the top. The claim is one the
+          clips themselves prove, so it needs no figure behind it. Rendered only
+          for a project that has the recordings. */}
+      {p.phones && p.phones.length > 0 ? (
+        <SectionShell
+          tone="dark"
+          eyebrow="On the phone"
+          heading="Nothing lost on the small screen."
+          accent="Nothing"
+          headingSize="md"
+        >
+          <Reveal from="up" distance={TRAVEL.media}>
+            <PhoneRow phones={p.phones} />
+          </Reveal>
+        </SectionShell>
+      ) : null}
+
       {/* Results — first-recess alt-section */}
       {p.results && p.results.length > 0 ? (
         <SectionShell tone="rule" eyebrow="Results" heading="Engineered to perform." headingSize="md">
@@ -192,7 +215,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <ul className="grid max-w-editorial gap-x-gutter gap-y-4 font-sans text-fluid-lg text-ink sm:grid-cols-2">
             {p.scope.map((item) => (
               <li key={item} className="flex items-baseline gap-4 border-t border-ink/12 py-4">
-                <span aria-hidden className="h-px w-6 flex-shrink-0 translate-y-2 bg-flare" />
+                {/* Ink, not cherry: six coloured ticks spent the page budget six times over
+                    (audit 2026-09-09, finding 1). Matches the service pages. */}
+                <span aria-hidden className="h-px w-6 flex-shrink-0 translate-y-2 bg-ink/25" />
                 {item}
               </li>
             ))}
@@ -214,12 +239,9 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       ) : null}
 
       {/* CTA — the case study's one dark moment. `marker` off: the heading has the flare. */}
-      <SectionShell
-        tone="dark"
+      <ClosingCTA
         heading="Let’s build something worth owning."
         accent="worth"
-        headingSize="xl"
-        className="!pb-14"
       >
         <div className="flex flex-wrap items-center gap-4">
           <Button href="/begin" variant="onDark">
@@ -227,12 +249,12 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           </Button>
           <Link
             href={nextCase ? `/work/${nextCase.id}` : "/work"}
-            className="type-meta text-milk underline decoration-milk/30 underline-offset-4 transition-colors hover:decoration-milk"
+            className="type-meta -my-2 inline-block py-2 text-milk underline decoration-milk/30 underline-offset-4 transition-colors hover:decoration-milk"
           >
             {nextCase ? `Next — ${nextCase.client}` : "See all work"}
           </Link>
         </div>
-      </SectionShell>
+      </ClosingCTA>
     </>
   );
 }

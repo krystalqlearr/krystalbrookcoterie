@@ -9,6 +9,12 @@
  * Tone: `ink` on milk sections, `milk` on the onyx dark. Opacity is deliberately
  * low so it reads as structure, never as a second headline — raise the color
  * opacity below to make it louder.
+ *
+ * SIZE IS DERIVED FROM THE LABEL, not fixed (audit 2026-09-09, finding 12). The text
+ * runs vertically, so its extent is bounded by the section's height while the word
+ * length varies: a fixed 13vw fitted "About" and clipped "Commission" to "ommissi.".
+ * `50 / length` vw holds every label to roughly the same optical height, so a long
+ * word simply sets smaller instead of running off the section.
  */
 type Props = {
   label: string;
@@ -25,7 +31,10 @@ export default function SectionMarker({ label, side = "right", tone = "ink", cla
     <span
       aria-hidden
       className={`pointer-events-none absolute top-1/2 hidden -translate-y-1/2 select-none font-display font-normal normal-case leading-none tracking-display lg:block ${pos} ${color} ${className}`}
-      style={{ writingMode: "vertical-rl", fontSize: "clamp(5rem, 13vw, 11rem)" }}
+      style={{
+        writingMode: "vertical-rl",
+        fontSize: `clamp(2.5rem, ${(50 / Math.max(label.length, 4)).toFixed(2)}vw, 11rem)`,
+      }}
     >
       {label}
     </span>

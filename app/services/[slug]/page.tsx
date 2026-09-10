@@ -9,6 +9,7 @@ import FAQAccordion from "@/components/FAQAccordion";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 import { TRAVEL } from "@/lib/motion";
 import { FLOOR_LINE, SERVICES, getService, serviceSlugs } from "@/lib/services";
@@ -140,7 +141,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <Reveal as="ol" stagger={0.08} className="flex flex-wrap gap-x-10 gap-y-4">
           {PHASES.map((phase, i) => (
             <RevealItem as="li" variant="soft" key={phase} className="flex items-baseline gap-3">
-              <span className="type-meta text-flare-deep [font-variant-numeric:tabular-nums]">
+              {/* Muted, not flare-deep: five coloured ordinals on top of the hero and
+                  closing accents read busier than the budget intends, and these are not
+                  IndexMeta's live index (audit 2026-09-09, finding 5). */}
+              <span className="type-meta text-ink/70 [font-variant-numeric:tabular-nums]">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="type-display text-fluid-xl text-ink">{phase}</span>
@@ -219,17 +223,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       </SectionShell>
 
       {/* CTA — the page's one dark moment. */}
-      <SectionShell
-        tone="dark"
-        heading={`Commission ${s.name}.`}
-        accent={s.name}
-        headingSize="xl"
-        className="!pb-14"
-      >
+      <ClosingCTA heading={`Commission ${s.name}.`} accent={s.name}>
         <Button href="/begin" variant="onDark">
           Begin your project
         </Button>
-      </SectionShell>
+      </ClosingCTA>
     </>
   );
 }

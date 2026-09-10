@@ -21,7 +21,7 @@ type EyebrowTone = "muted" | "onDark" | "ink" | "flare" | "flareDark";
 type EyebrowProps = {
   children: ReactNode;
   tone?: EyebrowTone;
-  as?: "p" | "span" | "div";
+  as?: "p" | "span" | "div" | "h1" | "h2" | "h3";
   className?: string;
 };
 

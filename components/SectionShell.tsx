@@ -86,7 +86,12 @@ export default function SectionShell({
           ) : null}
           {eyebrow ? (
             <RevealItem variant="soft">
-              <Eyebrow tone={t.eyebrow}>{eyebrow}</Eyebrow>
+              {/* When the section has no display heading, the eyebrow IS the heading —
+                  so the document outline matches what a sighted reader sees (audit
+                  2026-09-09, finding 4). With a heading present it stays a <p>. */}
+              <Eyebrow tone={t.eyebrow} as={heading ? "p" : headingAs}>
+                {eyebrow}
+              </Eyebrow>
             </RevealItem>
           ) : null}
           {heading ? (
@@ -109,7 +114,9 @@ export default function SectionShell({
           ) : null}
         </Reveal>
       ) : null}
-      {children ? <div className={hasHeader ? "mt-16" : ""}>{children}</div> : null}
+      {/* An eyebrow-only header is one 13px line: 64px under it left a label floating
+          over a gap (audit, finding 11). A display heading still gets the full drop. */}
+      {children ? <div className={hasHeader ? (heading ? "mt-16" : "mt-8") : ""}>{children}</div> : null}
     </>
   );
 

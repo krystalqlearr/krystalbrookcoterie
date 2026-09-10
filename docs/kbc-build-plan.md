@@ -278,6 +278,32 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   lib/motion.ts); `soft`/`fade` alias it; `TRAVEL.text` 32; media slides moved onto
   the same 0.7s curve; `Reveal` fires at `amount 0.15` (was 0.3). Verified by
   sampling our own reveal on `/services` the same way.
+- **The case study shows the phone (2026-09-09).** Five pages of glowtoure.com
+  recorded at iPhone width and put on `/work/glowtoure` as an "On the phone"
+  section — the mobile counterpart to the desktop frame at the top, and the
+  page's one mid-scroll dark moment. Three are used (Home · Services · Booking —
+  the journey); bridal and gallery are captured and swap in by editing
+  `WorkProject.phones`. The recordings are driven rather than hand-captured
+  (`scratchpad/gt-record.mjs`, kept): a constant 300 css px a second so every
+  clip reads at one pace, TRIMMED to each page's best 12–15 seconds instead of
+  sped up to cover all of it — which also took them from 5–6 MB to 1.1–1.4 MB,
+  since a slower scroll compresses far better. Cookie banner declined before
+  each capture and every lazy image woken first. mp4 only (H.264 plays
+  everywhere and these are small enough that a second format buys nothing).
+  `PhoneRow` attaches `src` only when the row is near the viewport, so the case
+  study's initial load is byte-for-byte what it was — verified: zero video
+  requests until the section is scrolled to, then all three play.
+- **The work is one project (2026-09-09, her call).** Maison Dermé and Étoile
+  Atelier deleted from `lib/work.ts` — both were invented concepts carried with
+  gradient placeholders and a "Concept" / "In production" label to make the work
+  look fuller, which is the invented-testimonial failure with a brand name instead
+  of a quote. Ripples handled rather than left: the home concepts list and its now
+  unused `IndexMeta` import are gone; `IndexMeta`'s total is suppressed at a count
+  of one (`01 — Glowtoure`); a lone frame on `/work` takes the full 12-column track
+  and enters rising instead of hugging a 7-column slot with a dead half-page beside
+  it. All three reverse themselves the moment a second real project lands. OPEN:
+  `/work`'s intro still says "Selected identities and digital experiences" (plural)
+  — hers to reword at the copy review.
 - **Phase 9 — Services by discipline (2026-09-07).** Her ask: services "laid out more
   like a page underneath each category", a services "dropdown in the menu bar", the
   seven disciplines she listed, and a process section tied to the name. Decisions:

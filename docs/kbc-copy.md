@@ -858,3 +858,5 @@ Seven services sold by discipline, each on its own page. One-word names in the s
 | 16.29 | case study · Glowtoure · stack | Next.js · Tailwind CSS · Lenis · next/image · Pangram Pangram type · Vercel | verified against the live site's bundles — four PP faces (Frama, Frama Text, Right Serif, Playground) self-hosted via next/font; Framer Motion / Sanity / Three.js left no signature and are not claimed — add TypeScript if Glowtoure was written in it | (keep) |
 
 Retired from the site by this section: the tier prices ($4,500 / $9,800 / $22,000+ / $32,000+), the Care Plan prices ($175 / $450 / $950 a month), and the Founding Client figure ($2,800 — the program itself is gone from the hub; restore it as a row if you want it public).
+
+| 16.30 | case study · on the phone | On the phone · **Nothing lost on the small screen.** · labels: Home · Services · Booking | new dark section on /work/glowtoure (2026-09-09); accent "Nothing". The claim is one the clips themselves prove, so it needs no figure behind it | (keep) |

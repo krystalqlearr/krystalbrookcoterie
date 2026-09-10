@@ -122,7 +122,14 @@ export default function WorkShowcase({
             key={p.id}
             project={p}
             index={i + 1}
-            total={total ?? projects.length}
+            // A total of one encodes nothing — `01 / 01` is a sequence of one.
+            // IndexMeta drops the total when it is undefined, and the count
+            // returns by itself the moment a second project lands.
+            total={(total ?? projects.length) > 1 ? (total ?? projects.length) : undefined}
+            // A lone project owns the full track: `span` places a frame against
+            // its siblings, and with no siblings a 7-of-12 frame reads as a page
+            // half-empty rather than composed (audit 2026-09-09).
+            alone={projects.length === 1}
             variant={variant}
             gem={gem}
             selected={selectedId === p.id}
@@ -171,6 +178,7 @@ function ProjectSlot({
   project: p,
   index,
   total,
+  alone,
   variant,
   gem,
   selected,
@@ -181,7 +189,8 @@ function ProjectSlot({
 }: {
   project: Project;
   index: number;
-  total: number;
+  total?: number;
+  alone: boolean;
   variant: "index" | "sequence";
   gem: boolean;
   selected: boolean;
@@ -269,7 +278,7 @@ function ProjectSlot({
   const entrance = reduce
     ? {}
     : {
-        variants: revealFrom(sequence ? "down" : p.enter, TRAVEL.frame),
+        variants: revealFrom(sequence ? "down" : alone ? "up" : p.enter, TRAVEL.frame),
         initial: "hidden",
         whileInView: "visible",
         viewport: { once: true, amount: 0.3 },
@@ -314,12 +323,12 @@ function ProjectSlot({
           />
         )}
 
+        {/* The client's name only. The "View →" that used to appear on hover was a
+            second CTA vocabulary on a target the cursor already labels `open`
+            (audit 2026-09-09, finding 6). */}
         {!selected && !sequence && (
-          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 md:p-6">
+          <div className="absolute inset-x-0 bottom-0 flex items-end p-5 md:p-6">
             <span className="type-meta text-milk/85">{p.client}</span>
-            <span className="flex translate-x-[-6px] items-center gap-2 type-meta text-milk opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
-              View <span aria-hidden>→</span>
-            </span>
           </div>
         )}
 
@@ -359,8 +368,12 @@ function ProjectSlot({
   );
 
   if (sequence) {
+    // Full-height and centred only where the frame is big enough to earn it (audit
+    // 2026-09-09, finding 10): on a phone the 16:9 frame is ~192px tall, so a 100svh
+    // slot left 460px of empty milk beneath it. Below md the slot is the frame's own
+    // height, top-aligned.
     return (
-      <div className="flex min-h-[100svh] flex-col justify-center py-24">
+      <div className="flex flex-col justify-start pb-24 pt-6 md:min-h-[100svh] md:justify-center md:py-24">
         {/* A 16:9 frame (the recording's own aspect — the site's hero and its
             widest sections both fit it without cropping) that fills the container
             but is capped by the viewport height, so it always fits one screen. */}
@@ -385,7 +398,7 @@ function ProjectSlot({
   }
 
   return (
-    <div className={`relative ${p.span}`}>
+    <div className={`relative ${alone ? "lg:col-span-12" : p.span}`}>
       {/* Slot placeholder — holds the grid space so siblings never reflow. */}
       <div className="relative w-full" style={{ paddingTop: selected ? undefined : p.pt }}>
         {frame}
@@ -395,15 +408,17 @@ function ProjectSlot({
           Fades in after the frame has slid; the Close button stays OUTSIDE this
           wrapper (it is fixed, and must not sit under a transformed ancestor). */}
       <Reveal variant="fade" delay={0.2}>
-        <div className="mt-5 flex items-baseline justify-between font-sans text-xs tracking-[0.06em] text-ink/70">
-          <span>
-            {p.index} · {p.category}
-          </span>
-          {p.status ? <span>{p.status}</span> : null}
+        {/* IndexMeta, not a bespoke 12px line — every counted sequence on the site
+            uses the one device (audit 2026-09-09, finding 3). */}
+        <div className="mt-5 flex items-baseline justify-between gap-4">
+          <IndexMeta index={index} total={total} tag={p.category} />
+          {p.status ? <span className="type-meta text-ink/70">{p.status}</span> : null}
         </div>
-        <h3 className="type-display mt-3 max-w-[24ch] text-fluid-xl text-ink">
-          {renderAccent(p.descriptor, p.accent, false)}
-        </h3>
+        {/* Plain ink. Three accented descriptors spent the page's whole flare budget
+            three times over (audit 2026-09-09, finding 1): /work's one touch is its
+            hero, and the index numbers are the functional carve-out. `renderAccent`
+            stays for the EXPANDED case study, where the dark is the moment. */}
+        <h2 className="type-display mt-3 max-w-[24ch] text-fluid-xl text-ink">{p.descriptor}</h2>
         <p className="mt-3 type-meta text-ink/70">{p.capabilities}</p>
       </Reveal>
 

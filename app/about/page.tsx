@@ -4,6 +4,7 @@ import EditorialHeading from "@/components/EditorialHeading";
 import ImageFrame from "@/components/ImageFrame";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 
 export const metadata: Metadata = {
@@ -39,7 +40,9 @@ export default function AboutPage() {
           </Reveal>
           <Reveal stagger={0.12}>
             <RevealItem variant="soft">
-              <EditorialHeading as="h2" size="md" accent="own" className="max-w-[20ch]">
+              {/* No accent: the page spends its budget on the hero and the closing CTA
+                   (audit 2026-09-09, finding 1). */}
+              <EditorialHeading as="h2" size="md" className="max-w-[20ch]">
                 A studio, and a point of view of its own.
               </EditorialHeading>
             </RevealItem>
@@ -72,7 +75,6 @@ export default function AboutPage() {
         tone="rule"
         eyebrow="Philosophy"
         heading="The standard is distinction."
-        accent="distinction"
         headingSize="md"
       >
         <Reveal variant="fade">
@@ -96,17 +98,14 @@ export default function AboutPage() {
 
       {/* CTA — dark showstopper */}
       {/* CTA — the page's one dark moment. `marker` off: the heading has the flare. */}
-      <SectionShell
-        tone="dark"
+      <ClosingCTA
         heading="If that sounds like your brand, let’s talk."
         accent="your"
-        headingSize="xl"
-        className="!pb-14"
       >
         <Button href="/begin" variant="onDark">
           Begin your project
         </Button>
-      </SectionShell>
+      </ClosingCTA>
     </>
   );
 }
