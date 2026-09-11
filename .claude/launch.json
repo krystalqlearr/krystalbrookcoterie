@@ -10,7 +10,7 @@
     {
       "name": "kbc-dev-claude",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "-H", "127.0.0.1"],
+      "runtimeArgs": ["run", "dev"],
       "port": 3100,
       "autoPort": true
     }
