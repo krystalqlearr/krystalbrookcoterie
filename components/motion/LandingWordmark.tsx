@@ -154,39 +154,43 @@ export default function LandingWordmark() {
   // Arrival = the spring has settled, not a scroll threshold.
   useMotionValueEvent(p, "change", (v) => setArrived(v >= 0.985));
 
-  if (reduce) {
-    return (
-      <section className="flex min-h-[42svh] items-center justify-center bg-milk">
-        <span className="font-display font-medium text-meta lowercase tracking-[0.42em] text-ink/70">
-          krystal brook coterie
-        </span>
-      </section>
-    );
-  }
-
+  // ONE TREE, ALWAYS. Reduced motion used to return a different element here (a
+  // <section> band). The server can't see the preference, so it rendered the
+  // animated tree, the browser rendered the band, and React threw hydration error
+  // #418 and re-rendered the entire page on the client (#423) — live in
+  // production, for exactly the visitors who asked for less motion. The band is
+  // now CSS: `motion-reduce:` collapses the pinned wrapper and swaps the traveler
+  // for a static name from the first paint, so the markup never differs, nothing
+  // flashes, and nothing shifts.
   return (
     <div
-      className="relative bg-milk"
+      className="relative bg-milk motion-reduce:!h-auto"
       style={{ height: `calc(100svh + ${(LANDING.endVh + HOLD_VH) * 100}svh)` }}
     >
-      <div className="sticky top-0 h-[100svh] overflow-hidden">
+      <div className="sticky top-0 h-[100svh] overflow-hidden motion-reduce:static motion-reduce:flex motion-reduce:h-auto motion-reduce:min-h-[42svh] motion-reduce:items-center motion-reduce:justify-center">
         <span
           ref={ghostRef}
           aria-hidden
-          className="invisible absolute left-0 top-0 whitespace-nowrap font-display font-medium text-meta lowercase"
+          className="invisible absolute left-0 top-0 whitespace-nowrap font-display font-medium text-meta lowercase motion-reduce:hidden"
           style={{ letterSpacing: `${REST_TRACKING_PX}px` }}
         >
           krystal brook coterie
         </span>
         <motion.span
           aria-hidden
-          className="pointer-events-none absolute left-0 top-0 whitespace-nowrap font-display font-medium text-meta lowercase text-ink"
+          className="pointer-events-none absolute left-0 top-0 whitespace-nowrap font-display font-medium text-meta lowercase text-ink motion-reduce:hidden"
           style={{ x, y, scale, letterSpacing, transformOrigin: "0% 50%" }}
           animate={{ opacity: arrived ? 0 : 1 }}
           transition={{ duration: DUR.base, ease: EASE }}
         >
           <motion.span style={{ opacity: inkAlpha }}>krystal brook coterie</motion.span>
         </motion.span>
+        <span
+          aria-hidden
+          className="hidden font-display font-medium text-meta lowercase tracking-[0.42em] text-ink/70 motion-reduce:inline"
+        >
+          krystal brook coterie
+        </span>
       </div>
     </div>
   );

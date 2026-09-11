@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useHydrated } from "@/lib/useHydrated";
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "framer-motion";
 import Button from "./Button";
 import IndexMeta from "./IndexMeta";
@@ -201,6 +202,15 @@ function ProjectSlot({
   onClose: () => void;
 }) {
   const sequence = variant === "sequence";
+  // The frame is ALWAYS a <video> when the project has one; only its sources and
+  // autoplay depend on motion. It used to swap to an <img> under reduced motion —
+  // but the server can't see that preference, so server and browser rendered
+  // different elements: React hydration error #418 and a full client re-render on
+  // / and /work, live in production (2026-09-10). Sources attach only after
+  // hydration, and only when motion is allowed; a <video> with a poster and no
+  // source downloads nothing but the poster.
+  const hydrated = useHydrated();
+  const videoOn = hydrated && !reduce;
   const triggerRef = useRef<HTMLButtonElement>(null);
   // On the index, a project with a published case study navigates instead of
   // expanding — see the trigger below. The homepage sequence always expands.
@@ -225,10 +235,10 @@ function ProjectSlot({
   const chromeLabel = p.status ?? p.url;
 
   const media = (() => {
-    if (p.video && !reduce) {
+    if (p.video) {
       return (
         <video
-          autoPlay
+          autoPlay={videoOn}
           loop
           muted
           playsInline
@@ -239,12 +249,13 @@ function ProjectSlot({
             selected ? "" : "group-hover:scale-[1.04]"
           }`}
         >
-          {p.video.webm ? <source src={p.video.webm} type="video/webm" /> : null}
-          <source src={p.video.mp4} type="video/mp4" />
+          {videoOn && p.video.webm ? <source src={p.video.webm} type="video/webm" /> : null}
+          {videoOn ? <source src={p.video.mp4} type="video/mp4" /> : null}
         </video>
       );
     }
-    const still = p.video?.poster ?? p.image;
+    // A project with a video always returned above, so only the image remains.
+    const still = p.image;
     if (still) {
       return (
         <Image
@@ -279,20 +290,24 @@ function ProjectSlot({
   // Scroll entrance — the variant's own transition wins over `frameT` for the
   // reveal; `frameT` still drives the layout morph. Once in view the transform
   // resolves to `none`, so the expanded `fixed` frame is never offset.
-  const entrance = reduce
-    ? {}
-    : {
-        variants: revealFrom(sequence ? "down" : alone ? "up" : p.enter, TRAVEL.frame),
-        initial: "hidden",
-        whileInView: "visible",
-        viewport: { once: true, amount: 0.3 },
-      };
-
+  //
+  // The entrance props are the SAME for everyone. They used to be dropped under
+  // reduced motion, but the server can't see that preference: it rendered the
+  // hidden start state (opacity 0, translateY ±64px) and reduced-motion browsers
+  // rendered none — a style hydration mismatch on / and /work (2026-09-11).
+  // `data-reveal` hands reduced motion to the CSS rule in globals.css, which shows
+  // the frame at full opacity with no transform from the first paint. It sits on
+  // the frame ITSELF, not a wrapper, so no transformed ancestor can clip the
+  // `fixed` expanded state.
   const frame = (
     <motion.div
       layout
       transition={frameT}
-      {...entrance}
+      variants={revealFrom(sequence ? "down" : alone ? "up" : p.enter, TRAVEL.frame)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      data-reveal
       data-lenis-prevent
       className={
         selected

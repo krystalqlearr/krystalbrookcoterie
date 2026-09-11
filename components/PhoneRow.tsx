@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
+import { useHydrated } from "@/lib/useHydrated";
 
 /**
  * A row of phone screens playing the real site — the mobile counterpart to the
@@ -17,8 +17,13 @@ import { useReducedMotion } from "framer-motion";
  * scratchpad/gt-record.mjs — driven at a constant 300 css px a second, so the
  * pace is identical across every screen).
  *
- * Reduced motion gets the poster frame and no video at all — not a paused
- * `<video>`, which still downloads.
+ * REDUCED MOTION gets the poster frame and downloads no video: the <video> is
+ * given no `src` and no autoplay, and a <video> with a poster and no source loads
+ * only the poster. It is ALWAYS a <video>, never swapped for an <img>. The server
+ * can't see the motion preference, so the old swap made server and browser render
+ * different elements — React hydration error #418 and a full client re-render,
+ * live on /work/glowtoure (2026-09-10). So `src` and `autoPlay` are attached only
+ * after hydration (`useHydrated`), and only when motion is allowed.
  */
 
 export type Phone = {
@@ -26,7 +31,7 @@ export type Phone = {
   label: string;
   mp4: string;
   poster: string;
-  /** Alt text for the reduced-motion still. */
+  /** Accessible label for the screen. */
   alt: string;
 };
 
@@ -35,11 +40,13 @@ const RATIO = 390 / 844;
 
 export default function PhoneRow({ phones, className = "" }: { phones: Phone[]; className?: string }) {
   const reduce = useReducedMotion();
+  const hydrated = useHydrated();
+  const videoOn = hydrated && !reduce;
   const ref = useRef<HTMLUListElement>(null);
   const [near, setNear] = useState(false);
 
   useEffect(() => {
-    if (reduce) return;
+    if (!videoOn) return;
     const el = ref.current;
     if (!el) return;
     // No IntersectionObserver (or an old engine) — just load; correctness first.
@@ -58,7 +65,7 @@ export default function PhoneRow({ phones, className = "" }: { phones: Phone[]; 
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [reduce]);
+  }, [videoOn]);
 
   return (
     <ul
@@ -71,23 +78,20 @@ export default function PhoneRow({ phones, className = "" }: { phones: Phone[]; 
             className="relative w-full overflow-hidden border border-milk/15 bg-onyx"
             style={{ aspectRatio: RATIO }}
           >
-            {reduce ? (
-              <Image src={p.poster} alt={p.alt} fill sizes="(min-width: 768px) 30vw, 68vw" className="object-cover" />
-            ) : (
-              <video
-                // `src` is attached only once the row is near the viewport, so a
-                // page that is never scrolled this far downloads nothing.
-                src={near ? p.mp4 : undefined}
-                poster={p.poster}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="none"
-                aria-label={p.alt}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            )}
+            <video
+              // No `src` until the row is near the viewport AND motion is allowed,
+              // so a page never scrolled this far, or a reduced-motion visit,
+              // downloads nothing but the poster.
+              src={videoOn && near ? p.mp4 : undefined}
+              poster={p.poster}
+              autoPlay={videoOn}
+              loop
+              muted
+              playsInline
+              preload="none"
+              aria-label={p.alt}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
           </div>
           <p className="type-meta mt-4 text-milk/60">{p.label}</p>
         </li>

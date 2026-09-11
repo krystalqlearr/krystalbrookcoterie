@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   reveal,
   revealFade,
@@ -13,7 +13,17 @@ import {
 
 /**
  * Scroll-reveal primitive — the canonical entrance across the site (build-plan §3).
- * Under reduced motion it renders content immediately with no transform.
+ * Under reduced motion the content is visible immediately with no transform. That
+ * is done in CSS (`[data-reveal]` in globals.css), NOT by rendering a different
+ * element.
+ *
+ * WHY CSS. This used to return a plain tag instead of the motion tag when
+ * `useReducedMotion()` was true. The server can't see that preference, so it
+ * rendered the motion tag with Framer's inline hidden style while reduced-motion
+ * browsers rendered a bare tag without it: a hydration mismatch on every page that
+ * uses Reveal (found 2026-09-10). The CSS rule overrides Framer's inline styles
+ * with !important from the first paint, so the markup is identical for everyone
+ * and reduced-motion visitors see the content before any script has run.
  *
  * THE REGISTER (2026-09-07): words fade, media slides — on Bionic Egg's clock.
  *  - `variant`  : "soft" and "fade" are now the SAME text recipe (`revealText`):
@@ -64,18 +74,12 @@ function RevealRoot({
   amount = 0.15,
   className = "",
 }: Props) {
-  const reduce = useReducedMotion();
   const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
-
   const variants = stagger ? revealStagger(stagger, delay) : pick(variant, from, distance);
 
   return (
     <MotionTag
+      data-reveal
       className={className}
       variants={variants}
       initial="hidden"
@@ -104,14 +108,9 @@ function RevealItem({
   distance?: number;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
   const MotionTag = motion[as];
   return (
-    <MotionTag className={className} variants={pick(variant, from, distance)}>
+    <MotionTag data-reveal className={className} variants={pick(variant, from, distance)}>
       {children}
     </MotionTag>
   );

@@ -251,4 +251,14 @@ html {
     animation: none !important;
     transform: none !important;
   }
+  /* Reveal's entrances (components/motion/Reveal.tsx). Framer writes the hidden
+     state as INLINE styles, so only !important can override them. Doing it here
+     rather than rendering a different element in JS keeps the server and client
+     markup identical (the JS swap caused hydration mismatches, 2026-09-10), and
+     shows the content from the first paint, before any script runs. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
