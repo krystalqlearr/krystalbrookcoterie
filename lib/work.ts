@@ -50,7 +50,9 @@ export type WorkProject = {
   // A published deliverable from the engagement that a visitor can open — the
   // brand book, a written design system. Shown under Scope: the list CLAIMS the
   // work, this SHOWS it. External by definition, so it opens in a new tab.
-  deliverable?: { label: string; href: string; note: string };
+  // `short` names it in the case study's meta column, where the row is a FACT
+  // beside Client / Role / Year — so it is a noun, not the section's invitation.
+  deliverable?: { label: string; short: string; href: string; note: string };
   // Narrative
   intro: string;
   body: string[];
@@ -148,6 +150,7 @@ export const WORK: WorkProject[] = [
     // /public/brand with a rewrite giving it this path — see next.config.mjs.
     deliverable: {
       label: "Open the Glowtoure brand system",
+      short: "Brand system",
       href: "/work/glowtoure/brand-system",
       note: "The system was written down, not just built — nine locked colours, four faces with one job each, and the governance that keeps a tenth colour from quietly appearing eighteen months in.",
     },
