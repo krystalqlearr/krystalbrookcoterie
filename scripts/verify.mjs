@@ -170,10 +170,9 @@ if (!LIVE) {
     // isn't ours to make alone. A permanently red gate gets ignored, so these are
     // named (with why) while anything NEW still fails the run. Delete an entry
     // the moment its fix ships; a stale entry is reported.
-    const KNOWN_CONTRAST = [
-      { route: "/styleguide", text: "Role, Company",
-        why: "milk/70 on the flare band 3.74 — one-token fix (full milk) awaiting her approval." },
-    ];
+    // Empty on purpose: the one entry, the /styleguide flare-band credit line
+    // (milk/70, 3.74), was fixed to full milk (6.48) on her approval, 2026-09-11.
+    const KNOWN_CONTRAST = [];
 
     const all = pages.flatMap((p) => p.contrast.map((c) => ({ route: p.route, ...c })));
     const isClient = (f) => CLIENT_DOCS.includes(f.route);

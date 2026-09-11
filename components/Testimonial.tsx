@@ -7,10 +7,10 @@ import Image from "next/image";
  * a decorative serif aside.
  *
  * `tone` follows the canvas. `onFlare` is for the full-bleed flare band, which uses
- * the `deep` stop (#A8004F): milk on deep clears AA at 6.02 at ANY size, including
- * the 13px attribution. The neon default would only manage 3.01 for milk and 4.30
- * for ink — fine for the big quote, short for the caption beneath it. One band per
- * page, at most.
+ * the `flare-deep` stop (#B3102E): FULL milk on it is 6.48, AA at any size,
+ * including the 13px attribution. The attribution must be full milk — at milk/70
+ * it measured 3.74 and failed (caught by `npm run verify`, fixed 2026-09-11; this
+ * comment used to quote the retired magenta #A8004F). One band per page, at most.
  */
 type Tone = "onLight" | "onDark" | "onFlare";
 
@@ -30,7 +30,7 @@ const toneClass: Record<Tone, { quote: string; name: string; meta: string; ring:
   onFlare: {
     quote: "text-milk",
     name: "text-milk",
-    meta: "text-milk/70",
+    meta: "text-milk",
     ring: "border-milk/30",
   },
 };
