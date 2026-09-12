@@ -169,6 +169,29 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
                   <dd className="mt-1 font-sans text-fluid-base text-ink">{value}</dd>
                 </div>
               ))}
+
+              {/* The deliverable as a FACT, beside Client / Role / Year — visible
+                  without scrolling to Scope, where the same document gets its
+                  invitation. A plain underlined link, not an ArrowLink: this is a
+                  value in a definition list, and a second arrow CTA in the meta
+                  column would be the duplicate-vocabulary problem the audit
+                  removed from the work frames (finding 6). */}
+              {p.deliverable ? (
+                <div className="border-t border-ink/12 pt-3">
+                  <dt className="type-meta text-ink/70">Deliverable</dt>
+                  <dd className="mt-1">
+                    <Link
+                      href={p.deliverable.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      prefetch={false}
+                      className="font-sans text-fluid-base text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                    >
+                      {p.deliverable.short}
+                    </Link>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
           </Reveal>
         </div>

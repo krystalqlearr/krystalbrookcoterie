@@ -12,6 +12,8 @@
 # next.js
 /.next/
 /.next-claude/
+# local production builds (npm run build / verify) - see next.config.mjs
+/.next-build/
 
 # Session scratch served by the dev server (raw recordings, review boards) — never shipped.
 /public/_tmp-*
