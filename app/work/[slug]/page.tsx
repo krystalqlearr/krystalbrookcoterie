@@ -18,8 +18,14 @@ export function generateStaticParams() {
   return caseStudySlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const p = getProject(params.slug);
+// Next 15: `params` is a Promise, so both entry points await it.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const p = getProject(slug);
   if (!p || !p.caseStudy) return {};
   const description = p.seoDescription ?? p.intro;
   return {
@@ -48,8 +54,9 @@ function accented(text: string, accent: string) {
   );
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const p = getProject(params.slug);
+export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const p = getProject(slug);
   if (!p || !p.caseStudy) notFound();
 
   // Next published case study (if any), for the closing hand-off.
