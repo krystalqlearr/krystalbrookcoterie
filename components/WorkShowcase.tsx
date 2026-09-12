@@ -309,6 +309,7 @@ function ProjectSlot({
       viewport={{ once: true, amount: 0.3 }}
       data-reveal
       data-lenis-prevent
+      data-work-frame
       className={
         selected
           ? "group fixed inset-0 z-[210] flex flex-col overflow-y-auto bg-onyx"
@@ -334,6 +335,29 @@ function ProjectSlot({
             data-cursor="hover"
             data-cursor-label="open"
             aria-label={`Open ${p.client} case study`}
+            onClick={(e) => {
+              // Hand this one navigation to the browser's cross-document view
+              // transition, so the frame travels into the case study's hero frame
+              // instead of the page simply being replaced (globals.css).
+              //
+              // Everything here is decided at CLICK time, never at render: the
+              // server and client markup are identical, which is the rule the
+              // reduced-motion hydration bug bought us (CLAUDE.md, Motion).
+              if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+              // `CSSViewTransitionRule` is the precise probe for CROSS-DOCUMENT
+              // support — `document.startViewTransition` only proves the
+              // same-document kind, and a browser with one and not the other
+              // would pay for a full page load and get no morph for it.
+              if (!("CSSViewTransitionRule" in window)) return;
+              if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+              const frame = e.currentTarget.closest<HTMLElement>("[data-work-frame]");
+              if (!frame) return;
+              e.preventDefault();
+              // Named here and nowhere else: one name per document, on the frame
+              // that was actually clicked.
+              frame.style.viewTransitionName = "work-frame";
+              window.location.href = `/work/${p.id}`;
+            }}
             className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-milk"
           />
         ) : (

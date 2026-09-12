@@ -32,7 +32,15 @@ export default function PageHero({ eyebrow, title, accent, intro, size = "xl", m
             <Eyebrow>{eyebrow}</Eyebrow>
           </RevealItem>
           <RevealItem variant="soft">
-            <EditorialHeading as="h1" size={size} accent={accent} className="mt-6 max-w-[20ch]">
+            {/* `accent-on-load` tells globals.css that this heading is already on
+                screen when the page arrives, so its accent word develops on a
+                clock rather than waiting for a scroll that never comes. */}
+            <EditorialHeading
+              as="h1"
+              size={size}
+              accent={accent}
+              className="accent-on-load mt-6 max-w-[20ch]"
+            >
               {title}
             </EditorialHeading>
           </RevealItem>

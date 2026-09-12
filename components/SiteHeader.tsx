@@ -94,15 +94,22 @@ export default function SiteHeader() {
   const linkFocus =
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink";
 
-  // `inert` keeps the invisible header out of the tab order. React 18's DOM
-  // layer predates the attribute (passing `true` warns; the types only allow
-  // boolean), so it's spread in as the empty-string form the browser reads.
+  // `inert` keeps the invisible header out of the tab order. It is set as a DOM
+  // PROPERTY in an effect, not as a JSX attribute: React 18.3 warns on the
+  // `inert=""` form (a forward-compat warning for 19, where it is boolean) and
+  // its types reject `inert={true}`, so the attribute layer has no clean spelling
+  // — the property is what the browser reads either way. `atLanding` starts
+  // false and flips in an effect, so the server never rendered it anyway; this
+  // lands one effect later, in the same frame.
   const hiddenAtLanding = atLanding && !open;
-  const inertProps = hiddenAtLanding ? ({ inert: "" } as Record<string, string>) : {};
+  const headerRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (headerRef.current) headerRef.current.inert = hiddenAtLanding;
+  }, [hiddenAtLanding]);
 
   return (
     <header
-      {...inertProps}
+      ref={headerRef}
       // No backdrop-blur while the menu is open: `backdrop-filter` makes the
       // header the containing block for its fixed descendants, which collapsed
       // the panel's `inset-0` to the 80px bar (height 0). Solid milk instead.

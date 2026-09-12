@@ -30,8 +30,8 @@ type Canvas = "milk" | "dark";
  * changes HERE, not in a page.
  */
 const accentByCanvas: Record<Canvas, string> = {
-  milk: "text-flare",
-  dark: "text-flare",
+  milk: "text-flare accent-develop accent-develop-milk",
+  dark: "text-flare accent-develop accent-develop-dark",
 };
 
 // Fluid sizes; each token carries its own negative tracking + sub-1 leading.

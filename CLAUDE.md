@@ -178,7 +178,7 @@ the FIRST mismatch, so one such branch hides every other.
 
 MOTION IS SMALL AND SPECIFIC, NEVER AMBIENT (2026-09 quiet-luxury pivot). Nothing
 runs full-screen or continuously behind content. "The Row's aesthetic, Bionic Egg's
-motion": the vocabulary is six moments plus the basics, each used once —
+motion": the vocabulary is eight moments plus the basics, each used once —
 1. THE LANDING: the homepage opens on the name and nothing else (no headline, no CTA,
    no header, no nav). The name GROWS toward you first (viewport-capped, never clips),
    then FLOATS into the header's wordmark slot and BECOMES the logo — one continuous
@@ -205,7 +205,9 @@ motion": the vocabulary is six moments plus the basics, each used once —
    frame DROPS (the name just rose); `/work` frames enter from the grid side they
    sit on (`WorkProject.enter`, set beside `span`); the /about portrait slides from
    the left; side columns (/begin aside, case-study meta) slide from the right; the
-   case-study hero frame rises. The entrance lives ON `WorkShowcase`'s frame, never
+   case-study hero frame has NO entrance (2026-09-12) — it is the page's LCP and
+   the landing of moment 7, so it is present and opaque at first paint. The
+   entrance lives ON `WorkShowcase`'s frame, never
    on a wrapper — a transformed ancestor would clip its `fixed` expanded state.
    `html { overflow-x: clip }` absorbs the sideways travel.
 4. The cursor's word — `open` / `close` (see Cursor).
@@ -213,6 +215,29 @@ motion": the vocabulary is six moments plus the basics, each used once —
    milk for `GEM_BEAT_MS` before the morph; preloaded on hover so it never waits on
    Three.js (which still never enters first-load JS). Skipped under reduced motion.
 6. The Marquee at 90s — slower reads more expensive.
+7. THE FRAME OPENS INTO THE CASE STUDY (2026-09-12): on `/work`, the browser frame
+   you click travels and grows into the case study's hero frame — a CROSS-DOCUMENT
+   view transition, a real navigation the browser itself tweens because both
+   frames carry `view-transition-name: work-frame` (globals.css). Decided in the
+   CLICK HANDLER, never at render: markup is identical for everyone; a browser
+   without `CSSViewTransitionRule`, or reduced motion, gets next/link's soft
+   navigation. The `/work` side is named only on click (one name per document — a
+   second project would make a fixed name a duplicate, and a duplicate skips the
+   whole transition); the case-study side is named permanently. Why not a
+   soft-nav transition: React's `<ViewTransition>` needs React 19 experimental, and
+   a hand-rolled one over `router.push` holds the page frozen under a snapshot
+   until an RSC fetch resolves. PROVEN ON THE PRODUCTION BUILD, 6 of 6, including
+   at 400kbps/150ms; `next dev` drops it at random because it streams the HTML —
+   test it on `next start`, never on the dev server. `rel="expect"
+   blocking="render"` was tried and changed nothing; it is not in the tree.
+8. THE ACCENT DEVELOPS: the flare word in a heading arrives as ink and the cherry
+   washes through it left to right, a print coming up in the tray. Pure CSS —
+   `background-clip: text` over a two-stop gradient, driven by a scroll timeline
+   (`animation-range: entry 100% cover 35%`, anchored to the VIEWPORT: a range in
+   `entry` units is measured against the word's own ~40px and snaps) or, on a
+   `PageHero` h1 that is already on screen, by a clock (`.accent-on-load`). THE
+   RESTING STATE IS THE FINISHED STATE, so a browser that cannot run it shows the
+   plain flare word. Spends nothing from the budget: it is the same accent word.
 Plus: `Reveal` entrances, hover states, `Dispersion` (kept on `/for/[slug]` only).
 Parked ideas, not built until she asks: an empty viewport, route crossfades, count-ups. `LandingWordmark` flags `data-landing` on <html>; `SiteHeader` stays
 out (opacity 0 + `inert`, so it's out of the tab order too) until 0.6vh of scroll,
@@ -355,7 +380,13 @@ adds a headless pass over every route: 200s, exactly one h1, zero console errors
 failed requests, no mobile overflow, the flare budget (IndexMeta / ArrowLink / tier-flag
 carve-outs excluded), and AA contrast. It runs under EMULATED REDUCED MOTION, because
 that is where the hydration bug lived and no ordinary pass would have seen it, and it
-zeroes transitions so a run is deterministic. Contrast grounds resolve by GEOMETRY — the element's own background,
+zeroes transitions so a run is deterministic. A SECOND, LIGHTER PASS then walks every
+route with motion ON for console errors and failed requests — the reduced pass alone
+walked 19 routes and missed SiteHeader's `inert=""` warning on `/`, which only fires
+on the animated path (2026-09-12). MEASURE EFFECTS IN HEADLESS CHROME, NOT THE PANE:
+a headless page is a foreground document; the Browser pane can be hidden, and a
+hidden document stalls animations and scroll timelines — numbers read from it made a
+working effect look broken. Contrast grounds resolve by GEOMETRY — the element's own background,
 then any positioned sibling covering it, then ancestors; an ancestor-only walk invents
 1.00 ratios.
 AN IMPOSSIBLE NUMBER IS THE CHECKER, NOT THE SITE. A 1.00 ratio, ten flares on a quiet
