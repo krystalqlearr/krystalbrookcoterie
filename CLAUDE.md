@@ -10,7 +10,12 @@ shared-element transitions, live work, instant loads), never just claim it.
 CLAUDE.md is the short form; keep the two in sync, never let them drift.**
 
 ## Stack
-Next.js 14 App Router, TypeScript, Tailwind CSS, Framer Motion, Lenis. Deployed on Vercel.
+Next.js 15 App Router, TypeScript, Tailwind CSS, Framer Motion, Lenis. Deployed on Vercel.
+Upgraded 14 → 15.5.25 on 2026-09-12; React stays 18. The one code consequence: in a
+dynamic route `params` is a PROMISE, so `generateMetadata` and the page component are
+both `async` and both `await params` — six call sites across `/work/[slug]`,
+`/services/[slug]` and `/for/[slug]`. Next 15 also writes `"target": "ES2017"` into
+tsconfig.json itself on first run; that line is its, not hand-set.
 
 ## Color — TWO GROUNDS + ONE CHERRY FLARE (2026-09-07). NEVER hardcode hex.
 The site is milk and the blackest black, and nothing in between. The beige recesses
@@ -155,6 +160,21 @@ All easing/durations come from `lib/motion.ts` (JS) or `ease-editorial` / `durat
 cubic-bezier(0.16,1,0.3,1). Slow and weighted, never bouncy. Lenis smooth scroll,
 `Reveal` for entrances, the work-transition (shared-layout FLIP) as the signature
 moment. Respect prefers-reduced-motion EVERYWHERE (instant, no morph/parallax).
+
+REDUCED MOTION CHANGES STYLE, NEVER STRUCTURE (2026-09-12 — this shipped as a live
+bug). NEVER branch returned markup on `useReducedMotion()`. The server has no media
+query, so it renders the no-preference tree; a reduced-motion client renders a
+different one; React throws #418 and then #423 — and #423 drops the ENTIRE root to
+client rendering, discarding the server HTML. It was live on `/`, `/work` and
+`/work/glowtoure` (12, 14 and 16 console errors) and was invisible to anyone whose
+system animates normally, which is why it survived every previous audit. Say it in
+CSS the server can render too: Tailwind `motion-reduce:` variants, or the
+`[data-reveal]` override in globals.css that pins opacity/transform/filter inside
+`@media (prefers-reduced-motion: reduce)`. For the few values CSS cannot carry — a
+`<video>` src, `autoPlay` — gate on `useHydrated()` (`lib/useHydrated.ts`, a
+`useSyncExternalStore` that is false on the server AND on the first client render)
+so hydration still matches, then let the effect pass switch it on. React names only
+the FIRST mismatch, so one such branch hides every other.
 
 MOTION IS SMALL AND SPECIFIC, NEVER AMBIENT (2026-09 quiet-luxury pivot). Nothing
 runs full-screen or continuously behind content. "The Row's aesthetic, Bionic Egg's
@@ -327,7 +347,25 @@ element is a real, labeled, focusable control (work cards are <button>s); skip-l
 next/image everywhere (AVIF/WebP), priority on LCP media, local fonts w/ swap, server
 components by default (client only where interactivity requires), motion budgeted, zero
 layout shift. Future: View Transitions API, Speculation Rules prefetch, container
-queries, CSS scroll-driven animation (progressive enhancement); evaluate Next 15 + PPR.
+queries, CSS scroll-driven animation (progressive enhancement); PPR still to evaluate.
+
+## Verification — run it, don't reason about it
+`npm run verify` = typecheck + lint + production build. `npm run verify -- --live`
+adds a headless pass over every route: 200s, exactly one h1, zero console errors, zero
+failed requests, no mobile overflow, the flare budget (IndexMeta / ArrowLink / tier-flag
+carve-outs excluded), and AA contrast. It runs under EMULATED REDUCED MOTION, because
+that is where the hydration bug lived and no ordinary pass would have seen it, and it
+zeroes transitions so a run is deterministic. Contrast grounds resolve by GEOMETRY — the element's own background,
+then any positioned sibling covering it, then ancestors; an ancestor-only walk invents
+1.00 ratios.
+AN IMPOSSIBLE NUMBER IS THE CHECKER, NOT THE SITE. A 1.00 ratio, ten flares on a quiet
+page, a page that passes while failing to load — break the thing on purpose and watch
+the check FIRE before believing its all-clear. A page that never loaded is not audited:
+"exactly one h1" once passed on Chrome's error page.
+Documents under `public/brand` are CLIENT artefacts — their contrast is reported for
+information only and is the client's palette to change, never KBC's to silently fix.
+`npm run dev` binds 127.0.0.1 (this machine only) and builds write to `.next-build`, so
+a build can never break a running dev server.
 
 ## Voice — a luxury creative house (not a dev shop)
 Editorial, assured, fashion-conscious, commercially intelligent, selective, slightly

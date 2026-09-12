@@ -421,7 +421,15 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   framer measures, so target-relative progress never advanced. Decorative by design:
   the real `<h1>` and every CTA sit in the hero directly beneath. Reduced motion
   renders a short static band, no pin, no fade, header visible from the start.
-- Respect `prefers-reduced-motion` everywhere: instant, no morph, no parallax.
+- Respect `prefers-reduced-motion` everywhere: instant, no morph, no parallax — as
+  STYLE, never as STRUCTURE. Never branch returned markup on `useReducedMotion()`:
+  the server renders the no-preference tree, a reduced-motion client renders a
+  different one, and React throws #418 then #423 — #423 drops the whole root to
+  client rendering. It was live on `/`, `/work` and `/work/glowtoure` until
+  2026-09-12, visible only to a visitor who has reduced motion on. Use
+  `motion-reduce:` variants or the `[data-reveal]` override in globals.css; for the
+  values CSS cannot carry (`<video>` src, `autoPlay`) gate on `useHydrated()` so the
+  first client render still matches the server. See CLAUDE.md, Motion.
 
 **MOTION IS SMALL AND SPECIFIC, NEVER AMBIENT (2026-09 quiet-luxury pivot).** Nothing
 runs full-screen or continuously behind content. Retired to parked status — real,
@@ -510,7 +518,8 @@ where a fluid step exists.
   server components by default, motion budgeted, zero layout shift.
 - **Future-optimized:** View Transitions API, Speculation Rules prefetch, container
   queries, CSS scroll-driven animations (progressive enhancement), `content-visibility`
-  on long sections. Evaluate Next 15 upgrade for stable View Transitions + PPR.
+  on long sections. Next 15 landed 2026-09-12 (15.5.25, React 18 retained); PPR and
+  stable View Transitions are still to evaluate on it.
 - **SEO:** per-route metadata, Open Graph/Twitter cards, JSON-LD (Organization +
   per-case-study CreativeWork), sitemap + robots, semantic headings.
 - **Analytics/consent:** privacy-first; any consent UI declines non-essential by default.
@@ -553,13 +562,14 @@ compliant token.
       CreativeWork JSON-LD, results/scope/proof, sitemap entry) with the index overlay
       linking through; cross-document View Transitions enabled via CSS. TODO (needs
       you): real Glowtoure imagery + published Lighthouse numbers to replace the
-      "To publish" result slots; soft-nav route transitions await a Next 15 upgrade.
+      "To publish" result slots; soft-nav route transitions are unblocked by the Next 15 upgrade
+      (2026-09-12) and remain unbuilt.
 - [~] **Phase 5 — Perf/SEO/future.** DONE: shared metadata base (title template, OG +
       Twitter cards), dynamic `opengraph-image`/`twitter-image` (edge), JSON-LD
       (Organization + WebSite), `sitemap.ts`, `robots.ts` (styleguide disallowed).
       TODO: per-case-study CreativeWork JSON-LD (with Phase 4), Speculation Rules,
       image pipeline once real photography lands, CWV/Lighthouse pass on a production
-      build, Next 15 / PPR evaluation.
+      build, PPR evaluation on Next 15 (which landed 2026-09-12).
 - [~] **Phase 6 — Launch hardening.** DONE: clean production `next build` (17 routes,
       `/work/glowtoure` prerendered SSG, ~147 kB first load); fixed build blockers
       (unused import, `twitter-image` runtime literal, header ref-cleanup); added a
@@ -695,6 +705,44 @@ compliant token.
       line and closing line at copy review; whether the Signature tier flag keeps
       its flare-deep.
 
+- [x] **Phase 10 — The deliverable, the audit, and a verification system
+      (2026-09-10 → 12).** *(Phase 9 — services by discipline, 2026-09-07 — is
+      recorded in §3.)*
+      **The deliverable.** The Glowtoure brand book became the first published
+      artefact of an engagement: split out of one authored HTML file into
+      `public/brand/glowtoure-brand-system.html` plus nine cacheable `.woff2`
+      (`scripts/split-brand-book.mjs`, which refuses any document still reaching an
+      external host), given a real URL by a rewrite — `/work/glowtoure/brand-system`
+      — and linked from three places: under Scope on the case study, as a
+      `Deliverable` row in that page's meta column, and as "The proof" on
+      `/services/identity`. HER RULE, EMPHATIC: deliverables live on this domain,
+      never someone else's (§4). The book was corrected twice on her word — no AI
+      assisted any photography, and the footer is Charcoal with Caramel, Cacao only
+      the legal strip — both times after I had inferred a colour from an averaged
+      census instead of reading the pixels.
+      **Navigation and naming.** One click from a work frame to its case study (the
+      frame is a real link wherever it is not the homepage's expanding sequence);
+      Glowtoure is a high-end spray-tanning service, never "self tan".
+      **The hydration bug.** `Reveal`, `LandingWordmark`, `PhoneRow` and
+      `WorkShowcase` each returned DIFFERENT MARKUP under `useReducedMotion()`. Live
+      in production: 12, 14 and 16 console errors on `/`, `/work` and
+      `/work/glowtoure` — React #418 then #423, the whole root falling back to client
+      rendering — and invisible to anyone whose system animates normally. Fixed by
+      making reduced motion a style difference only (§3, anti-drift rule 7):
+      `motion-reduce:` variants, a `[data-reveal]` override in globals.css, and
+      `lib/useHydrated.ts` for the values CSS cannot carry. Confirmed zero on
+      production, 2026-09-12.
+      **The verification system.** `npm run verify` (typecheck, lint, build) and
+      `npm run verify -- --live` (every route: 200, one h1, no console errors, no
+      failed requests, no mobile overflow, the flare budget, AA contrast resolved by
+      geometry) — written after a session in which five separate claims of mine were
+      checker artefacts or inferences rather than facts, and self-tested by breaking
+      each check on purpose to watch it fire. `npm run dev` now binds 127.0.0.1 and
+      builds write to `.next-build`, so a build can never break a running dev server.
+      **Next 15.** 14.2.35 → 15.5.25, React 18 retained, `params` awaited in six
+      places; typecheck, lint, build, the reduced/normal-motion behaviour suite and
+      the full live verify all re-run green.
+
 ## 9. Anti-drift protocol
 
 1. This file + `CLAUDE.md` are canonical. Any change to tokens, motion, routes, or IA
@@ -714,3 +762,10 @@ compliant token.
 5. Every new interactive element is a real, labeled, focusable control with a
    reduced-motion path.
 6. Update the Phase boxes in §8 as work lands so status never lies.
+7. Reduced motion is a STYLE difference, never a STRUCTURAL one: no component returns
+   different markup under `useReducedMotion()`. That mismatch is React #418/#423 and
+   it is invisible to anyone whose system animates normally (§3; CLAUDE.md, Motion).
+8. Run `npm run verify -- --live` before claiming the site is fine — and distrust an
+   impossible number. A 1.00 contrast ratio or a page that passes while failing to
+   load is the CHECKER being wrong; break the thing on purpose and watch the check
+   fire before believing its all-clear.

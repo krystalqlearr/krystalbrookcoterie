@@ -36,8 +36,14 @@ export function generateStaticParams() {
   return serviceSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const s = getService(params.slug);
+// Next 15: `params` is a Promise, so both entry points await it.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const s = getService(slug);
   if (!s) return {};
   const description = `${s.line} ${s.forWhom}`;
   return {
@@ -52,8 +58,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const s = getService(params.slug);
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const s = getService(slug);
   if (!s) notFound();
 
   const index = SERVICES.findIndex((x) => x.slug === s.slug) + 1;

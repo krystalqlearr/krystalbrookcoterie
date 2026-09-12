@@ -19,8 +19,14 @@ export function generateStaticParams() {
   return prospectSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const p = getProspect(params.slug);
+// Next 15: `params` is a Promise, so both entry points await it.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const p = getProspect(slug);
   if (!p) return {};
   return {
     title: `Made for ${p.businessName}`,
@@ -29,8 +35,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function ProspectPage({ params }: { params: { slug: string } }) {
-  const prospect = getProspect(params.slug);
+export default async function ProspectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const prospect = getProspect(slug);
   if (!prospect) notFound();
 
   return (
