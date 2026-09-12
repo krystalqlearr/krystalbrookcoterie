@@ -32,6 +32,9 @@
  *   npm run verify -- --live --base https://krystalbrookcoterie.com
  */
 import { execFileSync } from "node:child_process";
+import { existsSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const args = process.argv.slice(2);
 const LIVE = args.includes("--live");
@@ -65,24 +68,34 @@ const step = (name, fn) => {
   }
 };
 
-const run = (cmd, cmdArgs, env = {}) =>
-  execFileSync(cmd, cmdArgs, {
+// Local binaries are run by THIS node, directly — no npx, no shell.
+// execFileSync(cmd, args, { shell: true }) is Node's DEP0190: with a shell the
+// args array is handed back to cmd.exe to re-parse, so a repo path containing a
+// space would be split into two arguments. Resolving the bin ourselves removes
+// the deprecation, the quoting hazard, and npx's startup cost.
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const bin = (rel) => {
+  const p = join(ROOT, "node_modules", rel);
+  if (!existsSync(p)) throw new Error(`missing ${rel} — run \`npm install\``);
+  return p;
+};
+const run = (rel, cmdArgs, env = {}) =>
+  execFileSync(process.execPath, [bin(rel), ...cmdArgs], {
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
     env: { ...process.env, ...env },
-    shell: process.platform === "win32",
   });
 
 console.log("\nStatic\n");
-step("typecheck", () => { run("npx", ["tsc", "--noEmit"]); });
+step("typecheck", () => { run("typescript/bin/tsc", ["--noEmit"]); });
 step("lint", () => {
-  const out = run("npx", ["next", "lint"]);
+  const out = run("next/dist/bin/next", ["lint"]);
   if (/couldn't determine the plugin|Plugin .* was conflicted/i.test(out))
     throw new Error("ESLint did not actually run — check \"root\": true in .eslintrc.json");
   return "actually ran";
 });
 step("build", () => {
-  const out = run("npx", ["next", "build"], { KBC_DIST: ".next-build" });
+  const out = run("next/dist/bin/next", ["build"], { KBC_DIST: ".next-build" });
   const m = out.match(/Generating static pages \((\d+)\/(\d+)\)/g);
   return m ? m[m.length - 1].replace("Generating static pages ", "") : "compiled";
 });
@@ -98,11 +111,20 @@ if (!LIVE) {
     args: ["--hide-scrollbars", "--autoplay-policy=no-user-gesture-required"],
   });
 
-  const { ROUTES, auditPage } = await import("./verify-live.mjs");
+  const { ROUTES, auditPage, smokePage } = await import("./verify-live.mjs");
   const pages = [];
   for (const route of ROUTES) {
     const page = await browser.newPage();
     pages.push(await auditPage(page, BASE, route));
+    await page.close();
+  }
+  // Second pass, motion ON — console errors and failed requests only. The
+  // reduced-motion audit above cannot see a warning that fires only on the
+  // animated path, and one did (verify-live.mjs, smokePage).
+  const smoke = [];
+  for (const route of ROUTES) {
+    const page = await browser.newPage();
+    smoke.push(await smokePage(page, BASE, route));
     await page.close();
   }
   await browser.close();
@@ -133,14 +155,16 @@ if (!LIVE) {
   // first version printed it whole: two routes' traces used up the report and
   // hid every other route that was failing.
   step("no console errors", () => {
-    const bad = pages.filter((p) => p.consoleErrors.length);
+    const bad = [...pages, ...smoke].filter((p) => p.consoleErrors.length);
     if (bad.length)
       throw new Error(bad.map((p) =>
         `${p.route}: ${p.consoleErrors.length} error(s), first: ${String(p.consoleErrors[0]).split("\n")[0].slice(0, 110)}`).join("\n"));
+    return "both motion preferences";
   });
   step("no failed requests", () => {
-    const bad = pages.filter((p) => p.failed.length);
+    const bad = [...pages, ...smoke].filter((p) => p.failed.length);
     if (bad.length) throw new Error(bad.map((p) => `${p.route}: ${p.failed[0]}`).join("\n"));
+    return "both motion preferences";
   });
   step("no mobile overflow", () => {
     const bad = loaded.filter((p) => p.mobileOverflow);

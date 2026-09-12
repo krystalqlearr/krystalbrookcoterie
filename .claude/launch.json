@@ -4,14 +4,30 @@
     {
       "name": "kbc-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000
     },
     {
       "name": "kbc-dev-claude",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3100,
+      "autoPort": true
+    },
+    {
+      "name": "kbc-prod",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "start"
+      ],
+      "port": 3400,
       "autoPort": true
     }
   ]

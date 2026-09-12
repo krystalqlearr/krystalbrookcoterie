@@ -117,6 +117,37 @@ const PROBE = `(() => {
   };
 })()`;
 
+/**
+ * The light pass — every route once more with motion ON, collecting only what
+ * cannot be judged from the settled state: console errors and failed requests.
+ *
+ * The full audit below runs under reduced motion on purpose (deterministic end
+ * states). But that made it blind to anything that only happens on the animated
+ * path: SiteHeader's `inert=""` warning fired on `/` with motion on and nowhere
+ * else, and the audit walked all 19 routes and reported them clean (2026-09-12).
+ * A checker that only ever looks at one preference is not checking the site
+ * most visitors get.
+ */
+export async function smokePage(page, base, route) {
+  const consoleErrors = [];
+  const failed = [];
+  page.on("console", (m) => { if (m.type() === "error") consoleErrors.push(m.text().slice(0, 140)); });
+  page.on("pageerror", (e) => consoleErrors.push(String(e).slice(0, 140)));
+  page.on("requestfailed", (r) => failed.push(`${r.url().slice(-60)} ${r.failure()?.errorText}`));
+  page.on("response", (r) => { if (r.status() >= 400) failed.push(`${r.status()} ${r.url().slice(-60)}`); });
+  await page.setViewport({ width: 1440, height: 900 });
+  await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "no-preference" }]);
+  let status = 0;
+  try {
+    const resp = await page.goto(base + route, { waitUntil: "networkidle0", timeout: 90000 });
+    status = resp?.status() ?? 0;
+  } catch (e) { consoleErrors.push("NAV FAILED " + String(e).slice(0, 100)); }
+  // Let the landing, reveals and any autoplay settle — the warnings this pass
+  // exists for are emitted by React after hydration, not at first paint.
+  await new Promise((r) => setTimeout(r, 1200));
+  return { route: `${route} (motion on)`, status, consoleErrors, failed };
+}
+
 export async function auditPage(page, base, route) {
   const consoleErrors = [];
   const failed = [];

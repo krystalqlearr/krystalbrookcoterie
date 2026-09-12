@@ -430,6 +430,18 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   `motion-reduce:` variants or the `[data-reveal]` override in globals.css; for the
   values CSS cannot carry (`<video>` src, `autoPlay`) gate on `useHydrated()` so the
   first client render still matches the server. See CLAUDE.md, Motion.
+- **Moment 7 — the frame opens into the case study (2026-09-12).** On `/work` the
+  clicked browser frame travels and grows into the case study's hero frame as a
+  CROSS-DOCUMENT view transition: both carry `view-transition-name: work-frame`,
+  the `/work` side named only in the click handler (one name per document), the
+  case-study side permanently and without an entrance reveal (it is the LCP and
+  the landing). Feature- and motion-gated at click time, never at render.
+  Proven 6/6 on the production build, including throttled to 400kbps; the dev
+  server drops it at random because it streams — verify on `next start`.
+- **Moment 8 — the accent develops (2026-09-12).** The heading's flare word
+  arrives as ink and the cherry washes through it: CSS only, `background-clip:
+  text` over a two-stop gradient on a scroll timeline (`entry 100% → cover 35%`,
+  viewport-anchored) or, for `PageHero`, a clock. Resting state = finished state.
 
 **MOTION IS SMALL AND SPECIFIC, NEVER AMBIENT (2026-09 quiet-luxury pivot).** Nothing
 runs full-screen or continuously behind content. Retired to parked status — real,
@@ -739,6 +751,19 @@ compliant token.
       checker artefacts or inferences rather than facts, and self-tested by breaking
       each check on purpose to watch it fire. `npm run dev` now binds 127.0.0.1 and
       builds write to `.next-build`, so a build can never break a running dev server.
+      **The effects (her "so dope" brief, 2026-09-12).** Two moments, both
+      structure-free: the work frame opens into the case study as a cross-document
+      view transition, and the heading accent develops from ink to cherry (§3,
+      moments 7 and 8). What it took to get right, recorded so it is never redone:
+      the Browser pane was hidden and stalled every animation, so the effect read
+      as broken until measured in headless Chrome; `entry`-unit scroll ranges are
+      relative to the word and snap; the dev server drops cross-document
+      transitions at random (streaming) while the production build is 6/6 even
+      throttled; `rel="expect"` changed nothing and was removed; port 3200 was
+      another chat's server, and three "production" readings were of the wrong
+      site. Also found and fixed on the way: SiteHeader's `inert=""` React warning,
+      and the verify walk's blindness to anything that only happens with motion
+      on (a second pass now covers it).
       **Next 15.** 14.2.35 → 15.5.25, React 18 retained, `params` awaited in six
       places; typecheck, lint, build, the reduced/normal-motion behaviour suite and
       the full live verify all re-run green.

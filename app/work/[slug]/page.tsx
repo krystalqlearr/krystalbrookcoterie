@@ -109,11 +109,25 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </div>
       </section>
 
-      {/* Hero — the real site inside a browser frame. Full-width, so it rises. */}
+      {/* Hero — the real site inside a browser frame. NO ENTRANCE (2026-09-12): it
+          is the page's LCP element and the landing point of the morph from
+          `/work`, and both want it present and opaque at first paint. It used to
+          rise (`Reveal from="up"`), which held the largest image on the page at
+          opacity 0 until hydration — a cost on every direct visit — and would have
+          had the morph arrive on an invisible frame. The meta column beneath
+          still slides in; the frame is simply there. */}
       <section className="pb-section">
         <div className="container">
-          <Reveal from="up" distance={TRAVEL.frame}>
-            <figure className="overflow-hidden border border-ink/15 bg-onyx">
+          <div>
+            {/* The far half of the morph from `/work`: the frame you clicked grows
+                into this one (globals.css). Named permanently because this page
+                has exactly one such frame — the `/work` side is named on click,
+                where a second project would otherwise make the name a duplicate
+                and the browser would skip the transition entirely. */}
+            <figure
+              style={{ viewTransitionName: "work-frame" }}
+              className="overflow-hidden border border-ink/15 bg-onyx"
+            >
               <div className="flex items-center gap-3 border-b border-milk/10 px-4 py-2.5">
                 <span className="flex gap-1.5" aria-hidden>
                   <span className="h-2 w-2 rounded-full bg-milk/25" />
@@ -142,7 +156,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                 )}
               </div>
             </figure>
-          </Reveal>
+          </div>
         </div>
       </section>
 

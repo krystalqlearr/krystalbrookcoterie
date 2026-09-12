@@ -227,11 +227,154 @@ html {
   }
 }
 
-/* Cross-document view transitions — a subtle cross-fade between full page loads
-   (direct visits / hard navigations). Supported browsers only; ignored elsewhere.
-   Soft-nav (in-app <Link>) route transitions are a Next 15 upgrade item. */
+/* ── The work frame opens into the case study ────────────────────────────────
+   Cross-document view transitions. `navigation: auto` gives every same-origin
+   full page load a quiet cross-fade; the named pair below turns one of those
+   loads into the signature move — the browser frame on `/work` travels and
+   grows into the case study's hero frame, because both carry the same
+   `view-transition-name` and the browser tweens between them.
+
+   WHY A DOCUMENT NAVIGATION AND NOT A SOFT NAV: React's <ViewTransition> needs
+   React 19's experimental channel, and hand-rolling one over `router.push`
+   means holding the page frozen under a snapshot until an RSC fetch resolves —
+   a promise that, if it never settles, freezes the site. The cross-document
+   path is the browser's own: it owns the snapshot, it cannot strand the page,
+   and it hides the load it costs. `WorkShowcase` opts into it in a click
+   handler, so the markup is identical for everyone and nothing branches at
+   render (CLAUDE.md, Motion).
+
+   The name is attached JUST IN TIME, to the frame that was actually clicked —
+   a fixed name on every frame would be a duplicate the moment `/work` carries
+   a second project, and a duplicate name makes the browser skip the whole
+   transition. It also means no frame carries a `view-transition-name` while
+   you are merely scrolling, which would promote each one to its own layer. */
 @view-transition {
   navigation: auto;
+}
+
+::view-transition-group(work-frame),
+::view-transition-old(work-frame),
+::view-transition-new(work-frame) {
+  animation-duration: var(--dur-slow);
+  animation-timing-function: var(--ease-editorial);
+}
+
+/* Everything that is not the frame is a quick, quiet cross-fade beneath it, so
+   the frame is plainly the thing that moved. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-fast);
+  animation-timing-function: var(--ease-editorial);
+}
+
+/* View-transition pseudo-elements live outside the document tree, so the
+   blanket `*` damp further down never reaches them — they need saying twice. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(work-frame),
+  ::view-transition-old(work-frame),
+  ::view-transition-new(work-frame),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* ── The accent develops ─────────────────────────────────────────────────────
+   The one flare word in a heading arrives as ink and the cherry washes through
+   it, left to right, as the line lands. A print coming up in the tray. It costs
+   nothing from the flare budget: this is the SAME accent word the Color rule
+   already allows, given a moment instead of a state.
+
+   THE RESTING STATE IS THE FINISHED STATE — the static rule paints the gradient
+   already at its flare half and the keyframes run FROM the ink half. So a
+   browser that can clip a background to text but cannot drive either timeline
+   shows a plain flare word, never a word stranded at ink.
+
+   Colours come from theme(), not hex, so they cannot drift from
+   tailwind.config.ts the way the ::selection literals above can. */
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  @media (prefers-reduced-motion: no-preference) {
+    span.accent-develop {
+      /* 220% wide with the stop at its middle: at position 0 the flare half
+         fills the glyphs, at 100% the ink half does. */
+      background-size: 220% 100%;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    span.accent-develop-milk {
+      background-image: linear-gradient(
+        90deg,
+        theme("colors.flare.DEFAULT") 48%,
+        theme("colors.ink") 52%
+      );
+    }
+    span.accent-develop-dark {
+      background-image: linear-gradient(
+        90deg,
+        theme("colors.flare.DEFAULT") 48%,
+        theme("colors.milk") 52%
+      );
+    }
+
+    /* A heading you scroll to develops as it arrives. Longhands, not the
+       shorthand: `animation:` resets animation-timeline to auto, and a shorthand
+       with no time value would pin the duration to 0s — on a scroll timeline the
+       duration must stay `auto` for the range to drive it.
+
+       THE RANGE IS ANCHORED TO THE VIEWPORT, NOT THE WORD. `entry` is measured
+       against the subject's own height, and the subject is one ~40px word, so
+       `entry 40% → entry 100%` ran the whole wipe inside 24px of scroll and read
+       as a snap (measured 2026-09-12). `cover` runs from the word's first pixel
+       entering at the bottom to its last leaving at the top — a viewport's worth
+       of travel — so `entry 100% → cover 35%` starts the moment the word is fully
+       on screen and finishes a third of the way up, in the reading zone. */
+    @supports (animation-timeline: view()) {
+      span.accent-develop {
+        animation-name: accent-develop;
+        animation-duration: auto;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 100% cover 35%;
+      }
+    }
+
+    /* A hero heading is already on screen at load, so it has no scroll to ride:
+       it develops on a clock instead, landing just after PageHero's own staggered
+       reveal. Higher specificity, so on the one element where both rules match
+       this is the one that wins. */
+    .accent-on-load span.accent-develop {
+      animation-name: accent-develop;
+      animation-duration: var(--dur-xslow);
+      animation-timing-function: var(--ease-editorial);
+      animation-delay: 0.35s;
+      animation-fill-mode: both;
+      animation-timeline: auto;
+      animation-range: normal;
+    }
+  }
+}
+
+@keyframes accent-develop {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* Forced colours: the system owns the palette, so drop the paint trick rather
+   than clip a background the UA has already overridden. */
+@media (forced-colors: active) {
+  span.accent-develop {
+    background-image: none;
+    color: CanvasText;
+    animation-name: none;
+  }
 }
 
 /* ── Reduced motion: hard damp everything ────────────────────────────────────
