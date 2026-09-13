@@ -28,7 +28,10 @@ import { WORK } from "@/lib/work";
  * an x no other page used, and gaps of 192 / 340 / 373 between blocks.
  *
  * Nothing on the page persuades. Copy is the fewest true declarative words —
- * the studio line and the closing line are WORKING DEFAULTS until the copy
+ * the studio line and the closing line were CHOSEN by Krystal on 2026-09-13 from
+ * three options each ("For brands that expect to be noticed." / "Say when.") — the
+ * reader is the subject, and neither line explains anything. They replaced the
+ * working defaults that stood until the copy
  * review. See docs/kbc-build-plan.md, Phase 8.
  *
  * FLARE BUDGET — the page spends zero accent touches. What's coloured is
@@ -80,7 +83,7 @@ export default function HomePage() {
           <div className={LINES}>
             <Reveal variant="soft" className={ON_LEFT}>
               <EditorialHeading as="h1" size="md" className="max-w-[16ch]">
-                Websites for brands that don&rsquo;t need to explain themselves.
+                For brands that expect to be noticed.
               </EditorialHeading>
             </Reveal>
 
@@ -139,7 +142,7 @@ export default function HomePage() {
         <div className="container">
           <Reveal variant="soft">
             <EditorialHeading as="h2" size="md" className="max-w-[16ch]">
-              Ready when you are.
+              Say when.
             </EditorialHeading>
             <div className="mt-8">
               <ArrowLink href="/begin">Commission</ArrowLink>

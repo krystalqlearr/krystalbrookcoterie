@@ -706,7 +706,10 @@ compliant token.
       and the frame is built video-ready. The big-type hero, proof band, Dispersion
       and the dark closing section left the homepage; the h1 is now the small studio
       line ("Websites for brands that don't need to explain themselves." — a working
-      default until copy review). Calls made inside scope: only Glowtoure gets the
+      default until copy review; CHOSEN 2026-09-13 from three options each: the h1 is
+      "For brands that expect to be noticed." and the closing line "Say when." — the
+      reader is the subject, neither line explains anything, and "Say when." pairs
+      with the Commission link beneath it). Calls made inside scope: only Glowtoure gets the
       expanding frame (concepts are a quiet list — a full-screen "Concept" gradient
       reads as padding); browser-chrome dots neutralised to bone/25 (flare budget);
       the mobile header uses the horizontal lowercase wordmark, not the monogram.
