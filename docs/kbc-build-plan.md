@@ -181,9 +181,30 @@ The monogram "KBC" keeps uppercase.
 ### 2.5 Layout & rhythm
 
 Left-aligned by default, asymmetric editorial composition, generous whitespace.
-Canvas rhythm alternates rich-black → petrol (alt) → cream (showstopper) per page.
-Container: centered, wide gutters, `max-w-editorial` (90rem). Sharp corners
-(`rounded-[1px]`) are brand; only pills/cursor are round.
+Canvas rhythm is milk, paced by whitespace and ink hairlines, with onyx as the
+inversion event (§2.1–2.2; the rich-black/petrol/cream line that stood here was
+drift from the 2026-07 palette). Container: centered, wide gutters,
+`max-w-editorial` (90rem). Sharp corners (`rounded-[1px]`) are brand; only the
+cursor is round.
+
+**THE THREE LINES (2026-09-12).** Her brief: "the text placements are kind of
+random and need order" — and "I kind of like when things are left and right." A
+census of every text block on every route (headless, 1440) found content starting
+at seven x positions (128, 400, 640, 752, 812, 976, 1017), two heading sizes doing
+the same job (44px lines on most sections, 13px labels alone on others, a 36px h1
+and a 24px closing on the homepage) and no shared rhythm (homepage gaps 192 / 340
+/ 373). Left-and-right is right; it reads expensive only when it is the same left
+and the same right everywhere. So: a four-track grid with the editorial gutter
+(lines at 128 · 440 · 752 · 1064 at 1440) and text may START on three of them —
+LEFT, MIDDLE (the half), RIGHT (the last track). `SectionShell layout="stack" |
+"split" | "aside"` carries it (split: label LEFT, heading + content from MIDDLE;
+aside: content LEFT over three tracks, meta on the RIGHT), exporting
+`LINES / ON_LEFT / ON_MIDDLE / ON_RIGHT` for bespoke blocks. Halves, thirds and
+quarters happen inside a column. With it: one voice per section (one 44px line,
+one label, one body) and equal air (every section `py-section`). Homepage done
+first — statement LEFT | the seven ways in from MIDDLE, the frame's caption split
+the same way, the closing line lifted to 44; after: x ∈ {128, 752}, sizes
+{44, 18, 13}, gaps 365 / 372. Remaining routes follow the same census.
 
 ---
 

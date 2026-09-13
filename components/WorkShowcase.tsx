@@ -7,6 +7,7 @@ import { useHydrated } from "@/lib/useHydrated";
 import { AnimatePresence, motion, useReducedMotion, type Transition } from "framer-motion";
 import Button from "./Button";
 import IndexMeta from "./IndexMeta";
+import { LINES, ON_LEFT, ON_MIDDLE } from "./SectionShell";
 import Reveal from "./motion/Reveal";
 import CrystalMark, { preloadCrystalMark } from "./motion/CrystalMark";
 import { BrowserChrome } from "./BrowserFrame";
@@ -449,11 +450,17 @@ function ProjectSlot({
         >
           {frame}
         </div>
-        <Reveal variant="soft" className="mx-auto mt-6 w-full" >
-          <div style={{ maxWidth: "calc((100svh - 14rem) * 1.7778)" }} className="mx-auto">
+        {/* The caption on the three lines (SectionShell): the index on the LEFT,
+            the descriptor from the MIDDLE — the same two edges the rest of the
+            homepage reads on, so the frame's caption is the first thing that
+            teaches them. */}
+        <Reveal variant="soft" className={`${LINES} mt-8`}>
+          <div className={ON_LEFT}>
             <IndexMeta index={index} total={total} tag={p.client} />
-            <p className="mt-3 max-w-measure font-sans text-fluid-base text-ink/70">{p.descriptor}</p>
           </div>
+          <p className={`${ON_MIDDLE} max-w-measure font-sans text-fluid-base text-ink/70`}>
+            {p.descriptor}
+          </p>
         </Reveal>
         {closeButton}
       </div>

@@ -268,6 +268,24 @@ composition, generous whitespace. The electric flare is the one accent, used bar
 Imagery placed with intentional offset/asymmetry. Sharp corners (rounded-[1px]) are
 brand; only the cursor is round.
 
+THE THREE LINES (2026-09-12 — Krystal: "the text placements are kind of random
+and need order", and "I kind of like when things are left and right"). Left-and-
+right is right; it reads expensive only when it is the SAME left and the SAME
+right on every page. The site is set on a four-track grid with the editorial
+gutter (at 1440: lines at 128 · 440 · 752 · 1064) and text may START on three of
+them — LEFT (the page edge), MIDDLE (the half), RIGHT (the last track). Never a
+fourth. Before the rule, content started at seven x positions across the site
+(128, 400, 640, 752, 812, 976, 1017): every new one read as a new decision, and a
+page of new decisions reads as clutter however reasonable each was. `SectionShell`
+carries it — `layout="stack" | "split" | "aside"` (split: label LEFT, content from
+MIDDLE; aside: content LEFT over three tracks, meta on the RIGHT) — and exports
+`LINES / ON_LEFT / ON_MIDDLE / ON_RIGHT` for a bespoke block on the same lines.
+Halves, thirds and quarters happen INSIDE a column, never against the page edge.
+With it, THE OTHER TWO: one voice per section (one 44px line, one label, one body
+— never a stranded 36 or 24) and equal air (every section `py-section`; one
+label-to-content drop). Homepage first (statement LEFT | the seven ways in from
+MIDDLE; the frame's caption split the same way); the other routes follow.
+
 ## Signature devices — the grotesk system's vocabulary
 ArrowLink   THE CTA. Actions are TYPOGRAPHY, not boxes: meta-caps label + neon arrow
             (↗ leaves / → continues / ↓ scrolls) over a hairline that wipes in flare on

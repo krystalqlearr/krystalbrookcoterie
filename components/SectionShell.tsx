@@ -41,6 +41,30 @@ const toneStyles: Record<
   },
 };
 
+/**
+ * THE THREE LINES (2026-09-12). The site is set on a four-track grid with the
+ * editorial gutter (at 1440: tracks of 248px, lines at 128 · 440 · 752 · 1064),
+ * and text may START on only three of them — the page edge (LEFT), the half
+ * (MIDDLE) and the last track (RIGHT). Krystal: "I kind of like when things are
+ * left and right" — and the expensive version of left-and-right is the same
+ * left and the same right on every page. Before this, content started at seven
+ * different x positions across the site (128, 400, 640, 752, 812, 976, 1017);
+ * every new one read as a new decision, and a page of new decisions reads as
+ * clutter however reasonable each was.
+ *
+ *  - stack : the header block and the children, all from the LEFT line — the
+ *            hero and any full-width moment.
+ *  - split : the label (eyebrow) on the LEFT, the heading + intro + children
+ *            from the MIDDLE line. The scanning layout: run your eye down the
+ *            labels, read right.
+ *  - aside : heading + children from the LEFT spanning three tracks, `aside`
+ *            from the RIGHT line — meta columns, captions, side notes.
+ *
+ * Halves, thirds and quarters happen INSIDE a column, never against the page
+ * edge with their own start line. Below `lg` everything stacks from the left.
+ */
+type Layout = "stack" | "split" | "aside";
+
 type Props = {
   eyebrow?: string;
   heading?: string;
@@ -53,9 +77,20 @@ type Props = {
   id?: string;
   headingAs?: "h1" | "h2" | "h3";
   headingSize?: "sm" | "md" | "lg" | "xl";
+  layout?: Layout;
+  /** `aside` layout only — what sits on the RIGHT line. */
+  aside?: ReactNode;
   children?: ReactNode;
   className?: string;
 };
+
+/** The grid every layout but `stack` is set on. Exported so a page can put a
+ *  bespoke block (a caption row, a form) on the same three lines. */
+export const LINES = "grid gap-x-gutter gap-y-8 lg:grid-cols-4";
+export const ON_LEFT = "lg:col-span-2";
+export const ON_MIDDLE = "lg:col-span-2 lg:col-start-3";
+export const ON_LEFT_WIDE = "lg:col-span-3";
+export const ON_RIGHT = "lg:col-span-1 lg:col-start-4";
 
 export default function SectionShell({
   eyebrow,
@@ -69,56 +104,92 @@ export default function SectionShell({
   id,
   headingAs = "h2",
   headingSize = "lg",
+  layout = "stack",
+  aside,
   children,
   className = "",
 }: Props) {
   const t = toneStyles[tone];
   const hasHeader = marker || Boolean(eyebrow) || Boolean(heading) || Boolean(intro);
 
-  const inner = (
-    <>
-      {hasHeader ? (
-        <Reveal stagger={0.1} className="flex flex-col gap-6">
-          {marker ? (
-            <RevealItem variant="soft">
-              <Rule width="short" tone={t.marker} className="mb-1" />
-            </RevealItem>
+  // When the section has no display heading, the eyebrow IS the heading — so the
+  // document outline matches what a sighted reader sees (audit 2026-09-09,
+  // finding 4). With a heading present it stays a <p>.
+  const label = eyebrow ? (
+    <Eyebrow tone={t.eyebrow} as={heading ? "p" : headingAs}>
+      {eyebrow}
+    </Eyebrow>
+  ) : null;
+  const line = heading ? (
+    <EditorialHeading
+      as={headingAs}
+      size={headingSize}
+      accent={accent}
+      canvas={tone === "dark" ? "dark" : "milk"}
+      className="max-w-[18ch]"
+    >
+      {heading}
+    </EditorialHeading>
+  ) : null;
+  const lede = intro ? (
+    <div className={`max-w-measure font-sans text-fluid-lg ${t.intro}`}>{intro}</div>
+  ) : null;
+  const tick = marker ? <Rule width="short" tone={t.marker} className="mb-1" /> : null;
+
+  // An eyebrow-only header is one 13px line: 64px under it left a label floating
+  // over a gap (audit, finding 11). A display heading still gets the full drop.
+  const drop = hasHeader ? (heading ? "mt-16" : "mt-8") : "";
+
+  let inner: ReactNode;
+  if (layout === "split") {
+    // Label on the LEFT line; everything else from the MIDDLE line.
+    inner = (
+      <div className={LINES}>
+        {label || tick ? (
+          <Reveal stagger={0.1} className={`${ON_LEFT} flex flex-col gap-6`}>
+            {tick ? <RevealItem variant="soft">{tick}</RevealItem> : null}
+            {label ? <RevealItem variant="soft">{label}</RevealItem> : null}
+          </Reveal>
+        ) : null}
+        <div className={ON_MIDDLE}>
+          {line || lede ? (
+            <Reveal stagger={0.1} className="flex flex-col gap-6">
+              {line ? <RevealItem variant="soft">{line}</RevealItem> : null}
+              {lede ? <RevealItem variant="fade">{lede}</RevealItem> : null}
+            </Reveal>
           ) : null}
-          {eyebrow ? (
-            <RevealItem variant="soft">
-              {/* When the section has no display heading, the eyebrow IS the heading —
-                  so the document outline matches what a sighted reader sees (audit
-                  2026-09-09, finding 4). With a heading present it stays a <p>. */}
-              <Eyebrow tone={t.eyebrow} as={heading ? "p" : headingAs}>
-                {eyebrow}
-              </Eyebrow>
-            </RevealItem>
-          ) : null}
-          {heading ? (
-            <RevealItem variant="soft">
-              <EditorialHeading
-                as={headingAs}
-                size={headingSize}
-                accent={accent}
-                canvas={tone === "dark" ? "dark" : "milk"}
-                className="max-w-[18ch]"
-              >
-                {heading}
-              </EditorialHeading>
-            </RevealItem>
-          ) : null}
-          {intro ? (
-            <RevealItem variant="fade">
-              <div className={`max-w-measure font-sans text-fluid-lg ${t.intro}`}>{intro}</div>
-            </RevealItem>
-          ) : null}
-        </Reveal>
-      ) : null}
-      {/* An eyebrow-only header is one 13px line: 64px under it left a label floating
-          over a gap (audit, finding 11). A display heading still gets the full drop. */}
-      {children ? <div className={hasHeader ? (heading ? "mt-16" : "mt-8") : ""}>{children}</div> : null}
-    </>
-  );
+          {children ? <div className={line || lede ? "mt-16" : ""}>{children}</div> : null}
+        </div>
+      </div>
+    );
+  } else {
+    const header = hasHeader ? (
+      <Reveal stagger={0.1} className="flex flex-col gap-6">
+        {tick ? <RevealItem variant="soft">{tick}</RevealItem> : null}
+        {label ? <RevealItem variant="soft">{label}</RevealItem> : null}
+        {line ? <RevealItem variant="soft">{line}</RevealItem> : null}
+        {lede ? <RevealItem variant="fade">{lede}</RevealItem> : null}
+      </Reveal>
+    ) : null;
+    const body = children ? <div className={drop}>{children}</div> : null;
+    inner =
+      layout === "aside" ? (
+        // Heading + children from the LEFT line over three tracks; the aside on
+        // the RIGHT line.
+        <div className={LINES}>
+          <div className={ON_LEFT_WIDE}>
+            {header}
+            {body}
+          </div>
+          {aside ? <div className={ON_RIGHT}>{aside}</div> : null}
+        </div>
+      ) : (
+        <>
+          {header}
+          {body}
+        </>
+      );
+  }
 
   return (
     <As id={id} className={`py-section ${t.section} ${className}`}>
