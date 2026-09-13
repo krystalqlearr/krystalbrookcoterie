@@ -104,6 +104,21 @@ if (!LIVE) {
   console.log("\n(static only — pass --live to walk a running site)\n");
 } else {
   console.log(`\nLive — ${BASE}\n`);
+  // NOTHING TO WALK IS A HARD STOP, NOT NINETEEN SOFT FAILURES. On 2026-09-12
+  // the dev server had died between the static half and the live half; every
+  // route reported "NAV FAILED … ERR_CONNECTION_REFUSED", three checks failed,
+  // the exit code was 1 — and the run had been piped through `sed`, which
+  // turned the 1 into a 0, and the merge went out on it. A dead server is not
+  // a finding about the site; it is a reason the run cannot be trusted at all,
+  // so it ends here, loudly, before a single check can print "ok".
+  try {
+    const r = await fetch(BASE, { redirect: "manual", signal: AbortSignal.timeout(8000) });
+    if (r.status >= 500) throw new Error(`HTTP ${r.status}`);
+  } catch (e) {
+    console.error(`\n  NOTHING IS LISTENING AT ${BASE} (${String(e.message || e).slice(0, 60)}).`);
+    console.error("  Start the server (or pass --base) and run again. No live check was performed.\n");
+    process.exit(2);
+  }
   const puppeteer = (await import("puppeteer-core")).default;
   const browser = await puppeteer.launch({
     executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe",
