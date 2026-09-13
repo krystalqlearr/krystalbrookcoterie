@@ -26,9 +26,9 @@ export default function AboutPage() {
 
       {/* Founder — portrait + narrative, asymmetric */}
       <SectionShell as="section" className="pt-0">
-        <div className="grid items-start gap-x-gutter gap-y-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="grid items-start gap-x-gutter gap-y-12 lg:grid-cols-4">
           {/* The portrait sits in the left column, so it slides in from the left. */}
-          <Reveal from="left">
+          <Reveal from="left" className="lg:col-span-2">
             <ImageFrame
               ratio="4/5"
               index="KB"
@@ -38,7 +38,7 @@ export default function AboutPage() {
               sizes="(min-width: 1024px) 33vw, 100vw"
             />
           </Reveal>
-          <Reveal stagger={0.12}>
+          <Reveal stagger={0.12} className="lg:col-span-2">
             <RevealItem variant="soft">
               {/* No accent: the page spends its budget on the hero and the closing CTA
                    (audit 2026-09-09, finding 1). */}
@@ -76,6 +76,7 @@ export default function AboutPage() {
         eyebrow="Philosophy"
         heading="The standard is distinction."
         headingSize="md"
+        layout="split"
       >
         <Reveal variant="fade">
           <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">

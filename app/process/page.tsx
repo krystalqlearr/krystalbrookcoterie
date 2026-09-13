@@ -73,9 +73,11 @@ export default function ProcessPage() {
         <ol className="border-b border-ink/15">
           {PHASES.map((phase, i) => (
             <Reveal as="li" variant="fade" key={phase.title} className="border-t border-ink/15">
-              <div className="grid gap-x-gutter gap-y-5 py-12 lg:grid-cols-[13rem_1fr]">
-                <IndexMeta index={i + 1} total={PHASES.length} />
-                <div className="max-w-measure">
+              <div className="grid gap-x-gutter gap-y-5 py-12 lg:grid-cols-4">
+                <div className="lg:col-span-2">
+                  <IndexMeta index={i + 1} total={PHASES.length} />
+                </div>
+                <div className="max-w-measure lg:col-span-2">
                   <h2 className="type-display text-fluid-2xl text-ink">{phase.title}</h2>
                   <p className="mt-5 font-sans text-fluid-base leading-relaxed text-ink/70">
                     {phase.body}
@@ -111,7 +113,7 @@ export default function ProcessPage() {
             ["Revisions in hours", "Because the whole system is held in one head, a change is a conversation, not a ticket."],
           ].map(([title, body]) => (
             <RevealItem as="li" variant="fade" key={title} className="border-t border-ink/12 pt-5">
-              <h3 className="type-display text-fluid-xl text-ink">{title}</h3>
+              <h3 className="type-display text-fluid-lg text-ink">{title}</h3>
               <p className="mt-3 max-w-[40ch] font-sans text-fluid-base leading-relaxed text-ink/70">{body}</p>
             </RevealItem>
           ))}

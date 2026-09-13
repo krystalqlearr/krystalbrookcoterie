@@ -48,9 +48,11 @@ export default function JournalPage() {
           <ol className="border-b border-ink/15">
             {ENTRIES.map((entry, i) => (
               <RevealItem as="li" variant="soft" key={entry.title} className="border-t border-ink/15">
-                <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-[13rem_1fr]">
-                  <IndexMeta index={i + 1} total={ENTRIES.length} tag={entry.tag} />
-                  <h2 className="type-display max-w-[34ch] text-fluid-xl text-ink">
+                <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-4">
+                  <div className="lg:col-span-2">
+                    <IndexMeta index={i + 1} total={ENTRIES.length} tag={entry.tag} />
+                  </div>
+                  <h2 className="type-display max-w-[34ch] text-fluid-2xl text-ink lg:col-span-2">
                     {entry.title}
                   </h2>
                 </div>

@@ -89,12 +89,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {/* What it covers — the list does the work. */}
       <SectionShell as="section" className="pt-0">
-        <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-[13rem_1fr]">
-          <div className="flex flex-col gap-4">
+        <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-4">
+          <div className="flex flex-col gap-4 lg:col-span-2">
             <IndexMeta index={index} total={SERVICES.length} />
             <h2 className="type-meta text-ink/70">What it covers</h2>
           </div>
-          <Reveal as="ul" stagger={0.06} className="max-w-editorial border-t border-ink/12">
+          <Reveal as="ul" stagger={0.06} className="max-w-editorial border-t border-ink/12 lg:col-span-2">
             {s.covers.map((item) => (
               <RevealItem
                 as="li"
@@ -110,9 +110,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
 
         {s.addOns ? (
-          <div className="mt-14 grid gap-x-gutter gap-y-6 lg:grid-cols-[13rem_1fr]">
-            <h2 className="type-meta text-ink/70">Add-ons</h2>
-            <Reveal variant="fade">
+          <div className="mt-14 grid gap-x-gutter gap-y-6 lg:grid-cols-4">
+            <h2 className="type-meta text-ink/70 lg:col-span-2">Add-ons</h2>
+            <Reveal variant="fade" className="lg:col-span-2">
               <p className="max-w-measure font-sans text-fluid-base text-ink/70">
                 {s.addOns.join(" · ")}
               </p>
@@ -123,11 +123,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {/* Who it's for + the engagement sizes that carry it. */}
       <SectionShell tone="rule" eyebrow="Who it's for" headingSize="md">
-        <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-[1.4fr_0.6fr]">
-          <Reveal variant="fade">
+        <div className="grid gap-x-gutter gap-y-10 lg:grid-cols-4">
+          <Reveal variant="fade" className="lg:col-span-3">
             <p className="max-w-measure font-sans text-fluid-lg leading-relaxed text-ink">{s.forWhom}</p>
           </Reveal>
-          <Reveal from="right" distance={TRAVEL.aside} delay={0.1}>
+          <Reveal from="right" distance={TRAVEL.aside} delay={0.1} className="lg:col-span-1">
             <dl className="lg:border-l lg:border-ink/12 lg:pl-10">
               <dt className="type-meta text-ink/70">Commissioned as</dt>
               <dd className="mt-3 font-sans text-fluid-base text-ink">{s.commissionedAs.join(" · ")}</dd>
@@ -147,7 +147,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </SectionShell>
 
       {/* How it runs — one row; the argument lives on /process. */}
-      <SectionShell tone="rule" eyebrow="How it runs" headingSize="md">
+      <SectionShell tone="rule" eyebrow="How it runs" headingSize="md" layout="split">
         <Reveal as="ol" stagger={0.08} className="flex flex-wrap gap-x-10 gap-y-4">
           {PHASES.map((phase, i) => (
             <RevealItem as="li" variant="soft" key={phase} className="flex items-baseline gap-3">
@@ -214,6 +214,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           eyebrow="The proof"
           heading="A system, not a logo file."
           headingSize="md"
+          layout="split"
         >
           <Reveal variant="fade" className="max-w-measure">
             <p className="font-sans text-fluid-base leading-relaxed text-ink/70">{deliverable.note}</p>
@@ -232,14 +233,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       ) : null}
 
       {/* Questions — two or three, answered plainly. */}
-      <SectionShell tone="rule" eyebrow="Questions" headingSize="md">
+      <SectionShell tone="rule" eyebrow="Questions" headingSize="md" layout="split">
         <Reveal variant="fade">
           <FAQAccordion items={s.questions} />
         </Reveal>
       </SectionShell>
 
       {/* Related — the services that usually travel with this one. */}
-      <SectionShell tone="rule" eyebrow="Alongside" headingSize="md">
+      <SectionShell tone="rule" eyebrow="Alongside" headingSize="md" layout="split">
         <Reveal as="ul" stagger={0.08} className="max-w-editorial border-t border-ink/12">
           {related.map((r) => (
             <RevealItem as="li" variant="fade" key={r.slug} className="border-b border-ink/12">

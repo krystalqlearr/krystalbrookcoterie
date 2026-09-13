@@ -83,7 +83,7 @@ const FAQ = [
 // The flood on a row: the fill, then the type re-colours to stay legal —
 // display line → milk (≥24px), everything smaller → ink.
 const row =
-  "group -mx-4 grid gap-x-gutter gap-y-4 px-4 py-10 transition-colors duration-600 ease-editorial hover:bg-flare focus-visible:bg-flare focus-visible:outline-none motion-reduce:transition-none lg:grid-cols-[13rem_1fr]";
+  "group -mx-4 grid gap-x-gutter gap-y-4 px-4 py-10 transition-colors duration-600 ease-editorial hover:bg-flare focus-visible:bg-flare focus-visible:outline-none motion-reduce:transition-none lg:grid-cols-4";
 const toMilk =
   "transition-colors duration-600 ease-editorial group-hover:text-milk group-focus-visible:text-milk";
 const toInk =
@@ -106,11 +106,11 @@ export default function ServicesPage() {
           {SERVICES.map((s, i) => (
             <RevealItem as="li" variant="fade" key={s.slug} className="border-t border-ink/12">
               <Link href={`/services/${s.slug}`} aria-label={`${s.name} — ${s.eyebrow}`} className={row}>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 lg:col-span-2">
                   <IndexMeta index={i + 1} total={SERVICES.length} />
                   <span className={`type-meta text-ink/70 ${toInk}`}>{s.eyebrow}</span>
                 </div>
-                <div className="max-w-measure">
+                <div className="max-w-measure lg:col-span-2">
                   <span className={`type-display block text-fluid-2xl text-ink ${toMilk}`}>{s.name}</span>
                   <span className={`mt-4 block font-sans text-fluid-base leading-relaxed text-ink/70 ${toInk}`}>
                     {s.line}
@@ -135,14 +135,14 @@ export default function ServicesPage() {
           {TIERS.map((tier) => (
             <li key={tier.name} className="border-t border-ink/12">
               <Reveal variant="fade">
-                <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-[13rem_1fr]">
-                  <div className="flex flex-col gap-3">
+                <div className="grid gap-x-gutter gap-y-4 py-10 lg:grid-cols-4">
+                  <div className="flex flex-col gap-3 lg:col-span-2">
                     <p className="type-meta text-ink/70">{tier.duration}</p>
                     {"flag" in tier && tier.flag ? (
                       <p className="type-meta text-flare-deep">{tier.flag}</p>
                     ) : null}
                   </div>
-                  <div className="max-w-measure">
+                  <div className="max-w-measure lg:col-span-2">
                     <h3 className="type-display text-fluid-2xl text-ink">{tier.name}</h3>
                     <p className="mt-4 font-sans text-fluid-base leading-relaxed text-ink/70">
                       {tier.description}
@@ -167,7 +167,7 @@ export default function ServicesPage() {
         intro="A website is an asset — it performs best when it’s maintained. Care Plans keep yours fast, current, and evolving after launch."
       >
         <Reveal stagger={0.08}>
-          <div className="grid gap-x-gutter gap-y-6 sm:grid-cols-3">
+          <div className="grid gap-x-gutter gap-y-6 sm:grid-cols-2">
             {CARE.map((c) => (
               <RevealItem key={c.name} variant="fade">
                 <ServiceCard name={c.name} description={c.description} />
@@ -177,7 +177,7 @@ export default function ServicesPage() {
         </Reveal>
       </SectionShell>
 
-      <SectionShell tone="rule" eyebrow="Questions" heading="The honest answers." headingSize="md">
+      <SectionShell tone="rule" eyebrow="Questions" heading="The honest answers." headingSize="md" layout="split">
         <Reveal variant="fade">
           <FAQAccordion items={FAQ} />
         </Reveal>

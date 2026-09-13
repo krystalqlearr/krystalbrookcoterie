@@ -162,9 +162,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
       {/* Overview + meta */}
       <SectionShell as="section" className="pt-0">
-        <div className="grid gap-x-gutter gap-y-12 lg:grid-cols-[1.4fr_0.6fr]">
-          <Reveal variant="fade">
-            <p className="type-display max-w-measure text-fluid-xl text-ink">
+        <div className="grid gap-x-gutter gap-y-12 lg:grid-cols-4">
+          <Reveal variant="fade" className="lg:col-span-3">
+            <p className="max-w-measure font-sans text-fluid-lg leading-relaxed text-ink">
               {p.intro}
             </p>
             <div className="mt-10 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
@@ -177,7 +177,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </Reveal>
 
           {/* The meta column hangs off the right edge, so it slides in from the right. */}
-          <Reveal from="right" distance={TRAVEL.aside} delay={0.1}>
+          <Reveal from="right" distance={TRAVEL.aside} delay={0.1} className="lg:col-span-1">
             <dl className="space-y-6 lg:border-l lg:border-ink/12 lg:pl-10">
               {[
                 ["Client", p.client],
@@ -242,11 +242,11 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           {/* Each figure is its own staggered item — a stagger container with plain
               children animates nothing. */}
           <Reveal stagger={0.08}>
-            <dl className="grid gap-x-gutter gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="grid gap-x-gutter gap-y-10 sm:grid-cols-2">
               {p.results.map((r) => (
                 <RevealItem key={r.label} variant="fade" className="border-t border-ink/20 pt-5">
                   <dt className="type-meta text-ink/70">{r.label}</dt>
-                  <dd className="type-display mt-3 text-fluid-xl text-ink">{r.value}</dd>
+                  <dd className="type-display mt-3 text-fluid-2xl text-ink">{r.value}</dd>
                 </RevealItem>
               ))}
             </dl>

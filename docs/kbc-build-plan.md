@@ -204,7 +204,20 @@ quarters happen inside a column. With it: one voice per section (one 44px line,
 one label, one body) and equal air (every section `py-section`). Homepage done
 first — statement LEFT | the seven ways in from MIDDLE, the frame's caption split
 the same way, the closing line lifted to 44; after: x ∈ {128, 752}, sizes
-{44, 18, 13}, gaps 365 / 372. Remaining routes follow the same census.
+{44, 18, 13}, gaps 365 / 372. Then every other route, in one mechanical pass
+(same day): the `13rem | 1fr` label columns (services rows, tiers, phases,
+journal) became index LEFT / name from MIDDLE; the `1.4fr | 0.6fr` meta columns
+(case-study overview, "Who it's for", /begin) became content LEFT over three
+tracks / aside on the RIGHT, every aside inset `pl-10` past its hairline; /about's
+portrait pair (text at 640, on no line) became portrait LEFT / narrative from
+MIDDLE; the hub's three care sheets and the case study's four-up results moved
+to the halves; prose sections took `layout="split"`; the footer went brand LEFT /
+Studio MIDDLE / Connect RIGHT with the legal strip on the same lines; the three
+stranded 36px tiers joined 44 (journal titles, result figures) or 24 (coterie
+sub-heads, the case-study lede). Census after, all routes: text starts at 128,
+752 or the right track. Accepted residue: card text inside its sheet's padding,
+PhoneRow's thirds (media, not text), and /work's index-card captions at 24/36
+inside the frame card.
 
 ---
 
