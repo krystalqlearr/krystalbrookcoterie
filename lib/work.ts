@@ -47,6 +47,13 @@ export type WorkProject = {
   // row on the case study. mp4 only: H.264 plays everywhere and these encode
   // small enough that a second format would buy nothing.
   phones?: { label: string; mp4: string; poster: string; alt: string }[];
+  // ONE held frame of the work — the pause in the expanded case study between the
+  // argument ("The work") and the list ("Scope"), where you simply look. The slot
+  // is a 16:8 letterbox, so it wants a composition that is ALREADY horizontal
+  // rather than a whole page shrunk into a strip. Where a project has none, the
+  // `field` gradient is the fallback — and only then (2026-09-13: it used to
+  // render regardless, leaving a dead rectangle on a project with real media).
+  still?: { src: string; alt: string };
   // A published deliverable from the engagement that a visitor can open — the
   // brand book, a written design system. Shown under Scope: the list CLAIMS the
   // work, this SHOWS it. External by definition, so it opens in a new tab.
@@ -95,6 +102,17 @@ export const WORK: WorkProject[] = [
     enter: "left",
     field: "from-mocha/35 via-mocha/20 to-onyx",
     image: "/images/glowtoure/og-glowtoure.webp",
+    // glowtoure.com/book at 1440, captured headless (2026-09-13) so no browser
+    // chrome or bookmarks bar rides along — the raw screenshots did. Chosen over
+    // /bridal/reserve, which was the runner-up and stays in the bank: the
+    // photograph here IS the product (a tan, lit), it is warm enough to sit INTO
+    // the onyx instead of punching a pale rectangle through it, and the right
+    // half shows the three ways to book — the "Booking flow" the Scope list
+    // claims, shown rather than asserted.
+    still: {
+      src: "/images/glowtoure/book-desktop.webp",
+      alt: "Glowtoure's booking page — a sunlit portrait beside the three ways to book: the studio, mobile, and bridal.",
+    },
     // The first 31s of Krystal's 2026-09-06 full-screen recording — the
     // homepage, hero to footer, at its natural scroll pace — side-trimmed to
     // 16:9 (1440×810). No browser chrome; the site's own cursor dot is in shot.

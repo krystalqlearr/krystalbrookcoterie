@@ -537,10 +537,31 @@ function ExpandedBody({ project: p, reduce }: { project: Project; reduce: boolea
         </div>
       </div>
 
-      <div className="relative mt-16 aspect-[16/8] w-full overflow-hidden border border-milk/10">
-        <div aria-hidden className={`absolute inset-0 bg-gradient-to-tr ${p.field}`} />
+      {/* The held beat between the argument and the list — a real frame of the
+          work where there is one. The `field` gradient is the FALLBACK, for a
+          project with no imagery; it used to render regardless, which left a dead
+          rectangle on a project that has a video, five phone recordings and this
+          still (2026-09-13, hers: "what is supposed to go here"). The grain stays
+          either way: multiply over a photograph is what it was built for, where
+          over a near-black gradient on onyx it did nothing at all. */}
+      <figure className="relative mt-16 aspect-[16/8] w-full overflow-hidden border border-milk/10">
+        {p.still ? (
+          <Image
+            src={p.still.src}
+            alt={p.still.alt}
+            fill
+            /* The frame is the overlay body: max-w-editorial (90rem) minus its
+               own padding — px-16 above md, px-6 below. Measured, not guessed:
+               an 80vw hint made next/image serve 1152px into a slot rendering at
+               1310, which is soft at 1x and badly soft on retina. */
+            sizes="(min-width: 90rem) 1312px, (min-width: 768px) calc(100vw - 8rem), calc(100vw - 3rem)"
+            className="object-cover"
+          />
+        ) : (
+          <div aria-hidden className={`absolute inset-0 bg-gradient-to-tr ${p.field}`} />
+        )}
         <div aria-hidden className="editorial-grain absolute inset-0" />
-      </div>
+      </figure>
 
       <div className="mt-16 grid gap-x-gutter gap-y-8 md:grid-cols-[1fr_1.4fr]">
         <p className="type-meta text-flare">Scope</p>
