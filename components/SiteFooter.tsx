@@ -14,9 +14,9 @@ export default function SiteFooter() {
   return (
     <footer className="bg-onyx text-milk">
       <div className="container py-20">
-        <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="grid gap-x-gutter gap-y-12 md:grid-cols-4">
           {/* Brand + studio line */}
-          <div>
+          <div className="md:col-span-2">
             <Logo variant="stacked" color="milk" />
             <p className="mt-8 max-w-[40ch] font-sans text-sm leading-relaxed text-milk/60">
               Distinctive digital identities for founder-led beauty, wellness, med-spa,
@@ -25,7 +25,7 @@ export default function SiteFooter() {
           </div>
 
           {/* Nav repeat */}
-          <nav aria-label="Footer">
+          <nav aria-label="Footer" className="md:col-span-1">
             <p className="type-meta text-milk/60">Studio</p>
             {/* -my-1 + py-1 keeps the visual rhythm while clearing the 24px tap
                 minimum on a phone (audit 2026-09-09, finding 14). */}
@@ -44,7 +44,7 @@ export default function SiteFooter() {
           </nav>
 
           {/* Connect */}
-          <div>
+          <div className="md:col-span-1">
             <p className="type-meta text-milk/60">Connect</p>
             <ul className="mt-4 space-y-1.5 font-sans text-sm">
               <li>
@@ -80,10 +80,10 @@ export default function SiteFooter() {
         {/* Single flare structural rule */}
         <hr className="my-12 h-px border-0 bg-flare" />
 
-        <div className="flex flex-col gap-3 font-sans text-fluid-sm text-milk/60 sm:flex-row sm:items-center sm:justify-between">
-          <span>© 2026 Krystal Brook Coterie</span>
-          <span>a DBA of Lion &amp; Gazelle Holdings LLC</span>
-          <span className="flex gap-5">
+        <div className="grid gap-x-gutter gap-y-3 font-sans text-fluid-sm text-milk/60 md:grid-cols-4 md:items-center">
+          <span className="md:col-span-2">© 2026 Krystal Brook Coterie</span>
+          <span className="md:col-span-1">a DBA of Lion &amp; Gazelle Holdings LLC</span>
+          <span className="flex gap-5 md:col-span-1 md:justify-self-end">
             <Link href="/privacy" className={`-my-1 inline-block py-1 transition-colors hover:text-milk ${linkFocus}`}>
               Privacy
             </Link>

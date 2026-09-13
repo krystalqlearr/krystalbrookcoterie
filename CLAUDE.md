@@ -283,8 +283,16 @@ MIDDLE; aside: content LEFT over three tracks, meta on the RIGHT) — and export
 Halves, thirds and quarters happen INSIDE a column, never against the page edge.
 With it, THE OTHER TWO: one voice per section (one 44px line, one label, one body
 — never a stranded 36 or 24) and equal air (every section `py-section`; one
-label-to-content drop). Homepage first (statement LEFT | the seven ways in from
-MIDDLE; the frame's caption split the same way); the other routes follow.
+label-to-content drop). EVERY ROUTE IS ON THEM (2026-09-12): the homepage's
+statement LEFT | the seven ways in from MIDDLE; every counted row (services,
+tiers, phases, journal) index LEFT / name from MIDDLE; every meta column
+(case-study overview, "Who it's for", /begin) content LEFT over three tracks /
+aside on the RIGHT, all inset `pl-10` past a hairline; /about's portrait LEFT /
+narrative from MIDDLE; the hub's care sheets and the case study's results on the
+halves; prose sections `split`; the footer brand LEFT / Studio MIDDLE / Connect
+RIGHT. Known and accepted: card text sits inside its sheet's padding, media rows
+(PhoneRow) run in thirds, and /work's index-card captions keep 24/36 inside the
+frame card.
 
 ## Signature devices — the grotesk system's vocabulary
 ArrowLink   THE CTA. Actions are TYPOGRAPHY, not boxes: meta-caps label + neon arrow
