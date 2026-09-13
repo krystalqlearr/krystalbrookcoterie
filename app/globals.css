@@ -14,10 +14,34 @@
   --dur-xslow: 0.9s;
 }
 
+/* ── The onyx inversion (PREVIEW, 2026-09-12) ────────────────────────────────
+   Any page whose markup carries `data-ground="onyx"` renders with the grounds
+   swapped for its whole document: onyx is the canvas, milk is the ink, the
+   footer and the expanded case study become the LIGHT moments, the cherry stays
+   the one accent. Nothing in a component changes — the colour utilities read
+   the variables tailwind.config.ts emits, and this block re-points them.
+   `:has()` on <html> so the header and footer (rendered by the layout, outside
+   the page) invert with it, server-side, with no flash of milk.
+   Deep flare → neon: the deep stop is 2.8:1 on onyx. `white` → charcoal: the
+   lift sheet on the dark. The paper grain multiplies into nothing on black, so
+   it screens instead. Homepage only, for her to judge; if it stays, this
+   becomes the system and the docs follow. */
+html:has([data-ground="onyx"]) {
+  --c-milk: var(--c-onyx-base);
+  --c-ink: var(--c-milk-base);
+  --c-onyx: var(--c-milk-base);
+  --c-white: var(--c-charcoal-base);
+  --c-flare-deep: var(--c-flare-base);
+}
+html:has([data-ground="onyx"]) .page-grain::before {
+  mix-blend-mode: screen;
+  opacity: 0.07;
+}
+
 /* Milk-led canvas: the brightest sheet of warm paper, warm ink by default. */
 @layer base {
   html {
-    background-color: #faf7f0; /* milk — THE canvas */
+    background-color: rgb(var(--c-milk)); /* milk — THE canvas (tailwind.config.ts) */
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }

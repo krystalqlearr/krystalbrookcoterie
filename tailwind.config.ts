@@ -1,4 +1,32 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+
+/**
+ * THE VALUES, in one place. Every colour below is exposed to Tailwind as a CSS
+ * variable (`--c-milk`, …) rather than a literal, so `bg-milk`, `text-ink/70`
+ * and every opacity variant keep working exactly as before — same hex, same
+ * output — while a single element can re-point the variables for its subtree.
+ * That is how the homepage previews itself on onyx (app/page.tsx,
+ * `data-ground="onyx"`; the mapping lives in globals.css): milk ⇄ onyx swap
+ * roles, the deep flare stop becomes the neon (the deep stop is 2.8 on onyx and
+ * illegal there; the neon is 5.07), and `charcoal` — the retired warm black —
+ * comes back with one job, the lift sheet on the dark, because on a black
+ * canvas there is nothing lighter than milk to lift a card with.
+ *
+ * A `-base` copy of each variable is also emitted and never overridden, so an
+ * inversion can say "milk becomes onyx" without a circular reference.
+ */
+const TOKENS = {
+  milk: "#FAF7F0",
+  white: "#FFFFFF",
+  ink: "#23201B",
+  onyx: "#0E0C0B",
+  charcoal: "#161311",
+  flare: "#FF1744",
+  "flare-deep": "#B3102E",
+} as const;
+const rgb = (hex: string) => (hex.match(/\w\w/g) ?? []).map((h) => parseInt(h, 16)).join(" ");
+const token = (name: keyof typeof TOKENS) => `rgb(var(--c-${name}) / <alpha-value>)`;
 
 /**
  * Krystal Brook Coterie — token system.
@@ -68,9 +96,9 @@ const config: Config = {
          *          sit on it with an ink hairline. Never a section fill.
          *   ink    primary text and the filled-button surface. Prices/tags stay ink.
          */
-        milk: "#FAF7F0",
-        white: "#FFFFFF",
-        ink: "#23201B",
+        milk: token("milk"),
+        white: token("white"),
+        ink: token("ink"),
         /**
          * — THE DARK: onyx —
          * "The blackest warm black" (her words) — a black gemstone, which is the
@@ -85,7 +113,10 @@ const config: Config = {
          * #161311 (the interim). Lighten onyx and it stops being the ground the
          * cherry glows against.
          */
-        onyx: "#0E0C0B",
+        onyx: token("onyx"),
+        // The lift sheet ON THE DARK — only ever the value `white` maps to inside an
+        // onyx inversion; never a section fill, never used by name on milk pages.
+        charcoal: token("charcoal"),
         mocha: "#9A8264", //  deep warm neutral — imagery / atmosphere haze only
         /**
          * THE FLARE — CHERRY (2026-09-07, replaces the electric magenta).
@@ -111,8 +142,8 @@ const config: Config = {
          * `lift` is retired: the neon is its own text colour on onyx.
          */
         flare: {
-          DEFAULT: "#FF1744",
-          deep: "#B3102E",
+          DEFAULT: token("flare"),
+          deep: token("flare-deep"),
         },
       },
       /**
@@ -218,6 +249,17 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Emits the token values as `--c-*` (and a never-overridden `--c-*-base`
+    // copy) on :root, so the colour utilities above have something to read.
+    plugin(({ addBase }) => {
+      const vars: Record<string, string> = {};
+      for (const [name, hex] of Object.entries(TOKENS)) {
+        vars[`--c-${name}`] = rgb(hex);
+        vars[`--c-${name}-base`] = rgb(hex);
+      }
+      addBase({ ":root": vars });
+    }),
+  ],
 };
 export default config;

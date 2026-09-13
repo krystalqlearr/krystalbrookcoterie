@@ -46,7 +46,11 @@ export default function HomePage() {
   const [feature] = WORK;
 
   return (
-    <>
+    // PREVIEW (2026-09-12): the homepage on onyx. The attribute is the whole
+    // switch — globals.css re-points the colour variables for the document, so
+    // every `bg-milk`/`text-ink` below renders inverted, and the header and
+    // footer follow. Remove the attribute and the page is the milk one again.
+    <div data-ground="onyx">
       {/* 1 · The landing — the name, alone. It grows, then floats into the header. */}
       <LandingWordmark />
 
@@ -117,7 +121,8 @@ export default function HomePage() {
         <Marquee items={SECTORS} />
       </section>
 
-      {/* 6 · The closing line — on milk; the footer is the only dark surface. */}
+      {/* 6 · The closing line — on the canvas; the footer is the page's one
+             inverted surface (milk, in this preview). */}
       <section className="bg-milk py-section">
         <div className="container">
           <Reveal variant="soft">
@@ -128,6 +133,6 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
-    </>
+    </div>
   );
 }
