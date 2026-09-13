@@ -477,10 +477,16 @@ function ProjectSlot({
       {/* Collapsed meta — stays in the grid slot (hidden behind backdrop when open).
           Fades in after the frame has slid; the Close button stays OUTSIDE this
           wrapper (it is fixed, and must not sit under a transformed ancestor). */}
-      <Reveal variant="fade" delay={0.2}>
+      {/* THE SAME CAPTION AS THE HOMEPAGE FRAME (2026-09-12): index + status on
+          the LEFT line, descriptor + capabilities from the MIDDLE, at body size —
+          one frame, one caption, on both pages. The descriptor used to be a 36px
+          display line here, the last size on the site outside the 84 / 44 / 18 /
+          13 ladder. It stays an <h2> for the outline; it is set as body. When a
+          second project halves the frames the caption stacks inside its slot. */}
+      <Reveal variant="fade" delay={0.2} className={`mt-8 ${alone ? LINES : ""}`}>
         {/* IndexMeta, not a bespoke 12px line — every counted sequence on the site
             uses the one device (audit 2026-09-09, finding 3). */}
-        <div className="mt-5 flex items-baseline justify-between gap-4">
+        <div className={`flex items-baseline justify-between gap-4 ${alone ? ON_LEFT : ""}`}>
           <IndexMeta index={index} total={total} tag={p.category} />
           {p.status ? <span className="type-meta text-ink/70">{p.status}</span> : null}
         </div>
@@ -488,8 +494,10 @@ function ProjectSlot({
             three times over (audit 2026-09-09, finding 1): /work's one touch is its
             hero, and the index numbers are the functional carve-out. `renderAccent`
             stays for the EXPANDED case study, where the dark is the moment. */}
-        <h2 className="type-display mt-3 max-w-[24ch] text-fluid-xl text-ink">{p.descriptor}</h2>
-        <p className="mt-3 type-meta text-ink/70">{p.capabilities}</p>
+        <div className={alone ? ON_MIDDLE : "mt-3"}>
+          <h2 className="max-w-measure font-sans text-fluid-base text-ink/70">{p.descriptor}</h2>
+          <p className="mt-3 type-meta text-ink/70">{p.capabilities}</p>
+        </div>
       </Reveal>
 
       {closeButton}

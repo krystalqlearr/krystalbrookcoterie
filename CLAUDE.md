@@ -421,6 +421,9 @@ the check FIRE before believing its all-clear. A page that never loaded is not a
 "exactly one h1" once passed on Chrome's error page.
 Documents under `public/brand` are CLIENT artefacts — their contrast is reported for
 information only and is the client's palette to change, never KBC's to silently fix.
+Glowtoure was told the three findings (taupe labels 2.71, three caramel heads 4.44,
+pearl-on-caramel 3.8) and chose to keep the palette as locked (2026-09-12); the
+report stays informational and is not a task.
 `npm run dev` binds 127.0.0.1 (this machine only) and builds write to `.next-build`, so
 a build can never break a running dev server.
 
