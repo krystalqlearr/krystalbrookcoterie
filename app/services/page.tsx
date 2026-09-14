@@ -57,7 +57,7 @@ const FAQ = [
   {
     question: "What does it cost?",
     answer:
-      "It depends on the scope, and it is quoted individually — never from a menu. Tell me what you are planning and you will have a figure.",
+      "It depends on the scope, and it is quoted individually — never from a menu. A Squarespace commission is the one with a published entry, from $1,200, because the platform bounds the work. For everything else, tell me what you are planning and you will have a figure.",
   },
   {
     question: "Do you use AI?",
