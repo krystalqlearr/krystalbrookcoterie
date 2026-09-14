@@ -172,6 +172,13 @@ The monogram "KBC" keeps uppercase.
 
 ### 2.4 Motion tokens (NEW — single source, never inline magic numbers)
 
+**THE FRAME RECEDES WHILE THE MEDIA ADVANCES (2026-09-13).** Every framed image
+hovers alike: frame to 0.985 against media at 1.04, one 0.7s clock — depth rather
+than a zoom. Tailwind classes on the plain frames; Framer `whileHover` on
+`WorkShowcase`'s, whose transform belongs to the layout animation and overrides any
+CSS hover scale. Verified for the three things that could have gone wrong — edge
+oscillation, the expand morph, reduced motion — and none did.
+
 **THE LADDER IS CHOSEN BY SIZE (2026-09-13).** Tokens without a selection rule
 still leave the choice to memory: `fast` 400ms for anything under ~100px (a glyph,
 a hairline, a colour), `base` 600ms for a component, `slow` 700ms for media inside
