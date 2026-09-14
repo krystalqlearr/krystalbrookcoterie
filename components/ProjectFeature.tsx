@@ -78,7 +78,7 @@ export default function ProjectFeature({
         {href ? (
           <Link
             href={href}
-            className="mt-8 inline-flex items-center gap-2 border-b border-ink/40 pb-1 type-meta text-ink transition-colors hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+            className="mt-8 inline-flex items-center gap-2 border-b border-ink/40 pb-1 type-meta text-ink transition-colors duration-400 hover:border-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
           >
             View the case study <span aria-hidden>→</span>
           </Link>

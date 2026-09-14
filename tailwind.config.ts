@@ -86,6 +86,18 @@ const config: Config = {
          * cherry glows against.
          */
         onyx: "#0E0C0B",
+        /**
+         * THE LIFT ON THE DARK (2026-09-13) — one step between onyx and milk, and
+         * the only one. Milk and white lift a card off the MILK canvas; on onyx
+         * there was nothing, so a dark surface on the dark ground was separated by
+         * a hairline alone (PhoneRow's screens; the onyx homepage preview had to
+         * resurrect this exact value to lift anything at all). Baunfire run EIGHT
+         * near-blacks because theirs is a dark-first system; this site is milk-led
+         * and the dark is punctuation, so it gets one. Retired as an interim
+         * GROUND in 2026-09-07 — it returns with one job and is never a section
+         * fill.
+         */
+        charcoal: "#161311",
         mocha: "#9A8264", //  deep warm neutral — imagery / atmosphere haze only
         /**
          * THE FLARE — CHERRY (2026-09-07, replaces the electric magenta).

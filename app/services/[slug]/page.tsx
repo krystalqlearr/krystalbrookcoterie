@@ -131,10 +131,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <dl className="lg:border-l lg:border-ink/12 lg:pl-10">
               <dt className="type-meta text-ink/70">Commissioned as</dt>
               <dd className="mt-3 font-sans text-fluid-base text-ink">{s.commissionedAs.join(" · ")}</dd>
-              {/* No figure — the row says how a number is arrived at, not what it is
-                  (2026-09-13). */}
+              {/* One service publishes an entry price (Squarespace, `startingAt`);
+                  every other discipline is quoted, and the row says how a number is
+                  reached rather than what it is (2026-09-13). */}
               <dt className="mt-8 type-meta text-ink/70">Investment</dt>
-              <dd className="mt-3 font-sans text-fluid-base text-ink">Quoted to your scope.</dd>
+              <dd className="mt-3 font-sans text-fluid-base text-ink">
+                {s.startingAt ? `Starting at ${s.startingAt}.` : "Quoted to your scope."}
+              </dd>
               {s.builtWith ? (
                 <>
                   {/* The stack, named where it belongs — a proof point in the meta
@@ -181,7 +184,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               aria-label={`${work.client} — ${work.descriptor}`}
               className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
             >
-              <figure className="overflow-hidden border border-ink/12 bg-onyx">
+              {/* THE FRAME RECEDES WHILE THE IMAGE ADVANCES (2026-09-13, adapted from
+                  the Baunfire teardown). They pair scale(.95) + rotateY(-9deg) with an
+                  inner scale(1.1); the tilt is an agency gesture and this site sells
+                  quiet, so the rotation is dropped and the opposition kept at a
+                  whisper — 0.985 against the image's 1.04. It reads as depth rather
+                  than as a zoom, which is the whole point of the move. */}
+              <figure className="overflow-hidden border border-ink/12 bg-onyx transition-transform duration-700 ease-editorial group-hover:scale-[0.985] motion-reduce:transform-none motion-reduce:transition-none">
                 <BrowserChrome label={work.status ?? work.url} />
                 <div className="relative aspect-[16/9] w-full">
                   {work.video?.poster || work.image ? (

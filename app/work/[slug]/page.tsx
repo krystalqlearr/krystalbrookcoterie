@@ -92,7 +92,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <RevealItem variant="soft">
               <Link
                 href="/work"
-                className="type-meta -my-2 inline-block py-2 text-ink/70 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                className="type-meta -my-2 inline-block py-2 text-ink/70 transition-colors duration-400 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
               >
                 ← All work
               </Link>
@@ -206,7 +206,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                       target="_blank"
                       rel="noopener noreferrer"
                       prefetch={false}
-                      className="font-sans text-fluid-base text-ink underline decoration-ink/25 underline-offset-4 transition-colors hover:decoration-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+                      className="font-sans text-fluid-base text-ink underline decoration-ink/25 underline-offset-4 transition-colors duration-400 hover:decoration-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
                     >
                       {p.deliverable.short}
                     </Link>
@@ -319,7 +319,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           </Button>
           <Link
             href={nextCase ? `/work/${nextCase.id}` : "/work"}
-            className="type-meta -my-2 inline-block py-2 text-milk underline decoration-milk/30 underline-offset-4 transition-colors hover:decoration-milk"
+            className="type-meta -my-2 inline-block py-2 text-milk underline decoration-milk/30 underline-offset-4 transition-colors duration-400 hover:decoration-milk"
           >
             {nextCase ? `Next — ${nextCase.client}` : "See all work"}
           </Link>

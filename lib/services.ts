@@ -48,6 +48,15 @@ export type Service = {
   /** A project id from lib/work.ts to frame on the page. */
   work?: string;
   /**
+   * The ONE published figure on the site, and only where a service actually has
+   * an entry price (2026-09-13, hers). Squarespace has one because the platform
+   * bounds the work; every other discipline is quoted to its scope, and the
+   * meta row says so. This is deliberately NOT the old site-wide `FLOOR` — that
+   * was a single number standing for the whole studio, and it was deleted.
+   * Write it in the house style, with the comma: "$1,200".
+   */
+  startingAt?: string;
+  /**
    * A project id whose published `deliverable` this page should open.
    *
    * A screenshot of a website is the wrong proof for a discipline whose output
@@ -301,6 +310,9 @@ export const SERVICES: Service[] = [
       "Brands that want a custom look and real creative thinking without complexity the business doesn't need yet. Intentional, not templated — and a step, not a ceiling: when the brand outgrows it, the design comes with you.",
     commissionedAs: ["The Edit", "Signature"],
     builtWith: ["Squarespace"],
+    // The one figure the site publishes. The platform bounds the scope, so an
+    // entry price is answerable here in a way it is not for custom work.
+    startingAt: "$1,200",
     questions: [
       {
         question: "Isn't Squarespace a template?",

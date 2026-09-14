@@ -75,7 +75,11 @@ export default function PhoneRow({ phones, className = "" }: { phones: Phone[]; 
       {phones.map((p) => (
         <li key={p.mp4} className="w-[68%] shrink-0 snap-start md:w-auto">
           <div
-            className="relative w-full overflow-hidden border border-milk/15 bg-onyx"
+            // Charcoal, not onyx: the screens sit ON an onyx section, so before the
+            // clip loads — and under reduced motion, which never loads one — an
+            // onyx screen was a hairline around nothing. One step up reads as a
+            // screen that is off (2026-09-13).
+            className="relative w-full overflow-hidden border border-milk/15 bg-charcoal"
             style={{ aspectRatio: RATIO }}
           >
             <video

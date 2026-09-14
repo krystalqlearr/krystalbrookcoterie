@@ -156,7 +156,24 @@ components/CustomCursor.tsx.
 
 ## Motion — single source, luxury cadence
 All easing/durations come from `lib/motion.ts` (JS) or `ease-editorial` / `duration-*`
-(CSS/Tailwind) — NO inline magic numbers. Easing: `--ease-editorial`
+(CSS/Tailwind) — NO inline magic numbers.
+
+THE LADDER IS CHOSEN BY SIZE, NOT BY TASTE (2026-09-13, from the Baunfire
+teardown — they tie duration to element size and never re-decide it). The tokens
+already existed; the rule that PICKS one did not, so the choice was made per
+component from memory, and three inline durations had drifted in (0.32s on the
+link underline, 0.44s twice on ArrowLink — inside the file whose own rule forbids
+them). The bigger the thing that moves, the longer and softer the move:
+  fast   400ms  a glyph, a hairline, a colour — anything under ~100px:
+                ArrowLink's rule and arrow, the link underline, the accordion.
+  base   600ms  a component: a row's flood, a card, the header's bar.
+  slow   700ms  media inside a frame: the hover zoom and the frame's recede.
+  xslow  900ms  the largest things: a full-bleed frame, the /about portrait.
+Nothing is faster than `fast`. Nothing sits between `xslow` and an ambient loop,
+and the Marquee's 90s is the only ambient loop on the site. Two footnotes so
+nobody "corrects" them by accident: `DUR.slow` is 0.72 in JS while `duration-700`
+is 700ms in CSS (20ms apart, harmless), and Tailwind's own 300/500/1000 are NOT
+tokens — the config defines 400/600/700/900 and that is the whole ladder. Easing: `--ease-editorial`
 cubic-bezier(0.16,1,0.3,1). Slow and weighted, never bouncy. Lenis smooth scroll,
 `Reveal` for entrances, the work-transition (shared-layout FLIP) as the signature
 moment. Respect prefers-reduced-motion EVERYWHERE (instant, no morph/parallax).
@@ -352,8 +369,13 @@ own page from one template and one data file (`lib/services.ts`): hero line → 
 covers → who it's for + "commissioned as" → the five phases in one row → one frame of
 work → two or three questions → related → Commission. A third the length of the
 studios it was measured against, on purpose. The four tier names survive as
-ENGAGEMENT SIZES on the hub, without prices. NO FIGURE IS PUBLIC AT ALL (2026-09-13,
-hers: "anything related to money … i want them to contact for a quote"). The floor —
+ENGAGEMENT SIZES on the hub, without prices. EXACTLY ONE FIGURE IS PUBLIC, AND IT IS
+SQUARESPACE'S (2026-09-13, hers: "i dont want anything telling what i charge to build
+a site or any of my services. they must contact me. i am ok with the squarespace
+section saying starting at $1200"). It lives on `Service.startingAt`, set on that one
+service and rendered in its Investment row as "Starting at $1,200." — per-service, NOT
+a site-wide floor, because the platform bounds that scope in a way custom work is not.
+Every other discipline reads "Quoted to your scope." The old studio-wide floor —
 `FLOOR` / `FLOOR_LINE`, "Engagements begin at $4,500." on the hub, on every service
 page and on /begin — is deleted, and so is the enquiry form's budget dropdown and
 `ServiceCard`'s `price` prop. Every engagement is QUOTED TO ITS SCOPE and the enquiry
@@ -361,7 +383,8 @@ is the way to one: the "What does it cost?" FAQ answers "it depends on the scope
 it is quoted individually — never from a menu", and each service page's meta column
 says "Quoted to your scope." Know what was traded: the floor was a FILTER, and without
 it more unqualified enquiries arrive — that is the cost she accepted, and restoring it
-is one constant plus four call sites. Squarespace is the seventh service, framed as a stage
+is one constant plus four call sites. The "What does it cost?" FAQ names the
+Squarespace entry so the page never claims everything is quoted when one thing is not. Squarespace is the seventh service, framed as a stage
 ("When the business doesn't need custom code yet, it still deserves a designer"),
 never with the word "template". Krystal's list was Bionic Egg's list nearly verbatim —
 the NAMES and the ANATOMY are what keep the pages hers; never copy their sections. Each
