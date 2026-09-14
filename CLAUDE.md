@@ -347,6 +347,20 @@ WorkFrame   `WorkShowcase variant="sequence"` — the homepage's work: one proje
             testimonial again. With one project the counted total is suppressed
             (`01 — Glowtoure`, not `01 / 01`) and the lone frame takes the full
             grid track and rises; both restore themselves at project two.
+THE FRAME RECEDES WHILE THE MEDIA ADVANCES (2026-09-13) — every framed image on the
+site hovers the same way: the frame scales to 0.985 while the media inside goes to
+1.04, two opposed transforms on one 0.7s clock. It reads as DEPTH where a lone
+zoom reads as a hover effect. Adapted from Baunfire, who pair scale(.95) with
+rotateY(-9deg) and an inner scale(1.1): the tilt is an agency gesture and this
+site sells quiet, so the rotation is dropped and the opposition kept at a whisper.
+Live on the service pages' work frame and `ImageFrame` as Tailwind classes, and on
+`WorkShowcase`'s frame as Framer's `whileHover` — that element's transform belongs
+to the layout animation, so an inline transform always wins and a
+`group-hover:scale-` there silently does nothing. MEASURED, because all three
+worries were real and none survived: the recede eases in and holds at the frame's
+edge (no oscillation pulling the box out from under the cursor), the expand morph
+still reaches fullscreen and returns the frame to scale 1, and reduced motion gets
+no recede at all (the prop is `undefined`, a VALUE not a markup branch).
 
 ## Routes — canonical (see build-plan §4)
 Primary CTA route is `/begin` (all "Begin" CTAs point there). Nav data is single-source

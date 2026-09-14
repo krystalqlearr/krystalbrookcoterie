@@ -24,7 +24,13 @@ export const EASE_INOUT = [0.83, 0, 0.17, 1] as const;
 export const DUR = {
   fast: 0.4,
   base: 0.6,
-  slow: 0.72,
+  // 0.7, not 0.72 (2026-09-13): `slow` is one rung of the ladder, and it has to
+  // mean the same thing in all three places it is spelled — here, `--dur-slow` in
+  // globals.css, and Tailwind's `duration-700`. The 20ms gap was invisible and
+  // pointless, and it invited someone to "fix" one side into the other and wonder
+  // why the morph drifted. This drives morphTransition (the FLIP expand) and the
+  // view transition drives off the CSS twin — the same moment, two engines.
+  slow: 0.7,
   xslow: 0.9,
 } as const;
 

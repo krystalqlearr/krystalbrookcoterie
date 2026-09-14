@@ -308,6 +308,15 @@ function ProjectSlot({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
+      // THE FRAME RECEDES WHILE THE MEDIA ADVANCES (2026-09-13). Framer's own
+      // whileHover, not a CSS class: this element's transform belongs to the
+      // layout animation, so an inline transform always wins and a
+      // `group-hover:scale-` would silently do nothing. The media keeps its 1.04
+      // from the group, so the two move against each other on one clock — frameT,
+      // the same 0.7s the morph uses. Off when expanded (no frame to recede) and
+      // off under reduced motion; both are prop VALUES, so server and client
+      // markup stay identical.
+      whileHover={selected || reduce ? undefined : { scale: 0.985 }}
       data-reveal
       data-lenis-prevent
       data-work-frame
