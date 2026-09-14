@@ -9,13 +9,13 @@ import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
-import { FLOOR_LINE, SERVICES, TIERS } from "@/lib/services";
+import { SERVICES, TIERS } from "@/lib/services";
 
 /**
  * The services hub (2026-09-07). Services are sold BY DISCIPLINE — seven, each
  * with its own page — the way the studios Krystal measures against do it. The
  * four tier names survive as engagement SIZES beneath them, without prices:
- * exactly one figure is public (`FLOOR_LINE`), everything else is priced in the
+ * no figure is public (2026-09-13) — every engagement is quoted to its scope in the
  * proposal and the enquiry is the filter.
  *
  * Every row floods on hover (the flare as a surface — see CLAUDE.md, Color).
@@ -56,7 +56,8 @@ const FAQ = [
   },
   {
     question: "What does it cost?",
-    answer: `${FLOOR_LINE} Every engagement is priced in the proposal, against its scope — never from a menu. The enquiry form asks for a range so the proposal lands in the right size the first time.`,
+    answer:
+      "It depends on the scope, and it is quoted individually — never from a menu. Tell me what you are planning and you will have a figure.",
   },
   {
     question: "Do you use AI?",
@@ -122,14 +123,14 @@ export default function ServicesPage() {
         </Reveal>
       </SectionShell>
 
-      {/* Four sizes of engagement — names and timelines. The one public figure sits
-          in the intro; everything else is priced in the proposal. */}
+      {/* Four sizes of engagement — names and timelines. No figure anywhere: the
+          engagement is quoted to its scope, and the enquiry is the way to one. */}
       <SectionShell
         tone="rule"
         eyebrow="Ways to commission"
         heading="Four sizes of engagement."
         headingSize="md"
-        intro={`${FLOOR_LINE} Every engagement is priced in the proposal, against its scope.`}
+        intro="Every engagement is quoted individually, against its scope."
       >
         <ul className="border-b border-ink/12">
           {TIERS.map((tier) => (

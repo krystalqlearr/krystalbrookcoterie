@@ -4,7 +4,6 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/motion/Reveal";
 import SectionShell from "@/components/SectionShell";
 import { TRAVEL } from "@/lib/motion";
-import { FLOOR_LINE } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Commission",
@@ -28,9 +27,7 @@ export default function BeginPage() {
           <Reveal variant="fade" className="lg:col-span-3">
             <p className="mb-8 max-w-measure font-sans text-fluid-base leading-relaxed text-ink/70">
               Every engagement begins with alignment. The details below help determine
-              the right scope, timing, and level of partnership for your project.{" "}
-              {/* The one public figure — the filter. Everything else is in the proposal. */}
-              <span className="text-ink">{FLOOR_LINE}</span>
+              the right scope, timing, and level of partnership for your project.
             </p>
             <EnquiryForm />
             <p className="mt-10 max-w-measure font-sans text-fluid-base text-ink/70">

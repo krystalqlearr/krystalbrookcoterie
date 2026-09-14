@@ -12,7 +12,7 @@ import Reveal, { RevealItem } from "@/components/motion/Reveal";
 import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 import { TRAVEL } from "@/lib/motion";
-import { FLOOR_LINE, SERVICES, getService, serviceSlugs } from "@/lib/services";
+import { SERVICES, getService, serviceSlugs } from "@/lib/services";
 import { getProject } from "@/lib/work";
 
 /**
@@ -131,8 +131,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <dl className="lg:border-l lg:border-ink/12 lg:pl-10">
               <dt className="type-meta text-ink/70">Commissioned as</dt>
               <dd className="mt-3 font-sans text-fluid-base text-ink">{s.commissionedAs.join(" · ")}</dd>
+              {/* No figure — the row says how a number is arrived at, not what it is
+                  (2026-09-13). */}
               <dt className="mt-8 type-meta text-ink/70">Investment</dt>
-              <dd className="mt-3 font-sans text-fluid-base text-ink">{FLOOR_LINE} Priced in the proposal.</dd>
+              <dd className="mt-3 font-sans text-fluid-base text-ink">Quoted to your scope.</dd>
               {s.builtWith ? (
                 <>
                   {/* The stack, named where it belongs — a proof point in the meta
