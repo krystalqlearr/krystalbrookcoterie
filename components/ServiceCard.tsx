@@ -2,8 +2,9 @@ import Button from "./Button";
 
 /**
  * Service tier card — a WHITE sheet lifted off the milk with a hairline, display
- * name, ink price, muted-ink description. `featured` adds a flare top rule and the
- * "Most commissioned" flag. Ink-forward price (never coloured) so it reads expensive.
+ * name, duration, muted-ink description. `featured` adds a flare top rule and the
+ * "Most commissioned" flag. THE PRICE PROP IS GONE (2026-09-13): no figure appears
+ * anywhere on the site, so a card cannot carry one.
  *
  * THE FLOOD (2026-09-07, Krystal: "when you scroll over a service card the whole
  * card turns the flare colour and the text changes to work with it"): on hover or
@@ -15,8 +16,6 @@ import Button from "./Button";
  */
 type Props = {
   name: string;
-  /** Optional since 2026-09-07 — no price list on the site; the proposal carries it. */
-  price?: string;
   description: string;
   duration?: string;
   bestFor?: string;
@@ -28,7 +27,6 @@ type Props = {
 
 export default function ServiceCard({
   name,
-  price,
   description,
   duration,
   bestFor,
@@ -51,7 +49,6 @@ export default function ServiceCard({
       <h3 className="type-display text-fluid-2xl text-ink transition-colors duration-600 ease-editorial group-hover:text-milk group-focus-within:text-milk">
         {name}
       </h3>
-      {price ? <p className="mt-3 font-sans font-medium text-ink">{price}</p> : null}
       {duration ? (
         <p className="type-meta mt-2 text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-within:text-ink">
           {duration}

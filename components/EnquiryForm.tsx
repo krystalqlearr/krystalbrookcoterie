@@ -9,23 +9,16 @@ import { useState, type FormEvent } from "react";
  * For production, swap `onSubmit` to POST to a Route Handler wired to Resend (and a
  * Notion "Inquiries" record) per the ops plan — the field shape is already correct.
  *
- * No financial fields are ever collected here. "Investment" is a qualifying range,
- * not a payment. Accessible: real labels, required validation, visible ink focus.
+ * No financial fields are ever collected here, and since 2026-09-13 no monetary
+ * ones either: the budget dropdown (four dollar ranges) is gone with the rest of
+ * the figures on the site — a visitor is asked what they are planning, not what
+ * they will spend, and the quote follows the conversation.
+ * Accessible: real labels, required validation, visible ink focus.
  */
 
 const STUDIO_EMAIL = "hello@krystalbrookcoterie.com";
 
 const INDUSTRIES = ["Beauty", "Med-spa", "Wellness", "Bridal", "Luxury lifestyle", "Other"];
-// Ranges, not tier prices (2026-09-07): the site carries no price list — this is
-// a private qualifier so the proposal lands in the right size. The old options
-// used names the site never had ("Launch", "Atelier Custom").
-const INVESTMENT = [
-  "Under $5,000",
-  "$5,000 – $10,000",
-  "$10,000 – $25,000",
-  "$25,000 and above",
-  "Not sure yet",
-];
 const TIMING = ["As soon as possible", "Within 1–3 months", "In 3–6 months", "Just exploring"];
 
 const fieldBase =
@@ -47,7 +40,6 @@ export default function EnquiryForm() {
       email: get("email"),
       link: get("link"),
       industry: get("industry"),
-      investment: get("investment"),
       timing: get("timing"),
       vision: get("vision"),
     };
@@ -75,7 +67,6 @@ export default function EnquiryForm() {
       `Email: ${payload.email}`,
       `Website / Instagram: ${payload.link}`,
       `Industry: ${payload.industry}`,
-      `Investment: ${payload.investment}`,
       `Timing: ${payload.timing}`,
       "",
       "Vision:",
@@ -139,21 +130,6 @@ export default function EnquiryForm() {
               Select…
             </option>
             {INDUSTRIES.map((o) => (
-              <option key={o} value={o}>
-                {o}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="investment" className={labelBase}>
-            Investment
-          </label>
-          <select id="investment" name="investment" defaultValue="" className={fieldBase}>
-            <option value="" disabled>
-              Select…
-            </option>
-            {INVESTMENT.map((o) => (
               <option key={o} value={o}>
                 {o}
               </option>

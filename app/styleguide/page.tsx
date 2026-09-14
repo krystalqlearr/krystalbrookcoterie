@@ -567,20 +567,17 @@ export default function StyleguidePage() {
             <div className="mt-12 grid gap-x-gutter gap-y-10 md:grid-cols-3">
               <ServiceCard
                 name="The Edit"
-                price="$4,500"
                 duration="2–3 weeks"
                 description="Go to market looking established."
               />
               <ServiceCard
                 name="Signature"
-                price="$9,800"
                 duration="6–8 weeks"
                 featured
                 description="The flagship. Most brands start here."
               />
               <ServiceCard
                 name="Atelier"
-                price="$22,000+"
                 duration="8–12 weeks"
                 description="When the site is the flagship location."
               />

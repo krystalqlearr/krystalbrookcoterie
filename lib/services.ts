@@ -5,8 +5,11 @@
  *
  * The shape follows what the studios Krystal admires actually do (Bionic Egg,
  * Clay, Studio Krista — checked 2026-09-07): services sold BY DISCIPLINE, on
- * their own pages, with NO price list on the site — the proposal carries the
- * price and the enquiry is the filter. Exactly one figure is public: `FLOOR`.
+ * their own pages, with NO price list on the site. NO FIGURE IS PUBLIC AT ALL
+ * (2026-09-13, hers): every engagement is quoted to its scope and the enquiry is
+ * the way to one. The floor that used to stand here — a single "$4,500" on the
+ * hub, every service page and /begin — is gone, and so is the form's budget
+ * dropdown: a visitor is asked what they are planning, not what they will spend.
  * The four tier names survive as engagement SIZES ("commissioned as"), not as a
  * menu. Names are one word in the site's fewest-words register; the full name
  * is the eyebrow (and the metadata title, so search still sees "SEO" and
@@ -56,11 +59,7 @@ export type Service = {
   deliverable?: string;
 };
 
-/** The one public figure. Everything else is priced in the proposal. */
-export const FLOOR = "$4,500";
-export const FLOOR_LINE = `Engagements begin at ${FLOOR}.`;
-
-/** Engagement sizes — names and timelines only. No prices on the site. */
+/** Engagement sizes — names and timelines only. No figures anywhere on the site. */
 export const TIERS = [
   {
     name: "The Edit",

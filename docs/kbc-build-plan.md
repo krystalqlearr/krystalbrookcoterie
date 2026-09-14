@@ -396,7 +396,10 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   NO price list; Bionic Egg's nine service pages are her list nearly verbatim; Clay
   names engagement models in its FAQ; Studio Krista has three services and a
   10-step process page) → option (a): services by discipline, tier names as sizes,
-  exactly one public figure (`FLOOR`); Squarespace = the seventh page, framed as a
+  no public figure at all since 2026-09-13 (`FLOOR` deleted with the form's budget
+  dropdown and ServiceCard's price prop — every engagement is quoted to its scope and
+  the enquiry is the way to one; the floor had been the filter, and more unqualified
+  enquiries is the trade she accepted); Squarespace = the seventh page, framed as a
   stage; process keeps Position · Direct · Design · Build · Release and gains "the
   coterie". Built: `lib/services.ts` (one data file → hub, seven pages, panel
   column, home rows, sitemap); `/services/[slug]` template (hero → covers →

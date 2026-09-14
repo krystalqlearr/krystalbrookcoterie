@@ -352,9 +352,16 @@ own page from one template and one data file (`lib/services.ts`): hero line → 
 covers → who it's for + "commissioned as" → the five phases in one row → one frame of
 work → two or three questions → related → Commission. A third the length of the
 studios it was measured against, on purpose. The four tier names survive as
-ENGAGEMENT SIZES on the hub, without prices. EXACTLY ONE FIGURE IS PUBLIC — `FLOOR`,
-"Engagements begin at $4,500." — on the hub, on every service page and on /begin; the
-enquiry form asks for a range. Squarespace is the seventh service, framed as a stage
+ENGAGEMENT SIZES on the hub, without prices. NO FIGURE IS PUBLIC AT ALL (2026-09-13,
+hers: "anything related to money … i want them to contact for a quote"). The floor —
+`FLOOR` / `FLOOR_LINE`, "Engagements begin at $4,500." on the hub, on every service
+page and on /begin — is deleted, and so is the enquiry form's budget dropdown and
+`ServiceCard`'s `price` prop. Every engagement is QUOTED TO ITS SCOPE and the enquiry
+is the way to one: the "What does it cost?" FAQ answers "it depends on the scope, and
+it is quoted individually — never from a menu", and each service page's meta column
+says "Quoted to your scope." Know what was traded: the floor was a FILTER, and without
+it more unqualified enquiries arrive — that is the cost she accepted, and restoring it
+is one constant plus four call sites. Squarespace is the seventh service, framed as a stage
 ("When the business doesn't need custom code yet, it still deserves a designer"),
 never with the word "template". Krystal's list was Bionic Egg's list nearly verbatim —
 the NAMES and the ANATOMY are what keep the pages hers; never copy their sections. Each
@@ -439,7 +446,7 @@ Nomenclature: services are an ENGAGEMENT/COMMISSION (nav CTA = "Commission"). Th
 SERVICES are one word each — Identity · Collateral · Websites · Redesign · Development ·
 Search · Squarespace (full names as eyebrows). The four ENGAGEMENT SIZES are The Edit ·
 Signature (flag: "Most commissioned") · Atelier · Private Commission — names and
-timelines only; no prices on the site but the floor.
+timelines only; no prices on the site and no floor either (2026-09-13).
 Display headings are UPPERCASE monumental sans; body and serif sublines sentence case.
 NEVER name competitors. AVOID empty luxury filler — "elevated," "bespoke," "intentional,"
 "curated," "timeless" — unless it says something specific. Positioning: rented vs. owned.

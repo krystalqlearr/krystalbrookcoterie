@@ -47,7 +47,6 @@ export async function POST(req: Request) {
     `Email: ${email}`,
     `Website / Instagram: ${clean(data.link)}`,
     `Industry: ${clean(data.industry)}`,
-    `Investment: ${clean(data.investment)}`,
     `Timing: ${clean(data.timing)}`,
     "",
     "Vision:",
