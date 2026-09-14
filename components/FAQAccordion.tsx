@@ -67,7 +67,7 @@ export default function FAQAccordion({ items, allowMultiple = false, className =
                 <span className="type-display text-fluid-xl text-ink">{item.question}</span>
                 <span
                   aria-hidden
-                  className={`relative block h-3 w-3 flex-shrink-0 text-ink transition-transform duration-300 motion-reduce:transition-none ${
+                  className={`relative block h-3 w-3 flex-shrink-0 text-ink transition-transform duration-400 motion-reduce:transition-none ${
                     open ? "rotate-45" : ""
                   }`}
                 >
@@ -80,7 +80,7 @@ export default function FAQAccordion({ items, allowMultiple = false, className =
               id={panelId}
               role="region"
               aria-labelledby={triggerId}
-              className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+              className={`grid transition-[grid-template-rows] duration-400 ease-out motion-reduce:transition-none ${
                 open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               }`}
             >

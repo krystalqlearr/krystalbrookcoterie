@@ -43,7 +43,7 @@ export default function BeginPage() {
                 <p className="type-meta text-ink/70">Prefer email?</p>
                 <a
                   href="mailto:hello@krystalbrookcoterie.com"
-                  className="mt-3 block font-sans text-fluid-base text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink"
+                  className="mt-3 block font-sans text-fluid-base text-ink underline decoration-ink/30 underline-offset-4 transition-colors duration-400 hover:decoration-ink"
                 >
                   hello@krystalbrookcoterie.com
                 </a>
@@ -51,7 +51,7 @@ export default function BeginPage() {
                   href="https://www.instagram.com/krystalbrookcoterie/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 block font-sans text-fluid-base text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:decoration-ink"
+                  className="mt-2 block font-sans text-fluid-base text-ink underline decoration-ink/30 underline-offset-4 transition-colors duration-400 hover:decoration-ink"
                 >
                   Instagram
                 </a>

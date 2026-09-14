@@ -172,6 +172,16 @@ The monogram "KBC" keeps uppercase.
 
 ### 2.4 Motion tokens (NEW — single source, never inline magic numbers)
 
+**THE LADDER IS CHOSEN BY SIZE (2026-09-13).** Tokens without a selection rule
+still leave the choice to memory: `fast` 400ms for anything under ~100px (a glyph,
+a hairline, a colour), `base` 600ms for a component, `slow` 700ms for media inside
+a frame, `xslow` 900ms for the largest things. Nothing faster than `fast`; nothing
+between `xslow` and the Marquee's 90s, which is the site's only ambient loop.
+Tailwind's 300/500/1000 are not tokens — 400/600/700/900 are the whole ladder.
+Adopted from the Baunfire teardown, which ties duration to element size; the
+audit also found three inline durations that had drifted past the no-magic-numbers
+rule (0.32s, 0.44s twice) and they are now tokens.
+
 - Easing: `--ease-editorial` `cubic-bezier(0.16, 1, 0.3, 1)` (primary, weighted
   ease-out); `--ease-inout` `cubic-bezier(0.83, 0, 0.17, 1)` (symmetric morphs).
 - Durations: fast `0.4s` · base `0.6s` · slow `0.72s` · xslow `0.9s`.
@@ -396,7 +406,9 @@ Everything inherits from `lib/motion.ts` so the language is consistent site-wide
   NO price list; Bionic Egg's nine service pages are her list nearly verbatim; Clay
   names engagement models in its FAQ; Studio Krista has three services and a
   10-step process page) → option (a): services by discipline, tier names as sizes,
-  no public figure at all since 2026-09-13 (`FLOOR` deleted with the form's budget
+  exactly one public figure since 2026-09-13, and it is Squarespace's alone —
+  `Service.startingAt` = "$1,200", rendered in that page's Investment row, because the
+  platform bounds the scope (the site-wide `FLOOR` deleted with the form's budget
   dropdown and ServiceCard's price prop — every engagement is quoted to its scope and
   the enquiry is the way to one; the floor had been the filter, and more unqualified
   enquiries is the trade she accepted); Squarespace = the seventh page, framed as a

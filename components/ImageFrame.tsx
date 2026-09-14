@@ -57,10 +57,16 @@ export default function ImageFrame({
   const zoom = zoomOnGroupHover
     ? "transition-transform duration-900 ease-editorial group-hover:scale-[1.04] motion-reduce:transform-none motion-reduce:transition-none"
     : "";
+  // The frame recedes as the image advances (2026-09-13) — two opposed transforms
+  // read as depth where a lone zoom reads as a hover effect. Same clock as the
+  // zoom so they are one move, not two.
+  const recede = zoomOnGroupHover
+    ? "transition-transform duration-900 ease-editorial group-hover:scale-[0.985] motion-reduce:transform-none motion-reduce:transition-none"
+    : "";
 
   return (
     <figure
-      className={`relative overflow-hidden ${frame} ${className}`}
+      className={`relative overflow-hidden ${frame} ${recede} ${className}`}
       style={{ aspectRatio: ratio.replace("/", " / ") }}
     >
       {src ? (

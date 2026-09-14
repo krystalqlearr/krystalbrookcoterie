@@ -144,7 +144,7 @@ export default function SiteHeader() {
           // button lays its word across the button's own ("close" over "Close");
           // the word belongs on the work frame and the case-study close, per CLAUDE.md.
           data-cursor="hover"
-          className={`-mr-3 px-3 py-2 type-meta text-ink/70 transition-colors hover:text-ink ${linkFocus}`}
+          className={`-mr-3 px-3 py-2 type-meta text-ink/70 transition-colors duration-400 hover:text-ink ${linkFocus}`}
         >
           {open ? "Close" : "Menu"}
         </button>
@@ -169,7 +169,7 @@ export default function SiteHeader() {
                       <Link
                         href={item.href}
                         onClick={() => setOpen(false)}
-                        className={`type-display inline-block text-fluid-3xl text-ink transition-colors hover:text-ink/60 ${linkFocus}`}
+                        className={`type-display inline-block text-fluid-3xl text-ink transition-colors duration-400 hover:text-ink/60 ${linkFocus}`}
                       >
                         {item.label}
                       </Link>
@@ -180,7 +180,7 @@ export default function SiteHeader() {
                           aria-expanded={servicesOpen}
                           aria-controls="site-menu-services"
                           aria-label={servicesOpen ? "Hide the services" : "Show the services"}
-                          className={`type-display text-fluid-xl text-ink/70 transition-colors hover:text-ink lg:hidden ${linkFocus}`}
+                          className={`type-display text-fluid-xl text-ink/70 transition-colors duration-400 hover:text-ink lg:hidden ${linkFocus}`}
                         >
                           {servicesOpen ? "−" : "+"}
                         </button>
@@ -194,7 +194,7 @@ export default function SiteHeader() {
                             <Link
                               href={`/services/${s.slug}`}
                               onClick={() => setOpen(false)}
-                              className={`type-display inline-block text-fluid-lg text-ink transition-colors hover:text-ink/60 ${linkFocus}`}
+                              className={`type-display inline-block text-fluid-lg text-ink transition-colors duration-400 hover:text-ink/60 ${linkFocus}`}
                             >
                               {s.name}
                             </Link>
@@ -215,7 +215,7 @@ export default function SiteHeader() {
                     <Link
                       href={`/services/${s.slug}`}
                       onClick={() => setOpen(false)}
-                      className={`type-display inline-block text-fluid-lg text-ink transition-colors hover:text-ink/60 ${linkFocus}`}
+                      className={`type-display inline-block text-fluid-lg text-ink transition-colors duration-400 hover:text-ink/60 ${linkFocus}`}
                     >
                       {s.name}
                     </Link>

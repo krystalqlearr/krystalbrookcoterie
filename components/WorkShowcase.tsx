@@ -425,7 +425,7 @@ function ProjectSlot({
       data-cursor-label="close"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: reduce ? 0 : 0.35 } }}
-      className="fixed right-5 top-5 z-[220] flex items-center gap-2 rounded-full border border-milk/25 bg-onyx/60 px-4 py-2 type-meta text-milk backdrop-blur transition-colors hover:border-milk md:right-8 md:top-8"
+      className="fixed right-5 top-5 z-[220] flex items-center gap-2 rounded-full border border-milk/25 bg-onyx/60 px-4 py-2 type-meta text-milk backdrop-blur transition-colors duration-400 hover:border-milk md:right-8 md:top-8"
     >
       Close <span aria-hidden>✕</span>
     </motion.button>

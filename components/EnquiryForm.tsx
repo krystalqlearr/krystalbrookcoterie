@@ -24,7 +24,7 @@ const TIMING = ["As soon as possible", "Within 1–3 months", "In 3–6 months",
 const fieldBase =
   // Fields are LIFTED off the milk in white with a hairline — not an inset beige
   // tint (retired 2026-09-07, see SectionShell). White is the sheet above the canvas.
-  "mt-2 w-full rounded-[1px] border border-ink/20 bg-white px-4 py-3 font-sans text-fluid-base text-ink placeholder:text-ink/70 transition-colors focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink";
+  "mt-2 w-full rounded-[1px] border border-ink/20 bg-white px-4 py-3 font-sans text-fluid-base text-ink placeholder:text-ink/70 transition-colors duration-400 focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink";
 const labelBase = "type-meta text-ink/70";
 
 export default function EnquiryForm() {

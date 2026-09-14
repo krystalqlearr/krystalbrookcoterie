@@ -65,7 +65,7 @@ export default function ProjectCard({
         {interactive ? (
           <span
             aria-hidden
-            className="ml-3 inline-block text-flare opacity-0 transition-all duration-500 ease-editorial group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:translate-x-1 group-focus-visible:opacity-100 motion-reduce:transition-none"
+            className="ml-3 inline-block text-flare opacity-0 transition-all duration-400 ease-editorial group-hover:translate-x-1 group-hover:opacity-100 group-focus-visible:translate-x-1 group-focus-visible:opacity-100 motion-reduce:transition-none"
           >
             ↗︎
           </span>

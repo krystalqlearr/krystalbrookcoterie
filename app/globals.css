@@ -108,7 +108,7 @@ html {
     background-repeat: no-repeat;
     background-position: left 100%;
     background-size: 0% 1px;
-    transition: background-size 0.32s var(--ease-editorial);
+    transition: background-size var(--dur-fast) var(--ease-editorial);
     padding-bottom: 2px;
   }
   .link-underline:hover {
@@ -118,17 +118,26 @@ html {
   /* Arrow CTA — the signature action. A meta-caps label over a hairline that wipes
      in from the left while the wine arrow travels up-and-right. No fill, no border,
      no radius: the action is typography, not a box. See components/ArrowLink.tsx. */
+  /* THE RULE SWEEPS THROUGH; IT DOES NOT REWIND (2026-09-13, from the Baunfire
+     teardown). The origin is RIGHT at rest and LEFT on hover, so the line grows
+     from the left edge on the way in and collapses toward the right edge on the
+     way out — one continuous pass through the word rather than a retraction back
+     the way it came. The flip happens at the instant scaleX is 1, where a
+     full-width line looks identical from either origin, so it is invisible.
+     (Baunfire spend a four-stop keyframe on this; two declarations do it.)
+     0.44s was an inline magic number in the file that forbids them. */
   .arrow-link .arrow-link__rule {
     transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.44s var(--ease-editorial);
+    transform-origin: right;
+    transition: transform var(--dur-fast) var(--ease-editorial);
   }
   .arrow-link:hover .arrow-link__rule,
   .arrow-link:focus-visible .arrow-link__rule {
     transform: scaleX(1);
+    transform-origin: left;
   }
   .arrow-link .arrow-link__glyph {
-    transition: transform 0.44s var(--ease-editorial);
+    transition: transform var(--dur-fast) var(--ease-editorial);
   }
   .arrow-link:hover .arrow-link__glyph,
   .arrow-link:focus-visible .arrow-link__glyph {

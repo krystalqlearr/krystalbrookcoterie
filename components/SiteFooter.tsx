@@ -34,7 +34,7 @@ export default function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`link-underline -my-1 inline-block py-1 text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
+                    className={`link-underline -my-1 inline-block py-1 text-milk transition-colors duration-400 hover:text-milk/60 ${linkFocus}`}
                   >
                     {item.label}
                   </Link>
@@ -50,7 +50,7 @@ export default function SiteFooter() {
               <li>
                 <a
                   href="mailto:hello@krystalbrookcoterie.com"
-                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
+                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors duration-400 hover:text-milk/60 ${linkFocus}`}
                 >
                   hello@krystalbrookcoterie.com
                 </a>
@@ -60,7 +60,7 @@ export default function SiteFooter() {
                   href="https://www.instagram.com/krystalbrookcoterie/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
+                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors duration-400 hover:text-milk/60 ${linkFocus}`}
                 >
                   Instagram
                 </a>
@@ -68,7 +68,7 @@ export default function SiteFooter() {
               <li>
                 <Link
                   href="/begin"
-                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors hover:text-milk/60 ${linkFocus}`}
+                  className={`link-underline -my-1 inline-block py-1 text-milk transition-colors duration-400 hover:text-milk/60 ${linkFocus}`}
                 >
                   Commission a project
                 </Link>
@@ -84,10 +84,10 @@ export default function SiteFooter() {
           <span className="md:col-span-2">© 2026 Krystal Brook Coterie</span>
           <span className="md:col-span-1">a DBA of Lion &amp; Gazelle Holdings LLC</span>
           <span className="flex gap-5 md:col-span-1 md:justify-self-end">
-            <Link href="/privacy" className={`-my-1 inline-block py-1 transition-colors hover:text-milk ${linkFocus}`}>
+            <Link href="/privacy" className={`-my-1 inline-block py-1 transition-colors duration-400 hover:text-milk ${linkFocus}`}>
               Privacy
             </Link>
-            <Link href="/terms" className={`-my-1 inline-block py-1 transition-colors hover:text-milk ${linkFocus}`}>
+            <Link href="/terms" className={`-my-1 inline-block py-1 transition-colors duration-400 hover:text-milk ${linkFocus}`}>
               Terms
             </Link>
           </span>
