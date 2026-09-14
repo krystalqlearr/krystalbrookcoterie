@@ -108,7 +108,14 @@ html {
     background-repeat: no-repeat;
     background-position: left 100%;
     background-size: 0% 1px;
-    transition: background-size var(--dur-fast) var(--ease-editorial);
+    /* COLOUR TRAVELS WITH THE UNDERLINE (2026-09-13). This is a SHORTHAND, and a
+       shorthand replaces the whole property — so it was quietly wiping out the
+       `transition-colors` that every one of these links also carries, and their
+       hover colour snapped while the underline swept. Naming both here fixes it
+       for all of them at once; the utility never stood a chance against it. */
+    transition:
+      background-size var(--dur-fast) var(--ease-editorial),
+      color var(--dur-fast) var(--ease-editorial);
     padding-bottom: 2px;
   }
   .link-underline:hover {
