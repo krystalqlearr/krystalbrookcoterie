@@ -283,6 +283,24 @@ html {
   animation-timing-function: var(--ease-editorial);
 }
 
+/* THE BAR HOLDS STILL WHILE THE PAGE DISSOLVES (2026-09-22). Naming the header
+   lifts it out of the root snapshot into its own layer, so the browser tweens
+   the bar from its old position to its new one — which is the same position on
+   every page, so it simply does not move while everything under it cross-fades.
+   Without this the header is part of the page and fades out and back in with
+   it, which reads as a page load rather than a transition. One name, one
+   element: `SiteHeader` renders once, so this can never become a duplicate. */
+[data-site-header] {
+  view-transition-name: site-header;
+}
+
+::view-transition-group(site-header),
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation-duration: var(--dur-fast);
+  animation-timing-function: var(--ease-editorial);
+}
+
 /* View-transition pseudo-elements live outside the document tree, so the
    blanket `*` damp further down never reaches them — they need saying twice. */
 @media (prefers-reduced-motion: reduce) {
@@ -290,8 +308,51 @@ html {
   ::view-transition-old(work-frame),
   ::view-transition-new(work-frame),
   ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-new(root),
+  ::view-transition-group(site-header),
+  ::view-transition-old(site-header),
+  ::view-transition-new(site-header) {
     animation: none !important;
+  }
+}
+
+/* ── The opening line arrives a line at a time ───────────────────────────────
+   See components/motion/LineReveal.tsx, which cuts the page's h1 into its real
+   rendered lines. Each line sits in a mask and rises out from behind the one
+   above it, one after another. The rise is `slow` because a display line is a
+   large object, and the ladder is chosen by size (CLAUDE.md, Motion).
+
+   The mask is `overflow: hidden`, which would otherwise shave the descenders
+   off a display face set at 0.92 leading — hence the padding, cancelled by an
+   equal negative margin so the heading's measured height does not change and
+   nothing below it moves.
+
+   TRANSFORM ONLY, NEVER OPACITY: the heading already sits inside `Reveal`,
+   which owns the fade. Two opacity curves on one element read as mud. */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.line-inner {
+  display: block;
+  transform: translate3d(0, 110%, 0);
+  transition: transform var(--dur-slow) var(--ease-editorial);
+  transition-delay: calc(var(--line, 0) * 90ms);
+}
+
+.is-line-revealed .line-inner {
+  transform: translate3d(0, 0, 0);
+}
+
+/* The heading is never split under reduced motion, so this only ever catches a
+   page that was already split when the preference changed mid-session. */
+@media (prefers-reduced-motion: reduce) {
+  .line-inner {
+    transform: none !important;
+    transition: none !important;
   }
 }
 
