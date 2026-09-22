@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
+import CrossDocumentLinks from "@/components/motion/CrossDocumentLinks";
+import LineReveal from "@/components/motion/LineReveal";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -118,6 +120,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SmoothScroll />
+        <CrossDocumentLinks />
+        <LineReveal />
         <a
           href="#main"
           className="type-meta sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[300] focus:rounded-[1px] focus:bg-ink focus:px-5 focus:py-3 focus:text-milk"

@@ -110,6 +110,9 @@ export default function SiteHeader() {
   return (
     <header
       ref={headerRef}
+      // Named for the cross-document view transition, so the bar is its own
+      // layer and holds still while the page beneath it dissolves (globals.css).
+      data-site-header
       // No backdrop-blur while the menu is open: `backdrop-filter` makes the
       // header the containing block for its fixed descendants, which collapsed
       // the panel's `inset-0` to the 80px bar (height 0). Solid milk instead.
