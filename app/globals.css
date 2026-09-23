@@ -316,6 +316,51 @@ html {
   }
 }
 
+/* ── The frame opens to the full width of the screen ─────────────────────────
+   See components/BleedImage.tsx. One image per page widens as it crosses the
+   viewport until it runs edge to edge, then settles.
+
+   THE RESTING STATE IS THE FINISHED STATE: the band is full-bleed in plain CSS
+   below, and the entrance is added only where the browser can actually run it.
+   A browser without scroll timelines shows the finished band — never an image
+   frozen half-open.
+
+   `50cqw` measures the editorial column (the wrapper is the query container)
+   and `50vw` measures the screen, so the closed state starts exactly on the
+   line the words start on, at every breakpoint, with no magic number. */
+.bleed-wrap {
+  container-type: inline-size;
+}
+
+.bleed-frame {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50cqw - 50vw);
+  overflow: hidden;
+  /* `html { overflow-x: clip }` absorbs the scrollbar's share of 100vw. */
+}
+
+@supports (animation-timeline: view()) and (width: 1cqw) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bleed-frame {
+      animation: bleed-open linear both;
+      animation-timeline: view();
+      /* Opens through the first half of its travel and is finished well before
+         it leaves, so the settled band is what you actually read. */
+      animation-range: entry 15% cover 45%;
+    }
+  }
+}
+
+@keyframes bleed-open {
+  from {
+    clip-path: inset(0 calc(50vw - 50cqw) 0 calc(50vw - 50cqw));
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
 /* ── The opening line arrives a line at a time ───────────────────────────────
    See components/motion/LineReveal.tsx, which cuts the page's h1 into its real
    rendered lines. Each line sits in a mask and rises out from behind the one

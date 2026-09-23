@@ -4,6 +4,7 @@ import EditorialHeading from "@/components/EditorialHeading";
 import ImageFrame from "@/components/ImageFrame";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import BleedImage from "@/components/BleedImage";
 import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 
@@ -99,6 +100,13 @@ export default function AboutPage() {
 
       {/* CTA — dark showstopper */}
       {/* CTA — the page's one dark moment. `marker` off: the heading has the flare. */}
+      {/* Warm and human, and still a screen of real work rather than decoration. */}
+      <BleedImage
+        src="/images/glowtoure/bridal-desktop.webp"
+        alt="Glowtoure's bridal page — the party booking flow, photographed on the live site."
+        caption="Glowtoure — Bridal"
+      />
+
       <ClosingCTA
         heading="If that sounds like your brand, let’s talk."
         accent="your"
