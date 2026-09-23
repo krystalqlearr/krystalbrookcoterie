@@ -6,6 +6,7 @@ import FAQAccordion from "@/components/FAQAccordion";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import BleedImage from "@/components/BleedImage";
 import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 import ServiceCard from "@/components/ServiceCard";
@@ -185,6 +186,14 @@ export default function ServicesPage() {
       </SectionShell>
 
       {/* CTA — the page's ONE dark moment. */}
+      {/* The page's one cinematic breath — a real services page, widening to the
+          full width of the screen as it crosses. One per page, never two. */}
+      <BleedImage
+        src="/images/glowtoure/services-desktop.webp"
+        alt="Glowtoure's services page — custom spray tanning, laid out by depth and finish."
+        caption="Glowtoure — Services"
+      />
+
       <ClosingCTA
         heading="Let’s build something worth owning."
         accent="worth"

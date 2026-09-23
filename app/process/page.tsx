@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import IndexMeta from "@/components/IndexMeta";
 import PageHero from "@/components/PageHero";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
+import BleedImage from "@/components/BleedImage";
 import ClosingCTA from "@/components/ClosingCTA";
 import SectionShell from "@/components/SectionShell";
 
@@ -122,6 +123,13 @@ export default function ProcessPage() {
 
       {/* CTA — the page's one dark moment. `marker` is off: the heading already
           carries the flare, and a section gets one flare element, not two. */}
+      {/* A real booking flow under a page about how the work runs. */}
+      <BleedImage
+        src="/images/glowtoure/book-desktop.webp"
+        alt="Glowtoure's booking page — a sunlit portrait beside the three ways to book."
+        caption="Glowtoure — Booking"
+      />
+
       <ClosingCTA
         heading="Ready when you are."
         accent="Ready"
