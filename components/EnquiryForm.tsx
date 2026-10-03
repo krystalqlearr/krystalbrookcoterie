@@ -28,7 +28,18 @@ const fieldBase =
 const labelBase = "type-meta text-ink/70";
 
 export default function EnquiryForm() {
-  const [submitted, setSubmitted] = useState(false);
+  /**
+   * THREE OUTCOMES, NOT TWO (2026-10-03). This was one boolean, and BOTH paths
+   * set it — so a visitor whose message never left saw the same "Thank you." as
+   * one whose did. The fallback hands the enquiry to the visitor's own mail app,
+   * and most people reading mail in a browser tab have no mail app registered:
+   * nothing opened, nothing sent, and the form said thank you. The most
+   * important page on the site was telling people something untrue.
+   */
+  const [status, setStatus] = useState<"idle" | "sent" | "unsent">("idle");
+  /** The enquiry as plain text, so an unsent visitor can still carry it over. */
+  const [draft, setDraft] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,7 +64,7 @@ export default function EnquiryForm() {
         body: JSON.stringify(payload),
       });
       if (res.ok) {
-        setSubmitted(true);
+        setStatus("sent");
         return;
       }
     } catch {
@@ -72,24 +83,80 @@ export default function EnquiryForm() {
       "Vision:",
       payload.vision,
     ].join("\n");
+    // Still TRY the mail app — for the minority who have one it is the shortest
+    // path. But never report success on the strength of it: `mailto` gives the
+    // page no way to know whether anything opened, so the state it leads to has
+    // to be honest about the uncertainty.
+    setDraft(`To: ${STUDIO_EMAIL}
+Subject: ${subject}
+
+${body}`);
+    setStatus("unsent");
     window.location.href = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
   };
 
-  if (submitted) {
+  const copyDraft = async () => {
+    try {
+      await navigator.clipboard.writeText(draft);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 4000);
+    } catch {
+      // Clipboard blocked (insecure context, or permission refused). The text is
+      // on screen and selectable, so there is still a way through.
+      setCopied(false);
+    }
+  };
+
+  if (status === "sent") {
     return (
-      <div className="max-w-measure border-t border-flare pt-8">
+      <div className="max-w-measure border-t border-flare pt-8" role="status">
         <p className="type-display text-fluid-2xl text-ink">Thank you.</p>
         <p className="mt-4 font-sans text-fluid-base leading-relaxed text-ink/70">
-          Your email client should have opened with your enquiry ready to send. If it didn’t,
-          write to{" "}
-          <a href={`mailto:${STUDIO_EMAIL}`} className="text-ink underline decoration-ink/40 underline-offset-4">
+          Your enquiry is with the studio. Every one is reviewed for fit, and you can
+          expect a reply within two business days.
+        </p>
+      </div>
+    );
+  }
+
+  if (status === "unsent") {
+    return (
+      // An ink hairline, not the flare: this is not the page's accent moment, and
+      // the flare budget is one or two per PAGE (CLAUDE.md, Color).
+      <div className="max-w-measure border-t border-ink pt-8" role="status">
+        <p className="type-display text-fluid-2xl text-ink">Almost — one more step.</p>
+        <p className="mt-4 font-sans text-fluid-base leading-relaxed text-ink/70">
+          Your enquiry could not be sent from this page, and it may not have reached
+          your email app either. Nothing is lost: your message is below. Send it to{" "}
+          <a
+            href={`mailto:${STUDIO_EMAIL}`}
+            className="link-underline text-ink transition-colors duration-400 hover:text-flare-deep"
+          >
             {STUDIO_EMAIL}
           </a>{" "}
-          directly. Every enquiry is reviewed for fit within 48 hours.
+          and it will be read the same day.
         </p>
+
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <button
+            type="button"
+            onClick={copyDraft}
+            className="inline-flex items-center justify-center rounded-[1px] border border-ink bg-ink px-8 py-4 font-sans text-meta-lg font-semibold uppercase text-milk transition duration-400 ease-editorial hover:border-flare-deep hover:bg-flare-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+          >
+            {copied ? "Copied" : "Copy my message"}
+          </button>
+          <span aria-live="polite" className="type-meta text-ink/70">
+            {copied ? "Paste it into an email to the studio." : ""}
+          </span>
+        </div>
+
+        {/* Readable and selectable, so the clipboard is a convenience and never a
+            requirement — a blocked clipboard must not be a dead end. */}
+        <pre className="mt-8 max-w-measure overflow-x-auto whitespace-pre-wrap border border-ink/15 bg-white p-6 font-sans text-fluid-sm leading-relaxed text-ink/70">
+          {draft}
+        </pre>
       </div>
     );
   }
