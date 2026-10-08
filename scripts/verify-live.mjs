@@ -21,7 +21,8 @@ export const ROUTES = [
   "/", "/work", "/work/glowtoure", "/work/glowtoure/brand-system",
   "/services", "/services/identity", "/services/collateral", "/services/websites",
   "/services/redesign", "/services/development", "/services/search", "/services/squarespace",
-  "/process", "/about", "/journal", "/begin", "/privacy", "/terms", "/styleguide",
+  "/process", "/about", "/journal", "/journal/why-your-luxury-website-still-feels-inexpensive",
+  "/begin", "/privacy", "/terms", "/styleguide",
 ];
 
 const PROBE = `(() => {

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { serviceSlugs } from "@/lib/services";
 import { WORK, caseStudySlugs } from "@/lib/work";
+import { publishedSlugs as journalSlugs } from "@/lib/journal";
 
 const SITE_URL = "https://krystalbrookcoterie.com";
 
@@ -34,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.7, changeFrequency: "yearly" },
     { path: "/begin", priority: 0.8, changeFrequency: "yearly" },
     { path: "/journal", priority: 0.5, changeFrequency: "weekly" },
+    // Only PUBLISHED pieces; a forthcoming title has no route to index.
+    ...journalSlugs().map((slug) => ({
+      path: `/journal/${slug}`,
+      priority: 0.6,
+      changeFrequency: "yearly" as const,
+    })),
     { path: "/privacy", priority: 0.2, changeFrequency: "yearly" },
     { path: "/terms", priority: 0.2, changeFrequency: "yearly" },
   ];
