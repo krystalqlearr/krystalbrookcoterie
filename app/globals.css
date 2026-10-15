@@ -425,6 +425,18 @@ html {
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      /* THE LAST LETTER WAS BEING CUT OFF (2026-10-15 — Krystal saw "intc" for
+         "into" on /for/kellie). Display tracking is negative (−0.045 → −0.06em),
+         which pulls the span's inline box in past the final glyph's right edge,
+         and background-clip: text paints nothing outside that box — so the
+         overhang of the last letter (and the left bearing of the first) went
+         transparent. Widen the paint box by the tracking on both sides and pull
+         the same amount back with margin so the layout does not move. A plain
+         `color` was never clipped; only the gradient trick is. */
+      padding-inline: 0.08em;
+      margin-inline: -0.08em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
     }
     span.accent-develop-milk {
       background-image: linear-gradient(
