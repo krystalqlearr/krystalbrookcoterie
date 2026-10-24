@@ -104,6 +104,7 @@ export const SUBSCRIPTIONS = [
   ["Hosting", "$20 a month", "Vercel Pro, the plan for business sites. Your account, your login"],
   ["Typeface license", "pass-through", "PP Neue Montreal and PP Editorial New, licensed for your domain. I confirm the exact price before invoicing"],
   ["Payments (Option B)", "2.9% + 30¢ per card payment", "Stripe’s published rate. No monthly fee; the money goes to your bank"],
+  ["Bookings database (Option B)", "$25 a month", "Supabase Pro. The free plan pauses after a week of inactivity, which would take bookings offline; Pro never pauses. Booking emails run on Resend’s free tier"],
 ] as const;
 
 export const NEEDS = [
