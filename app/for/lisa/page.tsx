@@ -271,10 +271,11 @@ export default function LisaPage() {
             <Reveal variant="fade" className="mt-12 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
               <p className="text-ink">Why it&rsquo;s a founding-client rate</p>
               <p>
-                This isn&rsquo;t a discount for the asking. You&rsquo;re one of the first three
-                businesses I&rsquo;m building for under my studio, and a finished Badabling site is
-                the proof that lets me charge full rate from the next client on. So the price is
-                an exchange:
+                This isn&rsquo;t a discount for the asking. I&rsquo;m offering the founding rate to
+                five businesses that fit a specific profile: a strong personal brand, real work to
+                show, and a site that would be a pleasure to build. Badabling fits it exactly, and a
+                finished Badabling site is the kind of work that lets me charge full rate from the
+                next client on. So the price is an exchange:
               </p>
             </Reveal>
             <Reveal stagger={0.06} as="ul" className="mt-5 divide-y divide-ink/12 border-y border-ink/12 font-sans text-fluid-base text-ink/70">
