@@ -41,19 +41,20 @@ export default function LisaPage() {
         <div className="container relative z-10">
           <Reveal stagger={0.1}>
             <RevealItem variant="soft">
-              <Eyebrow>Made for Lisa · Badabling Artistry</Eyebrow>
+              <Eyebrow>For Lisa, from Krystal · Badabling Artistry</Eyebrow>
             </RevealItem>
             <RevealItem variant="soft">
-              <EditorialHeading as="h1" size="xl" accent="deserves" className="mt-6 max-w-[16ch]">
-                The site your new photo deserves.
+              <EditorialHeading as="h1" size="xl" accent="photo" className="mt-6 max-w-[16ch]">
+                Lisa, look what your photo did.
               </EditorialHeading>
             </RevealItem>
             <RevealItem variant="fade">
               <div className="mt-8 max-w-measure font-sans text-fluid-lg text-ink/70">
                 <p>
-                  A Badabling website you can open and scroll like it&rsquo;s live, on your phone
-                  or your laptop. Below it, the same site page by page with me explaining each
-                  one, a printed menu and a business card off the same photo, and the offer.
+                  I built you a website. Well, the first version of one. Open it and scroll it
+                  like it&rsquo;s real, on your phone or your laptop. Everything under it is me
+                  walking you through it page by page, plus a printed menu, a business card, and
+                  what it would actually cost to make it real.
                 </p>
               </div>
             </RevealItem>
@@ -82,16 +83,17 @@ export default function LisaPage() {
           <Reveal variant="fade" className="lg:col-span-7 lg:col-start-6">
             <div className="max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
               <p>
-                Lisa, I saw your new photo and couldn&rsquo;t leave it alone. It was too good to
-                sit on Instagram, so I built the first screen of a website around it. Then I kept
-                going: your menu with your real prices, a few of your lip results for the work
-                section, a printed menu, and a business card, all out of the same system.
+                Okay. I saw the new photo and I could not leave it alone. It&rsquo;s way too good
+                to live on Instagram and nowhere else, so I built the first screen of a website
+                around it. And then I couldn&rsquo;t stop: your menu with your real prices, four
+                of your lip results, a printed menu, a business card. All of it matching.
               </p>
               <p>
-                Everything here is a draft from your page. The prices are your regular rates,
-                the captions are my guesses, and the words in your voice are placeholders. What
-                I wanted you to see is the direction, and how good you already look in it. If
-                it&rsquo;s a yes, the real build starts with your corrections.
+                None of this is final. The prices are your regular rates off your current menu,
+                the captions are my best guesses, and the words &ldquo;in your voice&rdquo; are
+                placeholders until you give me the real ones. I just wanted you to see what you
+                already look like as a brand, because it&rsquo;s a lot. If you love it, we fix
+                the details together and build the real thing.
               </p>
               <p className="text-ink">&mdash; Krystal</p>
             </div>
@@ -139,7 +141,8 @@ export default function LisaPage() {
             </RevealItem>
             <RevealItem variant="fade">
               <p className="max-w-measure font-sans text-fluid-lg text-ink/70">
-                Each page, with what I&rsquo;d say about it. Or skip the reading and{" "}
+                Each page, the way I&rsquo;d explain it if you were sitting next to me. Or skip
+                all that,{" "}
                 <ArrowLink href={SITE_URL} target="_blank" rel="noopener" direction="upRight">
                   open the site
                 </ArrowLink>{" "}
@@ -184,7 +187,7 @@ export default function LisaPage() {
         <div className="container grid gap-10 lg:grid-cols-12">
           <Reveal variant="soft" className="lg:col-span-4">
             <Rule width="short" tone="hair" className="mb-6" />
-            <Eyebrow>Why custom code</Eyebrow>
+            <Eyebrow>Why I build it this way</Eyebrow>
             <EditorialHeading as="h2" size="md" className="mt-5 max-w-[14ch]">
               No plugins to break into
             </EditorialHeading>
@@ -200,11 +203,11 @@ export default function LisaPage() {
                 46% had no fix available on the day they were disclosed.
               </p>
               <p>
-                This site has no plugin layer. It&rsquo;s custom code, served from Vercel, with
-                no admin login to guess and nothing third-party to go stale. The design can&rsquo;t
-                rot; the only thing that needs upkeep is the framework underneath, and that&rsquo;s
-                what a care plan covers. It&rsquo;s also why the pages load the way they do: there
-                is nothing on them that isn&rsquo;t yours.
+                Yours won&rsquo;t have any of that. It&rsquo;s custom code, hosted on Vercel, with
+                no admin login for someone to guess and no plugins to go stale. The design
+                can&rsquo;t rot. The only thing that ever needs upkeep is the framework
+                underneath, which is what the care plan is for. It&rsquo;s also why it loads so
+                fast: there&rsquo;s nothing on your pages that isn&rsquo;t yours.
               </p>
             </div>
             <ul className="mt-8 divide-y divide-ink/12 border-y border-ink/12">
@@ -231,11 +234,11 @@ export default function LisaPage() {
             <Rule width="short" tone="hair" className="mb-6" />
             <Eyebrow>The offer</Eyebrow>
             <EditorialHeading as="h2" size="md" className="mt-5 max-w-[14ch]">
-              My standard rate, and a founding-client rate
+              What it costs, and what I&rsquo;m offering you
             </EditorialHeading>
           </Reveal>
           <div className="lg:col-span-7 lg:col-start-6">
-            <p className="type-meta text-ink/70">What this costs a business client</p>
+            <p className="type-meta text-ink/70">What a business client pays me</p>
             <Reveal stagger={0.08} as="ul" className="mt-5 divide-y divide-ink/12 border-y border-ink/12">
               {STANDARD.map(([k, v, d]) => (
                 <RevealItem key={k} variant="fade">
@@ -250,7 +253,7 @@ export default function LisaPage() {
               ))}
             </Reveal>
 
-            <p className="type-meta mt-14 text-ink/70">What I&rsquo;m offering you</p>
+            <p className="type-meta mt-14 text-ink/70">What I&rsquo;m offering you, because it&rsquo;s you</p>
             <div className="mt-5 grid gap-6 md:grid-cols-2">
               {PACKAGES.map((p) => (
                 <Reveal key={p.id} variant="fade" className="flex flex-col border border-ink/15 bg-white p-7">
@@ -269,13 +272,13 @@ export default function LisaPage() {
             </div>
 
             <Reveal variant="fade" className="mt-12 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-              <p className="text-ink">Why it&rsquo;s a founding-client rate</p>
+              <p className="text-ink">Why it&rsquo;s a founding rate and not a friend discount</p>
               <p>
-                This isn&rsquo;t a discount for the asking. I&rsquo;m offering the founding rate to
-                five businesses that fit a specific profile: a strong personal brand, real work to
-                show, and a site that would be a pleasure to build. Badabling fits it exactly, and a
-                finished Badabling site is the kind of work that lets me charge full rate from the
-                next client on. So the price is an exchange:
+                Here&rsquo;s the honest version. I&rsquo;m offering this rate to five businesses
+                that fit a specific profile: a strong personal brand, real work to show, and a
+                site I&rsquo;d be proud to build. You fit it perfectly, and a finished Badabling
+                site is exactly the kind of work that lets me charge full rate from the next
+                client on. So instead of a discount, think of it as a trade:
               </p>
             </Reveal>
             <Reveal stagger={0.06} as="ul" className="mt-5 divide-y divide-ink/12 border-y border-ink/12 font-sans text-fluid-base text-ink/70">
@@ -289,9 +292,9 @@ export default function LisaPage() {
             <Reveal variant="fade" className="mt-12 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
               <p className="text-ink">What you&rsquo;d pay the providers directly</p>
               <p>
-                These are the accounts the site runs on. They&rsquo;re opened in your name, billed
-                to you at the provider&rsquo;s published price, and I don&rsquo;t mark them up.
-                You own everything from day one.
+                These are the accounts your site runs on. They&rsquo;re in your name, billed to
+                you at whatever the provider charges, and I don&rsquo;t add anything on top. You
+                own all of it from day one.
               </p>
             </Reveal>
             <Reveal stagger={0.08} as="ul" className="mt-5 divide-y divide-ink/12 border-y border-ink/12">
@@ -311,23 +314,24 @@ export default function LisaPage() {
             <Reveal variant="fade" className="mt-12 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
               <p className="text-ink">The care plan, and going without one</p>
               <p>
-                A care plan is optional and month to month. Essential keeps the site fast, secure
-                and online: the framework updated and redeployed every month, the forms and
-                booking tested, and half an hour of content changes. Growth and Partner add
-                hours, reporting and strategy on top.
+                The care plan is optional and month to month. Essential just keeps the site fast,
+                secure and online: I update and redeploy the framework every month, test the forms
+                and booking, and you get half an hour of changes whenever you need them. Growth and
+                Partner add hours, reporting and strategy on top.
               </p>
               <p>
-                Without one, the site is still yours and still works. But security updates become
-                your job: the framework publishes patches, and someone comfortable with code needs
-                to update and redeploy at least quarterly. Skipped for a year or two, that turns
-                into a paid project. I&rsquo;d rather you know that now than find out later.
+                If you skip it, the site is still yours and it still works. But the security
+                updates become your problem: the framework publishes patches, and someone who&rsquo;s
+                comfortable with code needs to update and redeploy it at least every few months.
+                Let it sit for a year or two and it turns into a paid project. I&rsquo;d rather tell
+                you that now than have you find out later.
               </p>
-              <p className="text-ink">Terms</p>
+              <p className="text-ink">The terms, so there are no surprises</p>
               <p>
-                Half to book your slot and start date, half at launch approval before anything goes
-                live. Two rounds of revisions are included, one at design and one at build; more are
-                billed by the hour. The timeline is set at kickoff once the photos and corrections are
-                in; late content pauses the clock, it doesn&rsquo;t compress the quality.
+                Half to book your slot, half at launch before anything goes live. Two rounds of
+                revisions are included, one at design and one at build; after that it&rsquo;s by
+                the hour. The clock starts once your photos and corrections are in, and if content
+                runs late the timeline pauses rather than squeezing the quality.
               </p>
             </Reveal>
 
@@ -356,13 +360,14 @@ export default function LisaPage() {
             </RevealItem>
             <RevealItem variant="soft">
               <EditorialHeading as="h2" size="lg" canvas="dark" accent="yes" className="max-w-[16ch]">
-                If you&rsquo;re in, say yes and pick A or B.
+                If you&rsquo;re in, just tell me yes, and A or B.
               </EditorialHeading>
             </RevealItem>
             <RevealItem variant="fade">
               <p className="max-w-measure font-sans text-fluid-lg text-milk/70">
-                I&rsquo;ll send the agreement, and the build starts the day the deposit and your
-                corrections land. Every page goes on a preview link before anything is public.
+                I&rsquo;ll send over the agreement, and we start the day the deposit and your
+                corrections land. You&rsquo;ll see every page on a preview link before anything
+                goes public, so nothing goes live without you.
               </p>
             </RevealItem>
             <RevealItem variant="fade">
