@@ -7,7 +7,7 @@ import EditorialHeading from "@/components/EditorialHeading";
 import IndexMeta from "@/components/IndexMeta";
 import Rule from "@/components/Rule";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
-import { EXCHANGE, FILES, NEEDS, PACKAGES, SLIDES, STANDARD, SUBSCRIPTIONS, VIDEO } from "./content";
+import { EXCHANGE, FILES, NEEDS, PACKAGES, SITE_URL, SLIDES, STANDARD, SUBSCRIPTIONS, VIDEO } from "./content";
 import { HearThis, Walkthrough } from "./Walkthrough";
 
 /**
@@ -51,10 +51,18 @@ export default function LisaPage() {
             <RevealItem variant="fade">
               <div className="mt-8 max-w-measure font-sans text-fluid-lg text-ink/70">
                 <p>
-                  A Badabling website, shown page by page, with a printed menu and a business
-                  card off the same photo. Read it or skip to the parts you care about. The
-                  offer is at the bottom.
+                  A Badabling website you can open and scroll like it&rsquo;s live, on your phone
+                  or your laptop. Below it, the same site page by page with me explaining each
+                  one, a printed menu and a business card off the same photo, and the offer.
                 </p>
+              </div>
+            </RevealItem>
+            <RevealItem variant="fade">
+              <div className="mt-8 flex flex-wrap items-center gap-5">
+                <Button href={SITE_URL} target="_blank" rel="noopener">
+                  Open the site
+                </Button>
+                <p className="font-sans text-fluid-sm text-ink/70">Opens in a new tab. Try it on your phone too.</p>
               </div>
             </RevealItem>
           </Reveal>
@@ -128,6 +136,15 @@ export default function LisaPage() {
               <EditorialHeading as="h2" size="lg" className="max-w-[18ch]">
                 The site, page by page
               </EditorialHeading>
+            </RevealItem>
+            <RevealItem variant="fade">
+              <p className="max-w-measure font-sans text-fluid-lg text-ink/70">
+                Each page, with what I&rsquo;d say about it. Or skip the reading and{" "}
+                <ArrowLink href={SITE_URL} target="_blank" rel="noopener" direction="upRight">
+                  open the site
+                </ArrowLink>{" "}
+                and scroll it yourself.
+              </p>
             </RevealItem>
           </Reveal>
 

@@ -44,7 +44,12 @@ export const VIDEO = {
   minutes: "",
 };
 
+/** The mockup itself, as a page Lisa can scroll on desktop or phone. */
+export const SITE_URL = "/for/lisa/badabling-site.html";
+
 export const FILES = [
+  { label: "The walkthrough deck", href: "/for/lisa/badabling-walkthrough.pdf", meta: "PDF · these nine pages, to read or forward" },
+  { label: "Scope of work", href: "/for/lisa/badabling-scope-of-work.pdf", meta: "PDF · what the build includes, the timeline, the rate and the terms" },
   { label: "The website mockup", href: "/for/lisa/badabling-website-mockup.pdf", meta: "PDF · the whole page, top to bottom" },
   { label: "The printed menu", href: "/for/lisa/badabling-menu.pdf", meta: "PDF · letter size, ready to print" },
   { label: "The business card", href: "/for/lisa/badabling-business-card.pdf", meta: "PDF · front and back, print size" },
