@@ -37,11 +37,11 @@ export default function LisaPage() {
   return (
     <>
       {/* — Hero — */}
-      <section className="relative overflow-hidden pb-14 pt-32 md:pb-20 md:pt-40">
+      <section className="relative overflow-hidden pb-14 pt-28 md:pb-20 md:pt-40">
         <div className="container relative z-10">
           <Reveal stagger={0.1}>
             <RevealItem variant="soft">
-              <Eyebrow>For Lisa, from Krystal · Badabling Artistry</Eyebrow>
+              <Eyebrow>For Lisa, from Krystal<span className="hidden sm:inline"> · Badabling Artistry</span></Eyebrow>
             </RevealItem>
             <RevealItem variant="soft">
               <EditorialHeading as="h1" size="xl" accent="photo" className="mt-6 max-w-[16ch]">
@@ -71,7 +71,7 @@ export default function LisaPage() {
       </section>
 
       {/* — The letter — */}
-      <section className="border-t border-ink/12 py-section">
+      <section className="border-t border-ink/12 py-16 md:py-section">
         <div className="container grid gap-10 lg:grid-cols-12">
           <Reveal variant="soft" className="lg:col-span-4">
             <Rule width="short" tone="hair" className="mb-6" />
@@ -103,7 +103,7 @@ export default function LisaPage() {
 
       {/* — The video (once it exists) — */}
       {hasVideo && (
-        <section className="bg-onyx py-section text-milk">
+        <section className="bg-onyx py-16 md:py-section text-milk">
           <div className="container">
             <Reveal stagger={0.1} className="flex flex-col gap-6">
               <RevealItem variant="soft">
@@ -128,7 +128,7 @@ export default function LisaPage() {
       )}
 
       {/* — Page by page — */}
-      <section className="py-section">
+      <section className="py-16 md:py-section">
         <div className="container">
           <Reveal stagger={0.1} className="flex flex-col gap-6">
             <RevealItem variant="soft">
@@ -151,9 +151,9 @@ export default function LisaPage() {
             </RevealItem>
           </Reveal>
 
-          <ol className="mt-16 divide-y divide-ink/12 border-t border-ink/12">
+          <ol className="mt-10 md:mt-16 divide-y divide-ink/12 border-t border-ink/12">
             {SLIDES.map((s) => (
-              <li key={s.id} id={s.id} className="grid gap-8 py-14 lg:grid-cols-12 lg:gap-12">
+              <li key={s.id} id={s.id} className="grid gap-6 py-10 md:gap-8 md:py-14 lg:grid-cols-12 lg:gap-12">
                 <Reveal from="up" className="lg:col-span-7">
                   <div className="border border-ink/15 bg-onyx">
                     <Image
@@ -183,7 +183,7 @@ export default function LisaPage() {
       </section>
 
       {/* — Why it's built this way — */}
-      <section className="border-t border-ink/12 py-section">
+      <section className="border-t border-ink/12 py-16 md:py-section">
         <div className="container grid gap-10 lg:grid-cols-12">
           <Reveal variant="soft" className="lg:col-span-4">
             <Rule width="short" tone="hair" className="mb-6" />
@@ -228,7 +228,7 @@ export default function LisaPage() {
       </section>
 
       {/* — The offer — */}
-      <section className="border-t border-ink/12 py-section">
+      <section className="border-t border-ink/12 py-16 md:py-section">
         <div className="container grid gap-12 lg:grid-cols-12">
           <Reveal variant="soft" className="lg:col-span-4">
             <Rule width="short" tone="hair" className="mb-6" />
@@ -352,7 +352,7 @@ export default function LisaPage() {
       </section>
 
       {/* — Next step — */}
-      <section className="bg-onyx py-section text-milk">
+      <section className="bg-onyx py-16 md:py-section text-milk">
         <div className="container grid gap-12 lg:grid-cols-12">
           <Reveal stagger={0.1} className="flex flex-col gap-6 lg:col-span-6">
             <RevealItem variant="soft">
