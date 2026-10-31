@@ -7,7 +7,7 @@ import EditorialHeading from "@/components/EditorialHeading";
 import IndexMeta from "@/components/IndexMeta";
 import Rule from "@/components/Rule";
 import Reveal, { RevealItem } from "@/components/motion/Reveal";
-import { EXCHANGE, FILES, NEEDS, PACKAGES, SITE_URL, SLIDES, STANDARD, SUBSCRIPTIONS, VIDEO } from "./content";
+import { CARE, EXCHANGE, FILES, NEEDS, PACKAGES, SITE_URL, SLIDES, STANDARD, SUBSCRIPTIONS, VIDEO } from "./content";
 import { HearThis, Walkthrough } from "./Walkthrough";
 
 /**
@@ -273,13 +273,22 @@ export default function VikkilynnPage() {
             </div>
 
             <Reveal variant="fade" className="mt-12 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-              <p className="text-ink">Why it&rsquo;s a founding rate and not a friend discount</p>
+              <p className="text-ink">Why the number is what it is</p>
               <p>
-                Here&rsquo;s the honest version. I&rsquo;m offering this rate to five businesses
-                that fit a specific profile: a strong personal brand, real work to show, and a
-                site I&rsquo;d be proud to build. You fit it perfectly, and a finished Love Vee
-                Beauty site is exactly the kind of work that lets me charge full rate from the
-                next client on. So instead of a discount, think of it as a trade:
+                Here&rsquo;s the honest math. A site like this one, with the brand system, the
+                shop, memberships and booking all working together, is a site I&rsquo;d quote at
+                around $5,000 to build and $250 a month to maintain and refresh each season. For
+                comparison, I offered Lisa her site, without an online shop, for $3,500.
+              </p>
+              <p>
+                You&rsquo;re getting it for less than either, because it&rsquo;s you. You&rsquo;re
+                my best friend, you&rsquo;ve built something real with no help from a website, and
+                you deserve one that matches the work. Same scope, same process, same care as a
+                full-rate client, nothing held back.
+              </p>
+              <p>
+                It still works best as a trade, so here&rsquo;s what I&rsquo;d ask for in return.
+                The first one matters most:
               </p>
             </Reveal>
             <Reveal stagger={0.06} as="ul" className="mt-5 divide-y divide-ink/12 border-y border-ink/12 font-sans text-fluid-base text-ink/70">
@@ -291,11 +300,18 @@ export default function VikkilynnPage() {
             </Reveal>
 
             <Reveal variant="fade" className="mt-12 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-              <p className="text-ink">What you&rsquo;d pay the providers directly</p>
+              <p className="text-ink">What it costs to run, so there are no surprises</p>
               <p>
-                These are the accounts your site runs on. They&rsquo;re in your name, billed to
-                you at whatever the provider charges, and I don&rsquo;t add anything on top. You
-                own all of it from day one.
+                Some of this costs money to keep running, and I&rsquo;d rather tell you now. Every
+                site needs a domain and hosting. On Option B, Stripe takes its standard fee on each
+                card payment, and your booking platform, Vagaro or whichever you choose, has its own
+                monthly plan. These accounts are in your name, billed to you at whatever the
+                provider charges, and I don&rsquo;t add anything on top.
+              </p>
+              <p>
+                The care plan below is the other half: it keeps the site maintained, and it means
+                you&rsquo;d always have me for changes, updates and seasonal promos, and to keep
+                building your online presence with you.
               </p>
             </Reveal>
             <Reveal stagger={0.08} as="ul" className="mt-5 divide-y divide-ink/12 border-y border-ink/12">
@@ -313,13 +329,21 @@ export default function VikkilynnPage() {
             </Reveal>
 
             <Reveal variant="fade" className="mt-12 max-w-measure space-y-5 font-sans text-fluid-base leading-relaxed text-ink/70">
-              <p className="text-ink">The care plan, and going without one</p>
-              <p>
-                The care plan is optional and month to month. Essential just keeps the site fast,
-                secure and online: I update and redeploy the framework every month, test the forms
-                and booking, and you get half an hour of changes whenever you need them. Growth and
-                Partner add hours, reporting and strategy on top.
+              <p className="text-ink">
+                Your care plan: {CARE.price}, instead of {CARE.standard}
               </p>
+              <p>
+                Optional and month to month. Because it&rsquo;s you, it covers more than the
+                standard plan does:
+              </p>
+              <ul className="divide-y divide-ink/12 border-y border-ink/12">
+                {CARE.items.map((item) => (
+                  <li key={item} className="py-3">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-ink">Going without one</p>
               <p>
                 If you skip it, the site is still yours and it still works. But the security
                 updates become your problem: the framework publishes patches, and someone who&rsquo;s
@@ -329,10 +353,11 @@ export default function VikkilynnPage() {
               </p>
               <p className="text-ink">The terms, so there are no surprises</p>
               <p>
-                Half to book your slot, half at launch before anything goes live. Two rounds of
+                50% up front to book your slot, and 50% before launch, before anything goes live.
+                Launch is four to six weeks out, with one shoot day in between: a small photoshoot
+                of the studio, you, a few of your clients and your lash line. Two rounds of
                 revisions are included, one at design and one at build; after that it&rsquo;s by
-                the hour. The clock starts once your photos and corrections are in, and if content
-                runs late the timeline pauses rather than squeezing the quality.
+                the hour. If content or photos run late, the date moves rather than the quality.
               </p>
             </Reveal>
 
