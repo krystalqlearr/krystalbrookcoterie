@@ -90,7 +90,10 @@ export const WORK: WorkProject[] = [
     // next/font (PP Frama, PP Frama Text, PP Right Serif, PP Playground) served
     // with a Vercel deployment id. Framer Motion, Sanity and Three.js left no
     // signature — not claimed.
-    stack: "Next.js · Tailwind CSS · Lenis · next/image · Pangram Pangram type · Vercel",
+    // Supabase and Stripe added 2026-11-22: server-side, so they leave no bundle
+    // signature, but verified directly — the glowtoure-prod Supabase project (30
+    // public tables, RLS on all 30) and live Stripe charges since 2026-03-24.
+    stack: "Next.js · Tailwind CSS · Supabase · Stripe · Lenis · Pangram Pangram type · Vercel",
     url: "glowtoure.com",
     year: "2025",
     role: "Design & build",
@@ -152,6 +155,10 @@ export const WORK: WorkProject[] = [
       "Glowtoure is a private, custom-colour spray-tan studio, mobile and in-studio across the greater Sacramento region. The service is intimate and exacting; the old site read like a booking utility, quietly undercutting the price and the positioning.",
       "We rebuilt the brand from its positioning up — a warm, editorial world where the photography leads and every screen signals authority. Custom colour, private appointments, bridal and event work, prep-to-aftercare: each given the room a luxury service deserves, paced like a magazine rather than a landing page.",
       "The result reads unmistakably high-end on the first scroll, makes the offer feel worth its price, and turns a browse into a booking.",
+      // Engineering depth, verified 2026-11-22 against the glowtoure-site repo and
+      // the production database: 30 tables with row-level security on every one,
+      // 336 Vitest cases, Stripe subscriptions confirmed by webhook.
+      "Beneath the surface, the site runs the business: booking with deposits, memberships billed automatically, member accounts, and a private dashboard for bookings, clients and payments. It sits on a thirty-table database with row-level security on every table, and 336 automated tests hold the pricing and booking rules in place.",
     ],
     // The brand book, credited on its own last line ("Identity, design system
     // and art direction by Krystal Brook"). It is the visible proof of the first
@@ -177,7 +184,9 @@ export const WORK: WorkProject[] = [
       "Design system",
       "Custom front-end (Next.js · Tailwind)",
       "Motion & interaction",
-      "Booking flow",
+      "Booking, deposits & payments",
+      "Memberships & client accounts",
+      "Admin dashboard",
       "Performance & SEO",
     ],
     // Measured 2026-08-18, Lighthouse 12.8.2 against the live https://glowtoure.com,
@@ -192,6 +201,8 @@ export const WORK: WorkProject[] = [
       { label: "Accessibility", value: "97 / 100" },
       { label: "Best practices · SEO", value: "100 · 100" },
       { label: "Layout shift (CLS)", value: "0.001" },
+      // From the repo, 2026-11-22: `it(`/`test(` cases across 42 Vitest files.
+      { label: "Automated tests", value: "336" },
     ],
     // NO TESTIMONIAL until a real, approved, attributed quote exists.
     //
