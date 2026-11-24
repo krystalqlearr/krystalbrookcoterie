@@ -441,7 +441,7 @@ is 15.17 (AAA). The flare is SIZE-GATED on paper: cherry #FF1744 is 3.60 on milk
 3.85 on white → graphics and text ≥24px ONLY; use flare-deep (6.48) under 24px. On
 onyx the neon is 5.07 — any size. This is why fluid-xl floors at 24px. In the flood
 (a cherry-filled card) the display line is milk (3.6, ≥24px only) and everything
-smaller is ink (4.2). Focus rings stay ink/milk, NEVER the flare. Primary CTAs are
+smaller is onyx (5.07). Focus rings stay ink/milk, NEVER the flare. Primary CTAs are
 INK-filled with milk text (`primary`); `onDark` (milk outline) on onyx sections. Focus
 rings are per-ground: `outline-ink` on milk/white, `outline-milk` on onyx. Every interactive
 element is a real, labeled, focusable control (work cards are <button>s); skip-link +
