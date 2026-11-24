@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     })),
     { path: "/process", priority: 0.7, changeFrequency: "yearly" },
+    { path: "/brand-system", priority: 0.5, changeFrequency: "yearly" },
     { path: "/about", priority: 0.7, changeFrequency: "yearly" },
     { path: "/begin", priority: 0.8, changeFrequency: "yearly" },
     { path: "/journal", priority: 0.5, changeFrequency: "weekly" },

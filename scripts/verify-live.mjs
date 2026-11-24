@@ -21,7 +21,7 @@ export const ROUTES = [
   "/", "/work", "/work/glowtoure", "/work/glowtoure/brand-system",
   "/services", "/services/identity", "/services/collateral", "/services/websites",
   "/services/redesign", "/services/development", "/services/search", "/services/squarespace",
-  "/process", "/about", "/journal", "/journal/why-your-luxury-website-still-feels-inexpensive",
+  "/process", "/brand-system", "/about", "/journal", "/journal/why-your-luxury-website-still-feels-inexpensive",
   "/begin", "/privacy", "/terms", "/styleguide",
 ];
 
@@ -149,6 +149,59 @@ export async function smokePage(page, base, route) {
   return { route: `${route} (motion on)`, status, consoleErrors, failed };
 }
 
+// THE FLOOD, MEASURED WHILE FLOODED (2026-11-24). The probe above sees each page
+// at rest, and the flood only exists on hover — so "ink on the neon, 4.2, legal for
+// small text" stood in CLAUDE.md for months while being false (4.22 < 4.5), and an
+// IndexMeta number sat at 1.80 inside every /services row. This hovers each
+// flooded element and measures every line of text inside it against the fill.
+// A hover that produces NO fill is reported as a checker failure, never a pass.
+const FLOOD_PROBE = (sel) => {
+  const srgb = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+  const lum = ([r, g, b]) => 0.2126 * srgb(r) + 0.7152 * srgb(g) + 0.0722 * srgb(b);
+  const parse = (s) => { const m = String(s).match(/rgba?\(([^)]+)\)/); if (!m) return null;
+    const p = m[1].split(",").map(parseFloat); return { rgb: p.slice(0, 3), a: p.length > 3 ? p[3] : 1 }; };
+  const root = document.querySelector(sel);
+  const fill = parse(getComputedStyle(root).backgroundColor);
+  if (!fill || fill.a < 1) return { error: `hovered but not filled (${getComputedStyle(root).backgroundColor})`, findings: [] };
+  const findings = [];
+  for (const el of [root, ...root.querySelectorAll("*")]) {
+    if (el.closest("[aria-hidden=true]")) continue;
+    const text = [...el.childNodes].filter((n) => n.nodeType === 3 && n.textContent.trim())
+      .map((n) => n.textContent.trim()).join(" ");
+    if (!text) continue;
+    const cs = getComputedStyle(el);
+    const f = parse(cs.color); if (!f) continue;
+    const fg = f.rgb.map((c, i) => c * f.a + fill.rgb[i] * (1 - f.a));
+    const [x, y] = [lum(fg), lum(fill.rgb)];
+    const ratio = (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+    const px = parseFloat(cs.fontSize), w = parseInt(cs.fontWeight) || 400;
+    const need = px >= 24 || (px >= 18.66 && w >= 700) ? 3 : 4.5;
+    if (ratio < need - 0.01) findings.push(`"${text.slice(0, 32)}" ${ratio.toFixed(2)} at ${Math.round(px)}px`);
+  }
+  return { error: null, findings };
+};
+
+async function floodPass(page) {
+  const count = await page.evaluate(() => {
+    const els = [...document.querySelectorAll("[class]")].filter((e) =>
+      /(^|\s)hover:bg-flare(\s|$)/.test(e.getAttribute("class") || ""));
+    els.forEach((e, i) => e.setAttribute("data-verify-flood", String(i)));
+    return els.length;
+  });
+  const findings = [];
+  for (let i = 0; i < count; i++) {
+    const sel = `[data-verify-flood="${i}"]`;
+    await page.evaluate((s) => document.querySelector(s).scrollIntoView({ block: "center" }), sel);
+    await page.hover(sel);
+    await new Promise((r) => setTimeout(r, 60));
+    const r = await page.evaluate(FLOOD_PROBE, sel);
+    if (r.error) findings.push(`CHECKER: flood #${i} ${r.error}`);
+    findings.push(...r.findings);
+  }
+  await page.mouse.move(0, 0);
+  return { floodCount: count, flood: [...new Set(findings)] };
+}
+
 export async function auditPage(page, base, route) {
   const consoleErrors = [];
   const failed = [];
@@ -183,7 +236,7 @@ export async function auditPage(page, base, route) {
   // that error page too.
   if (status !== 200 && status !== 304) {
     return { route, status, consoleErrors, failed, mobileOverflow: false,
-      h1s: 0, flareDecorative: 0, flareDetail: [], contrast: [] };
+      h1s: 0, flareDecorative: 0, flareDetail: [], contrast: [], floodCount: 0, flood: [] };
   }
 
   // Wake every scroll reveal, or half the page is measured mid-transition.
@@ -197,11 +250,14 @@ export async function auditPage(page, base, route) {
   let probe = { h1s: 0, flareDecorative: 0, flareDetail: [], contrast: [] };
   try { probe = await page.evaluate(PROBE); } catch (e) { consoleErrors.push("probe failed " + e.message); }
 
+  let flood = { floodCount: 0, flood: [] };
+  try { flood = await floodPass(page); } catch (e) { consoleErrors.push("flood pass failed " + String(e.message).slice(0, 100)); }
+
   await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
   await new Promise((r) => setTimeout(r, 600));
   const mobileOverflow = await page
     .evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1)
     .catch(() => false);
 
-  return { route, status, consoleErrors, failed, mobileOverflow, ...probe };
+  return { route, status, consoleErrors, failed, mobileOverflow, ...probe, ...flood };
 }

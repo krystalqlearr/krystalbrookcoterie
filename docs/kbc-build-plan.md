@@ -51,7 +51,7 @@ Muted text and hairlines are OPACITIES of the pair, not separate tokens.
 
 | token | hex | role |
 |---|---|---|
-| `milk` | `#FAF7F0` | THE CANVAS — every paper surface, AND the light ink on onyx. Ink 16.2 (AAA) |
+| `milk` | `#FAF7F0` | THE CANVAS — every paper surface, AND the light ink on onyx. Ink 15.17 (AAA) |
 | `white` | `#FFFFFF` | THE LIFT — the one sheet above the canvas: cards, form fields (ink hairline). Never a section fill |
 | `ink` | `#23201B` | warm faded charcoal-brown — primary ink + button fill |
 | `onyx` | `#0E0C0B` | THE DARK — "the blackest warm black"; a black gemstone beside the crystal mark. Milk ≈18 · neon 5.07 |

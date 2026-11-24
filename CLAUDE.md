@@ -25,7 +25,7 @@ and vibrant colours." A tinted sheet next to a hot red reads cream-and-terracott
 a pale grey would have been cleaner but no more contrasty (1.1–1.3:1 against milk
 either way), so rhythm on the milk comes from whitespace and ink hairlines, never tint.
 milk     #FAF7F0   THE CANVAS — every paper surface, AND the light ink ON the dark.
-                   Ink 16.2 (AAA). The inversion pair is milk + onyx.
+                   Ink 15.17 (AAA; 16.23 is ink on white — corrected 2026-11-24, computed). The inversion pair is milk + onyx.
 white    #FFFFFF   THE LIFT — the one sheet ABOVE the canvas: cards and form fields
                    sit on it with an ink hairline. Never a section fill.
 ink      #23201B   warm faded charcoal-brown — primary INK (text) + button fill.
@@ -60,10 +60,15 @@ flare-deep  #B3102E  TEXT ON PAPER. Anything under 24px that must be flare-colou
 
 THE FLOOD — the flare as a SURFACE, on hover/focus-within only. A card or row fills
 with the neon and its type re-colours to stay legal: the display line goes MILK (3.6,
-legal ≥24px), everything smaller goes INK (4.2), 600ms on `ease-editorial`; reduced
+legal ≥24px), everything smaller goes ONYX (5.07), 600ms on `ease-editorial`; reduced
 motion swaps the colours without the transition. Live on `ServiceCard` and the home
 tier rows; the pattern for the coming service pages. Transient, so it spends nothing
 from the flare budget. The cursor inverts over it (mint) — see Cursor.
+ONYX, NOT INK (2026-11-24): ink on the neon is 4.22, which is UNDER AA for text below
+24px — the old "ink (4.2), legal for small text" was wrong, and the route audit never
+saw it because the flood only exists on hover. A hover-state pass found it, plus
+IndexMeta's flare-deep number at 1.80 inside the /services rows (now `flood` prop →
+onyx) and the home service names at 4.22. Onyx is 5.07: legal at any size.
 
 ONE OR TWO flare touches PER PAGE — not per view, and emphatically not per section
 (2026-09 quiet-luxury pivot). MOST SECTIONS CARRY NO FLARE AT ALL. The budget is
@@ -328,7 +333,7 @@ StatStrip   The proof band on onyx: 3–4 defensible figures in DISPLAY over MET
             which has no dark surface but its footer (Round 2).
 ServiceCard A white sheet lifted off the milk with an ink hairline — and THE FLOOD on
             hover/focus-within: the card fills cherry, the name goes milk, the rest
-            goes ink (Color section). The pattern for the coming service pages.
+            goes onyx (Color section). The pattern for the coming service pages.
 PhoneRow    The site ON A PHONE — a row of bare screens playing silent, looping
             ~15s scrolls of the real pages, on onyx, as a case study's one
             mid-scroll dark moment. Bare screens, never device mockups: phone
@@ -374,8 +379,12 @@ the SERVICES index (2026-09-07): seven one-word names from `lib/services.ts`, fo
 under a `+` on small screens — the "dropdown" done as an index, never a hover menu.
 Existing: / · /work · /work/[slug] · /services · /services/[slug] (seven: identity ·
 collateral · websites · redesign · development · search · squarespace) · /process ·
-/about · /journal · /begin · /styleguide(noindex) · /for/[slug](noindex, outreach). No
-route may 404 at launch.
+/about · /journal · /begin · /brand-system · /styleguide(noindex) · /for/[slug](noindex,
+outreach). No route may 404 at launch. /brand-system (2026-11-24) is the studio's own
+brand book, PUBLIC and linked from the footer's legal row: it reads its swatches from
+tailwind.config.ts and its durations/curves from lib/motion.ts, and COMPUTES its
+contrast table at build time, so it cannot drift from the system. /styleguide stays
+the internal component sheet.
 
 SERVICES ARE SOLD BY DISCIPLINE, NOT BY PRICE (2026-09-07 — checked against Bionic
 Egg, Clay and Studio Krista, none of whom publish a price). Seven services, each its
@@ -428,7 +437,7 @@ their question is answered — /prototype and /prototype-shatter both have been.
 
 ## Accessibility — WCAG 2.1 AA minimum
 Every text/bg pair ≥ 4.5:1 (3:1 large); flag failing pairs, never ship them. ink-on-milk
-is 16.2 (AAA). The flare is SIZE-GATED on paper: cherry #FF1744 is 3.60 on milk /
+is 15.17 (AAA). The flare is SIZE-GATED on paper: cherry #FF1744 is 3.60 on milk /
 3.85 on white → graphics and text ≥24px ONLY; use flare-deep (6.48) under 24px. On
 onyx the neon is 5.07 — any size. This is why fluid-xl floors at 24px. In the flood
 (a cherry-filled card) the display line is milk (3.6, ≥24px only) and everything

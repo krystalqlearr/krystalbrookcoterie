@@ -56,7 +56,7 @@ const SECTORS = [
 // the hub as engagement sizes, and no price is public but the floor (2026-09-07).
 
 const rowMeta =
-  "type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink";
+  "type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-visible:text-onyx";
 
 export default function HomePage() {
   const [feature] = WORK;
@@ -100,7 +100,7 @@ export default function HomePage() {
                     because the column is a half, and a half will not hold name,
                     discipline and arrow on one line without wrapping the discipline.
                     The flood: a row fills with the flare on hover and every line goes
-                    ink (4.2 on cherry — legal for small text). Negative margin +
+                    onyx (5.07 on cherry; ink was 4.22, under AA for this size). Negative margin +
                     padding so the fill runs edge to edge of the list. */}
                 {SERVICES.map((s) => (
                   <RevealItem as="li" variant="fade" key={s.slug}>
@@ -109,7 +109,7 @@ export default function HomePage() {
                       aria-label={`${s.name} — ${s.eyebrow}`}
                       className="group -mx-4 flex flex-col gap-1 px-4 py-5 transition-colors duration-600 ease-editorial hover:bg-flare focus-visible:bg-flare focus-visible:outline-none motion-reduce:transition-none"
                     >
-                      <span className="flex items-baseline justify-between gap-4 font-sans text-fluid-base text-ink">
+                      <span className="flex items-baseline justify-between gap-4 font-sans text-fluid-base text-ink transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-visible:text-onyx">
                         {s.name}
                         <span aria-hidden className={rowMeta}>
                           →

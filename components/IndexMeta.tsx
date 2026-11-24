@@ -25,8 +25,15 @@ type Props = {
   total?: number;
   tag?: string;
   tone?: Tone;
+  /** Set when the index sits inside a flooded row (a `group` that fills with the
+   *  neon on hover/focus). Every part goes ONYX while flooded: flare-deep on the
+   *  neon is 1.80 and ink is 4.22, both under AA for 13px text; onyx is 5.07.
+   *  Found 2026-11-24 by a hover-state contrast pass the route audit cannot see. */
+  flood?: boolean;
   className?: string;
 };
+
+const FLOOD = "transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-visible:text-onyx";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -35,9 +42,12 @@ export default function IndexMeta({
   total,
   tag,
   tone = "onLight",
+  flood = false,
   className = "",
 }: Props) {
-  const t = toneClass[tone];
+  const base = toneClass[tone];
+  const f = flood ? ` ${FLOOD}` : "";
+  const t = { current: base.current + f, total: base.total + f, tag: base.tag + f };
 
   return (
     <p className={`type-meta flex flex-wrap items-baseline gap-x-3 gap-y-1 ${className}`}>

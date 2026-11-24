@@ -32,7 +32,7 @@ const groups: { label: string; tokens: Token[] }[] = [
         name: "milk",
         hex: "#FAF7F0",
         swatch: "bg-milk",
-        note: "THE CANVAS — every paper surface, and the light ink ON the dark. Ink 16.2 (AAA); the neon 3.60 here, which clears the 3:1 large-text bar.",
+        note: "THE CANVAS — every paper surface, and the light ink ON the dark. Ink 15.17 (AAA); the neon 3.60 here, which clears the 3:1 large-text bar.",
       },
       {
         name: "white",
@@ -229,8 +229,8 @@ export default function StyleguidePage() {
                 <Note>
                   <strong className="font-normal text-ink">The flood.</strong> A card or
                   row may fill with the neon on hover or focus-within — then its display
-                  line goes milk (3.6, legal at ≥24px) and everything smaller goes ink
-                  (4.2). Transient, so it spends nothing from the budget.
+                  line goes milk (3.6, legal at ≥24px) and everything smaller goes onyx
+                  (5.07). Transient, so it spends nothing from the budget.
                 </Note>
                 <Note>
                   Prices, tags, and asterisks stay ink. Ink-forward reads expensive; the

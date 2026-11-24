@@ -9,8 +9,8 @@ import Button from "./Button";
  * THE FLOOD (2026-09-07, Krystal: "when you scroll over a service card the whole
  * card turns the flare colour and the text changes to work with it"): on hover or
  * focus-within the card fills with the neon and the type re-colours to stay legal —
- * the display name goes milk (3.8 on lipstick: legal at ≥24px only), every smaller
- * line goes INK (4.3 on lipstick: legal for text). Transient, so it spends nothing
+ * the display name goes milk (3.60 on the neon: legal at ≥24px only), every smaller
+ * line goes ONYX (5.07: legal at any size — ink was 4.22, under AA; 2026-11-24). Transient, so it spends nothing
  * from the flare budget. Reduced motion: the colours still swap, just without the
  * transition.
  */
@@ -42,7 +42,7 @@ export default function ServiceCard({
       } ${className}`}
     >
       {featured ? (
-        <span className="type-meta mb-4 block text-flare-deep transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-within:text-ink">
+        <span className="type-meta mb-4 block text-flare-deep transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-within:text-onyx">
           Most commissioned
         </span>
       ) : null}
@@ -50,15 +50,15 @@ export default function ServiceCard({
         {name}
       </h3>
       {duration ? (
-        <p className="type-meta mt-2 text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-within:text-ink">
+        <p className="type-meta mt-2 text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-within:text-onyx">
           {duration}
         </p>
       ) : null}
-      <p className="mt-5 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-within:text-ink">
+      <p className="mt-5 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-within:text-onyx">
         {description}
       </p>
       {bestFor ? (
-        <p className="mt-3 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-within:text-ink">
+        <p className="mt-3 max-w-[42ch] font-sans text-sm leading-relaxed text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-within:text-onyx">
           {bestFor}
         </p>
       ) : null}

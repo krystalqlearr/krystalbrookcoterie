@@ -21,6 +21,9 @@
  *                    that were really 2 — the checker has to know the carve-outs
  *                    (IndexMeta numbers, the ArrowLink glyph, the tier flag) or
  *                    it invents violations.
+ *   flood contrast   the at-rest probe can't see a hover state, so "ink on the
+ *                    neon is legal for small text" (it is 4.22) and a 1.80
+ *                    IndexMeta inside every flooded /services row both shipped.
  *   contrast         a background walker that only climbs ANCESTORS reports
  *                    milk-on-milk at ratio 1.0 for text sitting over an
  *                    absolutely-positioned sibling. A ratio of exactly 1.00 is a
@@ -191,6 +194,12 @@ if (!LIVE) {
     if (bad.length)
       throw new Error(bad.map((p) => `${p.route}: ${p.flareDecorative} — ${p.flareDetail.join(", ")}`).join("\n"));
     return coverage("carve-outs excluded");
+  });
+  step("flood contrast (AA, while hovered)", () => {
+    const bad = loaded.filter((p) => p.flood.length);
+    if (bad.length) throw new Error(bad.map((p) => `${p.route}: ${p.flood.slice(0, 4).join(" · ")}`).join("\n"));
+    const n = loaded.reduce((a, p) => a + p.floodCount, 0);
+    return coverage(`${n} flooded elements hovered`);
   });
   step("contrast (AA)", () => {
     const impossible = pages.flatMap((p) =>

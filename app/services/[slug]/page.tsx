@@ -262,7 +262,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 <span className="type-display text-fluid-xl text-ink transition-colors duration-600 ease-editorial group-hover:text-milk group-focus-visible:text-milk">
                   {r.name}
                 </span>
-                <span className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink">
+                <span className="type-meta text-ink/70 transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-visible:text-onyx">
                   {r.eyebrow}
                 </span>
               </Link>

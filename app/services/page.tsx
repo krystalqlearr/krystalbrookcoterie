@@ -83,13 +83,13 @@ const FAQ = [
 ];
 
 // The flood on a row: the fill, then the type re-colours to stay legal —
-// display line → milk (≥24px), everything smaller → ink.
+// display line → milk (≥24px), everything smaller → onyx (5.07; ink was 4.22, below AA).
 const row =
   "group -mx-4 grid gap-x-gutter gap-y-4 px-4 py-10 transition-colors duration-600 ease-editorial hover:bg-flare focus-visible:bg-flare focus-visible:outline-none motion-reduce:transition-none lg:grid-cols-4";
 const toMilk =
   "transition-colors duration-600 ease-editorial group-hover:text-milk group-focus-visible:text-milk";
-const toInk =
-  "transition-colors duration-600 ease-editorial group-hover:text-ink group-focus-visible:text-ink";
+const toOnyx =
+  "transition-colors duration-600 ease-editorial group-hover:text-onyx group-focus-visible:text-onyx";
 
 export default function ServicesPage() {
   return (
@@ -109,12 +109,12 @@ export default function ServicesPage() {
             <RevealItem as="li" variant="fade" key={s.slug} className="border-t border-ink/12">
               <Link href={`/services/${s.slug}`} aria-label={`${s.name} — ${s.eyebrow}`} className={row}>
                 <div className="flex flex-col gap-3 lg:col-span-2">
-                  <IndexMeta index={i + 1} total={SERVICES.length} />
-                  <span className={`type-meta text-ink/70 ${toInk}`}>{s.eyebrow}</span>
+                  <IndexMeta index={i + 1} total={SERVICES.length} flood />
+                  <span className={`type-meta text-ink/70 ${toOnyx}`}>{s.eyebrow}</span>
                 </div>
                 <div className="max-w-measure lg:col-span-2">
                   <span className={`type-display block text-fluid-2xl text-ink ${toMilk}`}>{s.name}</span>
-                  <span className={`mt-4 block font-sans text-fluid-base leading-relaxed text-ink/70 ${toInk}`}>
+                  <span className={`mt-4 block font-sans text-fluid-base leading-relaxed text-ink/70 ${toOnyx}`}>
                     {s.line}
                   </span>
                 </div>

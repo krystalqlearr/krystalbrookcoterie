@@ -90,6 +90,9 @@ export default function SiteFooter() {
             <Link href="/terms" className={`-my-1 inline-block py-1 transition-colors duration-400 hover:text-milk ${linkFocus}`}>
               Terms
             </Link>
+            <Link href="/brand-system" className={`-my-1 inline-block py-1 transition-colors duration-400 hover:text-milk ${linkFocus}`}>
+              Brand system
+            </Link>
           </span>
         </div>
       </div>
